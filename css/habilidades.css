@@ -1,227 +1,309 @@
 /* ═══════════════════════════════════════════════════════════════
-   HABILIDADES — Scroll horizontal pinneado con paneles por categoría
+   HABILIDADES — Carrusel 3D en arco con cards liquid glass
+   Scroll-triggered en desktop, swipe en mobile
 ═══════════════════════════════════════════════════════════════ */
 
 .habilidades {
   position: relative;
   z-index: 4;
   overflow: hidden;
+  background: transparent;
 }
 
-.habilidades-track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-}
-
-/* ── Panel individual ── */
-.habilidades-panel {
-  width: 100vw;
+.habilidades-stage {
+  position: relative;
+  width: 100%;
   height: 100dvh;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(24px, 4vw, 60px);
-  gap: clamp(28px, 4vh, 52px);
-}
-
-.habilidades-panel-titulo {
-  font-family: var(--fuente-display);
-  font-size: clamp(32px, 5vw, 72px);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--color-texto);
-  text-align: center;
-  opacity: 0;
-  transform: translateY(30px);
-  will-change: opacity, transform;
-  transition: color var(--transicion-tema);
-}
-
-/* ── Grid de iconos dentro de cada panel ── */
-.habilidades-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: clamp(24px, 3.5vw, 52px);
-  max-width: 800px;
-}
-
-/* ── Cada item de tecnología ── */
-.habilidades-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  opacity: 0;
-  transform: translateY(20px) scale(0.85);
-  will-change: opacity, transform;
-}
-
-.habilidades-item-icono {
-  width: clamp(48px, 6vw, 80px);
-  height: clamp(48px, 6vw, 80px);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid color-mix(in srgb, var(--color-texto) 12%, transparent);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--color-fondo) 60%, transparent);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  padding: 12px;
-  transition:
-    border-color 0.3s ease,
-    transform 0.3s ease,
-    background-color var(--transicion-tema);
+  overflow: hidden;
 }
 
-.habilidades-item-icono img {
+/* ── Contenedor del carrusel ── */
+.habilidades-carrusel {
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .habilidades-item-icono:hover {
-    border-color: var(--color-acento);
-    transform: scale(1.12) translateY(-4px);
-  }
+/* ═══ CARD BASE — Liquid Glass ═══ */
+.habilidades-card {
+  position: absolute;
+  width: clamp(220px, 22vw, 320px);
+  height: clamp(300px, 30vw, 420px);
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.05) 40%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+  backdrop-filter: blur(14px) saturate(1.6) brightness(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6) brightness(1.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    background var(--transicion-tema),
+    border-color var(--transicion-tema),
+    box-shadow var(--transicion-tema);
 }
 
-.habilidades-item-nombre {
-  font-family: var(--fuente-micro);
-  font-size: clamp(10px, 0.9vw, 13px);
-  letter-spacing: 0.12em;
+/* ── Reflejo superior (efecto liquid glass) ── */
+.habilidades-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  border-radius: 24px 24px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.06) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Borde luminoso interior ── */
+.habilidades-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+/* ═══ CARD DE CATEGORÍA — Tinte editable ═══ */
+.habilidades-card--categoria {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-editable) 28%, transparent) 0%,
+      color-mix(in srgb, var(--color-editable-activo) 42%, transparent) 50%,
+      color-mix(in srgb, var(--color-editable) 58%, transparent) 100%
+    );
+  border-color: color-mix(in srgb, var(--color-editable-activo) 35%, transparent);
+  box-shadow:
+    0 12px 40px color-mix(in srgb, var(--color-editable-activo) 15%, transparent),
+    0 4px 12px color-mix(in srgb, var(--color-editable) 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--color-editable) 25%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--color-editable-activo) 10%, transparent);
+  overflow: hidden;
+}
+
+/* ── Título central de categoría ── */
+.habilidades-cat-titulo {
+  font-family: var(--fuente-display);
+  font-size: clamp(24px, 2.8vw, 40px);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-texto-suave);
+  color: var(--color-editable-activo);
   text-align: center;
-  white-space: nowrap;
+  position: relative;
+  z-index: 1;
   transition: color var(--transicion-tema);
 }
 
-/* ── Indicador de progreso (dots en el lado derecho, vertical) ── */
-.habilidades-dots {
-  position: absolute;
-  right: clamp(24px, 3vw, 42px);
-  top: 50%;
-  transform: translateY(-50%);
+/* ═══ CARD DE HABILIDAD — Contenido ═══ */
+.habilidades-card-contenido {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 5;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-.habilidades-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--color-texto) 20%, transparent);
-  transition: background 0.3s ease, transform 0.3s ease;
+/* ── Logo centrado — GRANDE ── */
+.habilidades-card-logo {
+  width: clamp(72px, 8vw, 110px);
+  height: clamp(72px, 8vw, 110px);
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
 }
 
-.habilidades-dot.activo {
-  background: var(--color-acento);
-  transform: scale(1.4);
+/* ── Numeración esquina superior derecha — fuente editable, grande ── */
+.habilidades-card-num {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-family: var(--fuente-micro);
+  font-size: clamp(22px, 2.2vw, 34px);
+  letter-spacing: 0.02em;
+  color: var(--color-editable);
+  opacity: 1;
+  transition: color var(--transicion-tema);
+}
+
+/* ── Nombre esquina inferior izquierda — fuente display, grande ── */
+.habilidades-card-nombre {
+  position: absolute;
+  bottom: 16px;
+  left: 18px;
+  font-family: var(--fuente-display);
+  font-size: clamp(32px, 3.2vw, 48px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-texto);
+  opacity: 0.9;
+  transition: color var(--transicion-tema);
 }
 
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════════════════ */
 
-/* ── Tablet landscape ── */
+/* ── Tablet landscape (≤1024px, orientation: landscape) ── */
 @media (max-width: 1024px) and (orientation: landscape) {
-  .habilidades-panel {
-    gap: clamp(20px, 3vh, 36px);
+  .habilidades-card {
+    width: clamp(180px, 20vw, 260px);
+    height: clamp(240px, 26vw, 340px);
   }
 
-  .habilidades-item-icono {
-    width: clamp(40px, 5.5vw, 64px);
-    height: clamp(40px, 5.5vw, 64px);
-    padding: 10px;
+  .habilidades-card-logo {
+    width: clamp(56px, 7vw, 80px);
+    height: clamp(56px, 7vw, 80px);
   }
 
-  .habilidades-grid {
-    gap: clamp(18px, 3vw, 36px);
+  .habilidades-stage {
+    perspective: 1000px;
   }
 }
 
-/* ── Tablet portrait ── */
+/* ── Tablet portrait (≤1024px, orientation: portrait) ── */
 @media (max-width: 1024px) and (orientation: portrait) {
-  .habilidades-panel-titulo {
-    font-size: clamp(28px, 5.5vw, 52px);
+  .habilidades-card {
+    width: clamp(190px, 26vw, 280px);
+    height: clamp(260px, 34vw, 370px);
   }
 
-  .habilidades-item-icono {
-    width: clamp(44px, 8vw, 68px);
-    height: clamp(44px, 8vw, 68px);
-  }
-
-  .habilidades-grid {
-    gap: clamp(20px, 4vw, 40px);
+  .habilidades-card-logo {
+    width: clamp(60px, 9vw, 90px);
+    height: clamp(60px, 9vw, 90px);
   }
 }
 
-/* ── Mobile portrait ── */
+/* ── Mobile portrait (≤599px) ── */
 @media (max-width: 599px) {
-  .habilidades-panel {
-    padding: clamp(18px, 5vw, 32px);
-    gap: clamp(20px, 4vh, 36px);
+  .habilidades-stage {
+    height: auto;
+    min-height: 70dvh;
+    perspective: 800px;
+    padding: 40px 0;
   }
 
-  .habilidades-panel-titulo {
-    font-size: clamp(24px, 8vw, 40px);
+  .habilidades-carrusel {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    transform-style: flat;
   }
 
-  .habilidades-item-icono {
-    width: clamp(42px, 12vw, 60px);
-    height: clamp(42px, 12vw, 60px);
-    padding: 8px;
-    border-radius: 12px;
+  .habilidades-card {
+    position: relative;
+    flex-shrink: 0;
+    width: clamp(180px, 60vw, 250px);
+    height: clamp(250px, 80vw, 340px);
+    scroll-snap-align: center;
+    opacity: 1;
   }
 
-  .habilidades-grid {
-    gap: clamp(16px, 5vw, 28px);
+  .habilidades-cat-titulo {
+    font-size: clamp(18px, 5.5vw, 26px);
   }
 
-  .habilidades-item-nombre {
-    font-size: 8px;
+  .habilidades-card-logo {
+    width: clamp(56px, 16vw, 76px);
+    height: clamp(56px, 16vw, 76px);
+  }
+
+  .habilidades-card-num {
+    font-size: clamp(11px, 3.5vw, 14px);
+  }
+
+  .habilidades-card-nombre {
+    font-size: clamp(12px, 3.8vw, 15px);
   }
 }
 
-/* ── Mobile landscape ── */
+/* ── Mobile landscape (≤768px, orientation: landscape) ── */
 @media (max-width: 768px) and (orientation: landscape) {
-  .habilidades-panel {
-    gap: clamp(14px, 2.5vh, 24px);
+  .habilidades-stage {
+    height: auto;
+    min-height: 90dvh;
+    perspective: 900px;
+    padding: 20px 0;
   }
 
-  .habilidades-panel-titulo {
-    font-size: clamp(20px, 4.5vw, 32px);
+  .habilidades-carrusel {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    transform-style: flat;
   }
 
-  .habilidades-item-icono {
-    width: clamp(36px, 7vw, 50px);
-    height: clamp(36px, 7vw, 50px);
-    padding: 7px;
+  .habilidades-card {
+    position: relative;
+    flex-shrink: 0;
+    width: clamp(150px, 22vw, 200px);
+    height: clamp(200px, 32vw, 270px);
+    scroll-snap-align: center;
+    opacity: 1;
   }
 
-  .habilidades-grid {
-    gap: clamp(12px, 2.5vw, 24px);
+  .habilidades-card-logo {
+    width: clamp(44px, 7vw, 60px);
+    height: clamp(44px, 7vw, 60px);
   }
 
-  .habilidades-item-nombre {
-    font-size: 7px;
+  .habilidades-cat-titulo {
+    font-size: clamp(14px, 3.5vw, 18px);
+  }
+
+  .habilidades-card-num {
+    font-size: 10px;
+  }
+
+  .habilidades-card-nombre {
+    font-size: 11px;
   }
 }
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .habilidades-panel-titulo,
-  .habilidades-item {
+  .habilidades-card {
     opacity: 1 !important;
     transform: none !important;
   }

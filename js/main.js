@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ── Inicializar módulos ── */
-  Lenis.init();
   Cursor.init();
   Hero.init();
   if (typeof TransicionHero !== "undefined") {

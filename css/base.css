@@ -85,8 +85,8 @@
 ───────────────────────────────────────── */
 
 html {
-  /* Scroll nativo suavizado — complementa el scrub de GSAP */
-  scroll-behavior: smooth;
+  /* Scroll nativo — sin smooth para no interferir con GSAP ScrollTrigger scrub */
+  scroll-behavior: auto;
 }
 
 /* Desactivar en usuarios que prefieren movimiento reducido */

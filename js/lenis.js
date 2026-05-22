@@ -4,7 +4,7 @@
    con lerp de 0.08 y easing suave para diseño premium
 ═══════════════════════════════════════════════════════════════ */
 
-const Lenis = (() => {
+const SmoothScroll = (() => {
   let instance = null;
 
   function init() {
@@ -13,7 +13,7 @@ const Lenis = (() => {
       return;
     }
 
-    instance = new Lenis({
+    instance = new window.Lenis({
       // Suavidad del scroll: menor = más suave, mayor = más reactivo
       // 0.08 es muy suave (estilo "premium")
       lerp: 0.08,

@@ -617,17 +617,19 @@ const Hero = (() => {
     const rect = getWordRect(elEditable);
     const targetX = rect.left + rect.width * 0.5;
     const targetY = rect.top + rect.height * 0.56;
-    /* En móvil: burbuja centrada verticalmente en la parte alta de pantalla.
+    /* En móvil: burbuja centrada horizontalmente en la parte alta de pantalla.
        En desktop: clamp para no salirse del viewport. */
     const isMobile = window.innerWidth <= 1024;
-    let bubbleX, bubbleY;
+    let bubbleX, bubbleY, bubbleXPercent;
     if (isMobile) {
       bubbleX = window.innerWidth / 2;
-      bubbleY = window.innerHeight * 0.09;
+      bubbleXPercent = -50;
+      bubbleY = window.innerHeight * 0.12;
     } else {
       const bubbleW = Math.min(editBubbleEl.offsetWidth || 220, window.innerWidth * 0.78);
       const bubbleXRaw = targetX + 18;
       bubbleX = Math.min(bubbleXRaw, window.innerWidth - bubbleW - 12);
+      bubbleXPercent = 0;
       bubbleY = targetY - 64;
     }
 
@@ -680,6 +682,7 @@ const Hero = (() => {
       /* Pequeña pausa dramática antes de la burbuja */
       .set(editBubbleEl, {
         x: bubbleX,
+        xPercent: bubbleXPercent,
         y: bubbleY,
         autoAlpha: 1,
         scale: 0,
@@ -973,18 +976,21 @@ const Hero = (() => {
 
       const p = getOriginPoint();
       const isMobile = window.innerWidth <= 1024;
-      let bubbleX, bubbleY, bubbleTOrigin;
+      let bubbleX, bubbleY, bubbleTOrigin, bubbleXPct;
       if (isMobile) {
-        bubbleX = 0; /* CSS: left:50% + translateX(-50%) centra la burbuja */
-        bubbleY = window.innerHeight * 0.09;
+        bubbleX = window.innerWidth / 2;
+        bubbleXPct = -50;
+        bubbleY = window.innerHeight * 0.12;
         bubbleTOrigin = 'center bottom';
       } else {
         bubbleX = p.x + 24;
+        bubbleXPct = 0;
         bubbleY = p.y - 52;
         bubbleTOrigin = 'left bottom';
       }
       gsap.set(messageBubble, {
         x: bubbleX,
+        xPercent: bubbleXPct,
         y: bubbleY,
         transformOrigin: bubbleTOrigin,
         autoAlpha: 1,

@@ -92,12 +92,12 @@
   min-width: 10px;
   max-width: 90vw;
   word-break: break-word;
-  color: var(--color-acento);
-  caret-color: var(--color-acento);
+  color: var(--color-editable);
+  caret-color: var(--color-editable-activo);
   outline: none;
   border-bottom: 1px solid transparent;
   transition:
-    color var(--transicion-tema),
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.3s ease;
 }
 
@@ -425,9 +425,6 @@
     padding: 9px 13px;
     max-width: 82vw;
     border-radius: 12px;
-    /* Centrada horizontalmente en pantalla */
-    left: 50% !important;
-    transform: translateX(-50%);
   }
 }
 
