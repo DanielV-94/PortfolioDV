@@ -1,0 +1,4 @@
+# Ignorar archivos JS del portfolio para evitar reformateo automático
+js/hero.js
+js/cursor.js
+js/main.js

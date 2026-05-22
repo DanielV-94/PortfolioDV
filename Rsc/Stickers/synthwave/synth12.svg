@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 26.81 24.69">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-3 {
+        filter: none;
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-328.25" y1="-348.77" x2="-314.95" y2="-328.11"
+      gradientTransform="translate(-311.98 345.35) rotate(87.04)" gradientUnits="userSpaceOnUse">
+      <stop offset=".02" stop-color="#ff85fb" />
+      <stop offset=".17" stop-color="#f97ffa" />
+      <stop offset=".37" stop-color="#ea6ffa" />
+      <stop offset=".59" stop-color="#d255f8" />
+      <stop offset=".82" stop-color="#b031f7" />
+      <stop offset="1" stop-color="#9111f6" />
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="7655.21" y1="-2395.76" x2="7667.16" y2="-2395.76"
+      gradientTransform="translate(1975.34 7633.25) rotate(-120.19) scale(1.13 -.89) skewX(22.02)"
+      gradientUnits="userSpaceOnUse">
+      <stop offset=".25" stop-color="#3f00ab" />
+      <stop offset="1" stop-color="#7910c9" />
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="-327.78" y1="-348.71" x2="-303.74" y2="-348.71"
+      gradientTransform="translate(-311.98 345.35) rotate(87.04)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#da54fc" />
+      <stop offset=".29" stop-color="#b33ded" />
+      <stop offset=".93" stop-color="#5205c7" />
+      <stop offset="1" stop-color="#4800c4" />
+    </linearGradient>
+  </defs>
+  <g id="Layer_1">
+    <g class="cls-3">
+      <polygon class="cls-4" points="0 13.04 6.2 .68 19.37 0 13.17 12.36 0 13.04" />
+      <polygon class="cls-1" points="0 13.04 7.44 24.69 20.61 24.01 13.17 12.36 0 13.04" />
+      <polygon class="cls-2" points="19.37 0 26.81 11.65 20.61 24.01 13.17 12.36 19.37 0" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42.85 133.31">
+  <defs>
+    <style>
+      .uuid-ad0a78d4-2837-434b-8e3b-66e62d2da1e9 {
+        fill: #fff;
+      }
+
+      .uuid-7f335ac6-342a-4dde-a806-ea601892da5c {
+        font-family: Montserrat-ExtraBold, Montserrat;
+        font-size: 28.09px;
+        font-weight: 700;
+      }
+
+      .uuid-7f335ac6-342a-4dde-a806-ea601892da5c,
+      .uuid-a00b283b-ee71-41d5-827a-01a2fe7da0ff {
+        fill: #171717;
+      }
+
+      .uuid-6e70acf1-0ef4-4c32-8d26-61348c2750a2 {
+        letter-spacing: -.01em;
+      }
+
+      .uuid-77e4a8ea-db9a-45a4-9ac5-abb81d105cfa {
+        fill: url(#uuid-2a14408d-40b4-4cbd-b258-43cc5901b050);
+      }
+    </style>
+    <linearGradient id="uuid-2a14408d-40b4-4cbd-b258-43cc5901b050" x1="-6.18" y1="130.31" x2="44.43" y2="2.36"
+      gradientTransform="translate(85.65 47.66) rotate(90)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#97ff08" />
+      <stop offset=".29" stop-color="#8bfff0" />
+      <stop offset=".62" stop-color="#ffdd8a" />
+      <stop offset=".84" stop-color="#31ecff" />
+      <stop offset="1" stop-color="#ffd600" />
+    </linearGradient>
+  </defs>
+  <g id="uuid-e20ebfc8-408d-4a6f-bffb-204988fab7e8">
+    <path class="uuid-a00b283b-ee71-41d5-827a-01a2fe7da0ff"
+      d="M-21.6,48.04h103.87c1.66,0,3,1.34,3,3v8.55c0,14.18-11.51,25.69-25.69,25.69H-44.29c-1.66,0-3-1.34-3-3v-8.55c0-14.18,11.51-25.69,25.69-25.69Z"
+      transform="translate(85.65 47.66) rotate(90)" />
+    <path class="uuid-ad0a78d4-2837-434b-8e3b-66e62d2da1e9"
+      d="M34.62,133.31h-8.55c-14.37,0-26.06-11.69-26.06-26.06V3.38C0,1.51,1.51,0,3.37,0h8.55c14.37,0,26.06,11.69,26.06,26.06v103.87c0,1.86-1.51,3.38-3.37,3.38ZM3.37.75C1.93.75.75,1.93.75,3.38v103.87c0,13.96,11.36,25.31,25.31,25.31h8.55c1.45,0,2.62-1.18,2.62-2.62V26.06C37.24,12.11,25.89.75,11.93.75H3.37Z" />
+    <path class="uuid-77e4a8ea-db9a-45a4-9ac5-abb81d105cfa"
+      d="M-21.6,51.04h103.87v8.55c0,12.52-10.17,22.69-22.69,22.69H-44.29v-8.55c0-12.52,10.17-22.69,22.69-22.69Z"
+      transform="translate(-47.66 85.65) rotate(-90)" /><text class="uuid-7f335ac6-342a-4dde-a806-ea601892da5c"
+      transform="translate(28.87 103.4) rotate(-90)">
+      <tspan class="uuid-6e70acf1-0ef4-4c32-8d26-61348c2750a2" x="0" y="0">W</tspan>
+      <tspan x="32.83" y="0">EB</tspan>
+    </text>
+  </g>
+</svg>

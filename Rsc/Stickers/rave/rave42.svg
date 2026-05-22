@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 44.88 77.16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre_5);
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_4);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_5" x1="22.44" y1="7.73" x2="22.44" y2="60.29"
+      gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" />
+      <stop offset="1" stop-color="#c9ccd1" />
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_4" x1="22.44" y1="11.7" x2="22.44" y2="57.5"
+      gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fffb00" />
+      <stop offset="1" stop-color="#f80" />
+    </linearGradient>
+  </defs>
+  <g id="OBJECTS">
+    <path class="cls-1"
+      d="M6.41,77.16c-.74,0-1.5-.18-2.2-.57-2.06-1.13-3.02-3.67-2.27-5.98l7.45-23.08h-4.66c-1.5,0-2.91-.75-3.8-2.01-.89-1.27-1.15-2.9-.71-4.41L11.27,3.49c.61-2.08,2.44-3.49,4.51-3.49h24.38c1.75,0,3.36,1.02,4.18,2.65.82,1.63.7,3.6-.29,5.12l-10.65,16.25h3.76c1.79,0,3.42,1.06,4.22,2.74.8,1.68.63,3.69-.44,5.19l-30.75,43.22c-.92,1.29-2.34,1.99-3.79,1.99Z" />
+    <polygon class="cls-2"
+      points="15.78 4.96 40.16 4.96 24.41 28.98 37.16 28.98 6.41 72.2 15.97 42.57 4.72 42.57 15.78 4.96" />
+  </g>
+</svg>

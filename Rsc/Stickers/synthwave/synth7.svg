@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 25.08 10.35">
+  <defs>
+    <style>
+      .cls-1 {
+        filter: none;
+      }
+
+      .cls-2 {
+        fill: #ff40bc;
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="4.35" y1="23.41" x2="4.35" y2="16.75"
+      gradientTransform="translate(13.79 -15.03) rotate(10.93) scale(.93 1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2cb5ff" />
+      <stop offset=".52" stop-color="#630596" />
+      <stop offset=".57" stop-color="#710895" />
+      <stop offset=".67" stop-color="#971395" />
+      <stop offset=".8" stop-color="#d52394" />
+      <stop offset=".87" stop-color="#f52c94" />
+    </linearGradient>
+  </defs>
+  <g id="Layer_1">
+    <g class="cls-1">
+      <path class="cls-3"
+        d="M22.8,3.77L3.54.05l-1.26,6.54,19.27,3.72c1.57.3,3.12-.92,3.47-2.72.35-1.81-.64-3.52-2.2-3.82Z" />
+      <path class="cls-2"
+        d="M5.74,3.86c-.35,1.81-1.9,3.03-3.47,2.72C.71,6.29-.28,4.58.07,2.77.42.96,1.97-.26,3.54.05c1.57.3,2.55,2.01,2.2,3.82Z" />
+    </g>
+  </g>
+</svg>

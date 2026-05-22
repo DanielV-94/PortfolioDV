@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 231.52 157.82">
+  <defs>
+    <style>
+      .uuid-e1cb32fc-4d9d-41d0-9db3-6d4fd7ec5dbe {
+        fill: url(#uuid-1f798989-46b3-42c8-8528-45a645f4465d);
+      }
+
+      .uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae {
+        fill: none;
+        stroke-width: .25px;
+      }
+
+      .uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae,
+      .uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0,
+      .uuid-e9e63d9b-5dae-4100-acde-cdf046243d04 {
+        font-family: BebasNeue-Regular, 'Bebas Neue';
+        font-size: 16px;
+      }
+
+      .uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae,
+      .uuid-4e905ea5-6430-4311-896c-83c5e38a8cc7 {
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+
+      .uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0 {
+        fill: #00e6ff;
+      }
+
+      .uuid-4e905ea5-6430-4311-896c-83c5e38a8cc7 {
+        stroke-width: 12px;
+      }
+
+      .uuid-e9e63d9b-5dae-4100-acde-cdf046243d04 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="uuid-1f798989-46b3-42c8-8528-45a645f4465d" x1="46.82" y1="78.91" x2="184.7" y2="78.91"
+      gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00e6ff" />
+      <stop offset="1" stop-color="#81fc47" />
+    </linearGradient>
+  </defs>
+  <g id="uuid-279691d5-829f-410e-8ba4-34aabaaeb7c6">
+    <g id="uuid-00ee16f6-6995-4847-9632-effcc6f03f53" class="uuid-fcc6dca7-6b44-4809-a1c7-5ea4405fe8b4">
+      <path class="uuid-4e905ea5-6430-4311-896c-83c5e38a8cc7"
+        d="M175.33,7.66c-24.23-4.04-53.17-.63-81.54,9.59-.06.02-.12.04-.19.07-.04.01-.07.03-.11.04-.01,0-.03,0-.04.01C34.21,38.84-4,83.92,8.3,117.86c6.05,16.7,23.06,28.17,47.89,32.31,24.23,4.04,53.17.63,81.54-9.6.06-.02.12-.04.18-.06.04-.01.07-.03.11-.04.01,0,.03,0,.04-.01,59.25-21.48,97.45-66.55,85.16-100.49-6.05-16.7-23.06-28.17-47.89-32.31Z" />
+      <path class="uuid-e1cb32fc-4d9d-41d0-9db3-6d4fd7ec5dbe"
+        d="M153.18,34.15c-15.22-2.54-33.4-.4-51.21,6.03-.04.01-.08.03-.12.04-.02,0-.05.02-.07.02,0,0-.02,0-.02,0-37.22,13.49-61.21,41.8-53.49,63.12,3.8,10.49,14.48,17.69,30.08,20.3,15.22,2.54,33.4.4,51.22-6.03.04-.01.07-.03.11-.04.02,0,.05-.02.07-.02,0,0,.02,0,.03,0,37.22-13.49,61.21-41.8,53.49-63.12-3.8-10.49-14.48-17.69-30.08-20.3ZM152.66,37.24c13.68,2.28,23.14,8.26,27,16.86l-19.04,6.9c-5.54-13.39-18.72-21.98-34.1-23.73,9.23-1.3,18.13-1.36,26.15-.03ZM113.76,77.97l-18.92,6.86c-6.15-18.31-3.28-35.96,6.56-40.98l12.37,34.12ZM114.83,80.91l12.37,34.13c-4.98,1.12-10.74-.74-16.4-5.42-6.14-5.07-11.34-12.83-14.86-21.86l18.88-6.84ZM117.76,79.85l18.92-6.86c6.15,18.31,3.28,35.96-6.56,40.98l-12.37-34.12ZM116.7,76.91l-12.37-34.12c10.77-2.44,24.29,9.26,31.29,27.26l-18.92,6.86ZM91.9,85.9l-19.13,6.93c-2.81-9.1-1.55-19.03,3.69-28.16,3.85-6.71,9.54-12.38,16.42-16.64-5.24,8.82-5.92,23.19-.98,37.86ZM93.01,88.82c3.71,9.56,9.24,17.78,15.8,23.21,2.99,2.47,6.03,4.21,9.03,5.27-7.97,1.12-15.91.39-23.13-2.27-9.88-3.65-17.21-10.47-20.88-19.26l19.17-6.95ZM139.62,71.93l19.13-6.93c5.03,16.32-3.55,34.5-20.09,44.77,5.23-8.82,5.9-23.19.97-37.84ZM138.55,68.99c-5.6-14.42-15.32-25.01-24.99-28.44,19.28-2.71,37.52,5.75,44.11,21.5l-19.13,6.93ZM80.74,53.88c-2.69,2.82-5.06,5.9-6.98,9.24-5.71,9.94-7.05,20.81-3.92,30.78l-19.04,6.9c-4.2-14.98,8.23-33.43,29.94-46.92ZM78.86,120.59c-13.68-2.28-23.14-8.26-27-16.86l19.04-6.9c3.99,9.66,11.97,17.15,22.73,21.12,3.68,1.36,7.54,2.21,11.48,2.65-9.27,1.31-18.2,1.33-26.25,0ZM150.71,103.99c10.69-11.2,15.3-26.24,10.98-40.07l19.04-6.9c4.21,14.99-8.26,33.48-30.01,46.96Z" />
+      <text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(131.18 122) rotate(158.62) scale(1.12 1)">
+        <tspan x="0" y="0">D</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(121.96 124.97) rotate(162.39) scale(1.12 1)">
+        <tspan x="0" y="0">A</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(112.62 127.29) rotate(166.45) scale(1.12 1)">
+        <tspan x="0" y="0">N</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(102.7 129.09) rotate(169.95) scale(1.12 1)">
+        <tspan x="0" y="0">I</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(96.85 129.69) rotate(173.46) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(87.97 130.13) rotate(178.04) scale(1.12 1)">
+        <tspan x="0" y="0">L</tspan>
+      </text><text class="uuid-e9e63d9b-5dae-4100-acde-cdf046243d04"
+        transform="translate(79.39 129.9) rotate(-177.84) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(74.2 129.29) rotate(-172.9) scale(1.12 1)">
+        <tspan x="0" y="0">V</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(65.28 127.54) rotate(-165.45) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(57.08 124.74) rotate(-156.26) scale(1.12 1)">
+        <tspan x="0" y="0">L</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(49.88 120.86) rotate(-144.27) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(43.58 115.45) rotate(-128.73) scale(1.12 1)">
+        <tspan x="0" y="0">Z</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(39.07 108.63) rotate(-110.13) scale(1.12 1)">
+        <tspan x="0" y="0">D</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(36.82 99.97) rotate(-91.26) scale(1.12 1)">
+        <tspan x="0" y="0">A</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(37.47 91) rotate(-75.49) scale(1.12 1)">
+        <tspan x="0" y="0">N</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(40.73 81.78) rotate(-65.63) scale(1.12 1)">
+        <tspan x="0" y="0">I</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(43.51 76.81) rotate(-58.36) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(48.65 69.71) rotate(-51.45) scale(1.12 1)">
+        <tspan x="0" y="0">L</tspan>
+      </text><text class="uuid-e9e63d9b-5dae-4100-acde-cdf046243d04"
+        transform="translate(54.4 63.38) rotate(-46.83) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(58.3 59.84) rotate(-42.6) scale(1.12 1)">
+        <tspan x="0" y="0">V</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(65.49 54.05) rotate(-37.95) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(72.87 49.03) rotate(-33.9) scale(1.12 1)">
+        <tspan x="0" y="0">L</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(80.3 44.71) rotate(-30.16) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(88.3 40.71) rotate(-26.55) scale(1.12 1)">
+        <tspan x="0" y="0">Z</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(96.5 37.26) rotate(-23.17) scale(1.12 1)">
+        <tspan x="0" y="0">D</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(105.65 34.03) rotate(-19.23) scale(1.12 1)">
+        <tspan x="0" y="0">A</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(114.9 31.45) rotate(-15.27) scale(1.12 1)">
+        <tspan x="0" y="0">N</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(124.77 29.34) rotate(-11.88) scale(1.12 1)">
+        <tspan x="0" y="0">I</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(130.62 28.55) rotate(-8.5) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(139.48 27.8) rotate(-4.17) scale(1.12 1)">
+        <tspan x="0" y="0">L</tspan>
+      </text><text class="uuid-e9e63d9b-5dae-4100-acde-cdf046243d04"
+        transform="translate(148.08 27.69) rotate(-.31) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(153.32 28.08) rotate(4.24) scale(1.12 1)">
+        <tspan x="0" y="0">V</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(162.35 29.38) rotate(10.99) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(170.74 31.65) rotate(19.14) scale(1.12 1)">
+        <tspan x="0" y="0">L</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(178.31 34.95) rotate(29.72) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(185.24 39.71) rotate(43.73) scale(1.12 1)">
+        <tspan x="0" y="0">Z</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(190.65 45.88) rotate(61.6) scale(1.12 1)">
+        <tspan x="0" y="0">D</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(194.12 54.12) rotate(81.04) scale(1.12 1)">
+        <tspan x="0" y="0">A</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(194.66 62.99) rotate(98.45) scale(1.12 1)">
+        <tspan x="0" y="0">N</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(192.36 72.41) rotate(109.63) scale(1.12 1)">
+        <tspan x="0" y="0">I</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(190 77.56) rotate(117.84) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-53f78af1-ff8f-4a9c-9b95-1bb149c782f0"
+        transform="translate(185.35 84.95) rotate(125.52) scale(1.12 1)">
+        <tspan x="0" y="0">L</tspan>
+      </text><text class="uuid-e9e63d9b-5dae-4100-acde-cdf046243d04"
+        transform="translate(179.94 91.54) rotate(130.54) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(176.21 95.24) rotate(135.09) scale(1.12 1)">
+        <tspan x="0" y="0">V</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(169.27 101.29) rotate(140.03) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(162.09 106.56) rotate(144.25) scale(1.12 1)">
+        <tspan x="0" y="0">L</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(154.8 111.12) rotate(148.12) scale(1.12 1)">
+        <tspan x="0" y="0">E</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(146.93 115.34) rotate(151.81) scale(1.12 1)">
+        <tspan x="0" y="0">Z</tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(138.81 119.13) rotate(154.64) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(133.81 121.13) rotate(156.72) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(128.72 122.95) rotate(158.78) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(123.59 124.58) rotate(160.87) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(118.39 126.02) rotate(163.02) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(113.18 127.26) rotate(165.21) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(107.88 128.3) rotate(167.5) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(102.6 129.12) rotate(169.87) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-5543477c-e2f1-4275-aa29-8ce5f4b16dae"
+        transform="translate(97.24 129.72) rotate(172.39) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text><text class="uuid-e9e63d9b-5dae-4100-acde-cdf046243d04"
+        transform="translate(91.92 130.08) rotate(175.04) scale(1.12 1)">
+        <tspan x="0" y="0"> </tspan>
+      </text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 234.24 76.9">
+  <defs>
+    <style>
+      .uuid-971726dc-6b54-4c97-bd2c-8654269f254a {
+        fill: url(#uuid-b83be0e2-ffaa-4507-9caf-f68dc4cbe803);
+      }
+
+      .uuid-971726dc-6b54-4c97-bd2c-8654269f254a,
+      .uuid-a4a005c5-60f9-4320-99b4-f34de3f96c4c {
+        stroke: #171717;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+
+      .uuid-a4a005c5-60f9-4320-99b4-f34de3f96c4c {
+        fill: url(#uuid-02d65f55-7b29-4c35-b05a-90469f440c1a);
+      }
+
+      .uuid-52a1fb70-3e21-4bf0-bb47-f23b86645281 {
+        fill: #fff;
+      }
+
+      .uuid-30ba57ab-02b5-42c0-924e-ca463908fc9b,
+      .uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f {
+        fill: #171717;
+      }
+
+      .uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f {
+        font-family: Montserrat-ExtraBold, Montserrat;
+        font-size: 18px;
+        font-weight: 700;
+      }
+    </style>
+    <linearGradient id="uuid-b83be0e2-ffaa-4507-9caf-f68dc4cbe803" x1="11.34" y1="95.21" x2="219.19" y2="-19.45"
+      gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fdcbaf" />
+      <stop offset=".29" stop-color="#5efdff" />
+      <stop offset=".62" stop-color="#d62e98" />
+      <stop offset=".84" stop-color="#edfe3c" />
+      <stop offset="1" stop-color="#d8ff43" />
+    </linearGradient>
+    <linearGradient id="uuid-02d65f55-7b29-4c35-b05a-90469f440c1a" x1="230.97" y1="-22.13" x2="28.67" y2="88.37"
+      xlink:href="#uuid-b83be0e2-ffaa-4507-9caf-f68dc4cbe803" />
+  </defs>
+  <g id="uuid-52b4206b-3eb8-42ac-b605-98c5518a0ed7">
+    <path class="uuid-30ba57ab-02b5-42c0-924e-ca463908fc9b"
+      d="M196.53,6.12C175.26,2.41,147.06.38,117.12.38S58.98,2.41,37.72,6.12C11.89,10.61.38,16.57.38,25.44v26.03c0,8.87,11.52,14.82,37.34,19.32,21.27,3.7,49.47,5.74,79.41,5.74s58.14-2.04,79.4-5.74c25.83-4.5,37.34-10.45,37.34-19.32v-26.03c0-8.87-11.52-14.82-37.34-19.32Z" />
+    <path class="uuid-52a1fb70-3e21-4bf0-bb47-f23b86645281"
+      d="M117.12,76.9c-29.96,0-58.18-2.04-79.47-5.75C11.61,66.62,0,60.55,0,51.47v-26.03C0,16.35,11.61,10.28,37.65,5.75,58.94,2.04,87.16,0,117.12,0s58.18,2.04,79.47,5.75c26.04,4.53,37.65,10.6,37.65,19.69v26.03c0,9.09-11.61,15.16-37.65,19.69-21.29,3.71-49.51,5.75-79.47,5.75ZM117.12.75c-29.92,0-58.1,2.04-79.34,5.74C12.17,10.94.75,16.79.75,25.44v26.03c0,8.65,11.42,14.49,37.03,18.95,21.25,3.7,49.42,5.74,79.34,5.74s58.1-2.04,79.34-5.74c25.61-4.46,37.03-10.3,37.03-18.95v-26.03c0-8.65-11.42-14.49-37.03-18.95h0C175.22,2.79,147.04.75,117.12.75Z" />
+    <path class="uuid-971726dc-6b54-4c97-bd2c-8654269f254a"
+      d="M229.36,51.99c0-11.08-50.25-20.07-112.24-20.07S4.88,40.91,4.88,51.99v-27.07C4.88,13.83,55.13,4.85,117.12,4.85s112.24,8.98,112.24,20.07v27.07Z" />
+    <path class="uuid-a4a005c5-60f9-4320-99b4-f34de3f96c4c"
+      d="M4.88,24.91c0,11.08,50.25,20.07,112.24,20.07s112.24-8.98,112.24-20.07v27.07c0,11.08-50.25,20.07-112.24,20.07S4.88,63.07,4.88,51.99v-27.07Z" />
+    <text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(40.07 30.37) rotate(-8.84)">
+      <tspan x="0" y="0">•</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(48.59 29.08) rotate(-7.41)">
+      <tspan x="0" y="0"> </tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(55.49 28.15) rotate(-5.76)">
+      <tspan x="0" y="0">C</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(69.73 26.73) rotate(-3.88)">
+      <tspan x="0" y="0">O</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(86.65 25.62) rotate(-2.14)">
+      <tspan x="0" y="0">D</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(103.24 25.06) rotate(-.98)">
+      <tspan x="0" y="0">I</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(111.08 24.9) rotate(.17)">
+      <tspan x="0" y="0">G</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(126.67 24.94) rotate(1.57)">
+      <tspan x="0" y="0">O</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(143.63 25.47) rotate(2.74)">
+      <tspan x="0" y="0"> </tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(150.6 25.79) rotate(3.85)">
+      <tspan x="0" y="0">E</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(164.37 26.71) rotate(5.68)">
+      <tspan x="0" y="0">N</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(180.49 28.41) rotate(7.41)">
+      <tspan x="0" y="0"> </tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(187.39 29.31) rotate(8.85)">
+      <tspan x="0" y="0">•</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(29.76 58.35) rotate(11.39)">
+      <tspan x="0" y="0">•</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(38.57 60.06) rotate(9.34)">
+      <tspan x="0" y="0"> </tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(45.53 61.28) rotate(6.94)">
+      <tspan x="0" y="0">M</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(64.27 63.49) rotate(4.51)">
+      <tspan x="0" y="0">O</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(80.72 64.75) rotate(2.78)">
+      <tspan x="0" y="0">V</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(95.98 65.43) rotate(1.66)">
+      <tspan x="0" y="0">I</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(103.81 65.7) rotate(.42)">
+      <tspan x="0" y="0">M</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(122.79 65.76) rotate(-.79)">
+      <tspan x="0" y="0">I</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(130.64 65.67) rotate(-1.8)">
+      <tspan x="0" y="0">E</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(144.45 65.23) rotate(-3.31)">
+      <tspan x="0" y="0">N</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(160.66 64.25) rotate(-5)">
+      <tspan x="0" y="0">T</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(173.54 63.14) rotate(-7.08)">
+      <tspan x="0" y="0">O</tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(190.5 60.91) rotate(-9.34)">
+      <tspan x="0" y="0"> </tspan>
+    </text><text class="uuid-f4260c28-43dc-49df-8b4f-6a7b79bc422f" transform="translate(197.7 59.71) rotate(-11.38)">
+      <tspan x="0" y="0">•</tspan>
+    </text>
+  </g>
+</svg>
