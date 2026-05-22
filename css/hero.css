@@ -1,0 +1,704 @@
+/* ═══════════════════════════════════════════════════════════════
+   HERO — Layout, tipografía, frase editable, nombre principal
+═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────
+   CONTENEDOR HERO
+───────────────────────────────────────── */
+
+.hero-sticky-stage {
+  position: relative;
+  height: 210dvh;
+  /* Perspectiva más corta = efecto 3D más pronunciado en el tilt/shrink */
+  perspective: 900px;
+  transform-style: preserve-3d;
+  /* overflow en el stage (no en el hero) para que el tilt no se recorte
+     pero tampoco tape los elementos fixed de las esquinas y el nav */
+  overflow: hidden;
+}
+
+.hero {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+/* ── Bloque NOMBRES — anclado a la derecha ── */
+.hero-nombres-area {
+  position: absolute;
+  right: 18vw;
+  top: 55%;
+  transform: translateY(-52%);
+  text-align: right;
+  user-select: none;
+}
+
+/* ── Bloque FRASE — anclado bottom-left ── */
+.hero-editable-area {
+  position: absolute;
+  bottom: calc(52px + 9vh);
+  left: calc(42px + 3vw);
+}
+
+/* ─────────────────────────────────────────
+   FRASE EDITABLE
+   Chiqueta Light — expresiva, editable
+───────────────────────────────────────── */
+
+.hero-frase-editable-contenedor {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-frase-fija,
+.hero-frase-prefijo,
+.hero-frase-editable {
+  font-family: var(--fuente-editable);
+  font-weight: 400;
+  font-size: clamp(15px, 2.92vw, 51px);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--color-editable);
+  text-transform: uppercase;
+  /* Ligaduras discrecionales de Chiqueta */
+  font-feature-settings:
+    "dlig" 1,
+    "liga" 1,
+    "calt" 1,
+    "aalt" 1;
+  font-variant-ligatures: discretionary-ligatures common-ligatures contextual;
+
+  transition: color var(--transicion-tema);
+}
+
+.hero-frase-fija {
+  /* Estado inicial para GSAP */
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.hero-frase-prefijo {
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero-frase-editable {
+  display: inline;
+  min-width: 10px;
+  max-width: 90vw;
+  word-break: break-word;
+  color: var(--color-acento);
+  caret-color: var(--color-acento);
+  outline: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--transicion-tema),
+    border-color 0.3s ease;
+}
+
+.hero-frase-editable:focus {
+  border-bottom-color: var(--color-acento);
+}
+
+.hero-frase-fija + .hero-frase-fija,
+.hero-frase-fija + .hero-frase-editable {
+  margin-top: clamp(2px, 0.35vw, 8px);
+}
+
+/* Desfase escalonado: cada línea sangra más hacia la derecha */
+.hero-frase-editable-contenedor > :nth-child(2) {
+  padding-left: clamp(10px, 2.2vw, 36px);
+}
+
+.hero-frase-editable-contenedor > :nth-child(3) {
+  padding-left: clamp(22px, 4.4vw, 72px);
+}
+
+.hero-frase-editable.modificada {
+  color: var(--color-editable-activo);
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-frase-editable::selection {
+  background: var(--color-acento);
+  color: var(--color-fondo);
+}
+
+/* Línea indicador inferior — crece al hacer foco */
+.hero-frase-editable-contenedor::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-acento);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-frase-editable-contenedor:focus-within::after {
+  width: 100%;
+}
+
+/* Hint "← editar" — aparece inline al lado de cada palabra editable */
+.hero-hint-editar {
+  display: inline;
+  margin-left: 0.6em;
+  font-family: var(--fuente-micro);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: none;
+  font-feature-settings:
+    "dlig" 1,
+    "liga" 1;
+  font-variant-ligatures: normal;
+  color: var(--color-hint);
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  vertical-align: middle;
+  transition:
+    opacity 0.3s ease,
+    color var(--transicion-tema);
+}
+
+.hero-frase-fija:hover .hero-hint-editar {
+  opacity: 1;
+}
+
+/* ─────────────────────────────────────────
+   NOMBRE PRINCIPAL
+───────────────────────────────────────── */
+
+/* ── Hint drag ── */
+.hero-drag-hint {
+  position: absolute;
+  top: -34px;
+  right: 12px;
+  font-family: var(--fuente-micro);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.13em;
+  text-transform: none;
+  font-feature-settings:
+    "dlig" 1,
+    "liga" 1;
+  font-variant-ligatures: normal;
+  color: var(--color-hint);
+  border: 1px solid var(--color-hint);
+  padding: 3px 10px;
+  border-radius: 20px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition:
+    opacity 0.3s ease,
+    color var(--transicion-tema),
+    border-color var(--transicion-tema);
+}
+
+.hero-nombres-area:hover .hero-drag-hint {
+  opacity: 1;
+}
+
+.hero-nombres-area.is-drag-active,
+.hero-nombres-area.is-drag-active * {
+  cursor: none !important;
+}
+
+/* ── DANIEL — filled, draggable ── */
+.hero-nombre-daniel {
+  font-family: var(--fuente-display);
+  font-weight: 700;
+  font-size: clamp(113px, 21.6vw, 348px);
+  letter-spacing: 0.04em;
+  line-height: 0.88;
+  color: var(--color-nombre-daniel);
+  display: inline-block;
+  position: relative;
+  will-change: transform;
+  text-shadow:
+    2px 3px 0 var(--sombra-nombre-daniel),
+    4px 6px 0 var(--sombra-nombre-daniel),
+    6px 9px 0 var(--sombra-nombre-daniel),
+    7px 12px 18px rgba(0, 0, 0, 0.28);
+  transition:
+    color var(--transicion-tema),
+    text-shadow var(--transicion-tema);
+  font-feature-settings:
+    "aalt" 1,
+    "liga" 1,
+    "ss01" 1;
+  font-variant-alternates: stylistic(ss01);
+  touch-action: none;
+}
+
+/* ── VELEZ — outline, stroke ── */
+.hero-nombre-velez {
+  font-family: var(--fuente-display);
+  font-weight: 200;
+  font-size: clamp(113px, 21.8vw, 351px);
+  letter-spacing: -0.03em;
+  line-height: 0.88;
+  color: transparent;
+  text-transform: none;
+  display: block;
+  position: relative;
+  left: clamp(58px, 23.6vw, 174px);
+  -webkit-text-stroke: 3.5px var(--color-texto);
+  font-feature-settings: "liga" 1;
+  transition:
+    color var(--transicion-tema),
+    -webkit-text-stroke-color var(--transicion-tema);
+}
+
+/* ─────────────────────────────────────────
+   DRAG MICROINTERACTION — DANIEL
+───────────────────────────────────────── */
+
+.hero-drag-line-svg {
+  position: fixed;
+  inset: 0;
+  z-index: 9996;
+  pointer-events: none;
+}
+
+.hero-drag-line {
+  stroke: var(--color-acento);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-dasharray: 8 7;
+  stroke-dashoffset: 0;
+  opacity: 0.95;
+  filter: drop-shadow(
+    0 0 8px color-mix(in srgb, var(--color-acento) 45%, transparent)
+  );
+  animation: hero-drag-dash-flow 0.85s linear infinite;
+}
+
+@keyframes hero-drag-dash-flow {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+
+.hero-drag-tooltip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9998;
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: var(--fuente-micro);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-acento);
+  background: color-mix(in srgb, var(--color-fondo) 78%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-acento) 54%, transparent);
+  border-radius: 14px;
+  padding: 5px 10px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-drag-custom-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  margin-left: -17px;
+  margin-top: -17px;
+  border-radius: 999px;
+  border: 2.5px solid var(--color-cursor-daniel);
+  background: color-mix(in srgb, var(--color-cursor-daniel) 18%, transparent);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--color-cursor-daniel) 28%, transparent),
+    0 0 14px color-mix(in srgb, var(--color-cursor-daniel) 72%, transparent),
+    0 0 34px color-mix(in srgb, var(--color-cursor-daniel) 55%, transparent);
+  z-index: 9998;
+  pointer-events: none;
+}
+
+.hero-drag-bubble {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  font-family: "Cloudsters", var(--fuente-dialogo), sans-serif;
+  font-size: clamp(19px, 1.5vw, 24px);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-feature-settings:
+    "liga" 1,
+    "dlig" 1,
+    "calt" 1,
+    "aalt" 1;
+  font-variant-ligatures: discretionary-ligatures common-ligatures contextual;
+  text-transform: none;
+  color: var(--color-cursor-daniel);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--color-fondo) 76%, transparent),
+    color-mix(in srgb, var(--color-fondo-alt) 52%, transparent)
+  );
+  border: 1.6px solid
+    color-mix(in srgb, var(--color-cursor-daniel) 76%, transparent);
+  border-radius: 14px;
+  padding: 12px 18px;
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, 0.2),
+    0 0 22px color-mix(in srgb, var(--color-cursor-daniel) 48%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--color-fondo) 70%, transparent);
+  backdrop-filter: blur(14px) saturate(1.35);
+  -webkit-backdrop-filter: blur(14px) saturate(1.35);
+  max-width: min(80vw, 560px);
+  text-shadow: 0 0 8px
+    color-mix(in srgb, var(--color-cursor-daniel) 34%, transparent);
+}
+
+/* ─── Tablet landscape (769px – 1024px) ─── */
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* Nombres: centrados como en móvil */
+  .hero-nombres-area {
+    right: auto;
+    left: 50%;
+    top: 42%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90vw;
+  }
+
+  .hero-nombre-daniel {
+    font-size: clamp(100px, 20vw, 180px);
+    display: block;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-nombre-velez {
+    font-size: clamp(90px, 18vw, 164px);
+    display: block;
+    text-align: center;
+    left: 0;
+    -webkit-text-stroke-width: 2.5px;
+  }
+
+  /* Frases: centradas en la parte baja */
+  .hero-editable-area {
+    bottom: clamp(44px, 6vh, 72px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .hero-frase-fija {
+    text-align: center;
+  }
+
+  .hero-frase-fija,
+  .hero-frase-editable {
+    font-size: clamp(18px, 3.2vw, 32px);
+  }
+
+  .hero-frase-editable {
+    font-size: clamp(16px, 2.9vw, 28px);
+  }
+
+  .hero-drag-hint {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-drag-bubble {
+    font-size: clamp(12px, 3.4vw, 15px);
+    padding: 9px 13px;
+    max-width: 82vw;
+    border-radius: 12px;
+    /* Centrada horizontalmente en pantalla */
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+}
+
+.hero-drag-bubble-char {
+  display: inline-block;
+}
+
+/* ─────────────────────────────────────────
+   EDICIÓN MICROINTERACCIÓN — DANIEL RESPONDE
+   Se activa cuando el usuario cambia texto editable.
+   Estados: IDLE → SELECT → BUBBLE → FADEOUT → IDLE
+───────────────────────────────────────── */
+
+.hero-editable-area.is-edit-reacting,
+.hero-editable-area.is-edit-reacting * {
+  cursor: none !important;
+}
+
+/* ─────────────────────────────────────────
+   INTRO OVERLAYS
+   Leyenda, bounding boxes, labels y tooltips
+   de la secuencia cinematográfica de entrada.
+   position: fixed + GSAP transform — cero layout impact.
+───────────────────────────────────────── */
+
+.hero-intro-legend {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin: 0 auto;
+  z-index: 9999;
+  font-family: var(--fuente-micro);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: none;
+  font-feature-settings:
+    "dlig" 1,
+    "liga" 1;
+  font-variant-ligatures: normal;
+  color: var(--color-acento);
+  border: 2px solid var(--color-acento);
+  padding: 7px 24px;
+  border-radius: 20px;
+  pointer-events: none;
+  white-space: nowrap;
+  transition:
+    border-color var(--transicion-tema),
+    color var(--transicion-tema);
+}
+
+.hero-intro-bbox {
+  position: fixed;
+  left: 0;
+  top: 0;
+  border: 2.5px solid var(--color-acento);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 9998;
+  box-sizing: border-box;
+  box-shadow:
+    0 0 10px 2px var(--color-acento),
+    0 0 28px 6px color-mix(in srgb, var(--color-acento) 35%, transparent),
+    inset 0 0 14px 0 color-mix(in srgb, var(--color-acento) 8%, transparent);
+  transition:
+    border-color var(--transicion-tema),
+    box-shadow var(--transicion-tema);
+}
+
+.hero-intro-bbox--velez {
+  border-color: var(--color-texto);
+  border-style: dotted;
+  border-width: 2px;
+  box-shadow:
+    0 0 8px 1px color-mix(in srgb, var(--color-texto) 35%, transparent),
+    0 0 20px 4px color-mix(in srgb, var(--color-texto) 18%, transparent);
+}
+
+.hero-intro-label {
+  position: fixed;
+  left: 0;
+  top: 0;
+  font-family: var(--fuente-micro);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: none;
+  font-feature-settings:
+    "dlig" 1,
+    "liga" 1;
+  font-variant-ligatures: normal;
+  color: var(--color-fondo);
+  background: var(--color-acento);
+  padding: 3px 10px;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 9999;
+  white-space: nowrap;
+  transition:
+    background var(--transicion-tema),
+    color var(--transicion-tema);
+}
+
+.hero-intro-tooltip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  font-family: var(--fuente-micro);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  font-feature-settings:
+    "dlig" 1,
+    "liga" 1;
+  font-variant-ligatures: normal;
+  /* Glassmorphism */
+  background: color-mix(in srgb, var(--color-fondo) 55%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1.5px solid color-mix(in srgb, var(--color-acento) 55%, transparent);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 color-mix(in srgb, var(--color-fondo) 40%, transparent);
+  padding: 10px 14px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+.hero-intro-tooltip .tip-row {
+  display: block;
+  line-height: 1; /* sin espacio entre filas */
+  padding: 4px 0; /* respiro visual mínimo sin hueco */
+}
+
+.hero-intro-tooltip .tip-row + .tip-row {
+  border-top: 1px solid color-mix(in srgb, var(--color-hint) 25%, transparent);
+}
+
+.hero-intro-tooltip .tip-key {
+  color: var(--color-acento);
+}
+.hero-intro-tooltip .tip-sep {
+  color: var(--color-hint);
+  margin: 0 5px;
+}
+.hero-intro-tooltip .tip-val {
+  color: var(--color-texto);
+}
+
+/* Flash de pantalla (doble parpadeo) antes de la leyenda */
+.hero-intro-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: var(--color-acento);
+  mix-blend-mode: blend;
+}
+
+/* Cursor parpadeante del typewriter de frases */
+.hero-tw-cursor {
+  color: var(--color-acento);
+  font-weight: 300;
+  will-change: opacity;
+  user-select: none;
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE HERO
+───────────────────────────────────────── */
+
+@media (max-width: 1200px) {
+  .hero-hint-editar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-sticky-stage {
+    height: 210dvh;
+  }
+
+  /* Nombres: centrados vertical y horizontalmente */
+  .hero-nombres-area {
+    right: auto;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 96vw;
+  }
+
+  .hero-drag-hint {
+    display: none;
+  }
+
+  /* ── Nombres más grandes en móvil ── */
+  .hero-nombre-daniel {
+    font-size: clamp(108px, 34vw, 200px);
+    letter-spacing: 0.02em;
+    display: block;
+    text-align: center;
+  }
+
+  .hero-nombre-velez {
+    font-size: clamp(100px, 31vw, 186px);
+    letter-spacing: -0.015em;
+    left: 0;
+    display: block;
+    text-align: center;
+    -webkit-text-stroke-width: 2.5px;
+  }
+
+  /* Frases: centradas, con espacio suficiente sobre las coords de esquina */
+  .hero-editable-area {
+    bottom: clamp(52px, 8vh, 80px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .hero-frase-editable-contenedor > :nth-child(2),
+  .hero-frase-editable-contenedor > :nth-child(3) {
+    padding-left: 0;
+  }
+
+  .hero-frase-fija {
+    text-align: center;
+  }
+
+  /* ── Frases editables más grandes ── */
+  .hero-frase-fija,
+  .hero-frase-editable {
+    font-size: clamp(22px, 6.4vw, 40px);
+  }
+
+  .hero-frase-editable {
+    font-size: clamp(20px, 5.8vw, 36px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-nombres-area {
+    width: 97vw;
+    top: 43%;
+  }
+
+  .hero-nombre-daniel {
+    font-size: clamp(96px, 31vw, 140px);
+  }
+
+  .hero-nombre-velez {
+    font-size: clamp(88px, 28.5vw, 130px);
+    -webkit-text-stroke-width: 2px;
+  }
+
+  .hero-editable-area {
+    bottom: clamp(48px, 7vh, 72px);
+  }
+
+  .hero-frase-fija,
+  .hero-frase-editable {
+    font-size: clamp(18px, 5.6vw, 32px);
+  }
+
+  .hero-frase-editable {
+    font-size: clamp(17px, 5.2vw, 28px);
+  }
+}

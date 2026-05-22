@@ -1,0 +1,133 @@
+/* ═══════════════════════════════════════════════════════════════
+   MODO CREATIVO — Disparar stickers como proyectiles
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Cursor sticker (reemplaza el cursor normal) ── */
+.creativo-cursor {
+  position: fixed;
+  z-index: 9990;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: none;
+}
+
+.creativo-cursor img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ── Sticker pegado en la página ── */
+.creativo-sticker-pegado {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  will-change: transform;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
+  z-index: 85;
+}
+
+.creativo-sticker-pegado img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Tamaños aleatorios de stickers pegados */
+.creativo-sticker-pegado--xl {
+  width: clamp(143px, 17vw, 234px);
+  height: clamp(143px, 17vw, 234px);
+}
+
+.creativo-sticker-pegado--grande {
+  width: clamp(110px, 13vw, 180px);
+  height: clamp(110px, 13vw, 180px);
+}
+
+.creativo-sticker-pegado--mediano {
+  width: clamp(85px, 10vw, 140px);
+  height: clamp(85px, 10vw, 140px);
+}
+
+.creativo-sticker-pegado--chico {
+  width: clamp(65px, 7.5vw, 110px);
+  height: clamp(65px, 7.5vw, 110px);
+}
+
+/* ── Layer para stickers pegados ── */
+.modo-creativo-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 85;
+  overflow: visible;
+}
+
+/* ── Ocultar cursor nativo cuando modo creativo está activo ── */
+body.modo-creativo-activo,
+body.modo-creativo-activo * {
+  cursor: none !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .creativo-cursor img {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .creativo-cursor img {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 599px) {
+  .creativo-cursor img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .creativo-sticker-pegado--grande {
+    width: clamp(60px, 16vw, 100px);
+    height: clamp(60px, 16vw, 100px);
+  }
+
+  .creativo-sticker-pegado--mediano {
+    width: clamp(40px, 11vw, 70px);
+    height: clamp(40px, 11vw, 70px);
+  }
+
+  .creativo-sticker-pegado--chico {
+    width: clamp(28px, 7vw, 50px);
+    height: clamp(28px, 7vw, 50px);
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .creativo-cursor img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .creativo-sticker-pegado {
+    transition: none !important;
+  }
+}

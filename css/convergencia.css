@@ -1,0 +1,58 @@
+/* ═══════════════════════════════════════════════════════════════
+   CONVERGENCIA — 5 filas que entran y convergen al centro
+═══════════════════════════════════════════════════════════════ */
+
+/* La sección no necesita min-height propia;
+   ScrollTrigger con pin:true añade el espacio extra automáticamente */
+.convergencia {
+  position: relative;
+  z-index: 4;
+  background: var(--color-fondo-alt);
+  transition: background var(--transicion-tema);
+}
+
+.convergencia-stage {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-fondo-alt);
+  transition: background var(--transicion-tema);
+}
+
+/* Cada fila ocupa exactamente 1/5 del viewport */
+.convergencia-fila {
+  flex: 0 0 20dvh;
+  height: 20dvh;
+  width: 100%;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+  filter: brightness(0) invert(1);
+  will-change: transform, opacity, filter; /* filter para el neon glow */
+  pointer-events: none;
+  user-select: none;
+}
+
+.convergencia-fila--fill {
+  filter: brightness(0) invert(1) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.22))
+    drop-shadow(0 14px 26px rgba(0, 0, 0, 0.28));
+}
+
+/* ── Móvil (≤767px): sin pin, filas fluyen normalmente ── */
+@media (max-width: 767px) {
+  /* La sección ocupa exactamente la altura de las 5 filas */
+  .convergencia {
+    overflow: hidden;
+  }
+
+  .convergencia-stage {
+    height: auto;
+  }
+
+  /* En móvil cada fila ocupa 20vh igual que desktop */
+  .convergencia-fila {
+    flex: 0 0 20vh;
+    height: 20vh;
+  }
+}

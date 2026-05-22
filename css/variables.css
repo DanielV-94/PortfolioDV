@@ -1,0 +1,245 @@
+﻿/* ═══════════════════════════════════════════════════════════════
+   VARIABLES — Sistema de 5 temas + base neutro claro
+   Cada tema corresponde a una colección de stickers
+═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --fuente-editable: "ChiquetaR", sans-serif;
+  --fuente-dialogo: "Cloudsters", sans-serif;
+  --fuente-display: "Pronell", sans-serif;
+  --fuente-micro: "Logrient", monospace;
+  --fuente-navbar: "PointPanther", sans-serif;
+  --fuente-navbar-active: "PointPantherOutline", sans-serif;
+  --fuente-footer: "PointPanther", sans-serif;
+  --fuente-footer-active: "PointPantherOutline", sans-serif;
+  --fuente-parrafo: "ProtageL", sans-serif;
+  --fuente-parrafo-light: "ProtageL", sans-serif;
+
+  /* ── Grid ── */
+  --grid-size: 44px;
+
+  /* ── Transición de tema ── */
+  --transicion-tema: 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ════════════════════════════════════════
+   TEMA BASE — Neutro Claro (estado por defecto)
+   Warm paper white — neutral before sticker themes
+════════════════════════════════════════ */
+[data-tema="neutro"],
+:root {
+  --color-fondo: #f0ede6;
+  --color-fondo-secundario: #c9c0ad;
+  --color-fondo-alt: #7a653c;
+  --color-texto: #0d0d0d;
+  --color-texto-suave: #6a6560;
+  --color-acento: #b5770c;
+  --color-acento-hover: #a16806;
+  --color-grid: rgba(13, 13, 13, 0.326);
+  --color-gradiente-ini: rgba(240, 237, 230, 0);
+  --color-gradiente-fin: rgba(220, 216, 206, 0.7);
+  --color-cursor-daniel: #dd070b;
+  --color-cursor-usuario: #0d0d0d;
+  --color-editable: #0d0d0d;
+  --color-editable-activo: #e63500;
+  --color-hint: rgba(13, 13, 13, 0.30);
+  --color-nav-fondo: rgba(240, 237, 230, 0.85);
+  --color-nombre-daniel: #e8a020;
+  --sombra-nombre-daniel: #7a4800;
+  /* ── Manifiesto ── */
+  --manifiesto-drop-1: rgba(223, 157, 44, 0.723);
+  --manifiesto-drop-2: rgba(169, 132, 132, 0.567);
+  --manifiesto-drop-3: rgba(220, 165, 69, 0.712);
+  --manifiesto-neon-color: #0d0d0d;
+  --manifiesto-neon-s1: 0 0 4px rgba(245, 170, 170, 0.6);
+  --manifiesto-neon-s2: 0 0 14px rgba(240, 174, 59, 0.5);
+  --manifiesto-neon-s3: 0 0 30px rgba(227, 164, 164, 0.4);
+  --manifiesto-neon-s4: 0 0 60px rgba(248, 180, 61, 0.3);
+  --manifiesto-neon-s5: 0 0 110px rgba(237, 188, 188, 0.2);
+  --manifiesto-neon-s6: 0 0 180px rgba(255, 218, 154, 0.1);
+}
+
+/* ════════════════════════════════════════
+   TEMA — ACID
+   Stickers: orgánicos, psicodélicos, neón sobre negro
+   Paleta: verde lima + magenta + cyan (psicodelia)
+════════════════════════════════════════ */
+[data-tema="acid"] {
+  --color-fondo: #0a0a14;
+  --color-fondo-secundario: #0a1420;
+  --color-fondo-alt: #19c1b8;
+  --color-texto: #f0fff0;
+  --color-texto-suave: #7b68ee;
+  --color-acento: #91ff00;
+  --color-acento-hover: #ff2d9b;
+  --color-grid: rgba(145, 255, 0, 0.586);
+  --color-gradiente-ini: rgba(10, 10, 20, 0);
+  --color-gradiente-fin: rgba(10, 10, 20, 0.88);
+  --color-cursor-daniel: #00f0ff;
+  --color-cursor-usuario: #f0fff0;
+  --color-editable: #f0fff0;
+  --color-editable-activo: #ff2d9b;
+  --color-hint: rgba(145, 255, 0, 0.45);
+  --color-nav-fondo: rgba(10, 10, 20, 0.90);
+  --color-nombre-daniel: #91ff00;
+  --sombra-nombre-daniel: #00f0ff;
+  /* ── Manifiesto ── */
+  --manifiesto-drop-1: rgba(145, 255, 0, 0.937);
+  --manifiesto-drop-2: rgba(0, 238, 255, 0.918);
+  --manifiesto-drop-3: rgba(103, 7, 57, 0.937);
+  --manifiesto-neon-color: #91ff00;
+  --manifiesto-neon-s1: 0 0 4px #91ff00;
+  --manifiesto-neon-s2: 0 0 14px rgba(145, 255, 0, 0.95);
+  --manifiesto-neon-s3: 0 0 30px rgba(0, 240, 255, 0.80);
+  --manifiesto-neon-s4: 0 0 60px rgba(180, 9, 97, 0.797);
+  --manifiesto-neon-s5: 0 0 110px rgba(154, 249, 29, 0.844);
+  --manifiesto-neon-s6: 0 0 180px rgba(5, 118, 126, 0.704);
+}
+
+/* ════════════════════════════════════════
+   TEMA — SYNTHWAVE
+   Stickers: retro-futuristas, 80s, sunset púrpura y magenta
+   Paleta: coral + dorado + cyan (sunset retro)
+════════════════════════════════════════ */
+[data-tema="synthwave"] {
+  --color-fondo: #0f0024;
+  --color-fondo-secundario: #000f24;
+  --color-fondo-alt: #dfc655;
+  --color-texto: #ec9ab5;
+  --color-texto-suave: #ff9ecd;
+  --color-acento: #ff2d6a;
+  --color-acento-hover: #ffd000;
+  --color-grid: rgba(255, 45, 104, 0.556);
+  --color-gradiente-ini: rgba(15, 0, 36, 0);
+  --color-gradiente-fin: rgba(15, 0, 36, 0.90);
+  --color-cursor-daniel: #00e5ff;
+  --color-cursor-usuario: #fff0f5;
+  --color-editable: #fff0f5;
+  --color-editable-activo: #ffd000;
+  --color-hint: rgba(0, 229, 255, 0.45);
+  --color-nav-fondo: rgba(15, 0, 36, 0.90);
+  --color-nombre-daniel: #ff2d6a;
+  --sombra-nombre-daniel: #ffd000;
+  /* ── Manifiesto ── */
+  --manifiesto-drop-1: rgba(255, 45, 106, 0.70);
+  --manifiesto-drop-2: rgba(255, 208, 0, 0.50);
+  --manifiesto-drop-3: rgba(0, 229, 255, 0.30);
+  --manifiesto-neon-color: #f0fffa;
+  --manifiesto-neon-s1: 0 0 4px #13b6df;
+  --manifiesto-neon-s2: 0 0 14px rgba(255, 45, 106, 0.95);
+  --manifiesto-neon-s3: 0 0 30px rgba(255, 208, 0, 0.80);
+  --manifiesto-neon-s4: 0 0 60px rgba(255, 45, 106, 0.60);
+  --manifiesto-neon-s5: 0 0 110px rgba(0, 229, 255, 0.40);
+  --manifiesto-neon-s6: 0 0 180px rgba(255, 208, 0, 0.433);
+}
+
+/* ════════════════════════════════════════
+   TEMA — RAVE
+   Stickers: club, underground, energía cruda
+   Paleta: rojo-naranja + verde menta + amarillo (strobes)
+════════════════════════════════════════ */
+[data-tema="rave"] {
+  --color-fondo: #050505;
+  --color-fondo-secundario: #050a0a;
+  --color-fondo-alt: #cf5306;
+  --color-texto: #ffffff;
+  --color-texto-suave: #777777;
+  --color-acento: #ff3300;
+  --color-acento-hover: #00ff88;
+  --color-grid: rgba(255, 153, 0, 0.564);
+  --color-gradiente-ini: rgba(5, 5, 5, 0);
+  --color-gradiente-fin: rgba(5, 5, 5, 0.90);
+  --color-cursor-daniel: #ffee00;
+  --color-cursor-usuario: #ffffff;
+  --color-editable: #ffffff;
+  --color-editable-activo: #00ff88;
+  --color-hint: rgba(255, 238, 0, 0.50);
+  --color-nav-fondo: rgba(5, 5, 5, 0.92);
+  --color-nombre-daniel: #ff3300;
+  --sombra-nombre-daniel: #ffee00;
+  /* ── Manifiesto ── */
+  --manifiesto-drop-1: rgba(255, 51, 0, 0.70);
+  --manifiesto-drop-2: rgba(0, 255, 136, 0.50);
+  --manifiesto-drop-3: rgba(255, 238, 0, 0.30);
+  --manifiesto-neon-color: #ffffff;
+  --manifiesto-neon-s1: 0 0 4px #ffffff;
+  --manifiesto-neon-s2: 0 0 14px rgba(255, 51, 0, 0.95);
+  --manifiesto-neon-s3: 0 0 30px rgba(0, 255, 136, 0.8);
+  --manifiesto-neon-s4: 0 0 60px rgba(255, 238, 0, 0.671);
+  --manifiesto-neon-s5: 0 0 110px rgba(255, 51, 0, 0.597);
+  --manifiesto-neon-s6: 0 0 180px rgba(0, 255, 136, 0.595);
+}
+
+/* ════════════════════════════════════════
+   TEMA — COLLAGE
+   Stickers: recortes fotoreales, zine culture, kitsch 90s
+   Paleta: rojo editorial + azul tinta + teal (zine CLARO)
+════════════════════════════════════════ */
+[data-tema="collage"] {
+  --color-fondo: #d5d3d0;
+  --color-fondo-secundario: #f2eee3;
+  --color-fondo-alt: #d4e8f0;
+  --color-texto: #1a1612;
+  --color-texto-suave: #c6791c;
+  --color-acento: #e03030;
+  --color-acento-hover: #0066cc;
+  --color-grid: rgba(26, 22, 18, 0.614);
+  --color-gradiente-ini: rgba(242, 236, 227, 0);
+  --color-gradiente-fin: rgba(232, 224, 212, 0.7);
+  --color-cursor-daniel: #009688;
+  --color-cursor-usuario: #1a1612;
+  --color-editable: #1a1612;
+  --color-editable-activo: #e03030;
+  --color-hint: rgba(0, 150, 136, 0.45);
+  --color-nav-fondo: rgba(242, 236, 227, 0.92);
+  --color-nombre-daniel: #e03030;
+  --sombra-nombre-daniel: #7a0000;
+  /* ── Manifiesto ── */
+  --manifiesto-drop-1: rgba(224, 48, 48, 0.844);
+  --manifiesto-drop-2: rgba(26, 22, 18, 0.521);
+  --manifiesto-drop-3: rgba(24, 133, 241, 0.721);
+  --manifiesto-neon-color: #1a1612;
+  --manifiesto-neon-s1: 0 0 4px rgba(26, 22, 18, 0.745);
+  --manifiesto-neon-s2: 0 0 14px rgba(203, 5, 5, 0.803);
+  --manifiesto-neon-s3: 0 0 30px rgba(26, 22, 18, 0.647);
+  --manifiesto-neon-s4: 0 0 60px rgba(10, 118, 226, 0.732);
+  --manifiesto-neon-s5: 0 0 110px rgba(224, 48, 48, 0.822);
+  --manifiesto-neon-s6: 0 0 180px rgba(243, 123, 4, 0.742);
+}
+
+/* ════════════════════════════════════════
+   TEMA — HOLOGRAPHIC
+   Stickers: holo foil, iridiscente, arcoíris nacarado
+   Paleta: violeta + turquesa + magenta (prisma CLARO)
+════════════════════════════════════════ */
+[data-tema="holographic"] {
+  --color-fondo: #f5f7ff;
+  --color-fondo-secundario: #f5f0ff;
+  --color-fondo-alt: #f5b8b8;
+  --color-texto: #1a1a2e;
+  --color-texto-suave: #555980;
+  --color-acento: #7c3aed;
+  --color-acento-hover: #06d6a0;
+  --color-grid: rgba(124, 58, 237, 0.619);
+  --color-gradiente-ini: rgba(245, 247, 255, 0);
+  --color-gradiente-fin: rgba(234, 237, 250, 0.7);
+  --color-cursor-daniel: #ff006e;
+  --color-cursor-usuario: #1a1a2e;
+  --color-editable: #b6062c;
+  --color-editable-activo: #7c3aed;
+  --color-hint: rgba(124, 58, 237, 0.64);
+  --color-nav-fondo: rgba(245, 247, 255, 0.90);
+  --color-nombre-daniel: #7c3aed;
+  --sombra-nombre-daniel: #3b1a7a;
+  /* ── Manifiesto ── */
+  --manifiesto-drop-1: rgba(124, 58, 237, 0.767);
+  --manifiesto-drop-2: rgba(26, 26, 46, 0.627);
+  --manifiesto-drop-3: rgba(255, 0, 111, 0.849);
+  --manifiesto-neon-color: #0c9c86;
+  --manifiesto-neon-s1: 0 0 4px rgba(26, 46, 41, 0.767);
+  --manifiesto-neon-s2: 0 0 14px rgba(124, 58, 237, 0.45);
+  --manifiesto-neon-s3: 0 0 30px rgba(26, 26, 46, 0.48);
+  --manifiesto-neon-s4: 0 0 60px rgba(6, 214, 160, 0.35);
+  --manifiesto-neon-s5: 0 0 110px rgba(124, 58, 237, 0.60);
+  --manifiesto-neon-s6: 0 0 180px rgba(26, 26, 46, 0.49);
+}

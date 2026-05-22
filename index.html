@@ -1,0 +1,526 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel Vélez — Desarrollador Web Creativo | Guadalajara, México</title>
+
+  <!-- SEO -->
+  <meta name="description"
+    content="Daniel Vélez, desarrollador web creativo en Guadalajara, México. Coreografío experiencias digitales interactivas con GSAP, Three.js y diseño UI/UX." />
+  <meta name="keywords"
+    content="desarrollador web, diseño web, Guadalajara, México, experiencias digitales, creativo, frontend, GSAP, interactivo, Daniel Vélez" />
+  <meta name="author" content="Daniel Vélez" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Daniel Vélez — Desarrollador Web Creativo" />
+  <meta property="og:description"
+    content="Coreografío experiencias digitales. Portfolio de Daniel Vélez, desarrollador web creativo en Guadalajara, México." />
+  <meta property="og:url" content="https://www.danielvelez-webdev.com" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#F0EDE6" />
+
+  <!-- Aplicar tema guardado antes del render para evitar flash -->
+  <script>
+    (function() {
+      var t = localStorage.getItem("dv-tema-activo");
+      if (t) document.documentElement.setAttribute("data-tema", t);
+    })();
+  </script>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/transicion-hero.css" />
+  <link rel="stylesheet" href="css/convergencia.css" />
+  <link rel="stylesheet" href="css/manifiesto.css" />
+  <link rel="stylesheet" href="css/tema-selector.css" />
+  <link rel="stylesheet" href="css/modo-caos.css" />
+  <link rel="stylesheet" href="css/modo-creativo.css" />
+  <link rel="stylesheet" href="css/habilidades.css" />
+</head>
+
+<body data-tema="neutro" class="cursor-oculto">
+
+  <!-- ══ Cursores ══ -->
+  <div class="cursor-usuario" id="cursorUsuario" aria-hidden="true">
+    <div class="cursor-punto"></div>
+    <span class="cursor-etiqueta">tú</span>
+  </div>
+  <div class="cursor-daniel" id="cursorDaniel" aria-hidden="true">
+    <div class="cursor-punto"></div>
+    <span class="cursor-etiqueta">Daniel</span>
+  </div>
+
+  <!-- ══ Fondo grid ══ -->
+  <div class="fondo-grid" aria-hidden="true">
+    <div class="fondo-gradiente"></div>
+  </div>
+  <div class="theme-shift-overlay" aria-hidden="true"></div>
+
+  <!-- ══ Esquina sup. izq — Ubicación + Hora ══ -->
+  <div class="esquina esquina--sup-izq" aria-label="Ubicación y hora local">
+    <span class="esquina-linea" id="datoUbicacion">20.6597° N, 103.3496° W</span>
+    <span class="esquina-linea" id="relojHero" aria-live="polite">GDL — 00:00:00 CST</span>
+  </div>
+
+  <!-- ══ Esquina sup. der — Menú (fullscreen nav pendiente) ══ -->
+  <div class="esquina esquina--sup-der">
+    <button class="nav-menu-btn" id="navMenuBtn" aria-label="Abrir menú de navegación" aria-expanded="false"
+      aria-controls="navOverlay">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- ══ Esquina inf. izq — Coords Daniel ══ -->
+  <div class="esquina esquina--inf-izq" aria-hidden="true">
+    <span class="esquina-nombre esquina-nombre--daniel">Daniel</span>
+    <span class="esquina-coords" id="coordsDaniel">x: —&nbsp; y: —</span>
+  </div>
+
+  <!-- ══ Selector de tema — "AMBIENTACIÓN" ══ -->
+  <div class="tema-selector" aria-label="Cambiar ambientación del sitio">
+    <button class="tema-selector-btn" aria-expanded="false" aria-controls="temaSelectorPanel"
+      aria-label="Abrir selector de ambientación">
+      <span class="tema-selector-label">Ambientación</span>
+    </button>
+    <div class="tema-selector-panel" id="temaSelectorPanel" role="listbox" aria-label="Temas disponibles">
+      <div class="tema-selector-opcion" data-tema="neutro" role="option" aria-label="Tema Neutro">
+        <div class="tema-selector-circulo" data-tema="neutro"></div>
+        <span class="tema-selector-nombre">Neutro</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="acid" role="option" aria-label="Tema Acid">
+        <div class="tema-selector-circulo" data-tema="acid"></div>
+        <span class="tema-selector-nombre">Acid</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="synthwave" role="option" aria-label="Tema Synthwave">
+        <div class="tema-selector-circulo" data-tema="synthwave"></div>
+        <span class="tema-selector-nombre">Synth</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="rave" role="option" aria-label="Tema Rave">
+        <div class="tema-selector-circulo" data-tema="rave"></div>
+        <span class="tema-selector-nombre">Rave</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="collage" role="option" aria-label="Tema Collage">
+        <div class="tema-selector-circulo" data-tema="collage"></div>
+        <span class="tema-selector-nombre">Collage</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="holographic" role="option" aria-label="Tema Holographic">
+        <div class="tema-selector-circulo" data-tema="holographic"></div>
+        <span class="tema-selector-nombre">Holo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Barra de modos — CAOS + CREATIVO (desktop/tablet) ══ -->
+  <div class="modos-barra" aria-label="Modos interactivos">
+    <button class="modo-toggle" id="modoCaosToggle" aria-pressed="false" aria-label="Activar modo caos">
+      <span class="modo-toggle-icono">✦</span>
+      <span class="modo-toggle-label">Caos</span>
+      <span class="modo-toggle-pip" aria-hidden="true"></span>
+    </button>
+    <button class="modo-toggle" id="modoCreativoToggle" aria-pressed="false" aria-label="Activar modo creativo" disabled>
+      <span class="modo-toggle-icono">✎</span>
+      <span class="modo-toggle-label">Creativo</span>
+      <span class="modo-toggle-pip" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <!-- ══ Esquina inf. der — Coords usuario ══ -->
+  <div class="esquina esquina--inf-der" aria-hidden="true">
+    <span class="esquina-nombre">tú</span>
+    <span class="esquina-coords" id="coordsUsuario">x: —&nbsp; y: —</span>
+  </div>
+
+  <!-- ══ Navegación fullscreen ══ -->
+  <aside class="nav-overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Menú de navegación"
+    aria-modal="true">
+    <div class="nav-overlay-shell">
+      <nav class="nav-overlay-panel" aria-label="Navegación principal">
+        <a class="nav-menu-row" href="index.html" data-nav-link>
+          <span class="nav-menu-index">01</span>
+          <span class="nav-menu-title">ORIGEN EN COMPÁS</span>
+          <span class="nav-menu-marquee" aria-hidden="true">
+            <span class="nav-menu-track">
+              <span>ORIGEN EN COMPÁS</span>
+              <span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span>
+              <span>ORIGEN EN COMPÁS</span>
+              <span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span>
+              <span>ORIGEN EN COMPÁS</span>
+            </span>
+          </span>
+        </a>
+
+        <a class="nav-menu-row" href="sobre-mi.html" data-nav-link>
+          <span class="nav-menu-index">02</span>
+          <span class="nav-menu-title">DEL RITMO AL CÓDIGO</span>
+          <span class="nav-menu-marquee" aria-hidden="true">
+            <span class="nav-menu-track">
+              <span>DEL RITMO AL CÓDIGO</span>
+              <span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span>
+              <span>DEL RITMO AL CÓDIGO</span>
+              <span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span>
+              <span>DEL RITMO AL CÓDIGO</span>
+            </span>
+          </span>
+        </a>
+
+        <a class="nav-menu-row" href="mi-trabajo.html" data-nav-link>
+          <span class="nav-menu-index">03</span>
+          <span class="nav-menu-title">ESCENAS QUE PROGRAMÉ</span>
+          <span class="nav-menu-marquee" aria-hidden="true">
+            <span class="nav-menu-track">
+              <span>ESCENAS QUE PROGRAMÉ</span>
+              <span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span>
+              <span>ESCENAS QUE PROGRAMÉ</span>
+              <span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span>
+              <span>ESCENAS QUE PROGRAMÉ</span>
+            </span>
+          </span>
+        </a>
+
+        <a class="nav-menu-row" href="contacto.html" data-nav-link>
+          <span class="nav-menu-index">04</span>
+          <span class="nav-menu-title">HABLEMOS SIN FILTRO</span>
+          <span class="nav-menu-marquee" aria-hidden="true">
+            <span class="nav-menu-track">
+              <span>HABLEMOS SIN FILTRO</span>
+              <span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span>
+              <span>HABLEMOS SIN FILTRO</span>
+              <span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span>
+              <span>HABLEMOS SIN FILTRO</span>
+            </span>
+          </span>
+        </a>
+      </nav>
+
+      <!-- ══ Modos interactivos — visible solo en mobile dentro del nav ══ -->
+      <div class="nav-modos" aria-label="Modos interactivos">
+        <button class="nav-modo-toggle" id="navModoCaosToggle" aria-pressed="false" aria-label="Activar modo caos">
+          <span class="nav-modo-icono">✦</span>
+          <span class="nav-modo-label">Modo Caos</span>
+          <span class="nav-modo-pip" aria-hidden="true"></span>
+        </button>
+        <button class="nav-modo-toggle" id="navModoCreativoToggle" aria-pressed="false" aria-label="Activar modo creativo" disabled>
+          <span class="nav-modo-icono">✎</span>
+          <span class="nav-modo-label">Modo Creativo</span>
+          <span class="nav-modo-pip" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <footer class="nav-overlay-footer" aria-label="Redes sociales y contacto">
+        <p class="nav-overlay-copy">
+          Diseño interfaces con intención: limpias, precisas y con carácter.
+          Cada proyecto está pensado para sentirse claro y memorable.
+        </p>
+
+        <div class="nav-overlay-contacto">
+          <a href="mailto:danielvelez.web@gmail.com" class="nav-overlay-meta-link">danielvelez.web@gmail.com</a>
+          <span>Guadalajara, México</span>
+        </div>
+
+        <div class="nav-overlay-sociales">
+          <a href="https://www.instagram.com" target="_blank" rel="noopener">instagram</a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener">linkedin</a>
+          <a href="https://github.com/DanielV-94" target="_blank" rel="noopener">github</a>
+        </div>
+      </footer>
+    </div>
+  </aside>
+
+  <!-- ════════════════════════════════════════
+       HERO
+      .hero-sticky-stage da 210dvh de rail para la fase de encogimiento sticky.
+  ════════════════════════════════════════ -->
+  <div class="hero-sticky-stage">
+    <main class="hero" id="hero" role="main">
+
+      <!-- Bloque nombres — derecha -->
+      <div class="hero-nombres-area">
+        <div class="hero-drag-hint" id="dragHint" aria-hidden="true">
+          <span>arrastra</span>
+        </div>
+        <h1 class="hero-nombre-daniel" id="nombreDaniel" aria-label="Daniel — arrástralo">ĐAniEŁ</h1>
+        <h2 class="hero-nombre-velez" id="nombreVelez" aria-label="Vélez">veLEz</h2>
+      </div>
+
+      <!-- Bloque texto — bottom izquierdo -->
+      <div class="hero-editable-area">
+        <div class="hero-frase-editable-contenedor">
+          <p class="hero-frase-fija" aria-label="Primera línea editable — haz clic en la palabra y escribe">
+            <span class="hero-frase-prefijo">Disciplina de </span><span class="hero-frase-editable"
+              contenteditable="true" role="textbox" aria-label="Edita tu disciplina" spellcheck="false"
+              data-original="BAILARIN">BAILARIN</span><span class="hero-hint-editar" aria-hidden="true">← editar</span>
+          </p>
+          <p class="hero-frase-fija" aria-label="Segunda línea editable — haz clic en la palabra y escribe">
+            <span class="hero-frase-prefijo">Precision de </span><span class="hero-frase-editable"
+              contenteditable="true" role="textbox" aria-label="Edita tu precisión" spellcheck="false"
+              data-original="PROGRAMADOR">PROGRAMADOR</span><span class="hero-hint-editar" aria-hidden="true">←
+              editar</span>
+          </p>
+          <p class="hero-frase-fija" aria-label="Última línea editable — haz clic en la palabra y escribe">
+            <span class="hero-frase-prefijo">Alma de </span><span class="hero-frase-editable" id="fraseEditable"
+              contenteditable="true" role="textbox" aria-label="Edita tu alma" spellcheck="false"
+              data-original="ARTISTA">ARTISTA</span><span class="hero-hint-editar" aria-hidden="true">← editar</span>
+          </p>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.hero-sticky-stage -->
+
+  <!-- ════════════════════════════════════════
+       TRANSICIÓN HERO → MENSAJE
+  ════════════════════════════════════════ -->
+  <section class="transicion-hero" id="transicionHero" aria-label="Transición visual del manifiesto">
+    <div class="transicion-hero-stage">
+      <div class="transicion-hero-gradient" aria-hidden="true"></div>
+
+      <div class="transicion-hero-copy" id="transicionHeroCopy" aria-label="Mensaje de transición">
+        <p>ALGUNOS DESARROLLAN</p>
+        <p>PAGINAS WEB</p>
+        <p aria-hidden="true">....</p>
+        <p>YO COREOGRAFIO</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       CONVERGENCIA — EXPERIENCIAS DIGITALES
+  ════════════════════════════════════════ -->
+  <section class="convergencia" id="convergencia" aria-label="Experiencias digitales">
+    <div class="convergencia-stage">
+      <!-- fila 0: OUTLINE — entra desde la derecha -->
+      <img class="convergencia-fila" src="Rsc/Stickers/OUTLINE.svg" alt="" aria-hidden="true" draggable="false" />
+      <!-- fila 1: OUTLINE — entra desde la izquierda -->
+      <img class="convergencia-fila" src="Rsc/Stickers/OUTLINE.svg" alt="" aria-hidden="true" draggable="false" />
+      <!-- fila 2: FILL — CENTRO, destino de la convergencia (SVG compartido) -->
+      <img class="convergencia-fila convergencia-fila--fill" src="Rsc/Stickers/FILL.svg" alt="Experiencias Digitales"
+        draggable="false" />
+      <!-- fila 3: OUTLINE — entra desde la izquierda -->
+      <img class="convergencia-fila" src="Rsc/Stickers/OUTLINE.svg" alt="" aria-hidden="true" draggable="false" />
+      <!-- fila 4: OUTLINE — entra desde la derecha -->
+      <img class="convergencia-fila" src="Rsc/Stickers/OUTLINE.svg" alt="" aria-hidden="true" draggable="false" />
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       MANIFIESTO — Texto sobre fondo acento
+       El texto sube empujando el FILL SVG hacia arriba.
+       Frases clave brillan en neon cuando entran al stage.
+  ════════════════════════════════════════ -->
+  <section class="manifiesto" id="manifiesto" aria-label="Manifiesto creativo">
+    <div class="manifiesto-stage" id="manifiestoStage">
+
+      <!-- Columna izquierda — texto palabra por palabra -->
+      <div class="manifiesto-col manifiesto-col--texto">
+        <div class="manifiesto-bloque" id="manifiestoBloque">
+          <p>No solo construyo sitios web; diseño experiencias digitales
+            que inspiran, conectan y transforman. Cada proyecto es una
+            oportunidad para contar una
+            <span class="manifiesto-highlight">historia única</span>,
+            conectar con tu audiencia de
+            <span class="manifiesto-highlight">forma auténtica</span>
+            y dejar una
+            <span class="manifiesto-highlight">impresión duradera</span>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Columna derecha — retrato Daniel -->
+      <div class="manifiesto-col manifiesto-col--imagen">
+        <div class="manifiesto-inset-shadow" id="manifiestoInsetShadow" aria-hidden="true"></div>
+        <div class="manifiesto-retrato-wrap">
+          <img class="manifiesto-retrato" id="manifiestoRetrato" src="Rsc/Img/daniel2.png"
+            alt="Daniel Vélez, desarrollador web creativo" draggable="false" />
+          <div class="manifiesto-glitch-layers" aria-hidden="true">
+            <div class="manifiesto-glitch-layer"></div>
+            <div class="manifiesto-glitch-layer"></div>
+            <div class="manifiesto-glitch-layer"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SALIDA MANIFIESTO — Degradado acento → fondo + grid reaparece
+  ════════════════════════════════════════ -->
+  <div class="salida-manifiesto" aria-hidden="true"></div>
+
+  <!-- ════════════════════════════════════════
+       HABILIDADES — Scroll horizontal pinneado
+  ════════════════════════════════════════ -->
+  <section class="habilidades" id="habilidades" aria-label="Habilidades y stack tecnológico">
+    <div class="habilidades-track">
+
+      <!-- Panel 1: Lenguajes -->
+      <div class="habilidades-panel">
+        <h2 class="habilidades-panel-titulo">Lenguajes</h2>
+        <div class="habilidades-grid">
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" /></div>
+            <span class="habilidades-item-nombre">HTML</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3" /></div>
+            <span class="habilidades-item-nombre">CSS</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" /></div>
+            <span class="habilidades-item-nombre">JavaScript</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" /></div>
+            <span class="habilidades-item-nombre">Python</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" alt="C#" /></div>
+            <span class="habilidades-item-nombre">C#</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Frameworks & Librerías -->
+      <div class="habilidades-panel">
+        <h2 class="habilidades-panel-titulo">Frameworks</h2>
+        <div class="habilidades-grid">
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" /></div>
+            <span class="habilidades-item-nombre">React</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" alt="Next.js" /></div>
+            <span class="habilidades-item-nombre">Next.js</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" alt="Vue.js" /></div>
+            <span class="habilidades-item-nombre">Vue.js</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" alt="Angular" /></div>
+            <span class="habilidades-item-nombre">Angular</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" /></div>
+            <span class="habilidades-item-nombre">Node.js</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" /></div>
+            <span class="habilidades-item-nombre">Tailwind</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" /></div>
+            <span class="habilidades-item-nombre">Bootstrap</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" alt="Sass" /></div>
+            <span class="habilidades-item-nombre">Sass</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Animación & 3D -->
+      <div class="habilidades-panel">
+        <h2 class="habilidades-panel-titulo">Animación & 3D</h2>
+        <div class="habilidades-grid">
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/greensock/greensock-original.svg" alt="GSAP" /></div>
+            <span class="habilidades-item-nombre">GSAP</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg" alt="Three.js" /></div>
+            <span class="habilidades-item-nombre">Three.js</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spline/spline-original.svg" alt="Spline" /></div>
+            <span class="habilidades-item-nombre">Spline</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="Barba.js" /></div>
+            <span class="habilidades-item-nombre">Barba.js</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" alt="Canvas" /></div>
+            <span class="habilidades-item-nombre">Canvas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 4: Diseño -->
+      <div class="habilidades-panel">
+        <h2 class="habilidades-panel-titulo">Diseño</h2>
+        <div class="habilidades-grid">
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="Figma" /></div>
+            <span class="habilidades-item-nombre">Figma</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg" alt="Photoshop" /></div>
+            <span class="habilidades-item-nombre">Photoshop</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/illustrator/illustrator-plain.svg" alt="Illustrator" /></div>
+            <span class="habilidades-item-nombre">Illustrator</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 5: Herramientas -->
+      <div class="habilidades-panel">
+        <h2 class="habilidades-panel-titulo">Herramientas</h2>
+        <div class="habilidades-grid">
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code" /></div>
+            <span class="habilidades-item-nombre">VS Code</span>
+          </div>
+          <div class="habilidades-item">
+            <div class="habilidades-item-icono"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" /></div>
+            <span class="habilidades-item-nombre">Git</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Dots de progreso -->
+    <div class="habilidades-dots" aria-hidden="true">
+      <div class="habilidades-dot activo"></div>
+      <div class="habilidades-dot"></div>
+      <div class="habilidades-dot"></div>
+      <div class="habilidades-dot"></div>
+      <div class="habilidades-dot"></div>
+    </div>
+  </section>
+
+  <!-- GSAP local — gsap-public/minified -->
+  <script src="gsap-public/minified/gsap.min.js"></script>
+  <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
+  <!-- MorphSVGPlugin is included in the distribution but not used by current animations.
+      Commented out to avoid loading an unused plugin. Re-enable if you add morphing SVG code.
+    <script src="gsap-public/minified/MorphSVGPlugin.min.js"></script>
+    -->
+  <script src="gsap-public/minified/SplitText.min.js"></script>
+
+  <!-- Scripts propios -->
+  <script src="js/cursor.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/transicion-hero.js"></script>
+  <script src="js/lenis.js"></script>
+  <script src="js/convergencia.js"></script>
+  <script src="js/manifiesto.js"></script>
+  <script src="js/habilidades.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/tema-selector.js"></script>
+  <script src="js/modo-caos.js"></script>
+  <script src="js/modo-creativo.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

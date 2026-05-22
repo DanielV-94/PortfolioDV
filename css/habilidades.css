@@ -1,0 +1,228 @@
+/* ═══════════════════════════════════════════════════════════════
+   HABILIDADES — Scroll horizontal pinneado con paneles por categoría
+═══════════════════════════════════════════════════════════════ */
+
+.habilidades {
+  position: relative;
+  z-index: 4;
+  overflow: hidden;
+}
+
+.habilidades-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+/* ── Panel individual ── */
+.habilidades-panel {
+  width: 100vw;
+  height: 100dvh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 60px);
+  gap: clamp(28px, 4vh, 52px);
+}
+
+.habilidades-panel-titulo {
+  font-family: var(--fuente-display);
+  font-size: clamp(32px, 5vw, 72px);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-texto);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: opacity, transform;
+  transition: color var(--transicion-tema);
+}
+
+/* ── Grid de iconos dentro de cada panel ── */
+.habilidades-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(24px, 3.5vw, 52px);
+  max-width: 800px;
+}
+
+/* ── Cada item de tecnología ── */
+.habilidades-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(20px) scale(0.85);
+  will-change: opacity, transform;
+}
+
+.habilidades-item-icono {
+  width: clamp(48px, 6vw, 80px);
+  height: clamp(48px, 6vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--color-texto) 12%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--color-fondo) 60%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 12px;
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    background-color var(--transicion-tema);
+}
+
+.habilidades-item-icono img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .habilidades-item-icono:hover {
+    border-color: var(--color-acento);
+    transform: scale(1.12) translateY(-4px);
+  }
+}
+
+.habilidades-item-nombre {
+  font-family: var(--fuente-micro);
+  font-size: clamp(10px, 0.9vw, 13px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-texto-suave);
+  text-align: center;
+  white-space: nowrap;
+  transition: color var(--transicion-tema);
+}
+
+/* ── Indicador de progreso (dots en el lado derecho, vertical) ── */
+.habilidades-dots {
+  position: absolute;
+  right: clamp(24px, 3vw, 42px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 5;
+}
+
+.habilidades-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-texto) 20%, transparent);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.habilidades-dot.activo {
+  background: var(--color-acento);
+  transform: scale(1.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet landscape ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .habilidades-panel {
+    gap: clamp(20px, 3vh, 36px);
+  }
+
+  .habilidades-item-icono {
+    width: clamp(40px, 5.5vw, 64px);
+    height: clamp(40px, 5.5vw, 64px);
+    padding: 10px;
+  }
+
+  .habilidades-grid {
+    gap: clamp(18px, 3vw, 36px);
+  }
+}
+
+/* ── Tablet portrait ── */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .habilidades-panel-titulo {
+    font-size: clamp(28px, 5.5vw, 52px);
+  }
+
+  .habilidades-item-icono {
+    width: clamp(44px, 8vw, 68px);
+    height: clamp(44px, 8vw, 68px);
+  }
+
+  .habilidades-grid {
+    gap: clamp(20px, 4vw, 40px);
+  }
+}
+
+/* ── Mobile portrait ── */
+@media (max-width: 599px) {
+  .habilidades-panel {
+    padding: clamp(18px, 5vw, 32px);
+    gap: clamp(20px, 4vh, 36px);
+  }
+
+  .habilidades-panel-titulo {
+    font-size: clamp(24px, 8vw, 40px);
+  }
+
+  .habilidades-item-icono {
+    width: clamp(42px, 12vw, 60px);
+    height: clamp(42px, 12vw, 60px);
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  .habilidades-grid {
+    gap: clamp(16px, 5vw, 28px);
+  }
+
+  .habilidades-item-nombre {
+    font-size: 8px;
+  }
+}
+
+/* ── Mobile landscape ── */
+@media (max-width: 768px) and (orientation: landscape) {
+  .habilidades-panel {
+    gap: clamp(14px, 2.5vh, 24px);
+  }
+
+  .habilidades-panel-titulo {
+    font-size: clamp(20px, 4.5vw, 32px);
+  }
+
+  .habilidades-item-icono {
+    width: clamp(36px, 7vw, 50px);
+    height: clamp(36px, 7vw, 50px);
+    padding: 7px;
+  }
+
+  .habilidades-grid {
+    gap: clamp(12px, 2.5vw, 24px);
+  }
+
+  .habilidades-item-nombre {
+    font-size: 7px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .habilidades-panel-titulo,
+  .habilidades-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

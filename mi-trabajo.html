@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escenas que Programé — Mi trabajo | Daniel Vélez</title>
+
+  <!-- Aplicar tema guardado antes del render para evitar flash -->
+  <script>
+    (function() {
+      var t = localStorage.getItem("dv-tema-activo");
+      if (t) document.documentElement.setAttribute("data-tema", t);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/tema-selector.css" />
+</head>
+
+<body data-tema="neutro">
+  <div class="fondo-grid" aria-hidden="true">
+    <div class="fondo-gradiente"></div>
+  </div>
+
+  <div class="esquina esquina--sup-izq" aria-label="Sección actual">
+    <span class="esquina-linea">Sección 03</span>
+    <span class="esquina-linea">Escenas que Programé</span>
+  </div>
+
+  <div class="esquina esquina--sup-der">
+    <button class="nav-menu-btn" id="navMenuBtn" aria-label="Abrir menú de navegación" aria-expanded="false"
+      aria-controls="navOverlay">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- ══ Selector de tema — "AMBIENTACIÓN" ══ -->
+  <div class="tema-selector" aria-label="Cambiar ambientación del sitio">
+    <button class="tema-selector-btn" aria-expanded="false" aria-controls="temaSelectorPanel"
+      aria-label="Abrir selector de ambientación">
+      <span class="tema-selector-label">Ambientación</span>
+    </button>
+    <div class="tema-selector-panel" id="temaSelectorPanel" role="listbox" aria-label="Temas disponibles">
+      <div class="tema-selector-opcion" data-tema="neutro" role="option" aria-label="Tema Neutro">
+        <div class="tema-selector-circulo" data-tema="neutro"></div>
+        <span class="tema-selector-nombre">Neutro</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="acid" role="option" aria-label="Tema Acid">
+        <div class="tema-selector-circulo" data-tema="acid"></div>
+        <span class="tema-selector-nombre">Acid</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="synthwave" role="option" aria-label="Tema Synthwave">
+        <div class="tema-selector-circulo" data-tema="synthwave"></div>
+        <span class="tema-selector-nombre">Synth</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="rave" role="option" aria-label="Tema Rave">
+        <div class="tema-selector-circulo" data-tema="rave"></div>
+        <span class="tema-selector-nombre">Rave</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="collage" role="option" aria-label="Tema Collage">
+        <div class="tema-selector-circulo" data-tema="collage"></div>
+        <span class="tema-selector-nombre">Collage</span>
+      </div>
+      <div class="tema-selector-opcion" data-tema="holographic" role="option" aria-label="Tema Holographic">
+        <div class="tema-selector-circulo" data-tema="holographic"></div>
+        <span class="tema-selector-nombre">Holo</span>
+      </div>
+    </div>
+  </div>
+
+  <aside class="nav-overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Menú de navegación"
+    aria-modal="true">
+    <div class="nav-overlay-shell">
+      <nav class="nav-overlay-panel" aria-label="Navegación principal">
+        <a class="nav-menu-row" href="index.html" data-nav-link>
+          <span class="nav-menu-index">01</span>
+          <span class="nav-menu-title">ORIGEN EN COMPÁS</span>
+          <span class="nav-menu-marquee" aria-hidden="true">
+            <span class="nav-menu-track">
+              <span>ORIGEN EN COMPÁS</span><span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span><span>ORIGEN EN COMPÁS</span><span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span><span>ORIGEN EN COMPÁS</span>
+            </span>
+          </span>
+        </a>
+        <a class="nav-menu-row" href="sobre-mi.html" data-nav-link>
+          <span class="nav-menu-index">02</span>
+          <span class="nav-menu-title">DEL RITMO AL CÓDIGO</span>
+          <span class="nav-menu-marquee" aria-hidden="true">
+            <span class="nav-menu-track">
+              <span>DEL RITMO AL CÓDIGO</span><span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span><span>DEL RITMO AL CÓDIGO</span><span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span><span>DEL RITMO AL CÓDIGO</span>
+            </span>
+          </span>
+        </a>
+        <a class="nav-menu-row" href="mi-trabajo.html" data-nav-link>
+          <span class="nav-menu-index">03</span>
+          <span class="nav-menu-title">ESCENAS QUE PROGRAMÉ</span>
+          <span class="nav-menu-marquee" aria-hidden="true">
+            <span class="nav-menu-track">
+              <span>ESCENAS QUE PROGRAMÉ</span><span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span><span>ESCENAS QUE PROGRAMÉ</span><span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span><span>ESCENAS QUE PROGRAMÉ</span>
+            </span>
+          </span>
+        </a>
+        <a class="nav-menu-row" href="contacto.html" data-nav-link>
+          <span class="nav-menu-index">04</span>
+          <span class="nav-menu-title">HABLEMOS SIN FILTRO</span>
+          <span class="nav-menu-marquee" aria-hidden="true">
+            <span class="nav-menu-track">
+              <span>HABLEMOS SIN FILTRO</span><span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span><span>HABLEMOS SIN FILTRO</span><span class="nav-menu-sigil" aria-hidden="true"><img src="Rsc/Stickers/menu.svg" alt="" /></span><span>HABLEMOS SIN FILTRO</span>
+            </span>
+          </span>
+        </a>
+      </nav>
+
+      <footer class="nav-overlay-footer" aria-label="Redes sociales y contacto">
+        <p class="nav-overlay-copy">
+          Diseño interfaces con intención: limpias, precisas y con carácter.
+          Cada proyecto está pensado para sentirse claro y memorable.
+        </p>
+        <div class="nav-overlay-contacto">
+          <a href="mailto:danielvelez.web@gmail.com" class="nav-overlay-meta-link">danielvelez.web@gmail.com</a>
+          <span>Guadalajara, México</span>
+        </div>
+        <div class="nav-overlay-sociales">
+          <a href="https://www.instagram.com" target="_blank" rel="noopener">instagram</a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener">linkedin</a>
+          <a href="https://github.com/DanielV-94" target="_blank" rel="noopener">github</a>
+        </div>
+      </footer>
+    </div>
+  </aside>
+
+  <main class="page-main">
+    <article class="page-card">
+      <p class="page-kicker">Mi trabajo</p>
+      <h1 class="page-title">Escenas que Programé</h1>
+      <p class="page-description">
+        Aquí viven mis proyectos: sitios con interacción cuidada, microanimaciones con intención y
+        una obsesión sana por el detalle técnico.
+      </p>
+      <a class="page-back-link" href="index.html">Volver a inicio</a>
+    </article>
+  </main>
+
+  <script src="gsap-public/minified/gsap.min.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/tema-selector.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof Nav !== "undefined") Nav.init();
+      if (typeof TemaSelector !== "undefined") TemaSelector.init();
+    });
+  </script>
+</body>
+
+</html>

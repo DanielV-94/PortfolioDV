@@ -1,0 +1,58 @@
+/* ═══════════════════════════════════════
+   RESET — Mínimo y preciso
+═══════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: none;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+[contenteditable]:focus {
+  outline: none;
+}
+
+[contenteditable]:empty::before {
+  content: attr(data-placeholder);
+  color: var(--color-hint);
+  pointer-events: none;
+}

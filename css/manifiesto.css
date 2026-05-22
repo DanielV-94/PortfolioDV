@@ -1,0 +1,432 @@
+﻿/* ---------------------------------------------------------------
+   MANIFIESTO - Layout 50/50: texto (izq) + retrato Daniel (der)
+   El scroll actua como revelador: palabras aparecen una a una
+   y la imagen se desvanece progresivamente.
+--------------------------------------------------------------- */
+
+.manifiesto {
+  position: relative;
+  background: var(--color-fondo-alt);
+  min-height: 100dvh;
+}
+
+/* -- Stage: viewport fijo -- */
+.manifiesto-stage {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* -- Columnas -- */
+.manifiesto-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.manifiesto-col--texto {
+  padding-inline: clamp(24px, 4vw, 72px);
+  padding-block: clamp(32px, 5vh, 80px);
+  align-items: center;
+}
+
+.manifiesto-col--imagen {
+  position: relative;
+  overflow: hidden;
+}
+
+/* -- Bloque de texto -- */
+.manifiesto-bloque {
+  width: 100%;
+  will-change: opacity;
+}
+
+.manifiesto-bloque p {
+  margin: 0;
+  padding: 0;
+  font-family: var(--fuente-dialogo);
+  font-size: clamp(25px, 2.96vw, 59.2px);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--color-texto);
+  font-feature-settings:
+    "liga" 1,
+    "clig" 1,
+    "dlig" 1,
+    "calt" 1;
+  font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+}
+
+/* Cada palabra invisible hasta que GSAP la revela */
+.manifiesto-word {
+  display: inline-block;
+  opacity: 0;
+  will-change: opacity, transform;
+  transition:
+    text-shadow 0.3s ease,
+    color 0.3s ease;
+}
+
+/* -- Retrato -- */
+
+/* Overlay de sombra interior - solo borde izquierdo, natural y difusa */
+.manifiesto-inset-shadow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity;
+  box-shadow: inset 48px 0 80px -20px rgba(0, 0, 0, 0.45);
+}
+
+.manifiesto-retrato-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: none;
+}
+
+.manifiesto-retrato {
+  display: block;
+  width: 100%;
+  height: 100dvh;
+  max-width: 100%;
+  max-height: 100dvh;
+  object-fit: contain;
+  object-position: center bottom;
+  opacity: 0;
+  will-change: opacity;
+  border-radius: 4px;
+  position: relative;
+  z-index: 1;
+  /* Resplandor alrededor del contorno del PNG - sigue el tema activo */
+  filter: drop-shadow(0 0 6px var(--manifiesto-drop-1))
+    drop-shadow(0 0 18px var(--manifiesto-drop-2))
+    drop-shadow(0 0 40px var(--manifiesto-drop-3));
+  transition: filter 0.4s ease;
+}
+
+/* -- Efecto glitch en hover (desktop) --
+   3 capas absolutas con la misma imagen de fondo,
+   recortadas con clip-path y desplazadas con translate3d.
+   Solo se activa en dispositivos con hover real. */
+.manifiesto-glitch-layers {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.manifiesto-glitch-layer {
+  position: absolute;
+  inset: 0;
+  background: url("../Rsc/Img/daniel2.png") no-repeat center bottom / contain;
+  opacity: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .manifiesto-retrato-wrap:hover .manifiesto-glitch-layers {
+    opacity: 1;
+  }
+
+  .manifiesto-retrato-wrap:hover .manifiesto-glitch-layer:nth-child(1) {
+    opacity: 0.7;
+    animation: glitch-1 4.2s infinite linear alternate-reverse;
+  }
+
+  .manifiesto-retrato-wrap:hover .manifiesto-glitch-layer:nth-child(2) {
+    opacity: 0.7;
+    animation: glitch-2 3s infinite linear alternate-reverse;
+  }
+
+  .manifiesto-retrato-wrap:hover .manifiesto-glitch-layer:nth-child(3) {
+    opacity: 0.5;
+    animation: glitch-3 3.8s infinite linear alternate-reverse;
+  }
+}
+
+/* Flash automático en mobile — clase añadida por JS */
+.manifiesto-glitch-layers.glitch-flash {
+  opacity: 1;
+}
+
+.manifiesto-glitch-layers.glitch-flash .manifiesto-glitch-layer:nth-child(1) {
+  opacity: 0.7;
+  animation: glitch-1 1.2s infinite linear alternate-reverse;
+}
+
+.manifiesto-glitch-layers.glitch-flash .manifiesto-glitch-layer:nth-child(2) {
+  opacity: 0.7;
+  animation: glitch-2 3s infinite linear alternate-reverse;
+}
+
+.manifiesto-glitch-layers.glitch-flash .manifiesto-glitch-layer:nth-child(3) {
+  opacity: 0.5;
+  animation: glitch-3 1.8s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-1 {
+  0% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translate3d(-33px, -30px, 0);
+  }
+  20% {
+    clip-path: inset(50% 0 20% 0);
+    transform: translate3d(23px, 10PX, 0);
+  }
+  40% {
+    clip-path: inset(10% 0 70% 0);
+    transform: translate3d(-23px, 20px, 0);
+  }
+  60% {
+    clip-path: inset(70% 0 5% 0);
+    transform: translate3d(2px, -10px, 0);
+  }
+  80% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate3d(-4px, 33px, 0);
+  }
+  100% {
+    clip-path: inset(55% 0 15% 0);
+    transform: translate3d(1px, 0, 0);
+  }
+}
+
+@keyframes glitch-2 {
+  0% {
+    clip-path: inset(65% 0 10% 0);
+    transform: translate3d(24px, 30, 0);
+    filter: hue-rotate(-30deg) saturate(1.5);
+  }
+  25% {
+    clip-path: inset(5% 0 80% 0);
+    transform: translate3d(-13px, -20px, 0);
+    filter: hue-rotate(15deg) saturate(1.3);
+  }
+  50% {
+    clip-path: inset(40% 0 30% 0);
+    transform: translate3d(-12px, 10PX, 0);
+    filter: hue-rotate(-15deg) saturate(0);
+  }
+  75% {
+    clip-path: inset(75% 0 2% 0);
+    transform: translate3d(24px, -20, 0);
+    filter: hue-rotate(25deg) saturate(-1.2);
+  }
+  100% {
+    clip-path: inset(15% 0 55% 0);
+    transform: translate3d(23px, 0, 0);
+    filter: hue-rotate(-10deg) saturate(1.3);
+  }
+}
+
+@keyframes glitch-3 {
+  0% {
+    clip-path: inset(80% 0 0% 0);
+    transform: translate3d(2px, -1px, 0);
+    filter: hue-rotate(40deg);
+  }
+  33% {
+    clip-path: inset(0% 0 85% 0);
+    transform: translate3d(-3px, 1px, 0);
+    filter: hue-rotate(-20deg);
+  }
+  66% {
+    clip-path: inset(45% 0 25% 0);
+    transform: translate3d(3px, 0, 0);
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    clip-path: inset(25% 0 50% 0);
+    transform: translate3d(-2px, -1px, 0);
+    filter: hue-rotate(-35deg);
+  }
+}
+
+/* -- Frases clave -- */
+.manifiesto-highlight {
+  display: inline;
+  transition:
+    text-shadow 0.45s ease,
+    color 0.45s ease;
+}
+
+.manifiesto-highlight.neon-activo {
+  color: var(--manifiesto-neon-color);
+  text-shadow:
+    var(--manifiesto-neon-s1), var(--manifiesto-neon-s2),
+    var(--manifiesto-neon-s3), var(--manifiesto-neon-s4),
+    var(--manifiesto-neon-s5), var(--manifiesto-neon-s6);
+}
+
+/* -- SVG compartido convergencia (herencia de escena anterior) -- */
+.convergencia-fila--fill.is-shared-manifiesto {
+  position: fixed;
+  left: 0;
+  top: 40dvh;
+  width: 100%;
+  height: 20dvh;
+  z-index: 5;
+}
+
+/* -- Salida: degradado acento -> fondo, grid reaparece gradualmente -- */
+.salida-manifiesto {
+  position: relative;
+  z-index: 1;
+  height: 60vh;
+  background: linear-gradient(
+    to bottom,
+    var(--color-fondo-alt) 0%,
+    var(--color-fondo-alt) 8%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: background var(--transicion-tema);
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+/* Desktop grande (>=1440px) */
+@media (min-width: 1440px) {
+  .manifiesto-bloque p {
+    font-size: clamp(28.8px, 2.34vw, 57.6px);
+    line-height: 1.12;
+  }
+  .manifiesto-col--texto {
+    padding-inline: clamp(56px, 5vw, 96px);
+  }
+}
+
+/* Tablet landscape (768px - 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .manifiesto-bloque p {
+    font-size: clamp(18px, 2.52vw, 34.2px);
+  }
+  .manifiesto-col--texto {
+    padding-inline: clamp(20px, 3.5vw, 48px);
+    padding-block: clamp(24px, 4vh, 56px);
+  }
+  .manifiesto-retrato {
+    object-position: center center;
+  }
+}
+
+/* Tablet portrait + mobile grande (480px - 767px) */
+@media (max-width: 767px) {
+  /* La imagen ocupa toda la pantalla como capa de fondo */
+  .manifiesto-stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    position: relative;
+  }
+
+  /* Imagen: capa absoluta de fondo, ocupa todo el stage */
+  .manifiesto-col--imagen {
+    position: absolute;
+    inset: 0;
+    height: 100dvh;
+    z-index: 0;
+    will-change: filter;
+  }
+
+  /* Gradiente oscuro encima de la imagen para legibilidad del texto */
+  .manifiesto-col--imagen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      160deg,
+      rgba(0, 0, 0, 0.18) 0%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Cuando el texto ya es visible, el overlay se activa via clase JS */
+  .manifiesto-col--imagen.overlay-activo::after {
+    opacity: 1;
+  }
+
+  /* Texto: capa superior, ocupa todo el stage centrada verticalmente */
+  .manifiesto-col--texto {
+    position: relative;
+    z-index: 2;
+    height: 100dvh;
+    padding-inline: clamp(20px, 6vw, 40px);
+    padding-block: clamp(24px, 5vh, 48px);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .manifiesto-bloque p {
+    font-size: clamp(26px, 7.4vw, 46px);
+    line-height: 1.25;
+    /* Sombra de texto para asegurar legibilidad sobre la imagen */
+    text-shadow:
+      0 1px 6px rgba(0, 0, 0, 0.55),
+      0 2px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  .manifiesto-retrato {
+    height: 100dvh;
+    width: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  /* Glitch layers en mobile: se activa via JS con clase .glitch-flash */
+  .manifiesto-glitch-layer {
+    background-size: cover;
+    background-position: center 20%;
+  }
+
+  .salida-manifiesto {
+    height: 40vh;
+  }
+}
+
+/* Mobile pequeno (<=479px) */
+@media (max-width: 479px) {
+  /* Layout hereda de <=767px: imagen fondo + texto superpuesto */
+  .manifiesto-bloque p {
+    font-size: clamp(18px, 7vw, 29px);
+  }
+  .manifiesto-col--texto {
+    padding-inline: 18px;
+    padding-block: 18px;
+  }
+}
+
+/* -- Reduced motion -- */
+@media (prefers-reduced-motion: reduce) {
+  .manifiesto-word,
+  .manifiesto-retrato {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+  .manifiesto-highlight.neon-activo {
+    text-shadow: none;
+    text-decoration: underline;
+    text-underline-offset: 0.1em;
+  }
+  .manifiesto-glitch-layers,
+  .manifiesto-glitch-layers.glitch-flash {
+    display: none !important;
+  }
+}

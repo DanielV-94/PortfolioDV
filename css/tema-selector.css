@@ -1,0 +1,282 @@
+/* ═══════════════════════════════════════════════════════════════
+   TEMA SELECTOR — Pill flotante "AMBIENTACIÓN"
+   Bottom center en todos los breakpoints.
+   Expande hacia arriba para mostrar 6 círculos de color.
+═══════════════════════════════════════════════════════════════ */
+
+.tema-selector {
+  position: fixed;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  /* Bottom center en todos los dispositivos */
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  gap: 0;
+  opacity: 0; /* GSAP anima a 1 */
+}
+
+/* ── Botón pill (label horizontal) ── */
+.tema-selector-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: 1px solid color-mix(in srgb, var(--color-texto) 20%, transparent);
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--color-fondo) 65%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tema-selector-btn:hover {
+    border-color: var(--color-acento);
+    background: color-mix(in srgb, var(--color-fondo) 80%, transparent);
+  }
+}
+
+.tema-selector-label {
+  font-family: var(--fuente-micro);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-texto-suave);
+  white-space: nowrap;
+  transition: color var(--transicion-tema);
+}
+
+/* ── Panel expandido (se abre hacia arriba) ── */
+.tema-selector-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--color-texto) 16%, transparent);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--color-fondo) 70%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* Posicionado arriba del botón */
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  /* Oculto por defecto — GSAP controla */
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    background-color var(--transicion-tema),
+    border-color var(--transicion-tema);
+}
+
+.tema-selector-panel.activo {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Cada opción de tema ── */
+.tema-selector-opcion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 10px 8px;
+  border-radius: 12px;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+  /* Área de click mínima 52×52 */
+  min-width: 52px;
+  min-height: 52px;
+  border: 1px solid transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tema-selector-opcion:hover {
+    transform: scale(1.1);
+    background: color-mix(in srgb, var(--color-texto) 6%, transparent);
+  }
+}
+
+.tema-selector-opcion.activo {
+  background: color-mix(in srgb, var(--color-acento) 12%, transparent);
+  border-color: color-mix(in srgb, var(--color-acento) 30%, transparent);
+}
+
+.tema-selector-circulo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--color-texto) 18%, transparent);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Colores de cada tema */
+.tema-selector-circulo[data-tema="neutro"] { background: #b5770c; }
+.tema-selector-circulo[data-tema="acid"] { background: #91ff00; }
+.tema-selector-circulo[data-tema="synthwave"] { background: #ff2d6a; }
+.tema-selector-circulo[data-tema="rave"] { background: #ff3300; }
+.tema-selector-circulo[data-tema="collage"] { background: #e03030; }
+.tema-selector-circulo[data-tema="holographic"] { background: #7c3aed; }
+
+/* Tema activo — ring glow */
+.tema-selector-opcion.activo .tema-selector-circulo {
+  border-color: var(--color-texto);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-acento) 40%, transparent),
+    0 0 12px color-mix(in srgb, var(--color-acento) 30%, transparent);
+}
+
+.tema-selector-nombre {
+  font-family: var(--fuente-micro);
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-texto-suave);
+  text-align: center;
+  white-space: nowrap;
+  transition: color var(--transicion-tema);
+}
+
+.tema-selector-opcion.activo .tema-selector-nombre {
+  color: var(--color-texto);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet landscape ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .tema-selector {
+    bottom: 18px;
+  }
+
+  .tema-selector-btn {
+    padding: 8px 16px;
+  }
+
+  .tema-selector-panel {
+    gap: 6px;
+    padding: 10px 12px;
+    min-width: 190px;
+  }
+
+  .tema-selector-circulo {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tema-selector-nombre {
+    font-size: 6px;
+  }
+}
+
+/* ── Tablet portrait ── */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .tema-selector {
+    bottom: 22px;
+  }
+
+  .tema-selector-btn {
+    padding: 9px 18px;
+  }
+
+  .tema-selector-panel {
+    min-width: 200px;
+  }
+
+  .tema-selector-circulo {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* ── Mobile portrait ── */
+@media (max-width: 599px) {
+  .tema-selector {
+    bottom: 16px;
+  }
+
+  .tema-selector-btn {
+    padding: 8px 14px;
+    border-radius: 20px;
+  }
+
+  .tema-selector-label {
+    font-size: 8px;
+  }
+
+  .tema-selector-panel {
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    min-width: 180px;
+  }
+
+  .tema-selector-circulo {
+    width: 22px;
+    height: 22px;
+  }
+
+  .tema-selector-nombre {
+    font-size: 6px;
+  }
+}
+
+/* ── Mobile landscape ── */
+@media (max-width: 768px) and (orientation: landscape) {
+  .tema-selector {
+    bottom: 10px;
+  }
+
+  .tema-selector-btn {
+    padding: 6px 12px;
+    border-radius: 16px;
+  }
+
+  .tema-selector-label {
+    font-size: 7px;
+  }
+
+  .tema-selector-panel {
+    gap: 5px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    min-width: 160px;
+  }
+
+  .tema-selector-circulo {
+    width: 18px;
+    height: 18px;
+  }
+
+  .tema-selector-nombre {
+    display: none;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .tema-selector-panel {
+    transition: none;
+  }
+
+  .tema-selector-opcion {
+    transition: none;
+  }
+}

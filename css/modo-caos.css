@@ -1,0 +1,157 @@
+/* ═══════════════════════════════════════════════════════════════
+   MODO CAOS — Stickers flotando por todo el documento
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Modo caos activo: cursor nativo visible, cursor personalizado oculto ── */
+body.modo-caos-activo .cursor-usuario,
+body.modo-caos-activo .cursor-daniel {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+body.modo-caos-activo,
+body.modo-caos-activo * {
+  cursor: auto !important;
+}
+
+body.modo-caos-activo .caos-sticker {
+  cursor: grab !important;
+}
+
+body.modo-caos-activo .caos-sticker:active {
+  cursor: grabbing !important;
+}
+
+/* ── Botón de activación ── */
+.modo-caos-btn {
+  display: none; /* Reemplazado por la barra de modos */
+}
+
+/* ── Contenedor de stickers — cubre todo el documento ── */
+.modo-caos-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Capa lejana — detrás del contenido */
+.modo-caos-layer--lejana {
+  z-index: 2; /* detrás del hero (z-index:50) y secciones */
+}
+
+/* Capa cercana — encima de todo */
+.modo-caos-layer--cercana {
+  z-index: 80;
+}
+
+/* ── Sticker individual ── */
+.caos-sticker {
+  position: absolute;
+  pointer-events: auto;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+  /* Sombra sutil para dar profundidad */
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.18));
+  transition: filter 0.2s ease;
+}
+
+.caos-sticker:active {
+  cursor: grabbing;
+}
+
+.caos-sticker img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Tamaños — se asignan por clase */
+.caos-sticker--xl {
+  width: clamp(234px, 26vw, 416px);
+  height: clamp(234px, 26vw, 416px);
+}
+
+.caos-sticker--grande {
+  width: clamp(180px, 20vw, 320px);
+  height: clamp(180px, 20vw, 320px);
+}
+
+.caos-sticker--mediano {
+  width: clamp(90px, 11vw, 160px);
+  height: clamp(90px, 11vw, 160px);
+}
+
+.caos-sticker--chico {
+  width: clamp(40px, 5vw, 70px);
+  height: clamp(40px, 5vw, 70px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .modo-caos-btn {
+    bottom: 18px;
+    right: 20px;
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .modo-caos-btn {
+    bottom: 22px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 599px) {
+  .modo-caos-btn {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 12px;
+    font-size: 8px;
+  }
+
+  .caos-sticker--xl {
+    width: clamp(156px, 39vw, 260px);
+    height: clamp(156px, 39vw, 260px);
+  }
+
+  .caos-sticker--grande {
+    width: clamp(120px, 30vw, 200px);
+    height: clamp(120px, 30vw, 200px);
+  }
+
+  .caos-sticker--mediano {
+    width: clamp(60px, 16vw, 110px);
+    height: clamp(60px, 16vw, 110px);
+  }
+
+  .caos-sticker--chico {
+    width: clamp(30px, 8vw, 50px);
+    height: clamp(30px, 8vw, 50px);
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .modo-caos-btn {
+    bottom: 10px;
+    right: 14px;
+    padding: 6px 10px;
+    font-size: 7px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .caos-sticker {
+    animation: none !important;
+    transition: none !important;
+  }
+}
