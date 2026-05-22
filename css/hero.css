@@ -164,7 +164,7 @@
   pointer-events: none;
   vertical-align: middle;
   transition:
-    opacity 0.3s ease,
+    opacity 0.8s ease,
     color var(--transicion-tema);
 }
 
@@ -198,7 +198,7 @@
   pointer-events: none;
   white-space: nowrap;
   transition:
-    opacity 0.3s ease,
+    opacity 0.8s ease,
     color var(--transicion-tema),
     border-color var(--transicion-tema);
 }
