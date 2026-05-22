@@ -478,8 +478,8 @@ const TransicionHero = (() => {
          back.out para el efecto flote, stagger para el beat. */
       const stLines = ScrollTrigger.create({
         id: "th-lines-mobile",
-        trigger: section,
-        start: "top 65%",
+        trigger: copy,
+        start: "top 95%",
         once: true,
         onEnter: () => {
           gsap.to(split.lines, {

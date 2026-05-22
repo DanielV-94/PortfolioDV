@@ -253,7 +253,15 @@ const ModoCreativo = (() => {
 
   /* ── Toggle ── */
   function toggle() {
-    activo ? desactivar() : activar();
+    if (!activo) {
+      /* Desactivar modo caos si está activo */
+      if (typeof ModoCaos !== 'undefined' && ModoCaos.desactivar) {
+        ModoCaos.desactivar();
+      }
+      activar();
+    } else {
+      desactivar();
+    }
   }
 
   /* ── Mezclar array ── */

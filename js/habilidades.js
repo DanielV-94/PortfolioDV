@@ -220,11 +220,6 @@ const Habilidades = (() => {
         gsap.set(allCards, { clearProps: 'all' });
       };
     });
-
-      return () => {
-        gsap.set(cards, { clearProps: 'all' });
-      };
-    });
   }
 
   return { init };
