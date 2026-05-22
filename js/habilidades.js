@@ -78,9 +78,10 @@ const Habilidades = (() => {
           const progress = self.progress;
 
           /* El "offset" angular total que se ha recorrido.
-             Al inicio (progress=0) la primera card entra por la derecha.
-             Al final (progress=1) la última card está en el centro (ángulo 45°). */
-          const totalTravel = (total - 1) * slotSpacing;
+             Al inicio (progress=0) la primera card entra por abajo-derecha.
+             Al final (progress=1) la última card llega al centro del arco (~47°). */
+          const centerAngle = arcDeg * 0.5; // centro del arco
+          const totalTravel = (total - 1) * slotSpacing + centerAngle;
           const currentOffset = progress * totalTravel;
 
           cards.forEach((card, i) => {
@@ -132,45 +133,93 @@ const Habilidades = (() => {
     });
 
     /* ══════════════════════════════════════════════════════════
-       MOBILE PORTRAIT (<600px): Swipe horizontal nativo
+       MOBILE PORTRAIT (<600px): Marquee infinito automático
+       Las cards se mueven solas en loop horizontal
     ══════════════════════════════════════════════════════════ */
     mm.add('(max-width: 599px) and (prefers-reduced-motion: no-preference)', () => {
-      gsap.from(cards, {
-        opacity: 0,
-        y: 30,
-        scale: 0.9,
-        duration: 0.5,
-        stagger: 0.06,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          once: true,
+      /* Duplicar cards para crear loop infinito */
+      const carrusel = section.querySelector('.habilidades-carrusel');
+      const originalCards = Array.from(carrusel.children);
+      const clones = originalCards.map(card => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.classList.add('habilidades-card--clon');
+        carrusel.appendChild(clone);
+        return clone;
+      });
+
+      /* Hacer todas visibles */
+      const allCards = carrusel.querySelectorAll('.habilidades-card');
+      gsap.set(allCards, { opacity: 1, scale: 1, x: 0, y: 0, rotation: 0 });
+
+      /* Animación marquee con GSAP */
+      const totalWidth = carrusel.scrollWidth / 2; // mitad porque duplicamos
+      const marquee = gsap.to(carrusel, {
+        x: -totalWidth,
+        duration: totalWidth / 40, // velocidad: 40px por segundo
+        ease: 'none',
+        repeat: -1,
+        modifiers: {
+          x: gsap.utils.unitize(x => parseFloat(x) % totalWidth),
         },
       });
 
+      /* Pausar al tocar, reanudar al soltar */
+      const pauseMarquee = () => marquee.pause();
+      const playMarquee = () => marquee.play();
+      carrusel.addEventListener('touchstart', pauseMarquee, { passive: true });
+      carrusel.addEventListener('touchend', playMarquee, { passive: true });
+
       return () => {
-        gsap.set(cards, { clearProps: 'all' });
+        marquee.kill();
+        carrusel.removeEventListener('touchstart', pauseMarquee);
+        carrusel.removeEventListener('touchend', playMarquee);
+        clones.forEach(c => c.remove());
+        gsap.set(allCards, { clearProps: 'all' });
       };
     });
 
     /* ══════════════════════════════════════════════════════════
-       MOBILE LANDSCAPE (≤768px landscape): Swipe horizontal
+       MOBILE LANDSCAPE (≤768px landscape): Marquee infinito
     ══════════════════════════════════════════════════════════ */
     mm.add('(max-width: 768px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
-      gsap.from(cards, {
-        opacity: 0,
-        y: 20,
-        scale: 0.9,
-        duration: 0.4,
-        stagger: 0.05,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          once: true,
+      const carrusel = section.querySelector('.habilidades-carrusel');
+      const originalCards = Array.from(carrusel.children);
+      const clones = originalCards.map(card => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.classList.add('habilidades-card--clon');
+        carrusel.appendChild(clone);
+        return clone;
+      });
+
+      const allCards = carrusel.querySelectorAll('.habilidades-card');
+      gsap.set(allCards, { opacity: 1, scale: 1, x: 0, y: 0, rotation: 0 });
+
+      const totalWidth = carrusel.scrollWidth / 2;
+      const marquee = gsap.to(carrusel, {
+        x: -totalWidth,
+        duration: totalWidth / 45,
+        ease: 'none',
+        repeat: -1,
+        modifiers: {
+          x: gsap.utils.unitize(x => parseFloat(x) % totalWidth),
         },
       });
+
+      const pauseMarquee = () => marquee.pause();
+      const playMarquee = () => marquee.play();
+      carrusel.addEventListener('touchstart', pauseMarquee, { passive: true });
+      carrusel.addEventListener('touchend', playMarquee, { passive: true });
+
+      return () => {
+        marquee.kill();
+        carrusel.removeEventListener('touchstart', pauseMarquee);
+        carrusel.removeEventListener('touchend', playMarquee);
+        clones.forEach(c => c.remove());
+        gsap.set(allCards, { clearProps: 'all' });
+      };
+    });
 
       return () => {
         gsap.set(cards, { clearProps: 'all' });
