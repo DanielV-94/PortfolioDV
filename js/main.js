@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof Habilidades !== "undefined") {
     Habilidades.init();
   }
+  if (typeof Proyectos !== "undefined") {
+    Proyectos.init();
+  }
   if (typeof Nav !== "undefined") {
     Nav.init();
   }

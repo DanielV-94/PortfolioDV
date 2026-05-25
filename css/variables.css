@@ -39,8 +39,8 @@
   --color-gradiente-ini: rgba(240, 237, 230, 0);
   --color-gradiente-fin: rgba(220, 216, 206, 0.7);
   --color-cursor-daniel: #dd070b;
-  --color-cursor-usuario: #0d0d0d;
-  --color-editable: #0d0d0d;
+  --color-cursor-usuario: #7b3232;
+  --color-editable: #efd56a;
   --color-editable-activo: #e63500;
   --color-hint: rgba(13, 13, 13, 0.30);
   --color-nav-fondo: rgba(240, 237, 230, 0.85);
@@ -76,7 +76,7 @@
   --color-gradiente-ini: rgba(10, 10, 20, 0);
   --color-gradiente-fin: rgba(10, 10, 20, 0.88);
   --color-cursor-daniel: #00f0ff;
-  --color-cursor-usuario: #f0fff0;
+  --color-cursor-usuario: #1f40e4;
   --color-editable: #f0fff0;
   --color-editable-activo: #ff2d9b;
   --color-hint: rgba(145, 255, 0, 0.45);
@@ -105,15 +105,15 @@
   --color-fondo: #0f0024;
   --color-fondo-secundario: #000f24;
   --color-fondo-alt: #dfc655;
-  --color-texto: #ec9ab5;
-  --color-texto-suave: #ff9ecd;
+  --color-texto: #c3f886;
+  --color-texto-suave: #55edf8;
   --color-acento: #ff2d6a;
   --color-acento-hover: #ffd000;
   --color-grid: rgba(255, 45, 104, 0.556);
   --color-gradiente-ini: rgba(15, 0, 36, 0);
   --color-gradiente-fin: rgba(15, 0, 36, 0.90);
   --color-cursor-daniel: #00e5ff;
-  --color-cursor-usuario: #fff0f5;
+  --color-cursor-usuario: #e03a72;
   --color-editable: #fff0f5;
   --color-editable-activo: #ffd000;
   --color-hint: rgba(0, 229, 255, 0.45);
@@ -150,8 +150,8 @@
   --color-gradiente-ini: rgba(5, 5, 5, 0);
   --color-gradiente-fin: rgba(5, 5, 5, 0.90);
   --color-cursor-daniel: #ffee00;
-  --color-cursor-usuario: #ffffff;
-  --color-editable: #ffffff;
+  --color-cursor-usuario: #8b1df2;
+  --color-editable: #c50eaf;
   --color-editable-activo: #00ff88;
   --color-hint: rgba(255, 238, 0, 0.50);
   --color-nav-fondo: rgba(5, 5, 5, 0.92);
@@ -176,8 +176,8 @@
    Paleta: rojo editorial + azul tinta + teal (zine CLARO)
 ════════════════════════════════════════ */
 [data-tema="collage"] {
-  --color-fondo: #d5d3d0;
-  --color-fondo-secundario: #f2eee3;
+  --color-fondo: #fafafa;
+  --color-fondo-secundario: #cfcfcf;
   --color-fondo-alt: #d4e8f0;
   --color-texto: #1a1612;
   --color-texto-suave: #c6791c;
@@ -187,8 +187,8 @@
   --color-gradiente-ini: rgba(242, 236, 227, 0);
   --color-gradiente-fin: rgba(232, 224, 212, 0.7);
   --color-cursor-daniel: #009688;
-  --color-cursor-usuario: #1a1612;
-  --color-editable: #1a1612;
+  --color-cursor-usuario: #ab5b0b;
+  --color-editable: #735398;
   --color-editable-activo: #e03030;
   --color-hint: rgba(0, 150, 136, 0.45);
   --color-nav-fondo: rgba(242, 236, 227, 0.92);
@@ -224,7 +224,7 @@
   --color-gradiente-ini: rgba(245, 247, 255, 0);
   --color-gradiente-fin: rgba(234, 237, 250, 0.7);
   --color-cursor-daniel: #ff006e;
-  --color-cursor-usuario: #1a1a2e;
+  --color-cursor-usuario: #0e0eb4;
   --color-editable: #b6062c;
   --color-editable-activo: #7c3aed;
   --color-hint: rgba(124, 58, 237, 0.64);
