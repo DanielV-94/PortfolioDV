@@ -174,33 +174,94 @@
 @media (max-width: 1024px) and (orientation: portrait) {
   .proyectos-stage {
     grid-template-columns: 1fr;
-    gap: clamp(24px, 4vh, 48px);
+    gap: 0;
+    min-height: auto;
+  }
+  .proyectos-preview {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    border-radius: 0;
+    z-index: 0;
+    pointer-events: none;
   }
 
-  .proyectos-preview {
-    height: clamp(220px, 30vh, 320px);
-    order: -1;
+  .proyectos-preview-img.fondo-mobile {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+
+  .proyectos-preview-img.fondo-mobile img {
+    object-fit: cover;
+    border-radius: 0;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .proyectos-lista {
+    position: relative;
+    z-index: 2;
+  }
+
+  .proyectos-item {
+    padding: clamp(10px, 1.5vh, 16px) 0;
   }
 
   .proyectos-item-nombre {
     font-size: clamp(28px, 6vw, 52px);
+  }
+
+  .proyectos-item.proyecto-activo-mobile .proyectos-item-nombre {
+    color: var(--color-acento);
   }
 }
 
 /* ── Mobile portrait ── */
 @media (max-width: 599px) {
   .proyectos {
-    padding: clamp(48px, 8vh, 80px) clamp(16px, 4vw, 24px);
+    padding: clamp(24px, 4vh, 48px) clamp(16px, 4vw, 24px);
+    padding-bottom: 16px;
   }
 
   .proyectos-stage {
     grid-template-columns: 1fr;
-    gap: clamp(20px, 3vh, 36px);
+    gap: 0;
+    min-height: auto;
   }
 
+  /* En mobile, el preview se convierte en fondo de la sección */
   .proyectos-preview {
-    height: clamp(180px, 28vh, 260px);
-    order: -1;
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    border-radius: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .proyectos-preview-img {
+    border-radius: 0;
+  }
+
+  .proyectos-preview-img.fondo-mobile {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+
+  .proyectos-preview-img.fondo-mobile img {
+    object-fit: cover;
+    border-radius: 0;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .proyectos-lista {
+    position: relative;
+    z-index: 2;
+  }
+
+  .proyectos-item {
+    padding: clamp(12px, 2vh, 20px) 0;
   }
 
   .proyectos-item-nombre {
@@ -214,6 +275,11 @@
   .proyectos-item-tag {
     font-size: 7px;
     padding: 2px 7px;
+  }
+
+  /* Estado activo al tap */
+  .proyectos-item.proyecto-activo-mobile .proyectos-item-nombre {
+    color: var(--color-acento);
   }
 }
 

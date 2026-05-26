@@ -223,6 +223,10 @@
 
 /* ── Tablet portrait ── */
 @media (max-width: 1024px) and (orientation: portrait) {
+  .metodo-titulo-principal {
+    margin-left: 10%;
+  }
+
   .metodo-titulo-linea {
     font-size: clamp(40px, 10vw, 100px);
   }
@@ -238,10 +242,19 @@
   .metodo-panel-contenido {
     max-width: 40ch;
   }
+
+  .metodo-intro-bg {
+    opacity: 0.1;
+  }
 }
 
 /* ── Mobile portrait ── */
 @media (max-width: 599px) {
+  .metodo-stage {
+    height: auto;
+    overflow: visible;
+  }
+
   .metodo-titulo-principal {
     margin-left: 0;
   }
@@ -253,6 +266,17 @@
   .metodo-panel {
     padding: clamp(24px, 6vw, 48px);
     align-items: flex-start;
+    min-height: auto;
+    height: auto;
+    width: 100%;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .metodo-panel--intro {
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 
   .metodo-panel-titulo {
@@ -273,7 +297,7 @@
   }
 
   .metodo-intro-bg {
-    opacity: 0.05;
+    display: none;
   }
 }
 

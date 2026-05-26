@@ -21,7 +21,7 @@ const Habilidades = (() => {
     /* ══════════════════════════════════════════════════════════
        DESKTOP + TABLET: Arco 3D — cards recorren la curva
     ══════════════════════════════════════════════════════════ */
-    mm.add('(min-width: 600px) and (prefers-reduced-motion: no-preference)', () => {
+    mm.add('(min-width: 600px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
       const total = cards.length;
 
       /* Configuración del arco — de esquina inf-der a esquina sup-izq
@@ -129,6 +129,49 @@ const Habilidades = (() => {
       return () => {
         st.kill();
         gsap.set(cards, { clearProps: 'all' });
+      };
+    });
+
+    /* ══════════════════════════════════════════════════════════
+       TABLET PORTRAIT (600px–1024px, portrait): Marquee infinito
+       Misma lógica que mobile — arco no funciona bien aquí
+    ══════════════════════════════════════════════════════════ */
+    mm.add('(max-width: 1024px) and (orientation: portrait) and (min-width: 600px) and (prefers-reduced-motion: no-preference)', () => {
+      const carrusel = section.querySelector('.habilidades-carrusel');
+      const originalCards = Array.from(carrusel.children);
+      const clones = originalCards.map(card => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.classList.add('habilidades-card--clon');
+        carrusel.appendChild(clone);
+        return clone;
+      });
+
+      const allCards = carrusel.querySelectorAll('.habilidades-card');
+      gsap.set(allCards, { opacity: 1, scale: 1, x: 0, y: 0, rotation: 0 });
+
+      const totalWidth = carrusel.scrollWidth / 2;
+      const marquee = gsap.to(carrusel, {
+        x: -totalWidth,
+        duration: totalWidth / 50,
+        ease: 'none',
+        repeat: -1,
+        modifiers: {
+          x: gsap.utils.unitize(x => parseFloat(x) % totalWidth),
+        },
+      });
+
+      const pauseMarquee = () => marquee.pause();
+      const playMarquee = () => marquee.play();
+      carrusel.addEventListener('touchstart', pauseMarquee, { passive: true });
+      carrusel.addEventListener('touchend', playMarquee, { passive: true });
+
+      return () => {
+        marquee.kill();
+        carrusel.removeEventListener('touchstart', pauseMarquee);
+        carrusel.removeEventListener('touchend', playMarquee);
+        clones.forEach(c => c.remove());
+        gsap.set(allCards, { clearProps: 'all' });
       };
     });
 

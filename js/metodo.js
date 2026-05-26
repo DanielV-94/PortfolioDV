@@ -120,7 +120,7 @@ const Metodo = (() => {
       paneles.forEach(p => {
         p.style.width = '100%';
         p.style.height = 'auto';
-        p.style.minHeight = '80vh';
+        p.style.minHeight = 'auto';
       });
 
       paneles.forEach(panel => {
