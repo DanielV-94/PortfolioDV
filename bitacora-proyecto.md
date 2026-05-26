@@ -493,3 +493,97 @@ Sesión amplia: efecto glitch en imagen del manifiesto, ajustes de variables de 
 - Considerar agregar una transición suave al cambiar de tema (overlay tipo "cortina" o fade).
 - Agregar el selector de tema a futuras páginas nuevas.
 - Decidir si el selector se oculta durante la intro del hero o aparece desde el inicio.
+
+
+---
+
+## Sesión — 26 de mayo 2026
+
+### Resumen de lo realizado
+
+#### Fixes críticos
+- **Lenis conflicto de nombre**: El módulo IIFE `const Lenis = (...)` sobrescribía `window.Lenis` (constructor de la librería). Renombrado a `SmoothScroll` en `js/lenis.js` y `main.js`.
+- **Lenis removido**: Se quitó completamente Lenis (librería + wrapper + inicialización) porque causaba conflictos con las animaciones de ScrollTrigger.
+- **`scroll-behavior: smooth` eliminado**: Causaba el efecto "escalonado" al pelear con el scrub de GSAP. Cambiado a `scroll-behavior: auto` en `base.css`.
+- **Burbuja de edición en mobile**: Centrada correctamente con `xPercent: -50` en GSAP (antes el CSS `left:50%` peleaba con GSAP `x`).
+- **Color editable en hero**: Cambiado de `--color-acento` a `--color-editable` para el estado base, con transición suave al `--color-editable-activo` cuando el usuario modifica.
+- **Exclusión mutua Caos/Creativo**: Al activar uno se desactiva el otro automáticamente.
+- **Cursor desactivado temporalmente** para editar MotionPath (pendiente reactivar).
+
+#### Sección Habilidades (rediseño completo)
+- **Carrusel 3D en arco**: Cards recorren un arco de esquina inf-izq a sup-der (como medio arcoíris).
+- **Cards liquid glass**: `backdrop-filter: blur(24px)`, bordes luminosos, reflejo superior, sombras internas.
+- **Cards de categoría**: Tinte con `--color-editable` / `--color-editable-activo`, título centrado.
+- **Numeración global** (01-29) con `--fuente-editable`, nombre con `--fuente-display`.
+- **Categoría IA & Productividad** agregada: Claude Code, Copilot, Cursor, ChatGPT, Ollama, v0.
+- **Mobile**: Marquee infinito automático (cards duplicadas, loop con GSAP, pausa al tocar).
+- **Parámetros actuales**: `slotSpacing: 26°`, `arcStart: 0°`, `arcEnd: 95°`, `scrollLength: total * 180`.
+
+#### Sección Proyectos (nueva)
+- **4 proyectos**: ENERGIEN, FC LUXE SPA & BEAUTY, EMOZIONY (en desarrollo), LAA REAL STATE (en desarrollo).
+- **Layout**: Nombres a la izquierda en `--fuente-display` gigante (ligatures activas), preview a la derecha.
+- **Hover**: Revela imagen/placeholder del proyecto correspondiente.
+- **Tag "En desarrollo"**: Dentro del preview, aparece solo al hover con fade in.
+- **Sin numeración**, sin border-bottom en hover.
+- **Click**: Navega a `mi-trabajo.html#proyecto-x`.
+
+#### Sección Método (nueva)
+- **Scroll horizontal pinneado** con 7 paneles (intro + párrafo + 5 actos).
+- **Panel 1**: Título "El Método: Del Escenario al Servidor" en tipografía gigante con SplitText chars.
+- **Panel 2**: Párrafo completo del manifiesto con ScrambleText al hover sobre palabras + imagen de fondo.
+- **Paneles 3-7**: Los 5 actos con watermark gigante (número romano), título en display, descripción.
+- **SplitText + ScrambleTextPlugin** cargados y activos.
+- **Degradado**: De `--color-fondo` a `--color-fondo-secundario` (85% opacidad para que el grid se vea).
+
+#### Screenshots de proyectos
+- Tomados para ENERGIEN y FC LUXE en desktop (3), tablet landscape, tablet portrait, mobile (2).
+- Guardados en `Rsc/Img/proyectos/{nombre}/`.
+- Pendientes: EMOZIONY y LAA REAL STATE.
+
+#### Archivos nuevos creados
+- `css/proyectos.css`
+- `css/metodo.css`
+- `js/proyectos.js`
+- `js/metodo.js`
+- `Rsc/Img/proyectos/` (carpetas con screenshots)
+
+#### Plugins GSAP cargados actualmente
+- `gsap.min.js` (core)
+- `ScrollTrigger.min.js`
+- `SplitText.min.js`
+- `ScrambleTextPlugin.min.js`
+- `Draggable.min.js`
+- `InertiaPlugin.min.js`
+
+---
+
+### Pendientes para la próxima sesión
+
+1. **Reactivar cursor personalizado** — Descomentar `Cursor.init()` en `main.js` y restaurar `class="cursor-oculto"` en `<body>`.
+
+2. **Método — animaciones reversibles**: Las animaciones de SplitText no se ven al hacer scroll up. Necesitan `onEnterBack` y `onLeaveBack` funcionales (actualmente están pero no revierten correctamente el SplitText).
+
+3. **Método — panel intro con fondo original**: El primer panel debe mantener `--color-fondo` (no secundario). El degradado hacia `--color-fondo-secundario` debe empezar cuando el scroll horizontal se activa (no antes).
+
+4. **Método — imagen metodo5.png como overlay**: Agregar `Rsc/Img/metodo5.png` como fondo del panel intro con opacidad baja (similar al panel manifiesto que ya tiene imagen).
+
+5. **Screenshots pendientes**: Tomar screenshots de EMOZIONY y LAA REAL STATE (GitHub Pages).
+
+6. **Transición entre secciones**: Revisar que el degradado orgánico entre proyectos → método se vea bien con el grid visible.
+
+7. **Mobile — texto "Algunos desarrollan..."**: El trigger `start: "top 95%"` puede no dispararse en todos los dispositivos. Verificar en mobile real.
+
+---
+
+### Estado actual de la página (orden de secciones)
+
+1. Hero (intro coreografiada + drag + editable)
+2. Transición Hero ("Algunos desarrollan páginas web... yo coreografío")
+3. Convergencia (SVGs convergiendo)
+4. Manifiesto (texto + retrato + glitch)
+5. Salida Manifiesto (degradado)
+6. **Habilidades** (carrusel 3D en arco, 29 skills + 6 categorías)
+7. **Proyectos** (4 proyectos, hover reveal)
+8. **Método** (scroll horizontal, 7 paneles, SplitText + ScrambleText)
+
+---
