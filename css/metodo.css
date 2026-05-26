@@ -118,16 +118,19 @@
   font-size: clamp(18px, 2vw, 28px);
   line-height: 1.7;
   color: var(--color-texto);
-  max-width: 52ch;
-  text-align: center;
+  width: 100%;
+  height: 100%;
   transition: color var(--transicion-tema);
 }
 
-/* Palabras del manifiesto — hover scramble */
+/* Palabras del manifiesto — dispersas */
 .metodo-manifiesto-texto .metodo-palabra {
   display: inline-block;
   cursor: default;
   transition: color 0.2s ease;
+  white-space: nowrap;
+  font-family: var(--fuente-micro);
+  letter-spacing: 0.05em;
 }
 
 @media (hover: hover) and (pointer: fine) {
