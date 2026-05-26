@@ -7,25 +7,11 @@
   position: relative;
   z-index: 4;
   padding: clamp(80px, 12vh, 160px) clamp(24px, 5vw, 80px);
-  padding-bottom: clamp(120px, 16vh, 220px);
+  padding-bottom: clamp(40px, 6vh, 80px);
 }
 
 /* ── Degradado de salida hacia la sección método ── */
-.proyectos::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 200px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    color-mix(in srgb, var(--color-fondo-secundario) 60%, transparent) 100%
-  );
-  pointer-events: none;
-  transition: background var(--transicion-tema);
-}
+/* ── Sin degradado de salida — continuidad directa con método ── */
 
 .proyectos-stage {
   display: grid;

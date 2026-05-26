@@ -106,8 +106,8 @@ const Metodo = (() => {
         ScrollTrigger.create({
           trigger: panel,
           containerAnimation: tl,
-          start: 'left 80%',
-          end: 'right 20%',
+          start: 'left 55%',
+          end: 'right -10%',
           onEnter: () => animarEntrada(panel, titulo, desc, num, watermark, lineas, manifiesto),
           onEnterBack: () => animarEntrada(panel, titulo, desc, num, watermark, lineas, manifiesto),
           onLeave: () => animarSalida(panel, titulo, desc, num, watermark, lineas, manifiesto),
