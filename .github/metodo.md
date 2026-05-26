@@ -6,9 +6,7 @@
 
 Mi proceso no es una línea recta, es una puesta en escena técnica donde cada acto está diseñado para el aplauso final: la conversión, en la cual el usuario no solo visita, sino que se queda, interactúa y regresa. Cada paso es una coreografía de decisiones estratégicas y creativas que garantizan que tu sitio web no solo funcione, sino que también emocione y conecte. Por que al final del día el que se lleva la ovación es tu marca.
 
-### El Viaje de Cinco Actos
 
-Mi metodología se estructura en cinco pasos fundamentales, cada uno esencial para transformar tu visión en una experiencia digital memorable. Estos no son procesos aislados, sino momentos conectados donde la investigación informa la estrategia, la estrategia guía el diseño, el diseño se somete a prueba y cada elemento se perfecciona hasta alcanzar la excelencia. Desde el análisis más profundo de tu marca hasta el pulido final del código, cada fase tiene un propósito claro: crear un sitio web que no solo se vea extraordinario, sino que funcione de manera impecable y genere resultados reales para tu negocio.
 
 ### I. El Análisis del Libreto (Investigación de Marca)
 
