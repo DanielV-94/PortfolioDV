@@ -1,13 +1,15 @@
 /* ═══════════════════════════════════════════════════════════════
    MÉTODO — Scroll horizontal + SplitText + ScrambleText
-   Animaciones reversibles, capas de profundidad
+   Animaciones cinematográficas reversibles, nivel Awwwards
 ═══════════════════════════════════════════════════════════════ */
 
 const Metodo = (() => {
   function init() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    gsap.registerPlugin(ScrambleTextPlugin);
+    if (typeof ScrambleTextPlugin !== 'undefined') {
+      gsap.registerPlugin(ScrambleTextPlugin);
+    }
 
     const section = document.querySelector('.metodo');
     if (!section) return;
@@ -42,7 +44,7 @@ const Metodo = (() => {
 
     const mm = gsap.matchMedia();
 
-    /* ══ DESKTOP/TABLET: scroll horizontal + animaciones reversibles ══ */
+    /* ══ DESKTOP/TABLET: scroll horizontal + animaciones cinematográficas ══ */
     mm.add('(min-width: 600px) and (prefers-reduced-motion: no-preference)', () => {
       const totalWidth = track.scrollWidth;
       const viewWidth  = window.innerWidth;
@@ -57,18 +59,18 @@ const Metodo = (() => {
 
         if (titulo && typeof SplitText !== 'undefined') {
           const s = new SplitText(titulo, { type: 'words' });
-          gsap.set(s.words, { opacity: 0, y: 40, rotateX: -15 });
+          gsap.set(s.words, { opacity: 0, y: 60, rotateX: -25, scale: 0.9 });
           splits.push(s);
         }
         if (desc && typeof SplitText !== 'undefined') {
           const s = new SplitText(desc, { type: 'words' });
-          gsap.set(s.words, { opacity: 0, y: 20 });
+          gsap.set(s.words, { opacity: 0, y: 30, filter: 'blur(4px)' });
           splits.push(s);
         }
         if (lineas.length && typeof SplitText !== 'undefined') {
           lineas.forEach(linea => {
             const s = new SplitText(linea, { type: 'chars' });
-            gsap.set(s.chars, { opacity: 0, y: 50, scale: 0.85 });
+            gsap.set(s.chars, { opacity: 0, y: 80, rotateY: -45, scale: 0.7 });
             splits.push(s);
           });
         }
@@ -80,7 +82,7 @@ const Metodo = (() => {
           trigger: section,
           start: 'top top',
           end: () => `+=${totalWidth - viewWidth}`,
-          scrub: 1.8,
+          scrub: 1.5,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -92,7 +94,7 @@ const Metodo = (() => {
         ease: 'none',
       });
 
-      /* Animar cada panel — REVERSIBLE (sin once) */
+      /* ── Animar cada panel — REVERSIBLE ── */
       paneles.forEach(panel => {
         const titulo    = panel.querySelector('.metodo-panel-titulo');
         const desc      = panel.querySelector('.metodo-panel-desc');
@@ -104,8 +106,8 @@ const Metodo = (() => {
         ScrollTrigger.create({
           trigger: panel,
           containerAnimation: tl,
-          start: 'left 85%',
-          end: 'right 15%',
+          start: 'left 80%',
+          end: 'right 20%',
           onEnter: () => animarEntrada(panel, titulo, desc, num, watermark, lineas, manifiesto),
           onEnterBack: () => animarEntrada(panel, titulo, desc, num, watermark, lineas, manifiesto),
           onLeave: () => animarSalida(panel, titulo, desc, num, watermark, lineas, manifiesto),
@@ -113,56 +115,123 @@ const Metodo = (() => {
         });
       });
 
+      /* ── ENTRADA — Cinematográfica ── */
       function animarEntrada(panel, titulo, desc, num, watermark, lineas, manifiesto) {
+        /* Watermark: escala desde 1.5 con blur que se aclara */
         if (watermark) {
-          gsap.to(watermark, { scale: 1, opacity: 0.06, duration: 1, ease: 'power2.out' });
+          gsap.killTweensOf(watermark);
+          gsap.fromTo(watermark,
+            { scale: 1.5, opacity: 0, filter: 'blur(8px)' },
+            { scale: 1, opacity: 0.06, filter: 'blur(2px)', duration: 1.4, ease: 'power3.out' }
+          );
         }
+
+        /* Número de acto: fade con slide sutil */
         if (num) {
-          gsap.to(num, { opacity: 0.7, duration: 0.5, ease: 'power2.out' });
+          gsap.killTweensOf(num);
+          gsap.fromTo(num,
+            { opacity: 0, x: -20 },
+            { opacity: 0.7, x: 0, duration: 0.6, ease: 'power2.out' }
+          );
         }
-        if (titulo) {
-          const words = titulo.querySelectorAll('div');
-          gsap.to(words, { opacity: 1, y: 0, rotateX: 0, duration: 0.6, stagger: 0.04, ease: 'power3.out' });
-        }
+
+        /* Título intro (chars): cascada dramática con rotación 3D */
         if (lineas.length) {
           lineas.forEach((linea, i) => {
             const chars = linea.querySelectorAll('div');
-            gsap.to(chars, { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.02, ease: 'back.out(1.3)', delay: i * 0.15 });
+            gsap.killTweensOf(chars);
+            gsap.fromTo(chars,
+              { opacity: 0, y: 80, rotateY: -45, scale: 0.7 },
+              {
+                opacity: 1, y: 0, rotateY: 0, scale: 1,
+                duration: 0.8,
+                stagger: { each: 0.03, from: 'start' },
+                ease: 'back.out(1.4)',
+                delay: i * 0.2,
+                force3D: true,
+              }
+            );
           });
         }
+
+        /* Título de acto (words): reveal elástico */
+        if (titulo) {
+          const words = titulo.querySelectorAll('div');
+          gsap.killTweensOf(words);
+          gsap.fromTo(words,
+            { opacity: 0, y: 60, rotateX: -25, scale: 0.9 },
+            {
+              opacity: 1, y: 0, rotateX: 0, scale: 1,
+              duration: 0.9,
+              stagger: 0.06,
+              ease: 'elastic.out(1, 0.6)',
+              force3D: true,
+            }
+          );
+        }
+
+        /* Descripción (words): fade up con blur clearing */
         if (desc) {
           const words = desc.querySelectorAll('div');
-          gsap.to(words, { opacity: 1, y: 0, duration: 0.4, stagger: 0.012, ease: 'power2.out', delay: 0.25 });
+          gsap.killTweensOf(words);
+          gsap.fromTo(words,
+            { opacity: 0, y: 30, filter: 'blur(4px)' },
+            {
+              opacity: 1, y: 0, filter: 'blur(0px)',
+              duration: 0.6,
+              stagger: 0.015,
+              ease: 'power3.out',
+              delay: 0.3,
+            }
+          );
         }
+
+        /* Texto manifiesto (palabras) */
         if (manifiesto) {
           const words = manifiesto.querySelectorAll('.metodo-palabra');
-          gsap.to(words, { opacity: 1, y: 0, duration: 0.4, stagger: 0.01, ease: 'power2.out' });
+          gsap.killTweensOf(words);
+          gsap.fromTo(words,
+            { opacity: 0, y: 15 },
+            {
+              opacity: 1, y: 0,
+              duration: 0.5,
+              stagger: 0.012,
+              ease: 'power2.out',
+            }
+          );
         }
       }
 
+      /* ── SALIDA — Elegante y rápida ── */
       function animarSalida(panel, titulo, desc, num, watermark, lineas, manifiesto) {
         if (watermark) {
-          gsap.to(watermark, { scale: 1.2, opacity: 0, duration: 0.5, ease: 'power2.in' });
+          gsap.killTweensOf(watermark);
+          gsap.to(watermark, { scale: 0.8, opacity: 0, filter: 'blur(6px)', duration: 0.5, ease: 'power2.in' });
         }
         if (num) {
-          gsap.to(num, { opacity: 0, duration: 0.3, ease: 'power2.in' });
+          gsap.killTweensOf(num);
+          gsap.to(num, { opacity: 0, x: 20, duration: 0.3, ease: 'power2.in' });
         }
         if (titulo) {
           const words = titulo.querySelectorAll('div');
-          gsap.to(words, { opacity: 0, y: -20, duration: 0.3, ease: 'power2.in' });
+          gsap.killTweensOf(words);
+          gsap.to(words, { opacity: 0, y: -30, scale: 0.95, duration: 0.35, ease: 'power2.in' });
         }
         if (lineas.length) {
           lineas.forEach(linea => {
             const chars = linea.querySelectorAll('div');
-            gsap.to(chars, { opacity: 0, y: -30, scale: 0.9, duration: 0.3, ease: 'power2.in' });
+            gsap.killTweensOf(chars);
+            gsap.to(chars, { opacity: 0, y: -40, rotateY: 30, scale: 0.8, duration: 0.35, ease: 'power2.in' });
           });
         }
         if (desc) {
           const words = desc.querySelectorAll('div');
-          gsap.to(words, { opacity: 0, y: -10, duration: 0.2, ease: 'power2.in' });
+          gsap.killTweensOf(words);
+          gsap.to(words, { opacity: 0, y: -15, filter: 'blur(3px)', duration: 0.25, ease: 'power2.in' });
         }
         if (manifiesto) {
           const words = manifiesto.querySelectorAll('.metodo-palabra');
+          gsap.killTweensOf(words);
           gsap.to(words, { opacity: 0, y: -10, duration: 0.2, ease: 'power2.in' });
         }
       }
@@ -173,7 +242,7 @@ const Metodo = (() => {
       };
     });
 
-    /* ══ MOBILE: scroll vertical ══ */
+    /* ══ MOBILE: scroll vertical con reveals ══ */
     mm.add('(max-width: 599px) and (prefers-reduced-motion: no-preference)', () => {
       track.style.flexDirection = 'column';
       track.style.width = '100%';
@@ -188,15 +257,30 @@ const Metodo = (() => {
         const titulo    = panel.querySelector('.metodo-panel-titulo');
         const desc      = panel.querySelector('.metodo-panel-desc');
         const watermark = panel.querySelector('.metodo-panel-watermark');
+        const lineas    = panel.querySelectorAll('.metodo-titulo-linea');
 
         ScrollTrigger.create({
           trigger: panel,
           start: 'top 75%',
           once: true,
           onEnter: () => {
-            if (watermark) gsap.to(watermark, { opacity: 0.04, duration: 0.8 });
-            if (titulo) gsap.from(titulo, { opacity: 0, y: 30, duration: 0.7, ease: 'power3.out' });
-            if (desc) gsap.from(desc, { opacity: 0, y: 20, duration: 0.6, delay: 0.2 });
+            if (watermark) {
+              gsap.fromTo(watermark,
+                { scale: 1.3, opacity: 0 },
+                { scale: 1, opacity: 0.04, duration: 1, ease: 'power2.out' }
+              );
+            }
+            if (lineas.length) {
+              lineas.forEach((linea, i) => {
+                gsap.from(linea, { opacity: 0, y: 40, duration: 0.7, ease: 'power3.out', delay: i * 0.15 });
+              });
+            }
+            if (titulo) {
+              gsap.from(titulo, { opacity: 0, y: 30, duration: 0.7, ease: 'power3.out' });
+            }
+            if (desc) {
+              gsap.from(desc, { opacity: 0, y: 20, duration: 0.6, delay: 0.2, ease: 'power2.out' });
+            }
           },
         });
       });

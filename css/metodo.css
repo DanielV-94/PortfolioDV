@@ -6,25 +6,7 @@
 .metodo {
   position: relative;
   z-index: 4;
-  background: color-mix(in srgb, var(--color-fondo-secundario) 85%, transparent);
-  overflow: hidden;
-  transition: background-color var(--transicion-tema);
-}
-
-/* ── Degradado de entrada ── */
-.metodo-gradiente-entrada {
-  position: absolute;
-  top: -200px;
-  left: 0;
-  right: 0;
-  height: 200px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    color-mix(in srgb, var(--color-fondo-secundario) 85%, transparent) 100%
-  );
-  pointer-events: none;
-  transition: background var(--transicion-tema);
+  background: transparent;
 }
 
 .metodo-stage {
@@ -60,11 +42,28 @@
   gap: clamp(24px, 4vh, 48px);
 }
 
+/* ── Imagen overlay del panel intro ── */
+.metodo-intro-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 1;
+  pointer-events: none;
+  background-image: url('../Rsc/Img/metodo.png');
+  background-size: contain;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-blend-mode: color-burn;
+}
+
 .metodo-titulo-principal {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0;
+  margin-left: 20%;
 }
 
 .metodo-titulo-linea {
@@ -240,6 +239,10 @@
 
 /* ── Mobile portrait ── */
 @media (max-width: 599px) {
+  .metodo-titulo-principal {
+    margin-left: 0;
+  }
+
   .metodo-titulo-linea {
     font-size: clamp(32px, 12vw, 64px);
   }
@@ -264,6 +267,10 @@
 
   .metodo-panel-desc {
     font-size: clamp(13px, 3.8vw, 16px);
+  }
+
+  .metodo-intro-bg {
+    opacity: 0.05;
   }
 }
 

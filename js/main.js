@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ── Inicializar módulos ── */
-  // Cursor.init(); // DESACTIVADO temporalmente para editar MotionPath
+  Cursor.init();
   Hero.init();
   if (typeof TransicionHero !== "undefined") {
     TransicionHero.init();
