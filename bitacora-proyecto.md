@@ -587,3 +587,95 @@ Sesión amplia: efecto glitch en imagen del manifiesto, ajustes de variables de 
 8. **Método** (scroll horizontal, 7 paneles, SplitText + ScrambleText)
 
 ---
+
+
+### 2026-05-26 (continuación — sesión vespertina)
+
+#### Resumen del día
+
+Sesión enfocada en resolver pendientes de la bitácora anterior + rediseño completo de animaciones de la sección Método + interacción mobile en Proyectos.
+
+#### Cambios implementados
+
+- **Cursor personalizado reactivado**
+  - `Cursor.init()` descomentado en `main.js`.
+  - `class="cursor-oculto"` restaurado en `<body>` de `index.html`.
+
+- **Sección Método — animaciones cinematográficas únicas por acto**
+  - Reescritura completa de `js/metodo.js` con animaciones diferentes para cada panel:
+    - **Acto I**: Cascada desde posiciones Y aleatorias + rotación + elastic bounce. Hover: pulso de escala + color acento.
+    - **Acto II**: Palabras entran alternando izquierda/derecha. Descripción encadenada después del título. Hover: ScrambleText en todo el título.
+    - **Acto III**: Typewriter con `clipPath` reveal izq→der. Descripción encadenada con blur clearing. Hover: underline animado + color.
+    - **Acto IV**: Flip 3D con `rotateX(-90°)` desde abajo con perspectiva. Hover: wave (palabras suben en ola con stagger).
+    - **Acto V**: Scale desde 0 con elastic bounce. Descripción con efecto dominó (rotación). Hover: rotación aleatoria por palabra.
+  - Todas las animaciones son 100% reversibles al hacer scroll up.
+  - Hovers protegidos con `(hover: hover) and (pointer: fine)`.
+  - Se usa `gsap.killTweensOf()` antes de cada animación para evitar conflictos.
+
+- **Sección Método — panel manifiesto: decodificación binaria**
+  - Las palabras aparecen dispersas por el viewport con tamaños variados (0.7× a 1.8×) y rotaciones aleatorias (-12° a 12°).
+  - Contenido inicial: código binario (01001...).
+  - Fase 1 (0%–75% scroll): cada palabra se decodifica progresivamente de binario a texto real con ScrambleTextPlugin (`chars: '01'`).
+  - Fase 2 (75%–100% scroll): todas las palabras se animan a su posición natural (inline, párrafo legible) — escala 1, rotación 0.
+  - Al hacer scroll back: se re-dispersan y vuelven a binario.
+  - Hover post-decodificación: scramble decorativo con caracteres especiales.
+
+- **Sección Método — imagen metodo5.png como overlay**
+  - Agregado `div.metodo-intro-bg` con `background-image` en CSS (no `<img>` tag).
+  - `background-size: contain`, `background-position: left center`, `filter: grayscale(0.4)`, `opacity: 0.15`.
+  - Título desplazado a la derecha (`margin-left: 20%`) para no tapar la imagen.
+
+- **Sección Método — fondo continuo (fix franja)**
+  - `.metodo` cambiado a `background: transparent` (antes tenía `--color-fondo-secundario`).
+  - Eliminado `overflow: hidden` de `.metodo`.
+  - Eliminado `div.metodo-gradiente-entrada` del HTML.
+  - Eliminado `::after` de `.proyectos` que tenía un degradado hacia `--color-fondo-secundario` (era la franja visible).
+  - Reducido `padding-bottom` de `.proyectos` de `120px` a `40px`.
+  - Reducido `--color-gradiente-fin` del tema neutro de `0.7` a `0.12` para que el radial gradient del fondo fijo no cree franjas visibles.
+
+- **Sección Proyectos — interacción mobile (tap/doble-tap)**
+  - Primer tap: muestra la imagen del proyecto como fondo de la sección (opacidad baja, `object-fit: cover`). Nombre se colorea con `--color-acento`.
+  - Doble-tap (dentro de 400ms): navega al destino (`mi-trabajo.html#proyecto-x`).
+  - Desktop: comportamiento sin cambios (hover muestra preview, click navega).
+  - CSS: en mobile/tablet portrait, `.proyectos-preview` se posiciona absolute como fondo.
+  - Clase `.fondo-mobile` controla la opacidad y estilo de la imagen como fondo.
+
+#### Archivos modificados
+
+- `index.html` (body class, metodo-intro-bg, eliminación gradiente-entrada)
+- `js/main.js` (Cursor.init reactivado)
+- `js/metodo.js` (reescritura completa — animaciones únicas + decodificación binaria)
+- `js/proyectos.js` (reescritura — lógica mobile tap/doble-tap)
+- `css/metodo.css` (fondo transparente, imagen bg, título desplazado, responsive)
+- `css/proyectos.css` (eliminación ::after, mobile fondo, responsive)
+- `css/variables.css` (gradiente-fin reducido en temas neutro, collage, holographic)
+
+#### Decisiones técnicas
+
+- Animaciones únicas por acto para dar personalidad a cada panel — evitar monotonía visual.
+- Decodificación binaria vinculada al scroll progress (no a tiempo) para control total del usuario.
+- Dispersión → reorden como metáfora visual: del caos al orden, del código al significado.
+- `background-image` en CSS (no `<img>`) para poder aplicar `filter` directamente al div.
+- Doble-tap en mobile como patrón de interacción: primer tap = preview, segundo = acción.
+- Eliminación del degradado `::after` de proyectos para continuidad visual con el grid.
+
+#### Estado actual
+
+- ✅ Cursor personalizado activo
+- ✅ Método: 5 animaciones únicas por acto + hovers interactivos
+- ✅ Método: decodificación binaria progresiva con scroll
+- ✅ Método: dispersión → reorden de palabras
+- ✅ Método: imagen metodo5.png como overlay izquierdo
+- ✅ Método: fondo continuo sin franjas
+- ✅ Proyectos: tap/doble-tap en mobile
+- ✅ Transición proyectos → método sin corte visual
+
+#### Pendientes sugeridos
+
+- **Responsive completo de Habilidades, Proyectos y Método** en tablet landscape, tablet portrait y mobile — verificar visualmente y ajustar UX.
+- Verificar que la decodificación binaria funcione bien en mobile (scroll vertical).
+- Probar doble-tap en dispositivos reales (iOS Safari, Android Chrome).
+- Ajustar la dispersión de palabras del manifiesto para que no se salgan del viewport en pantallas pequeñas.
+- Verificar que los temas oscuros (acid, synthwave, rave) se vean bien con los nuevos cambios.
+
+---
