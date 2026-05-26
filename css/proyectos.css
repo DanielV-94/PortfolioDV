@@ -159,8 +159,8 @@
   height: 100%;
   object-fit: contain;
   border-radius: 16px;
-  mask-image: radial-gradient(ellipse 65% 60% at center, black 40%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse 65% 60% at center, black 40%, transparent 85%);
+  mask-image: radial-gradient(ellipse 72% 68% at center, black 45%, transparent 92%);
+  -webkit-mask-image: radial-gradient(ellipse 72% 68% at center, black 45%, transparent 92%);
 }
 
 /* ═══════════════════════════════════════════════════════════════
