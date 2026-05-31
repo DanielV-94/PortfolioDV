@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="css/metodo.css" />
 </head>
 
-<body data-tema="neutro">
+<body data-tema="neutro" class="cursor-oculto">
 
   <!-- ══ Cursores ══ -->
   <div class="cursor-usuario" id="cursorUsuario" aria-hidden="true">
@@ -681,45 +681,76 @@
        MÉTODO — Los 5 Actos, scroll horizontal con SVG path
   ════════════════════════════════════════ -->
   <section class="metodo" id="metodo" aria-label="Mi método creativo">
-    <!-- Degradado de entrada -->
-    <div class="metodo-gradiente-entrada" aria-hidden="true"></div>
 
     <div class="metodo-stage">
       <div class="metodo-track">
 
+        <!-- Panel 1 — Título gigante -->
+        <div class="metodo-panel metodo-panel--intro">
+          <div class="metodo-intro-bg" aria-hidden="true"></div>
+          <h2 class="metodo-titulo-principal">
+            <span class="metodo-titulo-linea">El Método:</span>
+            <span class="metodo-titulo-linea">Del Escenario</span>
+            <span class="metodo-titulo-linea">al Servidor</span>
+          </h2>
+        </div>
+
+        <!-- Panel 2 — Párrafo intro con ScrambleText + imagen fondo -->
+        <div class="metodo-panel metodo-panel--manifiesto">
+          <div class="metodo-manifiesto-bg" aria-hidden="true">
+            <img src="Rsc/Img/metodo1.png" alt="" draggable="false" />
+          </div>
+          <p class="metodo-manifiesto-texto">Mi proceso no es una línea recta, es una puesta en escena técnica donde cada acto está diseñado para el aplauso final: la conversión, en la cual el usuario no solo visita, sino que se queda, interactúa y regresa. Cada paso es una coreografía de decisiones estratégicas y creativas que garantizan que tu sitio web no solo funcione, sino que también emocione y conecte. Por que al final del día el que se lleva la ovación es tu marca.</p>
+        </div>
+
         <!-- Acto I -->
         <div class="metodo-panel">
-          <span class="metodo-panel-num">I</span>
-          <h3 class="metodo-panel-titulo">El Análisis del Libreto</h3>
-          <p class="metodo-panel-desc">Me sumerjo en la psicología de tu marca para entender su voz, sus miedos y sus metas. No diseño para empresas, diseño para los humanos que las habitan.</p>
+          <span class="metodo-panel-watermark" aria-hidden="true">I</span>
+          <div class="metodo-panel-contenido">
+            <span class="metodo-panel-num">Acto I</span>
+            <h3 class="metodo-panel-titulo">El Análisis del Libreto</h3>
+            <p class="metodo-panel-desc">Antes del primer paso, viene la escucha. Me sumerjo en la psicología de tu marca para entender su voz, sus miedos y sus metas. No diseño para empresas, diseño para los humanos que las habitan. Si no entiendo el mensaje, no puedo crear el movimiento.</p>
+          </div>
         </div>
 
         <!-- Acto II -->
         <div class="metodo-panel">
-          <span class="metodo-panel-num">II</span>
-          <h3 class="metodo-panel-titulo">La Intención del Movimiento</h3>
-          <p class="metodo-panel-desc">Traduzco tus objetivos comerciales en arquitectura técnica. Cada funcionalidad tiene un propósito; si no suma a la narrativa, sobra.</p>
+          <span class="metodo-panel-watermark" aria-hidden="true">II</span>
+          <div class="metodo-panel-contenido">
+            <span class="metodo-panel-num">Acto II</span>
+            <h3 class="metodo-panel-titulo">La Intención del Movimiento</h3>
+            <p class="metodo-panel-desc">Un bailarín no se mueve sin dirección. Traduzco tus objetivos comerciales en arquitectura técnica. Aquí definimos la emoción clave: ¿confianza?, ¿asombro?, ¿urgencia? Cada funcionalidad tiene un propósito; si no suma a la narrativa, sobra.</p>
+          </div>
         </div>
 
         <!-- Acto III -->
         <div class="metodo-panel">
-          <span class="metodo-panel-num">III</span>
-          <h3 class="metodo-panel-titulo">Composición Creativa</h3>
-          <p class="metodo-panel-desc">Donde la estética y la técnica se encuentran con la usabilidad. No uso moldes; compongo visuales que respiran. Cada pixel tiene un propósito, cada animación una intención.</p>
+          <span class="metodo-panel-watermark" aria-hidden="true">III</span>
+          <div class="metodo-panel-contenido">
+            <span class="metodo-panel-num">Acto III</span>
+            <h3 class="metodo-panel-titulo">Composición Creativa</h3>
+            <p class="metodo-panel-desc">Donde la estética, el arte y la técnica se encuentran con la usabilidad. No uso moldes; compongo visuales que respiran. Cada pixel tiene un propósito, cada animación una intención. No es solo diseño, es coreografía digital.</p>
+          </div>
         </div>
 
         <!-- Acto IV -->
         <div class="metodo-panel">
-          <span class="metodo-panel-num">IV</span>
-          <h3 class="metodo-panel-titulo">El Ensayo de Variables</h3>
-          <p class="metodo-panel-desc">Exploro cada "qué pasaría si...". Pruebo paletas, tipografías y flujos como quien ensaya una secuencia mil veces. No me conformo con lo evidente.</p>
+          <span class="metodo-panel-watermark" aria-hidden="true">IV</span>
+          <div class="metodo-panel-contenido">
+            <span class="metodo-panel-num">Acto IV</span>
+            <h3 class="metodo-panel-titulo">El Ensayo de Variables</h3>
+            <p class="metodo-panel-desc">Exploro cada "qué pasaría si...". Pruebo paletas, tipografías y flujos de navegación como quien ensaya una secuencia mil veces. No me conformo con lo evidente; busco la versión que mejor ejecute la técnica y la emoción.</p>
+          </div>
         </div>
 
         <!-- Acto V -->
         <div class="metodo-panel">
-          <span class="metodo-panel-num">V</span>
-          <h3 class="metodo-panel-titulo">El Rigor del Pulido</h3>
-          <p class="metodo-panel-desc">Someto cada línea de código a pruebas de estrés, velocidad y adaptabilidad. La perfección no es opcional; es el estándar.</p>
+          <span class="metodo-panel-watermark" aria-hidden="true">V</span>
+          <div class="metodo-panel-contenido">
+            <span class="metodo-panel-num">Acto V</span>
+            <h3 class="metodo-panel-titulo">El Rigor del Pulido</h3>
+            <p class="metodo-panel-desc">En el teatro, el error se paga con silencio; en la web, se paga con abandono. Someto cada línea de código a pruebas de estrés, velocidad y adaptabilidad. La perfección no es opcional; es el estándar de un profesional que respeta su obra.</p>
+          </div>
         </div>
 
       </div>
@@ -730,6 +761,7 @@
   <script src="gsap-public/minified/gsap.min.js"></script>
   <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
   <script src="gsap-public/minified/SplitText.min.js"></script>
+  <script src="gsap-public/minified/ScrambleTextPlugin.min.js"></script>
   <script src="gsap-public/minified/Draggable.min.js"></script>
   <script src="gsap-public/minified/InertiaPlugin.min.js"></script>
   <!-- MorphSVGPlugin — no se usa actualmente. Descomentar si se agrega morphing SVG.

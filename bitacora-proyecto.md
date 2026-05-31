@@ -493,3 +493,189 @@ Sesión amplia: efecto glitch en imagen del manifiesto, ajustes de variables de 
 - Considerar agregar una transición suave al cambiar de tema (overlay tipo "cortina" o fade).
 - Agregar el selector de tema a futuras páginas nuevas.
 - Decidir si el selector se oculta durante la intro del hero o aparece desde el inicio.
+
+
+---
+
+## Sesión — 26 de mayo 2026
+
+### Resumen de lo realizado
+
+#### Fixes críticos
+- **Lenis conflicto de nombre**: El módulo IIFE `const Lenis = (...)` sobrescribía `window.Lenis` (constructor de la librería). Renombrado a `SmoothScroll` en `js/lenis.js` y `main.js`.
+- **Lenis removido**: Se quitó completamente Lenis (librería + wrapper + inicialización) porque causaba conflictos con las animaciones de ScrollTrigger.
+- **`scroll-behavior: smooth` eliminado**: Causaba el efecto "escalonado" al pelear con el scrub de GSAP. Cambiado a `scroll-behavior: auto` en `base.css`.
+- **Burbuja de edición en mobile**: Centrada correctamente con `xPercent: -50` en GSAP (antes el CSS `left:50%` peleaba con GSAP `x`).
+- **Color editable en hero**: Cambiado de `--color-acento` a `--color-editable` para el estado base, con transición suave al `--color-editable-activo` cuando el usuario modifica.
+- **Exclusión mutua Caos/Creativo**: Al activar uno se desactiva el otro automáticamente.
+- **Cursor desactivado temporalmente** para editar MotionPath (pendiente reactivar).
+
+#### Sección Habilidades (rediseño completo)
+- **Carrusel 3D en arco**: Cards recorren un arco de esquina inf-izq a sup-der (como medio arcoíris).
+- **Cards liquid glass**: `backdrop-filter: blur(24px)`, bordes luminosos, reflejo superior, sombras internas.
+- **Cards de categoría**: Tinte con `--color-editable` / `--color-editable-activo`, título centrado.
+- **Numeración global** (01-29) con `--fuente-editable`, nombre con `--fuente-display`.
+- **Categoría IA & Productividad** agregada: Claude Code, Copilot, Cursor, ChatGPT, Ollama, v0.
+- **Mobile**: Marquee infinito automático (cards duplicadas, loop con GSAP, pausa al tocar).
+- **Parámetros actuales**: `slotSpacing: 26°`, `arcStart: 0°`, `arcEnd: 95°`, `scrollLength: total * 180`.
+
+#### Sección Proyectos (nueva)
+- **4 proyectos**: ENERGIEN, FC LUXE SPA & BEAUTY, EMOZIONY (en desarrollo), LAA REAL STATE (en desarrollo).
+- **Layout**: Nombres a la izquierda en `--fuente-display` gigante (ligatures activas), preview a la derecha.
+- **Hover**: Revela imagen/placeholder del proyecto correspondiente.
+- **Tag "En desarrollo"**: Dentro del preview, aparece solo al hover con fade in.
+- **Sin numeración**, sin border-bottom en hover.
+- **Click**: Navega a `mi-trabajo.html#proyecto-x`.
+
+#### Sección Método (nueva)
+- **Scroll horizontal pinneado** con 7 paneles (intro + párrafo + 5 actos).
+- **Panel 1**: Título "El Método: Del Escenario al Servidor" en tipografía gigante con SplitText chars.
+- **Panel 2**: Párrafo completo del manifiesto con ScrambleText al hover sobre palabras + imagen de fondo.
+- **Paneles 3-7**: Los 5 actos con watermark gigante (número romano), título en display, descripción.
+- **SplitText + ScrambleTextPlugin** cargados y activos.
+- **Degradado**: De `--color-fondo` a `--color-fondo-secundario` (85% opacidad para que el grid se vea).
+
+#### Screenshots de proyectos
+- Tomados para ENERGIEN y FC LUXE en desktop (3), tablet landscape, tablet portrait, mobile (2).
+- Guardados en `Rsc/Img/proyectos/{nombre}/`.
+- Pendientes: EMOZIONY y LAA REAL STATE.
+
+#### Archivos nuevos creados
+- `css/proyectos.css`
+- `css/metodo.css`
+- `js/proyectos.js`
+- `js/metodo.js`
+- `Rsc/Img/proyectos/` (carpetas con screenshots)
+
+#### Plugins GSAP cargados actualmente
+- `gsap.min.js` (core)
+- `ScrollTrigger.min.js`
+- `SplitText.min.js`
+- `ScrambleTextPlugin.min.js`
+- `Draggable.min.js`
+- `InertiaPlugin.min.js`
+
+---
+
+### Pendientes para la próxima sesión
+
+1. **Reactivar cursor personalizado** — Descomentar `Cursor.init()` en `main.js` y restaurar `class="cursor-oculto"` en `<body>`.
+
+2. **Método — animaciones reversibles**: Las animaciones de SplitText no se ven al hacer scroll up. Necesitan `onEnterBack` y `onLeaveBack` funcionales (actualmente están pero no revierten correctamente el SplitText).
+
+3. **Método — panel intro con fondo original**: El primer panel debe mantener `--color-fondo` (no secundario). El degradado hacia `--color-fondo-secundario` debe empezar cuando el scroll horizontal se activa (no antes).
+
+4. **Método — imagen metodo5.png como overlay**: Agregar `Rsc/Img/metodo5.png` como fondo del panel intro con opacidad baja (similar al panel manifiesto que ya tiene imagen).
+
+5. **Screenshots pendientes**: Tomar screenshots de EMOZIONY y LAA REAL STATE (GitHub Pages).
+
+6. **Transición entre secciones**: Revisar que el degradado orgánico entre proyectos → método se vea bien con el grid visible.
+
+7. **Mobile — texto "Algunos desarrollan..."**: El trigger `start: "top 95%"` puede no dispararse en todos los dispositivos. Verificar en mobile real.
+
+---
+
+### Estado actual de la página (orden de secciones)
+
+1. Hero (intro coreografiada + drag + editable)
+2. Transición Hero ("Algunos desarrollan páginas web... yo coreografío")
+3. Convergencia (SVGs convergiendo)
+4. Manifiesto (texto + retrato + glitch)
+5. Salida Manifiesto (degradado)
+6. **Habilidades** (carrusel 3D en arco, 29 skills + 6 categorías)
+7. **Proyectos** (4 proyectos, hover reveal)
+8. **Método** (scroll horizontal, 7 paneles, SplitText + ScrambleText)
+
+---
+
+
+### 2026-05-26 (continuación — sesión vespertina)
+
+#### Resumen del día
+
+Sesión enfocada en resolver pendientes de la bitácora anterior + rediseño completo de animaciones de la sección Método + interacción mobile en Proyectos.
+
+#### Cambios implementados
+
+- **Cursor personalizado reactivado**
+  - `Cursor.init()` descomentado en `main.js`.
+  - `class="cursor-oculto"` restaurado en `<body>` de `index.html`.
+
+- **Sección Método — animaciones cinematográficas únicas por acto**
+  - Reescritura completa de `js/metodo.js` con animaciones diferentes para cada panel:
+    - **Acto I**: Cascada desde posiciones Y aleatorias + rotación + elastic bounce. Hover: pulso de escala + color acento.
+    - **Acto II**: Palabras entran alternando izquierda/derecha. Descripción encadenada después del título. Hover: ScrambleText en todo el título.
+    - **Acto III**: Typewriter con `clipPath` reveal izq→der. Descripción encadenada con blur clearing. Hover: underline animado + color.
+    - **Acto IV**: Flip 3D con `rotateX(-90°)` desde abajo con perspectiva. Hover: wave (palabras suben en ola con stagger).
+    - **Acto V**: Scale desde 0 con elastic bounce. Descripción con efecto dominó (rotación). Hover: rotación aleatoria por palabra.
+  - Todas las animaciones son 100% reversibles al hacer scroll up.
+  - Hovers protegidos con `(hover: hover) and (pointer: fine)`.
+  - Se usa `gsap.killTweensOf()` antes de cada animación para evitar conflictos.
+
+- **Sección Método — panel manifiesto: decodificación binaria**
+  - Las palabras aparecen dispersas por el viewport con tamaños variados (0.7× a 1.8×) y rotaciones aleatorias (-12° a 12°).
+  - Contenido inicial: código binario (01001...).
+  - Fase 1 (0%–75% scroll): cada palabra se decodifica progresivamente de binario a texto real con ScrambleTextPlugin (`chars: '01'`).
+  - Fase 2 (75%–100% scroll): todas las palabras se animan a su posición natural (inline, párrafo legible) — escala 1, rotación 0.
+  - Al hacer scroll back: se re-dispersan y vuelven a binario.
+  - Hover post-decodificación: scramble decorativo con caracteres especiales.
+
+- **Sección Método — imagen metodo5.png como overlay**
+  - Agregado `div.metodo-intro-bg` con `background-image` en CSS (no `<img>` tag).
+  - `background-size: contain`, `background-position: left center`, `filter: grayscale(0.4)`, `opacity: 0.15`.
+  - Título desplazado a la derecha (`margin-left: 20%`) para no tapar la imagen.
+
+- **Sección Método — fondo continuo (fix franja)**
+  - `.metodo` cambiado a `background: transparent` (antes tenía `--color-fondo-secundario`).
+  - Eliminado `overflow: hidden` de `.metodo`.
+  - Eliminado `div.metodo-gradiente-entrada` del HTML.
+  - Eliminado `::after` de `.proyectos` que tenía un degradado hacia `--color-fondo-secundario` (era la franja visible).
+  - Reducido `padding-bottom` de `.proyectos` de `120px` a `40px`.
+  - Reducido `--color-gradiente-fin` del tema neutro de `0.7` a `0.12` para que el radial gradient del fondo fijo no cree franjas visibles.
+
+- **Sección Proyectos — interacción mobile (tap/doble-tap)**
+  - Primer tap: muestra la imagen del proyecto como fondo de la sección (opacidad baja, `object-fit: cover`). Nombre se colorea con `--color-acento`.
+  - Doble-tap (dentro de 400ms): navega al destino (`mi-trabajo.html#proyecto-x`).
+  - Desktop: comportamiento sin cambios (hover muestra preview, click navega).
+  - CSS: en mobile/tablet portrait, `.proyectos-preview` se posiciona absolute como fondo.
+  - Clase `.fondo-mobile` controla la opacidad y estilo de la imagen como fondo.
+
+#### Archivos modificados
+
+- `index.html` (body class, metodo-intro-bg, eliminación gradiente-entrada)
+- `js/main.js` (Cursor.init reactivado)
+- `js/metodo.js` (reescritura completa — animaciones únicas + decodificación binaria)
+- `js/proyectos.js` (reescritura — lógica mobile tap/doble-tap)
+- `css/metodo.css` (fondo transparente, imagen bg, título desplazado, responsive)
+- `css/proyectos.css` (eliminación ::after, mobile fondo, responsive)
+- `css/variables.css` (gradiente-fin reducido en temas neutro, collage, holographic)
+
+#### Decisiones técnicas
+
+- Animaciones únicas por acto para dar personalidad a cada panel — evitar monotonía visual.
+- Decodificación binaria vinculada al scroll progress (no a tiempo) para control total del usuario.
+- Dispersión → reorden como metáfora visual: del caos al orden, del código al significado.
+- `background-image` en CSS (no `<img>`) para poder aplicar `filter` directamente al div.
+- Doble-tap en mobile como patrón de interacción: primer tap = preview, segundo = acción.
+- Eliminación del degradado `::after` de proyectos para continuidad visual con el grid.
+
+#### Estado actual
+
+- ✅ Cursor personalizado activo
+- ✅ Método: 5 animaciones únicas por acto + hovers interactivos
+- ✅ Método: decodificación binaria progresiva con scroll
+- ✅ Método: dispersión → reorden de palabras
+- ✅ Método: imagen metodo5.png como overlay izquierdo
+- ✅ Método: fondo continuo sin franjas
+- ✅ Proyectos: tap/doble-tap en mobile
+- ✅ Transición proyectos → método sin corte visual
+
+#### Pendientes sugeridos
+
+- **Responsive completo de Habilidades, Proyectos y Método** en tablet landscape, tablet portrait y mobile — verificar visualmente y ajustar UX.
+- Verificar que la decodificación binaria funcione bien en mobile (scroll vertical).
+- Probar doble-tap en dispositivos reales (iOS Safari, Android Chrome).
+- Ajustar la dispersión de palabras del manifiesto para que no se salgan del viewport en pantallas pequeñas.
+- Verificar que los temas oscuros (acid, synthwave, rave) se vean bien con los nuevos cambios.
+
+---

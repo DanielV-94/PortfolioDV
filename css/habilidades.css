@@ -192,9 +192,28 @@
 
 /* ── Tablet portrait (≤1024px, orientation: portrait) ── */
 @media (max-width: 1024px) and (orientation: portrait) {
+  .habilidades-stage {
+    height: auto;
+    min-height: 50dvh;
+    padding: 40px 0;
+    overflow: hidden;
+  }
+
+  .habilidades-carrusel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 0;
+    width: max-content;
+  }
+
   .habilidades-card {
-    width: clamp(190px, 26vw, 280px);
-    height: clamp(260px, 34vw, 370px);
+    position: relative;
+    flex-shrink: 0;
+    width: clamp(170px, 22vw, 240px);
+    height: clamp(230px, 30vw, 320px);
+    opacity: 1;
   }
 
   .habilidades-card-logo {
@@ -207,43 +226,58 @@
 @media (max-width: 599px) {
   .habilidades-stage {
     height: auto;
-    min-height: 50dvh;
-    padding: 32px 0;
+    min-height: auto;
+    padding: 24px 0;
     overflow: hidden;
+    display: flex;
+    align-items: center;
   }
 
   .habilidades-carrusel {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 14px;
-    padding: 16px 0;
+    gap: 10px;
+    padding: 12px 0;
     width: max-content;
   }
 
   .habilidades-card {
     position: relative;
     flex-shrink: 0;
-    width: clamp(150px, 48vw, 200px);
-    height: clamp(200px, 64vw, 270px);
+    width: 100px;
+    height: 140px;
     opacity: 1;
+    border-radius: 16px;
+  }
+
+  .habilidades-card::before {
+    border-radius: 16px 16px 0 0;
   }
 
   .habilidades-cat-titulo {
-    font-size: clamp(16px, 5vw, 22px);
+    font-size: 12px;
   }
 
   .habilidades-card-logo {
-    width: clamp(48px, 14vw, 64px);
-    height: clamp(48px, 14vw, 64px);
+    width: 32px;
+    height: 32px;
   }
 
   .habilidades-card-num {
-    font-size: clamp(16px, 5vw, 22px);
+    font-size: 10px;
+    top: 8px;
+    right: 8px;
   }
 
   .habilidades-card-nombre {
-    font-size: clamp(14px, 4.5vw, 20px);
+    font-size: 10px;
+    bottom: 8px;
+    left: 10px;
+  }
+
+  .habilidades-card-contenido {
+    padding: 10px;
   }
 }
 
