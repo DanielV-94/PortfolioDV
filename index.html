@@ -682,8 +682,9 @@
   ════════════════════════════════════════ -->
   <section class="metodo" id="metodo" aria-label="Mi método creativo">
 
-    <div class="metodo-stage">
-      <div class="metodo-track">
+    <!-- ── PARTE 1: Título intro (scroll horizontal) ── -->
+    <div class="metodo-stage metodo-stage--intro">
+      <div class="metodo-track metodo-track--intro">
 
         <!-- Panel 1 — Título gigante -->
         <div class="metodo-panel metodo-panel--intro">
@@ -695,13 +696,22 @@
           </h2>
         </div>
 
-        <!-- Panel 2 — Párrafo intro con ScrambleText + imagen fondo -->
-        <div class="metodo-panel metodo-panel--manifiesto">
-          <div class="metodo-manifiesto-bg" aria-hidden="true">
-            <img src="Rsc/Img/metodo1.png" alt="" draggable="false" />
-          </div>
-          <p class="metodo-manifiesto-texto">Mi proceso no es una línea recta, es una puesta en escena técnica donde cada acto está diseñado para el aplauso final: la conversión, en la cual el usuario no solo visita, sino que se queda, interactúa y regresa. Cada paso es una coreografía de decisiones estratégicas y creativas que garantizan que tu sitio web no solo funcione, sino que también emocione y conecte. Por que al final del día el que se lleva la ovación es tu marca.</p>
+      </div>
+    </div>
+
+    <!-- ── PARTE 2: Manifiesto (pinneado independiente) ── -->
+    <div class="metodo-manifiesto-wrapper">
+      <div class="metodo-panel metodo-panel--manifiesto">
+        <div class="metodo-manifiesto-bg" aria-hidden="true">
+          <img src="Rsc/Img/metodo1.png" alt="" draggable="false" />
         </div>
+        <p class="metodo-manifiesto-texto"><span class="metodo-palabra">Mi</span> <span class="metodo-palabra">proceso</span> <span class="metodo-palabra">no</span> <span class="metodo-palabra">es</span> <span class="metodo-palabra">una</span> <span class="metodo-palabra">línea</span> <span class="metodo-palabra">recta,</span> <span class="metodo-palabra">es</span> <span class="metodo-palabra">una</span> <span class="metodo-palabra">puesta</span> <span class="metodo-palabra">en</span> <span class="metodo-palabra">escena</span> <span class="metodo-palabra">técnica</span> <span class="metodo-palabra">donde</span> <span class="metodo-palabra">cada</span> <span class="metodo-palabra">acto</span> <span class="metodo-palabra">está</span> <span class="metodo-palabra">diseñado</span> <span class="metodo-palabra">para</span> <span class="metodo-palabra">el</span> <span class="metodo-palabra">aplauso</span> <span class="metodo-palabra">final:</span> <span class="metodo-palabra">la</span> <span class="metodo-palabra">conversión,</span> <span class="metodo-palabra">en</span> <span class="metodo-palabra">la</span> <span class="metodo-palabra">cual</span> <span class="metodo-palabra">el</span> <span class="metodo-palabra">usuario</span> <span class="metodo-palabra">no</span> <span class="metodo-palabra">solo</span> <span class="metodo-palabra">visita,</span> <span class="metodo-palabra">sino</span> <span class="metodo-palabra">que</span> <span class="metodo-palabra">se</span> <span class="metodo-palabra">queda,</span> <span class="metodo-palabra">interactúa</span> <span class="metodo-palabra">y</span> <span class="metodo-palabra">regresa.</span> <span class="metodo-palabra">Cada</span> <span class="metodo-palabra">paso</span> <span class="metodo-palabra">es</span> <span class="metodo-palabra">una</span> <span class="metodo-palabra">coreografía</span> <span class="metodo-palabra">de</span> <span class="metodo-palabra">decisiones</span> <span class="metodo-palabra">estratégicas</span> <span class="metodo-palabra">y</span> <span class="metodo-palabra">creativas</span> <span class="metodo-palabra">que</span> <span class="metodo-palabra">garantizan</span> <span class="metodo-palabra">que</span> <span class="metodo-palabra">tu</span> <span class="metodo-palabra">sitio</span> <span class="metodo-palabra">web</span> <span class="metodo-palabra">no</span> <span class="metodo-palabra">solo</span> <span class="metodo-palabra">funcione,</span> <span class="metodo-palabra">sino</span> <span class="metodo-palabra">que</span> <span class="metodo-palabra">también</span> <span class="metodo-palabra">emocione</span> <span class="metodo-palabra">y</span> <span class="metodo-palabra">conecte.</span> <span class="metodo-palabra">Porque</span> <span class="metodo-palabra">al</span> <span class="metodo-palabra">final</span> <span class="metodo-palabra">del</span> <span class="metodo-palabra">día</span> <span class="metodo-palabra">el</span> <span class="metodo-palabra">que</span> <span class="metodo-palabra">se</span> <span class="metodo-palabra">lleva</span> <span class="metodo-palabra">la</span> <span class="metodo-palabra">ovación</span> <span class="metodo-palabra">es</span> <span class="metodo-palabra">tu</span> <span class="metodo-palabra">marca.</span></p>
+      </div>
+    </div>
+
+    <!-- ── PARTE 3: Los 5 Actos (scroll horizontal) ── -->
+    <div class="metodo-stage metodo-stage--actos">
+      <div class="metodo-track metodo-track--actos">
 
         <!-- Acto I -->
         <div class="metodo-panel">
@@ -770,6 +780,7 @@
 
       </div>
     </div>
+
   </section>
 
   <!-- GSAP local — gsap-public/minified -->
