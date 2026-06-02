@@ -679,3 +679,57 @@ Sesión enfocada en resolver pendientes de la bitácora anterior + rediseño com
 - Verificar que los temas oscuros (acid, synthwave, rave) se vean bien con los nuevos cambios.
 
 ---
+
+### 2026-06-02
+
+#### Resumen del día
+
+Instalación de LTM Power (memoria persistente entre sesiones) y fix de distribución de palabras en la sección Método Parte 2 (Manifiesto — decodificación binaria).
+
+#### Cambios implementados
+
+- **LTM Power instalado**
+  - Memoria persistente entre sesiones de Kiro (checkpoints, sesiones, eventos, threads).
+  - Script CLI en `ltm/bin/ltm.py` — selftest pasando (11 tests OK).
+  - Hook automático `agentStop` que captura actividad al final de cada turno.
+  - Steering files para recall y formato de memoria.
+  - `.gitignore` actualizado para excluir datos privados de memoria.
+
+- **Método Parte 2 — Fix de distribución de palabras dispersas**
+  - **Problema**: Las palabras (en estado binario) se acumulaban en la esquina inferior derecha. El posicionamiento era completamente aleatorio (`gsap.utils.random(padding, panelW - padding - 140)`) sin ninguna garantía de distribución uniforme.
+  - **Solución**: Se reemplazó el random puro por un **sistema de grid con jitter**:
+    - Se calcula un grid de celdas (`cols × rows`) que cubre toda la pantalla.
+    - Cada palabra se asigna a una celda específica.
+    - Dentro de su celda, cada palabra tiene un jitter aleatorio (±25% en X, ±20% en Y) para mantener el look orgánico.
+  - **Resultado**: Las palabras se distribuyen uniformemente por toda la pantalla manteniendo el efecto visual disperso/caótico original.
+  - Escalas, rotaciones, opacidades y flotación se mantuvieron exactamente iguales al diseño original.
+
+#### Archivos creados
+
+- `ltm/` (directorio completo con bin, store, runtime, reports, snapshots)
+- `.kiro/hooks/ltm-postturn-capture.kiro.hook`
+- `.kiro/steering/ltm-operations.md`
+- `.kiro/steering/ltm-memory-format.md`
+- `.gitignore` (nuevo — antes no existía)
+
+#### Archivos modificados
+
+- `js/metodo.js` (lógica de posicionamiento en `_initManifiestoPinned`)
+
+#### Decisiones técnicas
+
+- Grid con jitter en vez de random puro: garantiza cobertura espacial uniforme sin perder el aspecto orgánico.
+- El CSS del `.metodo-palabra` no se tocó — el fix es puramente de lógica de posicionamiento en JS.
+- LTM en modo "selftest-verified" (hash no coincide por chunks de append pero funcionalidad verificada).
+
+#### Estado actual
+
+- ✅ LTM Power funcional con hook de captura automática
+- ✅ Palabras del manifiesto distribuidas uniformemente por toda la pantalla
+- ✅ Efecto visual original preservado (binario disperso → decodificación → párrafo)
+
+#### Pendientes sugeridos
+
+- Verificar distribución en tablets y mobile (la lógica usa dimensiones del panel que cambian por breakpoint).
+- Confirmar que el hook LTM aparece en el panel de Agent Hooks de Kiro.
+- Probar "Pick up where we left off" en una sesión nueva para validar recall.

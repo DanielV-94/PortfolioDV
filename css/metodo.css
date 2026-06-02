@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
-   MÉTODO — Scroll horizontal, capas de profundidad, SplitText
-   Tipografía cinematográfica con watermarks y animaciones
+   MÉTODO — 3 partes: Intro (reveal) → Manifiesto (pin) → Actos (acordeón)
+   Liquid glass, SplitText por chars, ScrambleText
 ═══════════════════════════════════════════════════════════════ */
 
 .metodo {
@@ -9,19 +9,13 @@
   background: transparent;
 }
 
+/* ═══ PARTE 1: INTRO — Título principal ═══ */
+
 .metodo-stage {
   position: relative;
   width: 100%;
   height: 100dvh;
   overflow: hidden;
-}
-
-.metodo-stage--intro {
-  /* Solo contiene el panel intro */
-}
-
-.metodo-stage--actos {
-  /* Contiene los 5 actos */
 }
 
 .metodo-track {
@@ -31,15 +25,6 @@
   will-change: transform;
 }
 
-.metodo-track--intro {
-  /* Un solo panel */
-}
-
-.metodo-track--actos {
-  /* 5 paneles */
-}
-
-/* ═══ PANEL BASE ═══ */
 .metodo-panel {
   position: relative;
   width: 100vw;
@@ -52,13 +37,11 @@
   overflow: hidden;
 }
 
-/* ═══ PANEL INTRO — Título principal ═══ */
 .metodo-panel--intro {
   flex-direction: column;
   gap: clamp(24px, 4vh, 48px);
 }
 
-/* ── Imagen overlay del panel intro ── */
 .metodo-intro-bg {
   position: absolute;
   inset: 0;
@@ -95,17 +78,8 @@
   transition: color var(--transicion-tema);
 }
 
-.metodo-intro-desc {
-  font-family: var(--fuente-parrafo);
-  font-size: clamp(14px, 1.3vw, 20px);
-  line-height: 1.6;
-  color: var(--color-texto-suave);
-  max-width: 48ch;
-  text-align: center;
-  transition: color var(--transicion-tema);
-}
+/* ═══ PARTE 2: MANIFIESTO — Párrafo con ScrambleText ═══ */
 
-/* ═══ PANEL MANIFIESTO — Párrafo con ScrambleText + imagen fondo ═══ */
 .metodo-manifiesto-wrapper {
   position: relative;
   width: 100%;
@@ -135,7 +109,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  
 }
 
 .metodo-manifiesto-texto {
@@ -150,7 +123,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* Palabras del manifiesto — dispersas */
 .metodo-manifiesto-texto .metodo-palabra {
   display: inline-block;
   cursor: default;
@@ -168,115 +140,260 @@
   }
 }
 
-/* ═══ WATERMARK — Capa trasera (profundidad) ═══ */
-.metodo-panel-watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--fuente-editable);
-  font-size: clamp(200px, 40vw, 500px);
-  line-height: 1;
-  color: var(--color-acento);
-  opacity: 0.06;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(2px);
-  transition: color var(--transicion-tema);
-}
+/* ═══════════════════════════════════════════════════════════════
+   PARTE 3: ACORDEÓN HORIZONTAL — 5 Actos con expand/collapse
+   Efecto liquid glass / burbuja
+═══════════════════════════════════════════════════════════════ */
 
-/* ═══ LÍNEAS DECORATIVAS — Cinematográficas ═══ */
-.metodo-panel-linea {
-  position: absolute;
-  left: 0;
+/* ── Contenedor principal ── */
+.metodo-acordeon-wrapper {
+  position: relative;
   width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    color-mix(in srgb, var(--color-acento) 40%, transparent) 20%,
-    color-mix(in srgb, var(--color-acento) 60%, transparent) 50%,
-    color-mix(in srgb, var(--color-acento) 40%, transparent) 80%,
-    transparent 100%
-  );
-  opacity: 0;
+  padding: clamp(64px, 10vw, 120px) clamp(32px, 6vw, 80px);
+  overflow: hidden;
+}
+
+/* ── Contenedor flex del acordeón ── */
+.metodo-acordeon {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: clamp(400px, 50vh, 560px);
+  gap: 0;
+}
+
+/* ── Card base (colapsada por defecto) — Liquid Glass ── */
+.metodo-acordeon-card {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      color-mix(in srgb, var(--color-editable) 10%, transparent) 20%,
+      color-mix(in srgb, var(--color-editable) 14%, transparent) 45%,
+      color-mix(in srgb, var(--color-editable-activo) 12%, transparent) 70%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+  backdrop-filter: blur(24px) saturate(1.4) brightness(1.05);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4) brightness(1.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 12px rgba(0, 0, 0, 0.08),
+    0 0 0 0.5px rgba(255, 255, 255, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+  transition:
+    flex 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease,
+    z-index 0s;
+  margin-left: -12px;
   z-index: 1;
-  pointer-events: none;
-  transform: scaleX(0);
-  transition: background var(--transicion-tema);
 }
 
-.metodo-panel-linea--top {
-  top: 12%;
+.metodo-acordeon-card:first-child {
+  margin-left: 0;
 }
 
-.metodo-panel-linea--bottom {
-  bottom: 12%;
-}
+.metodo-acordeon-card:nth-child(1) { z-index: 5; }
+.metodo-acordeon-card:nth-child(2) { z-index: 4; }
+.metodo-acordeon-card:nth-child(3) { z-index: 3; }
+.metodo-acordeon-card:nth-child(4) { z-index: 2; }
+.metodo-acordeon-card:nth-child(5) { z-index: 1; }
 
-/* ═══ PARTÍCULAS — Puntos flotantes de fondo ═══ */
-.metodo-panel-particulas {
+/* ── Reflejos especulares tipo liquid glass ── */
+.metodo-acordeon-card-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 1;
-  background-image:
-    radial-gradient(1px 1px at 15% 25%, var(--color-acento) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 75% 15%, var(--color-acento) 50%, transparent 100%),
-    radial-gradient(1px 1px at 85% 70%, var(--color-acento) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 25% 80%, var(--color-acento) 50%, transparent 100%),
-    radial-gradient(1px 1px at 55% 45%, var(--color-acento) 50%, transparent 100%),
-    radial-gradient(1px 1px at 40% 60%, var(--color-acento) 50%, transparent 100%);
-  background-size: 100% 100%;
-  transition: background-image var(--transicion-tema);
+  border-radius: 24px;
+  background:
+    /* Reflejo especular superior — franja brillante tipo cristal curvo */
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0.15) 8%,
+      rgba(255, 255, 255, 0.03) 20%,
+      transparent 35%
+    ),
+    /* Reflejo secundario inferior — luz ambiente rebotada */
+    linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      transparent 15%
+    ),
+    /* Brillo focal esquina superior izquierda */
+    radial-gradient(
+      ellipse 60% 40% at 20% 5%,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 80%
+    ),
+    /* Luz difusa inferior derecha */
+    radial-gradient(
+      ellipse 50% 30% at 80% 90%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 60%
+    );
 }
 
-/* ═══ CONTENIDO — Capa frontal ═══ */
-.metodo-panel-contenido {
-  position: relative;
-  z-index: 2;
+/* ── Glow interior tipo liquid glass ── */
+.metodo-acordeon-card-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 24px;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.4s ease;
+  background:
+    /* Borde interior luminoso simulando curvatura de vidrio */
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 0 24px color-mix(in srgb, var(--color-editable) 8%, transparent),
+    inset 0 0 48px color-mix(in srgb, var(--color-editable-activo) 5%, transparent);
+}
+
+/* ── Estado colapsado (visible por defecto) ── */
+.metodo-acordeon-colapsado {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: clamp(12px, 2vh, 24px);
-  max-width: 52ch;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 8px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease 0.2s, visibility 0s 0s;
 }
 
-/* ── Número de acto (capa media) ── */
-.metodo-panel-num {
+.metodo-acordeon-num {
+  font-family: var(--fuente-micro);
+  font-size: clamp(9px, 0.7vw, 11px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.metodo-acordeon-titulo-vertical {
+  font-family: var(--fuente-display);
+  font-size: clamp(16px, 1.8vw, 24px);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #ffffff;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  font-feature-settings: "liga" 1, "dlig" 1, "calt" 1;
+  font-variant-ligatures: discretionary-ligatures common-ligatures contextual;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Estado expandido (oculto por defecto) ── */
+.metodo-acordeon-expandido {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(12px, 2vh, 20px);
+  padding: clamp(32px, 4vw, 48px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0s 0.15s;
+}
+
+.metodo-acordeon-num-exp {
   font-family: var(--fuente-micro);
   font-size: clamp(10px, 0.9vw, 13px);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-acento);
-  opacity: 0.7;
-  transition: color var(--transicion-tema);
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* ── Título del acto — GRANDE ── */
-.metodo-panel-titulo {
+.metodo-acordeon-titulo-exp {
   font-family: var(--fuente-display);
-  font-size: clamp(36px, 5.5vw, 80px);
+  font-size: clamp(28px, 4vw, 56px);
   letter-spacing: 0.02em;
   line-height: 1;
   text-transform: uppercase;
-  color: var(--color-texto);
+  color: #ffffff;
   font-feature-settings: "liga" 1, "dlig" 1, "calt" 1;
   font-variant-ligatures: discretionary-ligatures common-ligatures contextual;
-  transition: color var(--transicion-tema);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ── Descripción ── */
-.metodo-panel-desc {
+.metodo-acordeon-desc {
   font-family: var(--fuente-parrafo);
   font-size: clamp(14px, 1.2vw, 18px);
   line-height: 1.7;
-  color: var(--color-texto-suave);
-  transition: color var(--transicion-tema);
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 52ch;
 }
 
-/* Sin SVG path — se usarán SVGs morphing entre secciones más adelante */
+/* ── Card activa (expandida) — Liquid Glass intensificado ── */
+.metodo-acordeon-card.activa {
+  flex: 4 1 0;
+  z-index: 10 !important;
+  backdrop-filter: blur(32px) saturate(1.6) brightness(1.08);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6) brightness(1.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    0 0 0 0.5px rgba(255, 255, 255, 0.15),
+    0 0 24px color-mix(in srgb, var(--color-editable) 15%, transparent),
+    inset 0 2px 4px rgba(255, 255, 255, 0.55),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.metodo-acordeon-card.activa .metodo-acordeon-card-glow {
+  opacity: 1;
+}
+
+.metodo-acordeon-card.activa .metodo-acordeon-colapsado {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0s 0.15s;
+}
+
+.metodo-acordeon-card.activa .metodo-acordeon-expandido {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.4s ease 0.25s, visibility 0s 0s;
+}
 
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE
@@ -288,12 +405,20 @@
     font-size: clamp(36px, 7vw, 90px);
   }
 
-  .metodo-panel-titulo {
-    font-size: clamp(28px, 4.5vw, 56px);
+  .metodo-acordeon {
+    height: clamp(320px, 45vh, 440px);
   }
 
-  .metodo-panel-watermark {
-    font-size: clamp(160px, 30vw, 360px);
+  .metodo-acordeon-titulo-vertical {
+    font-size: clamp(14px, 1.6vw, 20px);
+  }
+
+  .metodo-acordeon-titulo-exp {
+    font-size: clamp(24px, 3.5vw, 44px);
+  }
+
+  .metodo-acordeon-desc {
+    font-size: clamp(12px, 1.1vw, 16px);
   }
 }
 
@@ -307,20 +432,71 @@
     font-size: clamp(40px, 10vw, 100px);
   }
 
-  .metodo-panel-titulo {
-    font-size: clamp(30px, 6vw, 60px);
-  }
-
-  .metodo-panel-watermark {
-    font-size: clamp(140px, 35vw, 320px);
-  }
-
-  .metodo-panel-contenido {
-    max-width: 40ch;
-  }
-
   .metodo-intro-bg {
     opacity: 0.1;
+  }
+
+  /* Acordeón vertical */
+  .metodo-acordeon {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .metodo-acordeon-card {
+    margin-left: 0;
+    margin-top: -8px;
+    border-radius: 20px;
+    min-height: 64px;
+    box-shadow:
+      0 -4px 16px rgba(0, 0, 0, 0.12),
+      0 6px 24px rgba(0, 0, 0, 0.1),
+      inset 0 1px 2px rgba(255, 255, 255, 0.4),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .metodo-acordeon-card:first-child {
+    margin-top: 0;
+  }
+
+  .metodo-acordeon-card-bg {
+    border-radius: 20px;
+  }
+
+  .metodo-acordeon-card-glow {
+    border-radius: 20px;
+  }
+
+  .metodo-acordeon-colapsado {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+  }
+
+  .metodo-acordeon-num {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+
+  .metodo-acordeon-titulo-vertical {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: clamp(16px, 3vw, 22px);
+    white-space: normal;
+  }
+
+  .metodo-acordeon-expandido {
+    padding: clamp(24px, 4vw, 36px);
+  }
+
+  .metodo-acordeon-card.activa {
+    flex: none;
+    min-height: 280px;
+  }
+
+  .metodo-acordeon-titulo-exp {
+    font-size: clamp(26px, 5vw, 40px);
   }
 }
 
@@ -365,30 +541,80 @@
     padding-bottom: 24px;
   }
 
-  .metodo-panel-titulo {
-    font-size: clamp(26px, 8vw, 44px);
-  }
-
-  .metodo-panel-watermark {
-    font-size: clamp(100px, 40vw, 200px);
-    opacity: 0.04;
-  }
-
-  .metodo-panel-contenido {
-    max-width: 100%;
-  }
-
-  .metodo-panel-desc {
-    font-size: clamp(13px, 3.8vw, 16px);
-  }
-
   .metodo-intro-bg {
     display: none;
   }
 
-  .metodo-panel-linea,
-  .metodo-panel-particulas {
-    display: none;
+  /* Acordeón vertical */
+  .metodo-acordeon-wrapper {
+    padding: clamp(48px, 8vw, 80px) clamp(16px, 4vw, 32px);
+  }
+
+  .metodo-acordeon {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .metodo-acordeon-card {
+    margin-left: 0;
+    margin-top: -6px;
+    border-radius: 18px;
+    min-height: 56px;
+    box-shadow:
+      0 -3px 12px rgba(0, 0, 0, 0.1),
+      0 4px 16px rgba(0, 0, 0, 0.08),
+      inset 0 1px 2px rgba(255, 255, 255, 0.35),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .metodo-acordeon-card:first-child {
+    margin-top: 0;
+  }
+
+  .metodo-acordeon-card-bg {
+    border-radius: 18px;
+  }
+
+  .metodo-acordeon-card-glow {
+    border-radius: 18px;
+  }
+
+  .metodo-acordeon-colapsado {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  .metodo-acordeon-num {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: clamp(8px, 2.5vw, 10px);
+  }
+
+  .metodo-acordeon-titulo-vertical {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: clamp(14px, 4vw, 18px);
+    white-space: normal;
+  }
+
+  .metodo-acordeon-expandido {
+    padding: clamp(20px, 5vw, 32px);
+  }
+
+  .metodo-acordeon-card.activa {
+    flex: none;
+    min-height: 240px;
+  }
+
+  .metodo-acordeon-titulo-exp {
+    font-size: clamp(22px, 6vw, 34px);
+  }
+
+  .metodo-acordeon-desc {
+    font-size: clamp(13px, 3.5vw, 16px);
   }
 }
 
@@ -398,27 +624,104 @@
     font-size: clamp(28px, 6vw, 52px);
   }
 
-  .metodo-panel-titulo {
-    font-size: clamp(22px, 4.5vw, 38px);
+  /* Acordeón vertical */
+  .metodo-acordeon-wrapper {
+    padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 32px);
   }
 
-  .metodo-panel-watermark {
-    font-size: clamp(80px, 20vw, 180px);
-    opacity: 0.04;
+  .metodo-acordeon {
+    flex-direction: column;
+    height: auto;
   }
 
-  .metodo-panel-desc {
-    font-size: clamp(11px, 1.8vw, 14px);
+  .metodo-acordeon-card {
+    margin-left: 0;
+    margin-top: -6px;
+    border-radius: 16px;
+    min-height: 48px;
+    box-shadow:
+      0 -3px 12px rgba(0, 0, 0, 0.1),
+      0 4px 16px rgba(0, 0, 0, 0.08),
+      inset 0 1px 2px rgba(255, 255, 255, 0.3),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .metodo-acordeon-card:first-child {
+    margin-top: 0;
+  }
+
+  .metodo-acordeon-card-bg {
+    border-radius: 16px;
+  }
+
+  .metodo-acordeon-card-glow {
+    border-radius: 16px;
+  }
+
+  .metodo-acordeon-colapsado {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .metodo-acordeon-num {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: clamp(8px, 1.5vw, 10px);
+  }
+
+  .metodo-acordeon-titulo-vertical {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: clamp(12px, 2.5vw, 16px);
+    white-space: normal;
+  }
+
+  .metodo-acordeon-expandido {
+    padding: clamp(16px, 3vw, 24px);
+  }
+
+  .metodo-acordeon-card.activa {
+    flex: none;
+    min-height: 200px;
+  }
+
+  .metodo-acordeon-titulo-exp {
+    font-size: clamp(18px, 4vw, 28px);
+  }
+
+  .metodo-acordeon-desc {
+    font-size: clamp(11px, 2vw, 14px);
+  }
+
+  .metodo-acordeon-num-exp {
+    font-size: clamp(8px, 1.5vw, 11px);
   }
 }
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .metodo-titulo-linea,
-  .metodo-panel-titulo,
-  .metodo-panel-desc,
-  .metodo-panel-num {
+  .metodo-titulo-linea {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .metodo-acordeon-card {
+    transition: none !important;
+  }
+
+  .metodo-acordeon-colapsado,
+  .metodo-acordeon-expandido {
+    transition: none !important;
+  }
+
+  .metodo-acordeon-card.activa .metodo-acordeon-expandido {
+    opacity: 1;
+  }
+
+  .metodo-acordeon-card.activa .metodo-acordeon-colapsado {
+    opacity: 0;
   }
 }
