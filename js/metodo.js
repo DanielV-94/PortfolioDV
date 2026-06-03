@@ -15,8 +15,8 @@ const Metodo = (() => {
 
     const mm = gsap.matchMedia();
 
-    /* ══ DESKTOP/TABLET ══ */
-    mm.add('(min-width: 600px) and (prefers-reduced-motion: no-preference)', () => {
+    /* ══ DESKTOP (≥1025px) ══ */
+    mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', () => {
       const kills = [];
 
       /* ── PARTE 1: Intro (título) — reveal ── */
@@ -31,45 +31,38 @@ const Metodo = (() => {
       return () => { kills.forEach(k => k()); };
     });
 
-    /* ══ MOBILE: scroll vertical para cards ── */
+    /* ══ TABLET LANDSCAPE (≤1024px landscape) ══ */
+    mm.add('(max-width: 1024px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
+      const kills = [];
+
+      _initIntro(section, kills);
+      _initManifiestoPinned(section, kills);
+      _initActosCards(section, kills);
+
+      return () => { kills.forEach(k => k()); };
+    });
+
+    /* ══ TABLET PORTRAIT (≤1024px portrait, ≥600px) ══ */
+    mm.add('(max-width: 1024px) and (orientation: portrait) and (min-width: 600px) and (prefers-reduced-motion: no-preference)', () => {
+      const kills = [];
+
+      _initIntro(section, kills);
+      _initManifiestoPinned(section, kills);
+      _initActosCards(section, kills);
+
+      return () => { kills.forEach(k => k()); };
+    });
+
+    /* ══ MOBILE PORTRAIT (<600px): todo vertical ══ */
     mm.add('(max-width: 599px) and (prefers-reduced-motion: no-preference)', () => {
-      const allPanels = section.querySelectorAll('.metodo-panel');
-      const trackActos = section.querySelector('.metodo-track--actos');
+      _initMobileVertical(section);
+      return () => {};
+    });
 
-      if (trackActos) {
-        trackActos.style.flexDirection = 'column';
-        trackActos.style.width = '100%';
-      }
-
-      allPanels.forEach(p => {
-        p.style.width = '100%';
-        p.style.height = 'auto';
-        p.style.minHeight = 'auto';
-      });
-
-      allPanels.forEach(panel => {
-        const titulo    = panel.querySelector('.metodo-panel-titulo');
-        const desc      = panel.querySelector('.metodo-panel-desc');
-        const watermark = panel.querySelector('.metodo-panel-watermark');
-        const lineas    = panel.querySelectorAll('.metodo-titulo-linea');
-
-        ScrollTrigger.create({
-          trigger: panel,
-          start: 'top 75%',
-          once: true,
-          onEnter: () => {
-            if (watermark) gsap.fromTo(watermark, { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 0.04, duration: 1 });
-            if (lineas.length) lineas.forEach((l, i) => gsap.from(l, { opacity: 0, y: 40, duration: 0.7, delay: i * 0.15 }));
-            if (titulo) gsap.from(titulo, { opacity: 0, y: 30, duration: 0.7 });
-            if (desc) gsap.from(desc, { opacity: 0, y: 20, duration: 0.6, delay: 0.2 });
-          },
-        });
-      });
-
-      return () => {
-        if (trackActos) { trackActos.style.flexDirection = ''; trackActos.style.width = ''; }
-        allPanels.forEach(p => { p.style.width = ''; p.style.height = ''; p.style.minHeight = ''; });
-      };
+    /* ══ MOBILE LANDSCAPE (≤768px landscape): todo vertical ══ */
+    mm.add('(max-width: 768px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
+      _initMobileVertical(section);
+      return () => {};
     });
   }
 
@@ -400,6 +393,76 @@ const Metodo = (() => {
     });
 
     kills.push(() => { desactivarTodas(); });
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MOBILE — Todo vertical, acordeón vertical con click
+  ═══════════════════════════════════════════════════════════════ */
+
+  function _initMobileVertical(section) {
+    /* Reveals simples por scroll */
+    const lineas = section.querySelectorAll('.metodo-titulo-linea');
+    if (lineas.length) {
+      ScrollTrigger.create({
+        trigger: section.querySelector('.metodo-stage--intro'),
+        start: 'top 75%',
+        once: true,
+        onEnter: () => {
+          lineas.forEach((l, i) => gsap.from(l, { opacity: 0, y: 40, duration: 0.7, delay: i * 0.15 }));
+        },
+      });
+    }
+
+    /* Manifiesto — sin pin, solo reveal del texto */
+    const texto = section.querySelector('.metodo-manifiesto-texto');
+    if (texto) {
+      const palabras = texto.querySelectorAll('.metodo-palabra');
+      ScrollTrigger.create({
+        trigger: texto,
+        start: 'top 80%',
+        once: true,
+        onEnter: () => {
+          palabras.forEach((w, i) => {
+            gsap.from(w, { opacity: 0, y: 15, duration: 0.4, delay: i * 0.02, ease: 'power2.out' });
+          });
+        },
+      });
+    }
+
+    /* Acordeón — vertical con click */
+    const acordeon = section.querySelector('.metodo-acordeon');
+    if (!acordeon) return;
+
+    const cards = acordeon.querySelectorAll('.metodo-acordeon-card');
+    let cardActiva = null;
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (card === cardActiva) {
+          card.classList.remove('activa');
+          cardActiva = null;
+        } else {
+          if (cardActiva) cardActiva.classList.remove('activa');
+          card.classList.add('activa');
+          cardActiva = card;
+        }
+      });
+    });
+
+    /* Entrada animada */
+    ScrollTrigger.create({
+      trigger: acordeon,
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        cards.forEach((card, i) => {
+          gsap.fromTo(card,
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.5, delay: i * 0.08, ease: 'power3.out' }
+          );
+        });
+      },
+    });
   }
 
   return { init };

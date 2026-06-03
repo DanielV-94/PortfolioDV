@@ -19,9 +19,9 @@ const Habilidades = (() => {
     const mm = gsap.matchMedia();
 
     /* ══════════════════════════════════════════════════════════
-       DESKTOP + TABLET: Arco 3D — cards recorren la curva
+       DESKTOP + TABLET LANDSCAPE (≥1025px O landscape >768px): Arco 3D
     ══════════════════════════════════════════════════════════ */
-    mm.add('(min-width: 600px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
+    mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', () => {
       const total = cards.length;
 
       /* Configuración del arco — de esquina inf-der a esquina sup-izq
@@ -133,46 +133,18 @@ const Habilidades = (() => {
     });
 
     /* ══════════════════════════════════════════════════════════
-       TABLET PORTRAIT (600px–1024px, portrait): Marquee infinito
-       Misma lógica que mobile — arco no funciona bien aquí
+       TABLET LANDSCAPE (≤1024px landscape): Doble marquee con pin
+       Fila 1 va a la derecha, Fila 2 va a la izquierda
+    ══════════════════════════════════════════════════════════ */
+    mm.add('(max-width: 1024px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
+      return _initDoubleMarqueePinned(section, carrusel, cards);
+    });
+
+    /* ══════════════════════════════════════════════════════════
+       TABLET PORTRAIT (600px–1024px, portrait): Doble marquee con pin
     ══════════════════════════════════════════════════════════ */
     mm.add('(max-width: 1024px) and (orientation: portrait) and (min-width: 600px) and (prefers-reduced-motion: no-preference)', () => {
-      const carrusel = section.querySelector('.habilidades-carrusel');
-      const originalCards = Array.from(carrusel.children);
-      const clones = originalCards.map(card => {
-        const clone = card.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        clone.classList.add('habilidades-card--clon');
-        carrusel.appendChild(clone);
-        return clone;
-      });
-
-      const allCards = carrusel.querySelectorAll('.habilidades-card');
-      gsap.set(allCards, { opacity: 1, scale: 1, x: 0, y: 0, rotation: 0 });
-
-      const totalWidth = carrusel.scrollWidth / 2;
-      const marquee = gsap.to(carrusel, {
-        x: -totalWidth,
-        duration: totalWidth / 50,
-        ease: 'none',
-        repeat: -1,
-        modifiers: {
-          x: gsap.utils.unitize(x => parseFloat(x) % totalWidth),
-        },
-      });
-
-      const pauseMarquee = () => marquee.pause();
-      const playMarquee = () => marquee.play();
-      carrusel.addEventListener('touchstart', pauseMarquee, { passive: true });
-      carrusel.addEventListener('touchend', playMarquee, { passive: true });
-
-      return () => {
-        marquee.kill();
-        carrusel.removeEventListener('touchstart', pauseMarquee);
-        carrusel.removeEventListener('touchend', playMarquee);
-        clones.forEach(c => c.remove());
-        gsap.set(allCards, { clearProps: 'all' });
-      };
+      return _initDoubleMarqueePinned(section, carrusel, cards);
     });
 
     /* ══════════════════════════════════════════════════════════
@@ -263,6 +235,120 @@ const Habilidades = (() => {
         gsap.set(allCards, { clearProps: 'all' });
       };
     });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     DOBLE MARQUEE CON PIN — Dos filas, direcciones opuestas
+     Sección se pinnea, cards se mueven infinitamente
+  ══════════════════════════════════════════════════════════ */
+  function _initDoubleMarqueePinned(section, carrusel, cards) {
+    /* Dividir cards en dos filas */
+    const mitad = Math.ceil(cards.length / 2);
+    const fila1Cards = cards.slice(0, mitad);
+    const fila2Cards = cards.slice(mitad);
+
+    /* Crear contenedores de fila */
+    const fila1 = document.createElement('div');
+    fila1.className = 'habilidades-fila-marquee habilidades-fila-1';
+    const fila2 = document.createElement('div');
+    fila2.className = 'habilidades-fila-marquee habilidades-fila-2';
+
+    /* Mover cards originales a sus filas */
+    fila1Cards.forEach(c => fila1.appendChild(c));
+    fila2Cards.forEach(c => fila2.appendChild(c));
+
+    /* Duplicar para loop infinito */
+    const clones1 = fila1Cards.map(c => {
+      const cl = c.cloneNode(true);
+      cl.setAttribute('aria-hidden', 'true');
+      cl.classList.add('habilidades-card--clon');
+      fila1.appendChild(cl);
+      return cl;
+    });
+    const clones2 = fila2Cards.map(c => {
+      const cl = c.cloneNode(true);
+      cl.setAttribute('aria-hidden', 'true');
+      cl.classList.add('habilidades-card--clon');
+      fila2.appendChild(cl);
+      return cl;
+    });
+
+    /* Insertar filas en el carrusel */
+    carrusel.innerHTML = '';
+    carrusel.appendChild(fila1);
+    carrusel.appendChild(fila2);
+
+    /* Estilos inline para las filas */
+    [fila1, fila2].forEach(f => {
+      f.style.display = 'flex';
+      f.style.flexDirection = 'row';
+      f.style.alignItems = 'center';
+      f.style.gap = '16px';
+      f.style.width = 'max-content';
+      f.style.padding = '12px 0';
+    });
+    carrusel.style.display = 'flex';
+    carrusel.style.flexDirection = 'column';
+    carrusel.style.gap = '20px';
+    carrusel.style.width = '100%';
+    carrusel.style.height = '100%';
+    carrusel.style.justifyContent = 'center';
+
+    /* Hacer cards visibles */
+    const allCards = carrusel.querySelectorAll('.habilidades-card');
+    gsap.set(allCards, { opacity: 1, scale: 1, x: 0, y: 0, rotation: 0, position: 'relative' });
+
+    /* Marquees: fila 1 → derecha, fila 2 → izquierda */
+    const w1 = fila1.scrollWidth / 2;
+    const w2 = fila2.scrollWidth / 2;
+
+    const marquee1 = gsap.to(fila1, {
+      x: -w1,
+      duration: w1 / 45,
+      ease: 'none',
+      repeat: -1,
+      modifiers: { x: gsap.utils.unitize(x => parseFloat(x) % w1) },
+    });
+
+    /* Fila 2 arranca desplazada y va al contrario */
+    gsap.set(fila2, { x: -w2 });
+    const marquee2 = gsap.to(fila2, {
+      x: 0,
+      duration: w2 / 45,
+      ease: 'none',
+      repeat: -1,
+      modifiers: { x: gsap.utils.unitize(x => { const v = parseFloat(x) % w2; return v > 0 ? v - w2 : v; }) },
+    });
+
+    /* Pin de la sección */
+    const st = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: '+=150%',
+      pin: true,
+      scrub: false,
+    });
+
+    /* Pausar al tocar */
+    const pauseAll = () => { marquee1.pause(); marquee2.pause(); };
+    const playAll = () => { marquee1.play(); marquee2.play(); };
+    carrusel.addEventListener('touchstart', pauseAll, { passive: true });
+    carrusel.addEventListener('touchend', playAll, { passive: true });
+
+    return () => {
+      marquee1.kill();
+      marquee2.kill();
+      st.kill();
+      carrusel.removeEventListener('touchstart', pauseAll);
+      carrusel.removeEventListener('touchend', playAll);
+      /* Restaurar cards originales al carrusel */
+      carrusel.innerHTML = '';
+      carrusel.style.cssText = '';
+      [...fila1Cards, ...fila2Cards].forEach(c => carrusel.appendChild(c));
+      clones1.forEach(c => c.remove());
+      clones2.forEach(c => c.remove());
+      gsap.set(cards, { clearProps: 'all' });
+    };
   }
 
   return { init };

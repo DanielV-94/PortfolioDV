@@ -175,50 +175,63 @@
 
 /* ── Tablet landscape (≤1024px, orientation: landscape) ── */
 @media (max-width: 1024px) and (orientation: landscape) {
+  .habilidades-stage {
+    height: 100dvh;
+    padding: 24px 0;
+    overflow: hidden;
+  }
+
   .habilidades-card {
-    width: clamp(180px, 20vw, 260px);
-    height: clamp(240px, 26vw, 340px);
+    position: relative;
+    flex-shrink: 0;
+    width: clamp(160px, 18vw, 220px);
+    height: clamp(210px, 24vw, 290px);
+    opacity: 1;
   }
 
   .habilidades-card-logo {
-    width: clamp(56px, 7vw, 80px);
-    height: clamp(56px, 7vw, 80px);
+    width: clamp(48px, 6vw, 70px);
+    height: clamp(48px, 6vw, 70px);
   }
 
-  .habilidades-stage {
-    perspective: 1000px;
+  .habilidades-card-num {
+    font-size: clamp(14px, 1.5vw, 20px);
+  }
+
+  .habilidades-card-nombre {
+    font-size: clamp(18px, 2vw, 28px);
   }
 }
 
 /* ── Tablet portrait (≤1024px, orientation: portrait) ── */
 @media (max-width: 1024px) and (orientation: portrait) {
   .habilidades-stage {
-    height: auto;
-    min-height: 50dvh;
-    padding: 40px 0;
+    height: 100dvh;
+    padding: 32px 0;
     overflow: hidden;
   }
 
   .habilidades-carrusel {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    gap: 16px;
-    padding: 20px 0;
-    width: max-content;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
   }
 
   .habilidades-card {
     position: relative;
     flex-shrink: 0;
-    width: clamp(170px, 22vw, 240px);
-    height: clamp(230px, 30vw, 320px);
+    width: clamp(150px, 20vw, 220px);
+    height: clamp(200px, 26vw, 290px);
     opacity: 1;
   }
 
   .habilidades-card-logo {
-    width: clamp(60px, 9vw, 90px);
-    height: clamp(60px, 9vw, 90px);
+    width: clamp(52px, 8vw, 80px);
+    height: clamp(52px, 8vw, 80px);
   }
 }
 

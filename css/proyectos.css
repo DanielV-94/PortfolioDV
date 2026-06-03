@@ -227,6 +227,7 @@
     grid-template-columns: 1fr;
     gap: 0;
     min-height: auto;
+    position: relative;
   }
 
   /* En mobile, el preview se convierte en fondo de la sección */
@@ -244,40 +245,55 @@
   }
 
   .proyectos-preview-img.fondo-mobile {
-    opacity: 0.15;
+    opacity: 0.18;
     transform: scale(1);
   }
 
   .proyectos-preview-img.fondo-mobile img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 0;
+    left: 50%;
     mask-image: none;
     -webkit-mask-image: none;
+    filter: none;
   }
 
   .proyectos-lista {
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
   .proyectos-item {
-    padding: clamp(12px, 2vh, 20px) 0;
+    padding: clamp(24px, 5vh, 48px) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .proyectos-item-nombre {
-    font-size: clamp(24px, 8vw, 40px);
+    font-size: clamp(28px, 10vw, 52px);
   }
 
   .proyectos-item-num {
-    font-size: clamp(14px, 4.5vw, 20px);
+    font-size: clamp(12px, 3.5vw, 16px);
   }
 
   .proyectos-item-tag {
     font-size: 7px;
     padding: 2px 7px;
+    position: static;
+    margin-top: 8px;
+    opacity: 1;
+    transform: none;
   }
 
-  /* Estado activo al tap */
+  /* Estado activo al scroll */
   .proyectos-item.proyecto-activo-mobile .proyectos-item-nombre {
     color: var(--color-acento);
   }
