@@ -174,8 +174,8 @@
   cursor: pointer;
   border-radius: 24px;
   background: transparent;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border: none;
   box-shadow:
     /* Glow externo neon degradado */
@@ -230,57 +230,119 @@
   margin-left: 0;
 }
 
-/* ── Reflejos especulares + glare + bisel (volumen 3D) ── */
+/* ── Reflejos especulares + glare animado (liquid glass real) ── */
 .metodo-acordeon-card-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   border-radius: 24px;
-  background:
-    /* Glare diagonal — destello de luz tipo cristal */
-    linear-gradient(
-      125deg,
-      transparent 0%,
-      transparent 40%,
-      rgba(255, 255, 255, 0.12) 44%,
-      rgba(255, 255, 255, 0.25) 46%,
-      rgba(255, 255, 255, 0.12) 48%,
-      transparent 52%,
-      transparent 100%
-    ),
-    /* Bisel superior — borde iluminado desde arriba */
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.06) 2%,
-      transparent 5%
-    ),
-    /* Bisel inferior — sombra sutil abajo */
-    linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.06) 0%,
-      rgba(0, 0, 0, 0.02) 2%,
-      transparent 5%
-    ),
-    /* Bisel izquierdo — luz lateral */
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      transparent 3%
-    ),
-    /* Bisel derecho — sombra lateral */
-    linear-gradient(
-      270deg,
-      rgba(0, 0, 0, 0.04) 0%,
-      transparent 3%
-    );
-  /* Sombra inset para profundidad del bisel */
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
-    inset 1px 0 0 rgba(255, 255, 255, 0.1),
-    inset -1px 0 0 rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+/* Glare animado — destello diagonal que se mueve */
+.metodo-acordeon-card-bg::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    125deg,
+    transparent 0%,
+    transparent 42%,
+    rgba(255, 255, 255, 0.15) 45%,
+    rgba(255, 255, 255, 0.3) 46.5%,
+    rgba(255, 255, 255, 0.15) 48%,
+    transparent 51%,
+    transparent 100%
+  );
+  animation: glare-drift 6s ease-in-out infinite;
+}
+
+/* Segundo glare más sutil, dirección opuesta */
+.metodo-acordeon-card-bg::after {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    -45deg,
+    transparent 0%,
+    transparent 46%,
+    rgba(255, 255, 255, 0.08) 48%,
+    rgba(255, 255, 255, 0.15) 49%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 52%,
+    transparent 100%
+  );
+  animation: glare-drift-reverse 8s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+@keyframes glare-drift {
+  0%, 100% { transform: translateX(-20%) translateY(-10%) rotate(0deg); }
+  50% { transform: translateX(20%) translateY(10%) rotate(2deg); }
+}
+
+@keyframes glare-drift-reverse {
+  0%, 100% { transform: translateX(15%) translateY(8%); }
+  50% { transform: translateX(-15%) translateY(-8%); }
+}
+
+/* Glare intensificado al expandir */
+.metodo-acordeon-card.activa .metodo-acordeon-card-bg::before {
+  background: linear-gradient(
+    125deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.2) 43%,
+    rgba(255, 255, 255, 0.4) 45.5%,
+    rgba(255, 255, 255, 0.2) 48%,
+    transparent 51%,
+    transparent 100%
+  );
+  animation-duration: 4s;
+}
+
+.metodo-acordeon-card.activa .metodo-acordeon-card-bg::after {
+  background: linear-gradient(
+    -45deg,
+    transparent 0%,
+    transparent 44%,
+    rgba(255, 255, 255, 0.12) 47%,
+    rgba(255, 255, 255, 0.22) 48.5%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 53%,
+    transparent 100%
+  );
+  animation-duration: 5s;
+}
+
+/* ── Patrón SVG recortado en vidrio ── */
+.metodo-acordeon-card-patron {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translateY(-50%);
+  width: 50%;
+  height: 75%;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 24px;
+  overflow: hidden;
+  /* SVG como fondo */
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  /* Invertir blanco a tono visible */
+  filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg) brightness(0.85);
+  opacity: 0.06;
+  transition: opacity 0.5s ease, left 0.5s ease, width 0.5s ease;
+}
+
+/* Al expandir: SVG se queda a la izquierda, más pequeño */
+.metodo-acordeon-card.activa .metodo-acordeon-card-patron {
+  left: 5%;
+  width: 30%;
+  opacity: 0.08;
 }
 
 /* ── Glow interior bordes (refuerza neon interno) ── */
@@ -390,8 +452,8 @@
   flex: 4 1 0;
   z-index: 10 !important;
   background: transparent;
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow:
     /* Neon externo intenso */
     0 0 14px color-mix(in srgb, var(--color-editable-activo) 55%, transparent),
@@ -759,6 +821,11 @@
 
   .metodo-acordeon-card.activa .metodo-acordeon-expandido {
     opacity: 1;
+  }
+
+  .metodo-acordeon-card-bg::before,
+  .metodo-acordeon-card-bg::after {
+    animation: none !important;
   }
 
   .metodo-acordeon-card.activa .metodo-acordeon-colapsado {

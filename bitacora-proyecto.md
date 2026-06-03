@@ -733,3 +733,89 @@ Instalación de LTM Power (memoria persistente entre sesiones) y fix de distribu
 - Verificar distribución en tablets y mobile (la lógica usa dimensiones del panel que cambian por breakpoint).
 - Confirmar que el hook LTM aparece en el panel de Agent Hooks de Kiro.
 - Probar "Pick up where we left off" en una sesión nueva para validar recall.
+
+---
+
+### 2026-06-03
+
+#### Resumen del día
+
+Sesión intensiva de responsive JS para las 3 secciones pendientes (Habilidades, Proyectos, Método) + rediseño visual completo de las cards del acordeón en la sección Método con efecto liquid glass premium.
+
+#### Cambios implementados
+
+- **Responsive JS — Método (`js/metodo.js`)**
+  - Se separó el `gsap.matchMedia()` en 5 breakpoints independientes: desktop (≥1025px), tablet landscape, tablet portrait, mobile portrait, mobile landscape.
+  - Se eliminó el scroll horizontal en tablets — todo vertical.
+  - Tablets: mantienen el acordeón horizontal con cards (click para expandir).
+  - Mobiles: acordeón vertical con click para expandir + reveals simples de texto.
+  - Se creó función `_initMobileVertical()` para el comportamiento mobile.
+
+- **Responsive JS — Proyectos (`js/proyectos.js`)**
+  - Reescritura completa con `gsap.matchMedia()` y 5 breakpoints.
+  - Desktop: hover revela imagen (sin cambios).
+  - Tablet landscape/portrait: tap revela imagen como fondo, doble-tap navega.
+  - Mobile portrait/landscape: imagen siempre visible de fondo (cambia con scroll al pasar cada proyecto vía ScrollTrigger), nombre centrado encima, disposición vertical.
+  - Se creó `_initTapInteraction()` y `_initMobileCards()` como funciones reutilizables.
+
+- **Responsive JS — Habilidades (`js/habilidades.js`)**
+  - Desktop (≥1025px): arco 3D original (sin cambios).
+  - Tablet landscape/portrait: **doble marquee con pin** — dos filas, una va a la derecha y otra a la izquierda, ambas infinitas. Sección se pinnea al scroll.
+  - Mobile portrait/landscape: marquee simple (sin cambios).
+  - Se creó función `_initDoubleMarqueePinned()`.
+
+- **Responsive CSS — Proyectos (`css/proyectos.css`)**
+  - Mobile portrait: items centrados verticalmente, imagen siempre visible como fondo (`opacity: 0.18`), tag "En desarrollo" estático.
+
+- **Responsive CSS — Habilidades (`css/habilidades.css`)**
+  - Tablet landscape/portrait: `height: 100dvh`, cards más pequeñas para las filas de marquee.
+
+- **Rediseño visual — Cards del acordeón Método**
+  - **Transparencia total**: `background: transparent`, sin `backdrop-filter` — se ve el grid completamente a través.
+  - **Borde degradado neon**: pseudo-element `::before` con `linear-gradient` usando `--color-editable` y `--color-editable-activo` con zonas transparentes intermedias (liquid glass feel). Técnica mask-composite para border-radius.
+  - **Glare animado**: dos pseudo-elements en `.metodo-acordeon-card-bg` con destellos diagonales que se mueven (`@keyframes glare-drift`). Se intensifican al expandir la card.
+  - **Bisel**: sombras inset top/bottom/left/right para dar volumen 3D.
+  - **SVGs únicos por card**: cada acto tiene su sticker (1.svg–5.svg) posicionado al centro. Al expandir, se mueve a la izquierda y se reduce.
+  - **Cards separadas**: `gap: 12px`, sin `margin-left` negativo ni z-index escalonados.
+  - **Reduced motion**: animaciones de glare desactivadas.
+
+#### Archivos creados
+
+- (ninguno nuevo)
+
+#### Archivos modificados
+
+- `js/metodo.js` (breakpoints separados, `_initMobileVertical`)
+- `js/proyectos.js` (reescritura completa con matchMedia)
+- `js/habilidades.js` (doble marquee pinneado, `_initDoubleMarqueePinned`)
+- `css/metodo.css` (cards liquid glass, glare animado, borde degradado, SVG patron, bisel)
+- `css/proyectos.css` (mobile cards layout)
+- `css/habilidades.css` (tablet marquee styles)
+- `index.html` (`.metodo-acordeon-card-patron` div + inline `background-image` por card)
+
+#### Decisiones técnicas
+
+- `mask-composite: exclude` con pseudo-element para lograr borde degradado con `border-radius` (border-image no lo soporta).
+- SVGs blancos (`fill="#fff"`) requieren `filter: invert(1) sepia(1)` para ser visibles sobre fondos claros — más flexible que editar cada SVG.
+- Glare animado con pseudo-elements y keyframes CSS (no GSAP) para performance óptima.
+- Doble marquee en tablets usa DOM manipulation en runtime (split cards en 2 filas + clones) con cleanup en la función de retorno del matchMedia.
+- Mobile proyectos usa ScrollTrigger por item para cambiar la imagen de fondo al hacer scroll natural.
+
+#### Estado actual
+
+- ✅ Responsive JS completo en las 3 secciones (5 breakpoints cada una)
+- ✅ Cards del método: liquid glass transparente con borde neon degradado
+- ✅ Glare animado con movimiento (2 destellos cruzados)
+- ✅ SVGs únicos por card que se reposicionan al expandir
+- ✅ Doble marquee pinneado en tablets para habilidades
+- ✅ Imagen siempre visible en mobile para proyectos
+- ✅ Reduced motion respetado
+
+#### Pendientes sugeridos
+
+- Verificar temas oscuros (acid, synthwave, rave) — el borde degradado usa variables de tema, debería adaptarse automáticamente.
+- Ajustar opacidad de los SVGs en las cards si se sienten muy prominentes.
+- Probar la expansión de cards en desktop para verificar el reposicionamiento del SVG.
+- Verificar el doble marquee de habilidades en dispositivos reales (iPad).
+- Considerar agregar un sticker diferente o ninguno en alguna card si se siente repetitivo.
+- Verificar layout de las cards del acordeón en móviles (vertical) — asegurar que se vean bien y que la interacción click/expand funcione correctamente.
