@@ -23,40 +23,40 @@
 }
 
 /* ════════════════════════════════════════
-   TEMA BASE — Neutro Claro (estado por defecto)
-   Warm paper white — neutral before sticker themes
+   TEMA BASE — Neutro (estado por defecto)
+   Fondo azul gélido claro — acentos teal + magenta + violeta
 ════════════════════════════════════════ */
 [data-tema="neutro"],
 :root {
-  --color-fondo: #f0ede6;
-  --color-fondo-secundario: #c9c0ad;
-  --color-fondo-alt: #7a653c;
-  --color-texto: #0d0d0d;
-  --color-texto-suave: #6a6560;
-  --color-acento: #b5770c;
-  --color-acento-hover: #a16806;
-  --color-grid: rgba(13, 13, 13, 0.326);
-  --color-gradiente-ini: rgba(240, 237, 230, 0);
-  --color-gradiente-fin: rgba(220, 216, 206, 0.12);
-  --color-cursor-daniel: #dd070b;
-  --color-cursor-usuario: #7b3232;
-  --color-editable: #ffae17;
-  --color-editable-activo: #e63500;
-  --color-hint: rgba(13, 13, 13, 0.30);
-  --color-nav-fondo: rgba(240, 237, 230, 0.85);
-  --color-nombre-daniel: #e8a020;
-  --sombra-nombre-daniel: #7a4800;
+  --color-fondo: #e8f2f5;
+  --color-fondo-secundario: #c4dbe3;
+  --color-fondo-alt: #1b4d5c;
+  --color-texto: #12232a;
+  --color-texto-suave: #7a4a7a;
+  --color-acento: #0b50c8;
+  --color-acento-hover: #6a09ab;
+  --color-grid: rgba(18, 35, 42, 0.1);
+  --color-gradiente-ini: rgba(232, 242, 245, 0);
+  --color-gradiente-fin: rgba(196, 219, 227, 0.18);
+  --color-cursor-daniel: #c8145a;
+  --color-cursor-usuario: #5b4a9e;
+  --color-editable: #7b2d8b;
+  --color-editable-activo: #c8145a;
+  --color-hint: rgba(11, 181, 200, 0.35);
+  --color-nav-fondo: rgba(232, 242, 245, 0.9);
+  --color-nombre-daniel: #c8145a;
+  --sombra-nombre-daniel: #6b0a30;
   /* ── Manifiesto ── */
-  --manifiesto-drop-1: rgba(223, 157, 44, 0.723);
-  --manifiesto-drop-2: rgba(169, 132, 132, 0.567);
-  --manifiesto-drop-3: rgba(220, 165, 69, 0.712);
-  --manifiesto-neon-color: #0d0d0d;
-  --manifiesto-neon-s1: 0 0 4px rgba(245, 170, 170, 0.6);
-  --manifiesto-neon-s2: 0 0 14px rgba(240, 174, 59, 0.5);
-  --manifiesto-neon-s3: 0 0 30px rgba(227, 164, 164, 0.4);
-  --manifiesto-neon-s4: 0 0 60px rgba(248, 180, 61, 0.3);
-  --manifiesto-neon-s5: 0 0 110px rgba(237, 188, 188, 0.2);
-  --manifiesto-neon-s6: 0 0 180px rgba(255, 218, 154, 0.1);
+  --manifiesto-drop-1: rgba(200, 20, 90, 0.7);
+  --manifiesto-drop-2: rgba(11, 181, 200, 0.5);
+  --manifiesto-drop-3: rgba(91, 74, 158, 0.6);
+  --manifiesto-neon-color: #12232a;
+  --manifiesto-neon-s1: 0 0 4px rgba(200, 20, 90, 0.6);
+  --manifiesto-neon-s2: 0 0 14px rgba(11, 181, 200, 0.5);
+  --manifiesto-neon-s3: 0 0 30px rgba(200, 20, 90, 0.35);
+  --manifiesto-neon-s4: 0 0 60px rgba(91, 74, 158, 0.3);
+  --manifiesto-neon-s5: 0 0 110px rgba(11, 181, 200, 0.2);
+  --manifiesto-neon-s6: 0 0 180px rgba(123, 45, 139, 0.15);
 }
 
 /* ════════════════════════════════════════
@@ -79,7 +79,7 @@
   --color-cursor-usuario: #1f40e4;
   --color-editable: #f0fff0;
   --color-editable-activo: #ff2d9b;
-  --color-hint: rgba(145, 255, 0, 0.45);
+  --color-hint: rgba(132, 0, 255, 0.45);
   --color-nav-fondo: rgba(10, 10, 20, 0.90);
   --color-nombre-daniel: #91ff00;
   --sombra-nombre-daniel: #00f0ff;
@@ -88,8 +88,8 @@
   --manifiesto-drop-2: rgba(0, 238, 255, 0.918);
   --manifiesto-drop-3: rgba(103, 7, 57, 0.937);
   --manifiesto-neon-color: #91ff00;
-  --manifiesto-neon-s1: 0 0 4px #91ff00;
-  --manifiesto-neon-s2: 0 0 14px rgba(145, 255, 0, 0.95);
+  --manifiesto-neon-s1: 0 0 4px #ff0066;
+  --manifiesto-neon-s2: 0 0 14px rgba(157, 0, 255, 0.95);
   --manifiesto-neon-s3: 0 0 30px rgba(0, 240, 255, 0.80);
   --manifiesto-neon-s4: 0 0 60px rgba(180, 9, 97, 0.797);
   --manifiesto-neon-s5: 0 0 110px rgba(154, 249, 29, 0.844);
@@ -115,11 +115,11 @@
   --color-cursor-daniel: #00e5ff;
   --color-cursor-usuario: #e03a72;
   --color-editable: #fff0f5;
-  --color-editable-activo: #ffd000;
+  --color-editable-activo: #7300ff;
   --color-hint: rgba(0, 229, 255, 0.45);
   --color-nav-fondo: rgba(15, 0, 36, 0.90);
   --color-nombre-daniel: #ff2d6a;
-  --sombra-nombre-daniel: #ffd000;
+  --sombra-nombre-daniel: #9900ff;
   /* ── Manifiesto ── */
   --manifiesto-drop-1: rgba(255, 45, 106, 0.70);
   --manifiesto-drop-2: rgba(255, 208, 0, 0.50);
@@ -127,10 +127,10 @@
   --manifiesto-neon-color: #f0fffa;
   --manifiesto-neon-s1: 0 0 4px #13b6df;
   --manifiesto-neon-s2: 0 0 14px rgba(255, 45, 106, 0.95);
-  --manifiesto-neon-s3: 0 0 30px rgba(255, 208, 0, 0.80);
-  --manifiesto-neon-s4: 0 0 60px rgba(255, 45, 106, 0.60);
+  --manifiesto-neon-s3: 0 0 30px rgba(129, 107, 255, 0.968);
+  --manifiesto-neon-s4: 0 0 60px rgba(146, 255, 45, 0.751);
   --manifiesto-neon-s5: 0 0 110px rgba(0, 229, 255, 0.40);
-  --manifiesto-neon-s6: 0 0 180px rgba(255, 208, 0, 0.433);
+  --manifiesto-neon-s6: 0 0 180px rgba(115, 0, 255, 0.943);
 }
 
 /* ════════════════════════════════════════
@@ -160,51 +160,51 @@
   /* ── Manifiesto ── */
   --manifiesto-drop-1: rgba(255, 51, 0, 0.70);
   --manifiesto-drop-2: rgba(0, 255, 136, 0.50);
-  --manifiesto-drop-3: rgba(255, 238, 0, 0.30);
+  --manifiesto-drop-3: rgba(242, 227, 19, 0.769);
   --manifiesto-neon-color: #ffffff;
   --manifiesto-neon-s1: 0 0 4px #ffffff;
   --manifiesto-neon-s2: 0 0 14px rgba(255, 51, 0, 0.95);
   --manifiesto-neon-s3: 0 0 30px rgba(0, 255, 136, 0.8);
-  --manifiesto-neon-s4: 0 0 60px rgba(255, 238, 0, 0.671);
+  --manifiesto-neon-s4: 0 0 60px rgba(136, 0, 255, 0.849);
   --manifiesto-neon-s5: 0 0 110px rgba(255, 51, 0, 0.597);
-  --manifiesto-neon-s6: 0 0 180px rgba(0, 255, 136, 0.595);
+  --manifiesto-neon-s6: 0 0 180px rgba(255, 251, 0, 0.927);
 }
 
 /* ════════════════════════════════════════
    TEMA — COLLAGE
    Stickers: recortes fotoreales, zine culture, kitsch 90s
-   Paleta: rojo editorial + azul tinta + teal (zine CLARO)
+   Paleta: papel kraft + rojo editorial + azul tinta (zine analógico)
 ════════════════════════════════════════ */
 [data-tema="collage"] {
-  --color-fondo: #fafafa;
-  --color-fondo-secundario: #cfcfcf;
-  --color-fondo-alt: #d4e8f0;
-  --color-texto: #1a1612;
-  --color-texto-suave: #c6791c;
-  --color-acento: #e03030;
-  --color-acento-hover: #0066cc;
-  --color-grid: rgba(26, 22, 18, 0.614);
-  --color-gradiente-ini: rgba(242, 236, 227, 0);
-  --color-gradiente-fin: rgba(232, 224, 212, 0.25);
-  --color-cursor-daniel: #009688;
-  --color-cursor-usuario: #ab5b0b;
-  --color-editable: #735398;
-  --color-editable-activo: #e03030;
-  --color-hint: rgba(0, 150, 136, 0.45);
-  --color-nav-fondo: rgba(242, 236, 227, 0.92);
-  --color-nombre-daniel: #e03030;
-  --sombra-nombre-daniel: #7a0000;
+  --color-fondo: #e8dcc8;
+  --color-fondo-secundario: #d4c4a8;
+  --color-fondo-alt: #c2a97e;
+  --color-texto: #1a1410;
+  --color-texto-suave: #6b5740;
+  --color-acento: #cc2222;
+  --color-acento-hover: #0044aa;
+  --color-grid: rgba(26, 20, 16, 0.18);
+  --color-gradiente-ini: rgba(232, 220, 200, 0);
+  --color-gradiente-fin: rgba(212, 196, 168, 0.3);
+  --color-cursor-daniel: #cc2222;
+  --color-cursor-usuario: #0044aa;
+  --color-editable: #0044aa;
+  --color-editable-activo: #cc2222;
+  --color-hint: rgba(0, 68, 170, 0.4);
+  --color-nav-fondo: rgba(232, 220, 200, 0.92);
+  --color-nombre-daniel: #cc2222;
+  --sombra-nombre-daniel: #660000;
   /* ── Manifiesto ── */
-  --manifiesto-drop-1: rgba(224, 48, 48, 0.844);
-  --manifiesto-drop-2: rgba(26, 22, 18, 0.521);
-  --manifiesto-drop-3: rgba(24, 133, 241, 0.721);
-  --manifiesto-neon-color: #1a1612;
-  --manifiesto-neon-s1: 0 0 4px rgba(26, 22, 18, 0.745);
-  --manifiesto-neon-s2: 0 0 14px rgba(203, 5, 5, 0.803);
-  --manifiesto-neon-s3: 0 0 30px rgba(26, 22, 18, 0.647);
-  --manifiesto-neon-s4: 0 0 60px rgba(10, 118, 226, 0.732);
-  --manifiesto-neon-s5: 0 0 110px rgba(224, 48, 48, 0.822);
-  --manifiesto-neon-s6: 0 0 180px rgba(243, 123, 4, 0.742);
+  --manifiesto-drop-1: rgba(204, 34, 34, 0.8);
+  --manifiesto-drop-2: rgba(26, 20, 16, 0.5);
+  --manifiesto-drop-3: rgba(0, 68, 170, 0.7);
+  --manifiesto-neon-color: #1a1410;
+  --manifiesto-neon-s1: 0 0 4px rgba(204, 34, 34, 0.7);
+  --manifiesto-neon-s2: 0 0 14px rgba(204, 34, 34, 0.6);
+  --manifiesto-neon-s3: 0 0 30px rgba(0, 68, 170, 0.5);
+  --manifiesto-neon-s4: 0 0 60px rgba(0, 68, 170, 0.4);
+  --manifiesto-neon-s5: 0 0 110px rgba(204, 34, 34, 0.5);
+  --manifiesto-neon-s6: 0 0 180px rgba(0, 68, 170, 0.3);
 }
 
 /* ════════════════════════════════════════
@@ -227,7 +227,7 @@
   --color-cursor-usuario: #0e0eb4;
   --color-editable: #b6062c;
   --color-editable-activo: #7c3aed;
-  --color-hint: rgba(124, 58, 237, 0.64);
+  --color-hint: rgba(58, 222, 237, 0.64);
   --color-nav-fondo: rgba(245, 247, 255, 0.90);
   --color-nombre-daniel: #7c3aed;
   --sombra-nombre-daniel: #3b1a7a;
@@ -236,7 +236,7 @@
   --manifiesto-drop-2: rgba(26, 26, 46, 0.627);
   --manifiesto-drop-3: rgba(255, 0, 111, 0.849);
   --manifiesto-neon-color: #0c9c86;
-  --manifiesto-neon-s1: 0 0 4px rgba(26, 46, 41, 0.767);
+  --manifiesto-neon-s1: 0 0 4px rgba(218, 161, 195, 0.767);
   --manifiesto-neon-s2: 0 0 14px rgba(124, 58, 237, 0.45);
   --manifiesto-neon-s3: 0 0 30px rgba(26, 26, 46, 0.48);
   --manifiesto-neon-s4: 0 0 60px rgba(6, 214, 160, 0.35);

@@ -114,7 +114,7 @@
 .metodo-manifiesto-texto {
   position: relative;
   z-index: 2;
-  font-family: var(--fuente-editable);
+  font-family: var(--fuente-parrafo);
   font-size: clamp(18px, 2vw, 28px);
   line-height: 1.7;
   color: var(--color-texto);
@@ -330,18 +330,6 @@
   height: 90%;
   z-index: 1;
   pointer-events: none;
-<<<<<<< HEAD
-  border-radius: 24px;
-  overflow: hidden;
-  /* SVG como fondo */
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
-  /* Invertir blanco a tono visible */
-  filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg) brightness(0.85);
-  opacity: 0.8;
-  transition: opacity 0.5s ease, left 0.5s ease, width 0.5s ease;
-=======
   /* SVG como máscara, fondo = color acento */
   background: var(--color-acento);
   background-blend-mode: screen;
@@ -353,7 +341,6 @@
   -webkit-mask-repeat: no-repeat;
   opacity: 0.42;
   transition: opacity 0.5s ease, background var(--transicion-tema);
->>>>>>> d4897d0ea5a6fa5b7b13126dd1de3afd0bf05740
 }
 
 /* Al expandir: NO se mueve, solo sube un poco la opacidad */
