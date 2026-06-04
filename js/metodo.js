@@ -88,19 +88,33 @@ const Metodo = (() => {
     ScrollTrigger.create({
       trigger: stageIntro,
       start: 'top 60%',
-      once: true,
-      onEnter: () => {
-        lineas.forEach((linea, i) => {
-          const chars = linea.querySelectorAll('div');
-          gsap.fromTo(chars,
-            { opacity: 0, y: 80, rotateY: -45, scale: 0.7 },
-            { opacity: 1, y: 0, rotateY: 0, scale: 1, duration: 0.8, stagger: 0.03, ease: 'back.out(1.4)', delay: i * 0.25, force3D: true }
-          );
-        });
-      },
+      end: 'bottom 20%',
+      onEnter: () => _revelarIntro(lineas),
+      onEnterBack: () => _revelarIntro(lineas),
+      onLeave: () => _ocultarIntro(lineas),
+      onLeaveBack: () => _ocultarIntro(lineas),
     });
 
     kills.push(() => { splits.forEach(s => s.revert()); });
+  }
+
+  function _revelarIntro(lineas) {
+    lineas.forEach((linea, i) => {
+      const chars = linea.querySelectorAll('div');
+      gsap.killTweensOf(chars);
+      gsap.fromTo(chars,
+        { opacity: 0, y: 80, rotateY: -45, scale: 0.7 },
+        { opacity: 1, y: 0, rotateY: 0, scale: 1, duration: 0.8, stagger: 0.03, ease: 'back.out(1.4)', delay: i * 0.25, force3D: true }
+      );
+    });
+  }
+
+  function _ocultarIntro(lineas) {
+    lineas.forEach(linea => {
+      const chars = linea.querySelectorAll('div');
+      gsap.killTweensOf(chars);
+      gsap.to(chars, { opacity: 0, y: -40, rotateY: 30, scale: 0.8, duration: 0.4, ease: 'power2.in' });
+    });
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -131,24 +145,26 @@ const Metodo = (() => {
 
     const panelW = panel.offsetWidth;
     const panelH = panel.offsetHeight;
-    const paddingX = panelW * 0.05;
-    const paddingY = panelH * 0.06;
+    const paddingX = panelW * 0.03;
+    const paddingY = panelH * 0.03;
     const floatTimelines = [];
 
-    /* ── Grid disperso: distribuye las palabras por toda la pantalla ── */
+    /* ── Grid disperso: distribuye las palabras por TODO el viewport ── */
     const totalWords = words.length;
     const cols = Math.ceil(Math.sqrt(totalWords * (panelW / panelH)));
     const rows = Math.ceil(totalWords / cols);
-    const cellW = (panelW - paddingX * 2) / cols;
-    const cellH = (panelH - paddingY * 2) / rows;
+    const usableW = panelW - paddingX * 2;
+    const usableH = panelH - paddingY * 2;
+    const cellW = usableW / cols;
+    const cellH = usableH / rows;
 
     words.forEach((w, i) => {
       const col = i % cols;
       const row = Math.floor(i / cols);
 
       /* Posición base centrada en la celda + jitter aleatorio */
-      const jitterX = gsap.utils.random(-cellW * 0.25, cellW * 0.25);
-      const jitterY = gsap.utils.random(-cellH * 0.2, cellH * 0.2);
+      const jitterX = gsap.utils.random(-cellW * 0.3, cellW * 0.3);
+      const jitterY = gsap.utils.random(-cellH * 0.3, cellH * 0.3);
       const baseX = paddingX + col * cellW + cellW * 0.5 + jitterX;
       const baseY = paddingY + row * cellH + cellH * 0.5 + jitterY;
 
@@ -248,6 +264,8 @@ const Metodo = (() => {
           /* Si estábamos reordenados y volvemos atrás, dispersar de nuevo */
           if (reordered) {
             reordered = false;
+            texto.style.fontFeatureSettings = '';
+            texto.style.fontVariantLigatures = '';
             words.forEach((w, idx) => {
               gsap.to(w, {
                 x: parseFloat(w.dataset.disperseX),
@@ -270,6 +288,10 @@ const Metodo = (() => {
 
           /* Matar todas las flotaciones restantes */
           floatTimelines.forEach(ft => ft.kill());
+
+          /* Activar ligatures en el contenedor */
+          texto.style.fontFeatureSettings = '"liga" 1, "dlig" 1, "calt" 1';
+          texto.style.fontVariantLigatures = 'discretionary-ligatures common-ligatures contextual';
 
           /* Animar cada palabra a su posición natural */
           words.forEach((w, i) => {
@@ -376,23 +398,31 @@ const Metodo = (() => {
     ScrollTrigger.create({
       trigger: wrapper,
       start: 'top 80%',
-      once: true,
-      onEnter: () => {
-        cards.forEach((card, i) => {
-          gsap.fromTo(card,
-            { opacity: 0, x: 30, scale: 0.95 },
-            {
-              opacity: 1, x: 0, scale: 1,
-              duration: 0.6,
-              delay: i * 0.1,
-              ease: 'power3.out'
-            }
-          );
-        });
-      }
+      end: 'bottom 20%',
+      onEnter: () => _revelarCards(cards),
+      onEnterBack: () => _revelarCards(cards),
+      onLeave: () => _ocultarCards(cards),
+      onLeaveBack: () => _ocultarCards(cards),
     });
 
     kills.push(() => { desactivarTodas(); });
+  }
+
+  function _revelarCards(cards) {
+    cards.forEach((card, i) => {
+      gsap.killTweensOf(card);
+      gsap.fromTo(card,
+        { opacity: 0, x: 30, scale: 0.95 },
+        { opacity: 1, x: 0, scale: 1, duration: 0.6, delay: i * 0.1, ease: 'power3.out' }
+      );
+    });
+  }
+
+  function _ocultarCards(cards) {
+    cards.forEach((card, i) => {
+      gsap.killTweensOf(card);
+      gsap.to(card, { opacity: 0, x: -20, scale: 0.95, duration: 0.4, delay: i * 0.05, ease: 'power2.in' });
+    });
   }
 
   /* ═══════════════════════════════════════════════════════════════
