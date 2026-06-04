@@ -332,21 +332,21 @@
   pointer-events: none;
   /* SVG como máscara, fondo = color acento */
   background: var(--color-acento);
-  background-blend-mode: screen;
-  mask-size: fill;
-  mask-position: center;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: fill;
+  -webkit-mask-size: contain;
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
   opacity: 0.42;
-  transition: opacity 0.5s ease, background var(--transicion-tema);
+  transition: opacity 0.5s ease, left 0.5s cubic-bezier(0.16, 1, 0.3, 1), width 0.5s cubic-bezier(0.16, 1, 0.3, 1), background var(--transicion-tema);
 }
 
-/* Al expandir: NO se mueve, solo sube un poco la opacidad */
+/* Al expandir: SVG se mueve a la izquierda */
 .metodo-acordeon-card.activa .metodo-acordeon-card-patron {
+  left: 22%;
+  width: 35%;
   opacity: 0.58;
-  filter: blur(10px);
 }
 
 /* ── Glow interior bordes (refuerza neon interno) ── */
@@ -372,9 +372,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 24px 8px;
+  justify-content: flex-start;
+  gap: 0;
+  padding: clamp(16px, 2vw, 24px) 12px;
   opacity: 1;
   visibility: visible;
   transition: opacity 0.3s ease 0.2s, visibility 0s 0s;
@@ -382,29 +382,31 @@
 
 .metodo-acordeon-num {
   font-family: var(--fuente-micro);
-  font-size: clamp(9px, 0.7vw, 11px);
+  font-size: clamp(9px, 0.8vw, 12px);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
+  color: var(--color-texto-suave);
+  writing-mode: horizontal-tb;
+  transform: none;
+  transition: color var(--transicion-tema);
 }
 
 .metodo-acordeon-titulo-vertical {
   font-family: var(--fuente-display);
-  font-size: clamp(16px, 1.8vw, 24px);
+  font-size: clamp(20px, 2.2vw, 32px);
   letter-spacing: 0.04em;
-  line-height: 1.1;
+  line-height: 1.05;
   text-transform: uppercase;
-  color: #ffffff;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
-  white-space: nowrap;
+  color: var(--color-texto);
+  writing-mode: horizontal-tb;
+  transform: none;
+  white-space: normal;
+  text-align: center;
+  margin-top: auto;
+  padding: 0 8px;
   font-feature-settings: "liga" 1, "dlig" 1, "calt" 1;
   font-variant-ligatures: discretionary-ligatures common-ligatures contextual;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: color var(--transicion-tema);
 }
 
 /* ── Estado expandido (oculto por defecto) ── */
