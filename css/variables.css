@@ -40,9 +40,9 @@
   --color-gradiente-fin: rgba(196, 219, 227, 0.18);
   --color-cursor-daniel: #c8145a;
   --color-cursor-usuario: #5b4a9e;
-  --color-editable: #7b2d8b;
+  --color-editable: #2d328b;
   --color-editable-activo: #c8145a;
-  --color-hint: rgba(11, 181, 200, 0.35);
+  --color-hint: rgb(235, 107, 197);
   --color-nav-fondo: rgba(232, 242, 245, 0.9);
   --color-nombre-daniel: #c8145a;
   --sombra-nombre-daniel: #6b0a30;
@@ -79,7 +79,7 @@
   --color-cursor-usuario: #1f40e4;
   --color-editable: #f0fff0;
   --color-editable-activo: #ff2d9b;
-  --color-hint: rgba(132, 0, 255, 0.45);
+  --color-hint: rgb(158, 241, 116);
   --color-nav-fondo: rgba(10, 10, 20, 0.90);
   --color-nombre-daniel: #91ff00;
   --sombra-nombre-daniel: #00f0ff;
@@ -116,7 +116,7 @@
   --color-cursor-usuario: #e03a72;
   --color-editable: #fff0f5;
   --color-editable-activo: #7300ff;
-  --color-hint: rgba(0, 229, 255, 0.45);
+  --color-hint: rgba(243, 184, 248, 0.85);
   --color-nav-fondo: rgba(15, 0, 36, 0.90);
   --color-nombre-daniel: #ff2d6a;
   --sombra-nombre-daniel: #9900ff;
@@ -190,7 +190,7 @@
   --color-cursor-usuario: #0044aa;
   --color-editable: #0044aa;
   --color-editable-activo: #cc2222;
-  --color-hint: rgba(0, 68, 170, 0.4);
+  --color-hint: rgba(0, 68, 170, 0.8);
   --color-nav-fondo: rgba(232, 220, 200, 0.92);
   --color-nombre-daniel: #cc2222;
   --sombra-nombre-daniel: #660000;
@@ -226,8 +226,8 @@
   --color-cursor-daniel: #ff006e;
   --color-cursor-usuario: #0e0eb4;
   --color-editable: #b6062c;
-  --color-editable-activo: #7c3aed;
-  --color-hint: rgba(58, 222, 237, 0.64);
+  --color-editable-activo: #3a99edff;
+  --color-hint: rgba(237, 58, 85, 0.9);
   --color-nav-fondo: rgba(245, 247, 255, 0.90);
   --color-nombre-daniel: #7c3aed;
   --sombra-nombre-daniel: #3b1a7a;
