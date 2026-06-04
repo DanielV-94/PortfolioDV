@@ -254,6 +254,10 @@ const Hero = (() => {
 
     _removeIntroArtifactsImmediate();
 
+    /* Revelar esquinas HUD que quedaron en opacity: 0 */
+    const esquinas = document.querySelectorAll('.esquina');
+    gsap.set(esquinas, { opacity: 1 });
+
     gsap.set([elNombreDaniel, elNombreVelez], { opacity: 1, y: 0, scale: 1 });
     gsap.set(elFrasesFijas, { opacity: 1, y: 0 });
 

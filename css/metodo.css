@@ -52,7 +52,7 @@
   background-size: contain;
   background-position: left center;
   background-repeat: no-repeat;
-  background-blend-mode: darken;
+  background-blend-mode: screen;
 }
 
 .metodo-titulo-principal {
@@ -128,10 +128,10 @@
   cursor: default;
   transition: color 0.3s ease, text-shadow 0.3s ease;
   white-space: nowrap;
-  font-family: var(--fuente-dialogo);
-  font-size: clamp(18px, 2.5vw, 42px);
-  letter-spacing: 0.05em;
-  font-weight: 500;
+  font-family: var(--fuente-editable);
+  font-size: clamp(22px, 3vw, 52px);
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -149,7 +149,11 @@
 .metodo-acordeon-wrapper {
   position: relative;
   width: 100%;
-  padding: clamp(64px, 10vw, 120px) clamp(32px, 6vw, 80px);
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(32px, 4vw, 64px) clamp(32px, 6vw, 80px);
   overflow: hidden;
 }
 
@@ -316,16 +320,17 @@
   animation-duration: 5s;
 }
 
-/* ── Patrón SVG recortado en vidrio ── */
+/* ── Patrón SVG — pintado en el liquid glass con color acento ── */
 .metodo-acordeon-card-patron {
   position: absolute;
   top: 50%;
-  left: 15%;
-  transform: translateY(-50%);
-  width: 50%;
-  height: 75%;
-  z-index: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  height: 90%;
+  z-index: 1;
   pointer-events: none;
+<<<<<<< HEAD
   border-radius: 24px;
   overflow: hidden;
   /* SVG como fondo */
@@ -336,13 +341,25 @@
   filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg) brightness(0.85);
   opacity: 0.8;
   transition: opacity 0.5s ease, left 0.5s ease, width 0.5s ease;
+=======
+  /* SVG como máscara, fondo = color acento */
+  background: var(--color-acento);
+  background-blend-mode: screen;
+  mask-size: fill;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: fill;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  opacity: 0.42;
+  transition: opacity 0.5s ease, background var(--transicion-tema);
+>>>>>>> d4897d0ea5a6fa5b7b13126dd1de3afd0bf05740
 }
 
-/* Al expandir: SVG se queda a la izquierda, más pequeño */
+/* Al expandir: NO se mueve, solo sube un poco la opacidad */
 .metodo-acordeon-card.activa .metodo-acordeon-card-patron {
-  left: 5%;
-  width: 30%;
-  opacity: 0.08;
+  opacity: 0.58;
+  filter: blur(10px);
 }
 
 /* ── Glow interior bordes (refuerza neon interno) ── */
