@@ -14,14 +14,10 @@ const Cursor = (() => {
   let curPosY = mousePosY;
   let etiquetaMostrada = false;
 
-  /* ── Suavizado RAF del cursor usuario ── */
-  function suavizar() {
-    const velocidad = 0.13;
-    curPosX += (mousePosX - curPosX) * velocidad;
-    curPosY += (mousePosY - curPosY) * velocidad;
-
-    gsap.set(elUsuario, { x: curPosX, y: curPosY });
-    requestAnimationFrame(suavizar);
+  /* ── Posición directa del cursor usuario (sin suavizado) ── */
+  function actualizarCursor() {
+    gsap.set(elUsuario, { x: mousePosX, y: mousePosY });
+    requestAnimationFrame(actualizarCursor);
   }
 
   /* ── Registrar hover en elementos interactivos ── */
@@ -83,7 +79,7 @@ const Cursor = (() => {
     });
 
     registrarHovers();
-    suavizar();
+    actualizarCursor();
   }
 
   return {

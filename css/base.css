@@ -130,6 +130,24 @@ body.nav-abierta {
   overflow: hidden;
 }
 
+/* Ocultar esquinas HUD cuando el menú está abierto (excepto el botón menú) */
+body.nav-abierta .esquina--sup-izq,
+body.nav-abierta .esquina--inf-izq,
+body.nav-abierta .esquina--inf-der {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
+body.nav-abierta .modos-barra,
+body.nav-abierta .tema-selector {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
 /* ─────────────────────────────────────────
    FONDO GRID ANIMADO
    Grid sutil + deriva continua + degradado radial

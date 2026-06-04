@@ -347,6 +347,8 @@
   left: 22%;
   width: 35%;
   opacity: 0.58;
+  filter: drop-shadow(3px 3px 0px var(--manifiesto-drop-1))
+          drop-shadow(6px 6px 1px var(--manifiesto-drop-1));
 }
 
 /* ── Glow interior bordes (refuerza neon interno) ── */
@@ -416,9 +418,11 @@
   z-index: 4;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: clamp(12px, 2vh, 20px);
-  padding: clamp(32px, 4vw, 48px);
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: clamp(8px, 1.5vh, 16px);
+  padding: clamp(20px, 2.5vw, 36px);
+  padding-left: 45%;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -430,27 +434,37 @@
   font-size: clamp(10px, 0.9vw, 13px);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-texto-suave);
+  text-align: right;
+  transition: color var(--transicion-tema);
 }
 
 .metodo-acordeon-titulo-exp {
   font-family: var(--fuente-display);
-  font-size: clamp(28px, 4vw, 56px);
+  font-size: clamp(24px, 3.2vw, 48px);
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 1.05;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-texto);
+  text-align: right;
   font-feature-settings: "liga" 1, "dlig" 1, "calt" 1;
   font-variant-ligatures: discretionary-ligatures common-ligatures contextual;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  text-shadow:
+    2px 2px 0px var(--manifiesto-drop-1),
+    4px 4px 0px var(--manifiesto-drop-1);
+  transition: color var(--transicion-tema);
 }
 
 .metodo-acordeon-desc {
   font-family: var(--fuente-parrafo);
-  font-size: clamp(14px, 1.2vw, 18px);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.92);
-  max-width: 52ch;
+  font-size: clamp(13px, 1.2vw, 18px);
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--color-texto-suave);
+  text-align: right;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  transition: color var(--transicion-tema);
 }
 
 /* ── Card activa (expandida) — Neon intensificado ── */
@@ -522,11 +536,11 @@
   }
 
   .metodo-acordeon-titulo-exp {
-    font-size: clamp(24px, 3.5vw, 44px);
+    font-size: clamp(20px, 3vw, 36px);
   }
 
   .metodo-acordeon-desc {
-    font-size: clamp(12px, 1.1vw, 16px);
+    font-size: clamp(11px, 1vw, 15px);
   }
 }
 
@@ -596,6 +610,7 @@
 
   .metodo-acordeon-expandido {
     padding: clamp(24px, 4vw, 36px);
+    padding-left: 40%;
   }
 
   .metodo-acordeon-card.activa {
@@ -606,6 +621,8 @@
   .metodo-acordeon-titulo-exp {
     font-size: clamp(26px, 5vw, 40px);
   }
+
+ 
 }
 
 /* ── Mobile portrait ── */
@@ -710,6 +727,7 @@
 
   .metodo-acordeon-expandido {
     padding: clamp(20px, 5vw, 32px);
+    padding-left: 35%;
   }
 
   .metodo-acordeon-card.activa {
@@ -724,7 +742,7 @@
   .metodo-acordeon-desc {
     font-size: clamp(13px, 3.5vw, 16px);
   }
-}
+
 
 /* ── Mobile landscape ── */
 @media (max-width: 768px) and (orientation: landscape) {
@@ -789,6 +807,7 @@
 
   .metodo-acordeon-expandido {
     padding: clamp(16px, 3vw, 24px);
+    padding-left: 35%;
   }
 
   .metodo-acordeon-card.activa {
@@ -837,4 +856,5 @@
   .metodo-acordeon-card.activa .metodo-acordeon-colapsado {
     opacity: 0;
   }
+}
 }
