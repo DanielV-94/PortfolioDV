@@ -154,47 +154,77 @@
 
 /* ── Tablet portrait ── */
 @media (max-width: 1024px) and (orientation: portrait) {
+  .proyectos {
+    padding: clamp(48px, 6vh, 80px) clamp(24px, 4vw, 48px);
+  }
+
   .proyectos-stage {
-    grid-template-columns: 1fr;
-    gap: 0;
     min-height: auto;
   }
+
+  /* Preview absoluto: ocultar en este breakpoint */
   .proyectos-preview {
-    position: absolute;
-    inset: 0;
-    height: 100%;
-    border-radius: 0;
-    z-index: 0;
-    pointer-events: none;
+    display: none;
   }
 
-  .proyectos-preview-img.fondo-mobile {
-    opacity: 0.12;
-    transform: scale(1);
-  }
-
-  .proyectos-preview-img.fondo-mobile img {
-    object-fit: cover;
-    border-radius: 0;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-
+  /* Cuadrícula 2x2 — nombre arriba, imagen abajo */
   .proyectos-lista {
-    position: relative;
-    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 3vw, 32px);
   }
 
   .proyectos-item {
-    padding: clamp(10px, 1.5vh, 16px) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: clamp(16px, 2.5vw, 24px);
+    gap: clamp(12px, 2vw, 20px);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
   }
 
   .proyectos-item-nombre {
-    font-size: clamp(28px, 6vw, 52px);
+    font-size: clamp(18px, 3.2vw, 28px);
+    order: -1;
+    line-height: 1.1;
   }
 
-  .proyectos-item.proyecto-activo-mobile .proyectos-item-nombre {
-    color: var(--color-acento);
+  /* Imagen inline dentro de cada item */
+  .proyectos-item::after {
+    content: '';
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .proyectos-item[data-proyecto="energien"]::after {
+    background-image: url('../Rsc/img/proyectos/energien.png');
+  }
+
+  .proyectos-item[data-proyecto="fc-luxe"]::after {
+    background-image: url('../Rsc/img/proyectos/fcluxe.png');
+  }
+
+  .proyectos-item[data-proyecto="emoziony"]::after {
+    background-image: url('../Rsc/img/proyectos/emoziony.png');
+  }
+
+  .proyectos-item[data-proyecto="laa-real-state"]::after {
+    background-image: url('../Rsc/img/proyectos/laareal.png');
+  }
+
+  .proyectos-item-tag {
+    position: static;
+    opacity: 1;
+    transform: none;
+    margin-top: 4px;
   }
 }
 

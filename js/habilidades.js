@@ -320,16 +320,7 @@ const Habilidades = (() => {
       modifiers: { x: gsap.utils.unitize(x => { const v = parseFloat(x) % w2; return v > 0 ? v - w2 : v; }) },
     });
 
-    /* Pin de la sección */
-    const st = ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end: '+=150%',
-      pin: true,
-      scrub: false,
-    });
-
-    /* Pausar al tocar */
+    /* Sin pin — la sección pasa con scroll natural */
     const pauseAll = () => { marquee1.pause(); marquee2.pause(); };
     const playAll = () => { marquee1.play(); marquee2.play(); };
     carrusel.addEventListener('touchstart', pauseAll, { passive: true });
@@ -338,7 +329,6 @@ const Habilidades = (() => {
     return () => {
       marquee1.kill();
       marquee2.kill();
-      st.kill();
       carrusel.removeEventListener('touchstart', pauseAll);
       carrusel.removeEventListener('touchend', playAll);
       /* Restaurar cards originales al carrusel */

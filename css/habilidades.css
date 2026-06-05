@@ -206,8 +206,9 @@
 /* ── Tablet portrait (≤1024px, orientation: portrait) ── */
 @media (max-width: 1024px) and (orientation: portrait) {
   .habilidades-stage {
-    height: 100dvh;
-    padding: 32px 0;
+    height: auto;
+    min-height: 60dvh;
+    padding: 48px 0;
     overflow: hidden;
   }
 
@@ -217,7 +218,7 @@
     align-items: center;
     gap: 20px;
     width: 100%;
-    height: 100%;
+    height: auto;
     justify-content: center;
   }
 

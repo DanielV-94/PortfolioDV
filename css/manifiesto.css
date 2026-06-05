@@ -322,6 +322,53 @@
   }
 }
 
+/* ── Tablet portrait (≤1024px, orientation: portrait) ── */
+@media (max-width: 1024px) and (orientation: portrait) and (min-width: 768px) {
+  .manifiesto-stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .manifiesto-col--texto {
+    padding-inline: clamp(24px, 5vw, 56px);
+    padding-block: clamp(24px, 4vh, 48px);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .manifiesto-col--imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .manifiesto-retrato-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .manifiesto-bloque p {
+    font-size: clamp(24px, 4.2vw, 44px);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .manifiesto-retrato {
+    height: auto;
+    width: auto;
+    max-height: 45dvh;
+    max-width: 80%;
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .salida-manifiesto {
+    height: 20vh;
+  }
+}
+
 /* Tablet portrait + mobile grande (480px - 767px) */
 @media (max-width: 767px) {
   /* La imagen ocupa toda la pantalla como capa de fondo */

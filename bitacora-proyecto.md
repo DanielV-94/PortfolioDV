@@ -819,3 +819,94 @@ Sesión intensiva de responsive JS para las 3 secciones pendientes (Habilidades,
 - Verificar el doble marquee de habilidades en dispositivos reales (iPad).
 - Considerar agregar un sticker diferente o ninguno en alguna card si se siente repetitivo.
 - Verificar layout de las cards del acordeón en móviles (vertical) — asegurar que se vean bien y que la interacción click/expand funcione correctamente.
+
+
+---
+
+### 2026-05-27
+
+#### Resumen del día
+
+Sesión intensiva de ajustes de UI en la sección Método (cards del acordeón) + eliminación de delay en cursor + ocultación de esquinas al abrir menú + responsive completo de tablet portrait (Manifiesto, Habilidades, Proyectos, Método).
+
+#### Cambios implementados
+
+- **Método — Cards expandidas: layout y tipografía**
+  - Textos de cards expandidas justificados a la derecha con `align-items: flex-end` + `text-align: right`.
+  - Numeración ("ACTO I", etc.) posicionada arriba del contenido, fluye naturalmente como primer elemento.
+  - Todo el contenido textual empujado a la derecha con `padding-left: 45%`, dejando espacio libre para el SVG a la izquierda.
+  - Descripción cambiada a `--fuente-editable` (ChiquetaR), uppercase, `font-weight: 600`, tamaño aumentado.
+  - Colores de card expandida igualados a los de colapsada — usa `var(--color-texto)` y `var(--color-texto-suave)` con transiciones de tema.
+
+- **Método — Drop shadow sharp en SVG y título**
+  - Al expandir, el patrón SVG proyecta `drop-shadow` nítida (blur 0–1px) con `var(--manifiesto-drop-1)`.
+  - El título expandido proyecta `text-shadow` sharp en 2 capas con mismo color.
+
+- **Cursor personalizado — delay eliminado**
+  - Se eliminó el lerp/suavizado (`velocidad: 0.13`) en `js/cursor.js`.
+  - Ahora el cursor sigue al mouse directamente sin interpolación — cero lag.
+
+- **Esquinas HUD ocultas al abrir menú**
+  - Se agregó regla CSS: `body.nav-abierta .esquina--sup-izq/inf-izq/inf-der` → `opacity: 0; visibility: hidden`.
+  - También se ocultan `.modos-barra` y `.tema-selector` al abrir el nav.
+  - La esquina sup-der (botón menú) permanece visible para poder cerrar.
+  - Aplica en todas las páginas (CSS compartido + JS ya agrega `nav-abierta`).
+
+- **Manifiesto — Tablet portrait**
+  - Layout cambiado a stacked: texto arriba, imagen abajo (`grid-template-rows: 1fr 1fr`).
+  - Texto centrado, fuente ~20% más grande: `clamp(24px, 4.2vw, 44px)`.
+  - Imagen centrada vertical y horizontalmente con flex en el wrap.
+  - `salida-manifiesto` reducida a `20vh` para eliminar espacio vacío.
+
+- **Habilidades — Tablet portrait**
+  - Eliminado el pin de ScrollTrigger — la sección ahora pasa con scroll natural.
+  - `height: auto; min-height: 60dvh` en vez de `100dvh` fijo.
+  - El marquee doble sigue moviéndose de fondo mientras el usuario scrollea.
+
+- **Proyectos — Tablet portrait: cuadrícula 2x2**
+  - Layout cambiado a grid 2 columnas.
+  - Cada proyecto muestra nombre arriba + imagen abajo (siempre visible, sin hover).
+  - Imágenes vía `::after` con `background-image` para no modificar HTML.
+  - Preview absoluto oculto (`display: none`).
+  - `aspect-ratio: 4/3`, `background-size: contain`.
+
+- **Método — Tablet portrait**
+  - Título intro mucho más grande: `clamp(52px, 13vw, 120px)`.
+  - Imagen de fondo del intro a opacidad completa (`opacity: 1`).
+  - Título posicionado arriba con `justify-content: flex-start` + padding-top.
+  - Texto del manifiesto del método 30% más grande.
+  - Cards del acordeón **siempre expandidas** — estado colapsado oculto via CSS.
+  - Cards distribuidas uniformemente verticalmente con gap + min-height.
+  - SVG patrón visible en posición expandida en todas las cards.
+
+#### Archivos modificados
+
+- `css/metodo.css` (layout expandido, colores, drop shadow, responsive tablet portrait)
+- `css/manifiesto.css` (tablet portrait stacked layout)
+- `css/habilidades.css` (tablet portrait height auto)
+- `css/proyectos.css` (tablet portrait grid 2x2)
+- `css/base.css` (ocultar esquinas/modos/tema al abrir nav)
+- `js/cursor.js` (eliminado lerp, movimiento directo)
+- `js/habilidades.js` (eliminado pin del doble marquee)
+
+#### Decisiones técnicas
+
+- Cursor sin delay porque el lerp de 0.13 se sentía laggy — mejor UX con seguimiento directo.
+- Cards siempre expandidas en tablet portrait porque el espacio vertical permite mostrar todo el contenido sin necesidad de interacción.
+- Proyectos en grid con imágenes vía `::after` para no modificar el HTML base.
+- Ocultar esquinas con CSS (`body.nav-abierta`) en vez de JS para mejor rendimiento y simplicidad.
+
+#### Estado actual
+
+- ✅ Método: cards con texto a la derecha, numeración arriba, drop shadow sharp
+- ✅ Cursor: cero delay, seguimiento directo
+- ✅ Menú: esquinas ocultas al abrir
+- ✅ Tablet portrait: Manifiesto stacked, Habilidades sin pin, Proyectos grid 2x2, Método cards expandidas
+- ✅ Todos los cambios con responsive en 4 breakpoints
+
+#### Pendientes sugeridos
+
+- Revisar mobile portrait (≤599px) para las mismas secciones.
+- Verificar mobile landscape.
+- Probar en dispositivos reales (iPad portrait, iPhone).
+- Considerar animaciones de entrada para las cards del método en tablet portrait (scroll-triggered stagger).
