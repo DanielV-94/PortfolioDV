@@ -1,0 +1,175 @@
+/* ═══════════════════════════════════════════════════════════════
+   PREGUNTAS — Sección FAQ con acordeón vertical
+   Animaciones controladas por GSAP (preguntas.js)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Base: estructura de la sección ── */
+.preguntas {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  padding: 8rem 4rem;
+  background: transparent;
+}
+
+.preguntas-titulo {
+  font-family: var(--fuente-dialogo);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  color: var(--color-texto);
+  margin-bottom: 4rem;
+  text-align: center;
+  transition: color var(--transicion-tema);
+}
+
+/* ── Contenedor del acordeón ── */
+.preguntas-contenedor {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Item individual ── */
+.preguntas-item {
+  border-bottom: 1px solid var(--color-grid);
+  transition: border-color var(--transicion-tema);
+}
+
+/* ── Trigger (botón clickeable) ── */
+.preguntas-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.8rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--color-texto);
+  transition: color var(--transicion-tema);
+}
+
+.preguntas-trigger-texto {
+  font-family: var(--fuente-dialogo);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  line-height: 1.3;
+}
+
+.preguntas-trigger-icono {
+  font-family: var(--fuente-dialogo);
+  font-size: 1.8rem;
+  color: var(--color-acento);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    color var(--transicion-tema);
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+/* ── Estado activo (+ rotado 45° → ×) ── */
+.preguntas-item--activo .preguntas-trigger-icono {
+  transform: rotate(45deg);
+}
+
+/* ── Panel de respuesta ── */
+.preguntas-panel {
+  overflow: hidden;
+  height: 0;
+}
+
+.preguntas-panel-contenido {
+  padding: 0 0 2rem 0;
+  opacity: 0;
+}
+
+.preguntas-panel-contenido p {
+  font-family: var(--fuente-parrafo);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--color-texto-suave);
+  transition: color var(--transicion-tema);
+}
+
+/* ── Hover protegido (solo dispositivos con puntero fino) ── */
+@media (hover: hover) and (pointer: fine) {
+  .preguntas-trigger:hover .preguntas-trigger-texto {
+    color: var(--color-acento);
+  }
+
+  .preguntas-trigger:hover .preguntas-trigger-icono {
+    color: var(--color-acento-hover);
+  }
+}
+
+/* ── Focus visible (accesibilidad universal) ── */
+.preguntas-trigger:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet landscape (≤1024px, orientation: landscape) ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .preguntas {
+    padding: 6rem 3rem;
+  }
+
+  .preguntas-contenedor {
+    max-width: 800px;
+  }
+}
+
+/* ── Tablet portrait (≤1024px, orientation: portrait) ── */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .preguntas {
+    padding: 6rem 2.5rem;
+  }
+
+  .preguntas-contenedor {
+    max-width: 100%;
+  }
+
+  .preguntas-titulo {
+    margin-bottom: 3rem;
+  }
+}
+
+/* ── Mobile portrait (≤599px) ── */
+@media (max-width: 599px) {
+  .preguntas {
+    padding: 4rem 1.5rem;
+  }
+
+  .preguntas-trigger {
+    padding: 1.4rem 0;
+  }
+
+  .preguntas-trigger-icono {
+    font-size: 1.4rem;
+  }
+
+  .preguntas-titulo {
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* ── Mobile landscape (≤768px, orientation: landscape) ── */
+@media (max-width: 768px) and (orientation: landscape) {
+  .preguntas {
+    padding: 4rem 2rem;
+  }
+
+  .preguntas-contenedor {
+    max-width: 700px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .preguntas-trigger-icono {
+    transition: none;
+  }
+}
