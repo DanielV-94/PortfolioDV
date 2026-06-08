@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof Preguntas !== "undefined") {
     Preguntas.init();
   }
+  if (typeof Footer !== "undefined") {
+    Footer.init();
+  }
   if (typeof Nav !== "undefined") {
     Nav.init();
   }

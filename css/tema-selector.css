@@ -126,7 +126,7 @@
 }
 
 /* Colores de cada tema */
-.tema-selector-circulo[data-tema="neutro"] { background: #b5770c; }
+.tema-selector-circulo[data-tema="neutro"] { background: #e8f2f5; }
 .tema-selector-circulo[data-tema="acid"] { background: #91ff00; }
 .tema-selector-circulo[data-tema="synthwave"] { background: #ff2d6a; }
 .tema-selector-circulo[data-tema="rave"] { background: #ff3300; }

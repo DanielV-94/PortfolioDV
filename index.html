@@ -45,6 +45,7 @@
   <link rel="stylesheet" href="css/proyectos.css" />
   <link rel="stylesheet" href="css/metodo.css" />
   <link rel="stylesheet" href="css/preguntas.css" />
+  <link rel="stylesheet" href="css/footer.css" />
 </head>
 
 <body data-tema="neutro" class="cursor-oculto">
@@ -80,10 +81,9 @@
     </button>
   </div>
 
-  <!-- ══ Esquina inf. izq — Coords Daniel ══ -->
+  <!-- ══ Esquina inf. izq — Coords usuario ══ -->
   <div class="esquina esquina--inf-izq" aria-hidden="true">
-    <span class="esquina-nombre esquina-nombre--daniel">Daniel</span>
-    <span class="esquina-coords" id="coordsDaniel">x: —&nbsp; y: —</span>
+    <span class="esquina-coords" id="coordsUsuario">X: —&nbsp; Y: —</span>
   </div>
 
   <!-- ══ Selector de tema — "AMBIENTACIÓN" ══ -->
@@ -132,12 +132,6 @@
       <span class="modo-toggle-label">Creativo</span>
       <span class="modo-toggle-pip" aria-hidden="true"></span>
     </button>
-  </div>
-
-  <!-- ══ Esquina inf. der — Coords usuario ══ -->
-  <div class="esquina esquina--inf-der" aria-hidden="true">
-    <span class="esquina-nombre">tú</span>
-    <span class="esquina-coords" id="coordsUsuario">x: —&nbsp; y: —</span>
   </div>
 
   <!-- ══ Navegación fullscreen ══ -->
@@ -938,6 +932,50 @@
 
   </section>
 
+  <!-- ════════════════════════════════════════
+       FOOTER — CTA impactante con degradado
+  ════════════════════════════════════════ -->
+  <footer class="footer" aria-label="Pie de página — contacto">
+    <!-- Degradado hacia color secundario -->
+    <div class="footer-degradado" aria-hidden="true"></div>
+
+    <!-- Contenido CTA -->
+    <a href="contacto.html" class="footer-cta" aria-label="Ir a la página de contacto — Nueva presencia digital">
+      <p class="footer-subtitulo">Listo para tu nueva</p>
+      <h2 class="footer-titulo">PRESENCIA DIGITAL</h2>
+    </a>
+
+    <!-- Navegación horizontal -->
+    <nav class="footer-nav" aria-label="Navegación del sitio">
+      <a href="index.html" class="footer-nav-enlace">INICIO</a>
+      <span class="footer-nav-separador" aria-hidden="true">✦</span>
+      <a href="sobre-mi.html" class="footer-nav-enlace">SOBRE MÍ</a>
+      <span class="footer-nav-separador" aria-hidden="true">✦</span>
+      <a href="mi-trabajo.html" class="footer-nav-enlace">MI TRABAJO</a>
+      <span class="footer-nav-separador" aria-hidden="true">✦</span>
+      <a href="contacto.html" class="footer-nav-enlace">CONTACTO</a>
+    </nav>
+
+    <!-- Barra inferior estilo nav-overlay (3 columnas con bordes) -->
+    <div class="footer-barra">
+      <p class="footer-barra-copy">
+        Diseño interfaces con intención: limpias, precisas y con carácter.
+        Cada proyecto está pensado para sentirse claro y memorable.
+      </p>
+
+      <div class="footer-barra-contacto">
+        <a href="mailto:danielvelez.web@gmail.com" class="footer-barra-link">danielvelez.web@gmail.com</a>
+        <span>Guadalajara, México</span>
+      </div>
+
+      <div class="footer-barra-sociales">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener">instagram</a>
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener">linkedin</a>
+        <a href="https://github.com/DanielV-94" target="_blank" rel="noopener">github</a>
+      </div>
+    </div>
+  </footer>
+
   <!-- GSAP local — gsap-public/minified -->
   <script src="gsap-public/minified/gsap.min.js"></script>
   <script src="gsap-public/minified/ScrollTrigger.min.js"></script>
@@ -963,6 +1001,7 @@
   <script src="js/modo-caos.js"></script>
   <script src="js/modo-creativo.js"></script>
   <script src="js/preguntas.js"></script>
+  <script src="js/footer.js"></script>
   <script src="js/main.js"></script>
 </body>
 
