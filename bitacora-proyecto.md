@@ -928,7 +928,7 @@ Sesión intensiva de diseño e implementación del **Footer** completo del portf
 - **Barra inferior estilo nav-overlay**: Grid de 3 columnas con bordes separadores (`color-mix`), replicando exactamente la estética de la barra inferior del menú overlay.
   - Columna izquierda: frase descriptiva.
   - Columna centro: email + ubicación (Guadalajara, México).
-  - Columna derecha: redes sociales (instagram, linkedin, github).
+  - Columna derecha: redes sociales (instagram, whatsapp, github).
 - **Degradado de transición**: De transparente a `var(--color-fondo-secundario)` (30% del recorrido).
 - **Fondo transparente**: El grid de fondo de la página (`position: fixed`) es visible a través del footer.
 - **Animación GSAP**: SplitText letra por letra con ScrollTrigger en el CTA + fade-in del subtítulo.
