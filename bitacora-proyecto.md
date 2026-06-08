@@ -910,3 +910,70 @@ Sesión intensiva de ajustes de UI en la sección Método (cards del acordeón) 
 - Verificar mobile landscape.
 - Probar en dispositivos reales (iPad portrait, iPhone).
 - Considerar animaciones de entrada para las cards del método en tablet portrait (scroll-triggered stagger).
+
+---
+
+### 2026-06-04
+
+#### Resumen del día
+
+Sesión intensiva de diseño e implementación del **Footer** completo del portfolio. Se iteró varias veces sobre el diseño hasta llegar a la versión final inspirada en referencias premium (estilo DUMEMEARTS/Elian Kent).
+
+#### Diseño final del footer
+
+- **CTA impactante**: "Listo para tu nueva" (subtítulo) + "PRESENCIA DIGITAL" (tipografía gigante `var(--fuente-footer)`).
+- **Hover del CTA**: La fuente cambia a `var(--fuente-footer-active)` (PointPantherOutline) + color acento. Sin atenuación, sin botón overlay.
+- **Click del CTA**: Enlaza a `contacto.html`.
+- **Navegación horizontal**: INICIO ✦ SOBRE MÍ ✦ MI TRABAJO ✦ CONTACTO — centrada debajo del CTA.
+- **Barra inferior estilo nav-overlay**: Grid de 3 columnas con bordes separadores (`color-mix`), replicando exactamente la estética de la barra inferior del menú overlay.
+  - Columna izquierda: frase descriptiva.
+  - Columna centro: email + ubicación (Guadalajara, México).
+  - Columna derecha: redes sociales (instagram, linkedin, github).
+- **Degradado de transición**: De transparente a `var(--color-fondo-secundario)` (30% del recorrido).
+- **Fondo transparente**: El grid de fondo de la página (`position: fixed`) es visible a través del footer.
+- **Animación GSAP**: SplitText letra por letra con ScrollTrigger en el CTA + fade-in del subtítulo.
+
+#### Iteraciones de diseño (cronología)
+
+1. **V1 — Grid 3 columnas** (nav, CTA central, redes): Implementado desde la spec original. Descartado por el usuario.
+2. **V2 — Grid 4 columnas con bordes** (inspiración Elian Kent): Nombre + nav + redes + SVG animado. Cruces decorativas. Descartado.
+3. **V3 — Sin bordes internos** (fondo transparente, grid de fondo visible): Mismo layout 4 cols pero sin los bordes propios. Descartado.
+4. **V4 — CTA impactante estilo DUMEMEARTS**: "NUEVA PRESENCIA DIGITAL" gigante con botón hover overlay. Navegación horizontal + barra inferior. Aceptado con ajustes.
+5. **V5 (final)** — "Listo para tu nueva" + "PRESENCIA DIGITAL", hover solo cambia fuente (sin overlay/atenuación). Barra inferior 3 columnas estilo nav-overlay. Navegación horizontal entre CTA y barra.
+
+#### Archivos creados/modificados
+
+- `css/footer.css` (reescrito múltiples veces — versión final con CTA + nav + barra 3 cols)
+- `js/footer.js` (animación SplitText + ScrollTrigger con matchMedia 5 breakpoints)
+- `index.html` (footer HTML reescrito — estructura final con CTA + nav + barra estilo nav-overlay)
+
+#### Decisiones técnicas
+
+- Replicar la barra del nav-overlay (`grid-template-columns: 1.4fr 1fr 0.8fr`, bordes `color-mix`, tipografía `--fuente-parrafo-light`) para coherencia visual con el menú.
+- Hover del CTA: solo `font-family` + `color` cambian — efecto impactante sin complejidad extra.
+- `z-index: 1` en el footer para que el grid de fondo (`z-index: 0`, `position: fixed`) sea visible.
+- Degradado desde transparente para fusionar visualmente con la sección preguntas.
+- SplitText con `gsap.matchMedia()` adaptando stagger/duration por breakpoint.
+
+#### Estado actual del footer
+
+- ✅ CTA "PRESENCIA DIGITAL" con hover de fuente outline
+- ✅ Navegación horizontal centrada
+- ✅ Barra inferior 3 columnas (frase, contacto, redes) con bordes
+- ✅ Degradado de transición
+- ✅ Grid de fondo visible
+- ✅ Animación de entrada con ScrollTrigger
+- ✅ Responsive en 4 breakpoints + desktop
+- ✅ Hover protegido con `@media (hover: hover) and (pointer: fine)`
+- ✅ Focus-visible en todos los enlaces
+- ✅ Reduced-motion respetado
+- ✅ Colores via CSS custom properties (compatible con los 6 temas)
+
+#### Pendientes sugeridos
+
+- Verificar visualmente en todos los temas (especialmente acid, synthwave, rave).
+- Probar el hover del CTA en dispositivos reales.
+- Considerar si agregar una animación sutil a la barra inferior (fade-in staggered al scroll).
+- Verificar responsive en dispositivos reales (iPad, iPhone).
+- Actualizar `sobre-mi.html`, `mi-trabajo.html`, `contacto.html` con el mismo footer.
+
