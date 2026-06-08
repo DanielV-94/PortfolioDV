@@ -241,7 +241,7 @@
   .habilidades-stage {
     height: auto;
     min-height: auto;
-    padding: 24px 0;
+    padding: 32px 0;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -251,7 +251,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     padding: 12px 0;
     width: max-content;
   }
@@ -259,39 +259,39 @@
   .habilidades-card {
     position: relative;
     flex-shrink: 0;
-    width: 100px;
-    height: 140px;
+    width: 140px;
+    height: 190px;
     opacity: 1;
-    border-radius: 16px;
+    border-radius: 18px;
   }
 
   .habilidades-card::before {
-    border-radius: 16px 16px 0 0;
+    border-radius: 18px 18px 0 0;
   }
 
   .habilidades-cat-titulo {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .habilidades-card-logo {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
   }
 
   .habilidades-card-num {
-    font-size: 10px;
-    top: 8px;
-    right: 8px;
+    font-size: 14px;
+    top: 10px;
+    right: 12px;
   }
 
   .habilidades-card-nombre {
-    font-size: 10px;
-    bottom: 8px;
-    left: 10px;
+    font-size: 14px;
+    bottom: 10px;
+    left: 12px;
   }
 
   .habilidades-card-contenido {
-    padding: 10px;
+    padding: 12px;
   }
 }
 

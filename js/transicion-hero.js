@@ -479,7 +479,7 @@ const TransicionHero = (() => {
       const stLines = ScrollTrigger.create({
         id: "th-lines-mobile",
         trigger: copy,
-        start: "top 95%",
+        start: "top 100%",
         once: true,
         onEnter: () => {
           gsap.to(split.lines, {
@@ -492,7 +492,16 @@ const TransicionHero = (() => {
         },
       });
 
+      /* Fallback: si después de 2s las líneas siguen ocultas, mostrarlas */
+      const fallbackTimer = setTimeout(() => {
+        const firstLine = split.lines[0];
+        if (firstLine && parseFloat(getComputedStyle(firstLine).opacity) < 0.5) {
+          gsap.to(split.lines, { y: 0, opacity: 1, stagger: 0.1, duration: 0.5 });
+        }
+      }, 2000);
+
       return () => {
+        clearTimeout(fallbackTimer);
         tlHero.kill();
         stGradient.kill();
         stLines.kill();

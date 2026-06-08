@@ -148,50 +148,11 @@ const Habilidades = (() => {
     });
 
     /* ══════════════════════════════════════════════════════════
-       MOBILE PORTRAIT (<600px): Marquee infinito automático
-       Las cards se mueven solas en loop horizontal
+       MOBILE PORTRAIT (<600px): Doble marquee (2 filas)
+       Fila 1 → derecha, Fila 2 → izquierda
     ══════════════════════════════════════════════════════════ */
     mm.add('(max-width: 599px) and (prefers-reduced-motion: no-preference)', () => {
-      /* Duplicar cards para crear loop infinito */
-      const carrusel = section.querySelector('.habilidades-carrusel');
-      const originalCards = Array.from(carrusel.children);
-      const clones = originalCards.map(card => {
-        const clone = card.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        clone.classList.add('habilidades-card--clon');
-        carrusel.appendChild(clone);
-        return clone;
-      });
-
-      /* Hacer todas visibles */
-      const allCards = carrusel.querySelectorAll('.habilidades-card');
-      gsap.set(allCards, { opacity: 1, scale: 1, x: 0, y: 0, rotation: 0 });
-
-      /* Animación marquee con GSAP */
-      const totalWidth = carrusel.scrollWidth / 2; // mitad porque duplicamos
-      const marquee = gsap.to(carrusel, {
-        x: -totalWidth,
-        duration: totalWidth / 40, // velocidad: 40px por segundo
-        ease: 'none',
-        repeat: -1,
-        modifiers: {
-          x: gsap.utils.unitize(x => parseFloat(x) % totalWidth),
-        },
-      });
-
-      /* Pausar al tocar, reanudar al soltar */
-      const pauseMarquee = () => marquee.pause();
-      const playMarquee = () => marquee.play();
-      carrusel.addEventListener('touchstart', pauseMarquee, { passive: true });
-      carrusel.addEventListener('touchend', playMarquee, { passive: true });
-
-      return () => {
-        marquee.kill();
-        carrusel.removeEventListener('touchstart', pauseMarquee);
-        carrusel.removeEventListener('touchend', playMarquee);
-        clones.forEach(c => c.remove());
-        gsap.set(allCards, { clearProps: 'all' });
-      };
+      return _initDoubleMarqueePinned(section, carrusel, cards);
     });
 
     /* ══════════════════════════════════════════════════════════
