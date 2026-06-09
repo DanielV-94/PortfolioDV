@@ -163,9 +163,7 @@
   object-fit: contain;
   border-radius: 8px;
   scroll-snap-align: start;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
   transition: transform 0.3s ease;
 }
 
@@ -179,9 +177,7 @@
   max-height: 80vh;
   width: auto;
   border-radius: 8px;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
 }
 
 /* ═══════════════════════════════════════════════════════════════
