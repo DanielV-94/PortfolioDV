@@ -1,0 +1,298 @@
+/* ═══════════════════════════════════════════════════════════════
+   MI TRABAJO — Proyectos con galería horizontal
+   Cada proyecto ocupa 100vh, dos mitades: info + galería
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Main ── */
+.trabajos-main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PROYECTO — Layout base (100vh, 2 columnas)
+═══════════════════════════════════════════════════════════════ */
+
+.proyecto {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-grid, rgba(255, 255, 255, 0.1));
+  transition: border-color var(--transicion-tema);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INFO — Lado izquierdo (título, rol, descripción)
+   Se posiciona de forma absoluta para que la galería pase por encima
+═══════════════════════════════════════════════════════════════ */
+
+.proyecto-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 5rem);
+  gap: 1.2rem;
+  z-index: 1;
+}
+
+.proyecto-numero {
+  font-family: var(--fuente-parrafo);
+  font-size: 0.96rem;
+  color: var(--color-acento);
+  letter-spacing: 0.1em;
+  transition: color var(--transicion-tema);
+}
+
+.proyecto-titulo {
+  font-family: var(--fuente-dialogo);
+  font-size: clamp(3rem, 6vw, 6rem);
+  color: var(--color-texto);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: color var(--transicion-tema);
+}
+
+.proyecto-tag {
+  display: inline-block;
+  font-family: var(--fuente-parrafo);
+  font-size: 0.84rem;
+  color: var(--color-acento);
+  border: 1px solid var(--color-acento);
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  width: fit-content;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color var(--transicion-tema), border-color var(--transicion-tema);
+}
+
+.proyecto-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.proyecto-rol,
+.proyecto-encargo {
+  font-family: var(--fuente-parrafo);
+  font-size: clamp(0.96rem, 1.2vw, 1.14rem);
+  color: var(--color-texto-suave);
+  margin: 0;
+  line-height: 1.5;
+  transition: color var(--transicion-tema);
+}
+
+.proyecto-rol strong,
+.proyecto-encargo strong {
+  color: var(--color-texto);
+  transition: color var(--transicion-tema);
+}
+
+.proyecto-descripcion {
+  font-family: var(--fuente-parrafo);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  color: var(--color-texto-suave);
+  margin: 0;
+  line-height: 1.7;
+  max-width: 520px;
+  transition: color var(--transicion-tema);
+}
+
+.proyecto-link {
+  font-family: var(--fuente-parrafo);
+  font-size: clamp(0.96rem, 1.2vw, 1.14rem);
+  color: var(--color-acento);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  margin-top: 0.5rem;
+  transition: color var(--transicion-tema);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .proyecto-link:hover {
+    text-decoration: underline;
+  }
+}
+
+.proyecto-link:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GALERÍA — Lado derecho (scroll horizontal)
+═══════════════════════════════════════════════════════════════ */
+
+.proyecto-galeria {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.proyecto-galeria-scroll {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  height: 80%;
+  will-change: transform;
+}
+
+.proyecto-galeria-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Imágenes ── */
+.proyecto-img {
+  flex-shrink: 0;
+  height: 100%;
+  width: auto;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 8px;
+  scroll-snap-align: start;
+  filter: drop-shadow(0 8px 24px var(--manifiesto-drop-1));
+  transition: transform 0.3s ease;
+}
+
+.proyecto-img--main {
+  max-height: 80vh;
+}
+
+/* ── Videos ── */
+.proyecto-video {
+  height: auto;
+  max-height: 80vh;
+  width: auto;
+  border-radius: 8px;
+  filter: drop-shadow(0 8px 24px var(--manifiesto-drop-1));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Tablet landscape (≤1024px, landscape)
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) and (orientation: landscape) {
+  .proyecto {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .proyecto-info {
+    padding: 2rem;
+  }
+
+  .proyecto-titulo {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Tablet portrait (≤1024px, portrait)
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .proyecto {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: auto;
+  }
+
+  .proyecto-info {
+    padding: 3rem 2rem 2rem;
+  }
+
+  .proyecto-galeria {
+    min-height: 50vh;
+  }
+
+  .proyecto-galeria-scroll {
+    height: 90%;
+    padding: 1.5rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile portrait (≤599px)
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 599px) {
+  .proyecto {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: auto;
+  }
+
+  .proyecto-info {
+    padding: 2rem 1.5rem;
+  }
+
+  .proyecto-titulo {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+  }
+
+  .proyecto-galeria {
+    min-height: 40vh;
+  }
+
+  .proyecto-galeria-scroll {
+    height: 85%;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .proyecto-img {
+    height: 85%;
+    border-radius: 6px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile landscape (≤768px, landscape)
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .proyecto {
+    grid-template-columns: 0.8fr 1.2fr;
+    min-height: 100vh;
+  }
+
+  .proyecto-info {
+    padding: 1.5rem;
+    gap: 0.8rem;
+  }
+
+  .proyecto-titulo {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .proyecto-descripcion {
+    font-size: 0.8rem;
+  }
+
+  .proyecto-galeria-scroll {
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .proyecto-img {
+    transition: none;
+  }
+}

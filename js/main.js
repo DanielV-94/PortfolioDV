@@ -40,6 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof Metodo !== "undefined") {
     Metodo.init();
   }
+  if (typeof Preguntas !== "undefined") {
+    Preguntas.init();
+  }
+  if (typeof Footer !== "undefined") {
+    Footer.init();
+  }
   if (typeof Nav !== "undefined") {
     Nav.init();
   }

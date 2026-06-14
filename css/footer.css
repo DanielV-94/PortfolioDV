@@ -1,0 +1,383 @@
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER — CTA impactante + nav horizontal + fila redes/frase
+   "Listo para tu NUEVA PRESENCIA DIGITAL" → hover: CONTACTO →
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Base ── */
+.footer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Degradado hacia color secundario ── */
+.footer-degradado {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-fondo-secundario) 30%
+  );
+  pointer-events: none;
+  z-index: 0;
+  transition: background var(--transicion-tema);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA PRINCIPAL — Enlace completo con hover
+═══════════════════════════════════════════════════════════════ */
+
+.footer-cta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  padding: 8rem 2rem 1.5rem;
+  cursor: pointer;
+}
+
+/* ── Subtítulo ── */
+.footer-subtitulo {
+  font-family: var(--fuente-parrafo);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  color: var(--color-texto-suave);
+  margin: 0 0 1rem;
+  letter-spacing: 0.05em;
+  transition: color var(--transicion-tema);
+}
+
+/* ── Título gigante ── */
+.footer-titulo {
+  font-family: var(--fuente-footer);
+  font-size: clamp(3rem, 10vw, 9rem);
+  color: var(--color-texto);
+  margin: 0;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  transition:
+    font-family 0s,
+    color var(--transicion-tema);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HOVER — Cambio de fuente a active
+═══════════════════════════════════════════════════════════════ */
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-cta:hover .footer-titulo {
+    font-family: var(--fuente-footer-active);
+    color: var(--color-acento);
+  }
+}
+
+/* ── Focus visible ── */
+.footer-cta:focus-visible {
+  outline: none;
+}
+
+.footer-cta:focus-visible .footer-titulo {
+  font-family: var(--fuente-footer-active);
+  color: var(--color-acento);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVEGACIÓN HORIZONTAL — Debajo del CTA
+═══════════════════════════════════════════════════════════════ */
+
+.footer-nav {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-nav-enlace {
+  font-family: var(--fuente-parrafo);
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  color: var(--color-texto-suave);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: color var(--transicion-tema);
+}
+
+.footer-nav-separador {
+  font-size: 0.55rem;
+  color: var(--color-acento);
+  transition: color var(--transicion-tema);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-nav-enlace:hover {
+    color: var(--color-acento);
+  }
+}
+
+.footer-nav-enlace:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BARRA INFERIOR — Estilo nav-overlay-footer (3 columnas)
+═══════════════════════════════════════════════════════════════ */
+
+.footer-barra {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.8fr;
+  margin-top: auto;
+  min-height: clamp(98px, 11.5vh, 126px);
+  border-top: 1px solid color-mix(in srgb, var(--color-texto) 18%, transparent);
+  transition: border-color var(--transicion-tema);
+}
+
+.footer-barra > * {
+  padding: 18px 24px;
+  border-right: 1px solid color-mix(in srgb, var(--color-texto) 18%, transparent);
+  transition: border-color var(--transicion-tema);
+}
+
+.footer-barra > *:last-child {
+  border-right: none;
+}
+
+/* ── Frase (izquierda) ── */
+.footer-barra-copy {
+  font-family: var(--fuente-parrafo-light, var(--fuente-parrafo));
+  font-size: clamp(13px, 1.28vw, 20px);
+  color: var(--color-texto-suave);
+  margin: 0;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  transition: color var(--transicion-tema);
+}
+
+/* ── Contacto (centro) ── */
+.footer-barra-contacto {
+  font-family: var(--fuente-parrafo-light, var(--fuente-parrafo));
+  font-size: clamp(13px, 1.28vw, 20px);
+  color: var(--color-texto-suave);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: color var(--transicion-tema);
+}
+
+.footer-barra-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transicion-tema);
+}
+
+/* ── Redes (derecha) ── */
+.footer-barra-sociales {
+  font-family: var(--fuente-parrafo-light, var(--fuente-parrafo));
+  font-size: clamp(13px, 1.28vw, 20px);
+  color: var(--color-texto-suave);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+  text-align: right;
+  transition: color var(--transicion-tema);
+}
+
+.footer-barra-sociales a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transicion-tema);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-barra-link:hover,
+  .footer-barra-sociales a:hover {
+    color: var(--color-acento);
+  }
+}
+
+.footer-barra-link:focus-visible,
+.footer-barra-sociales a:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Tablet landscape (≤1024px, landscape)
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) and (orientation: landscape) {
+  .footer-cta {
+    padding: 6rem 2rem 3rem;
+  }
+
+  .footer-titulo {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+  }
+
+  .footer-barra {
+    grid-template-columns: 1.4fr 1fr 0.8fr;
+    min-height: auto;
+  }
+
+  .footer-barra > * {
+    padding: 12px 18px;
+  }
+
+  .footer-barra-copy,
+  .footer-barra-contacto,
+  .footer-barra-sociales {
+    font-size: clamp(13px, 1.4vw, 18px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Tablet portrait (≤1024px, portrait)
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .footer-cta {
+    padding: 6rem 2rem 3rem;
+  }
+
+  .footer-titulo {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+  }
+
+  .footer-barra {
+    grid-template-columns: 1fr 1fr;
+    min-height: auto;
+  }
+
+  .footer-barra-copy {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+
+  .footer-barra-contacto {
+    border-right: 1px solid color-mix(in srgb, var(--color-texto) 18%, transparent);
+  }
+
+  .footer-barra-sociales {
+    text-align: left;
+  }
+
+  .footer-barra-copy,
+  .footer-barra-contacto,
+  .footer-barra-sociales {
+    font-size: clamp(14px, 1.8vw, 20px);
+    padding: 14px 20px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile portrait (≤599px)
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 599px) {
+  .footer-cta {
+    padding: 5rem 1.5rem 2.5rem;
+  }
+
+  .footer-titulo {
+    font-size: clamp(2rem, 12vw, 3.5rem);
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem 2rem;
+  }
+
+  .footer-barra {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .footer-barra > * {
+    border-right: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-texto) 18%, transparent);
+  }
+
+  .footer-barra > *:last-child {
+    border-bottom: none;
+  }
+
+  .footer-barra-copy,
+  .footer-barra-contacto,
+  .footer-barra-sociales {
+    font-size: clamp(13px, 3.8vw, 17px);
+  }
+
+  .footer-barra-sociales {
+    text-align: left;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile landscape (≤768px, landscape)
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .footer-cta {
+    padding: 4rem 1.5rem 2rem;
+  }
+
+  .footer-titulo {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+  }
+
+  .footer-barra {
+    grid-template-columns: 1.2fr 1fr 0.9fr;
+    min-height: auto;
+  }
+
+  .footer-barra > * {
+    padding: 10px 14px;
+  }
+
+  .footer-barra-copy,
+  .footer-barra-contacto,
+  .footer-barra-sociales {
+    font-size: clamp(11px, 1.6vw, 14px);
+  }
+
+  .footer-barra-sociales {
+    text-align: right;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-degradado,
+  .footer-subtitulo,
+  .footer-titulo,
+  .footer-barra,
+  .footer-barra > *,
+  .footer-barra-copy,
+  .footer-barra-contacto,
+  .footer-barra-link,
+  .footer-barra-sociales,
+  .footer-barra-sociales a {
+    transition: none;
+  }
+}

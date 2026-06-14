@@ -387,7 +387,7 @@
     will-change: filter;
   }
 
-  /* Gradiente oscuro encima de la imagen para legibilidad del texto */
+  /* Gradiente claro encima de la imagen para legibilidad del texto */
   .manifiesto-col--imagen::after {
     content: "";
     position: absolute;
@@ -395,8 +395,9 @@
     z-index: 1;
     background: linear-gradient(
       160deg,
-      rgba(0, 0, 0, 0.18) 0%,
-      rgba(0, 0, 0, 0.55) 100%
+      rgba(255, 255, 255, 0.65) 0%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0.3) 100%
     );
     pointer-events: none;
     opacity: 0;
