@@ -41,7 +41,7 @@
 }
 
 .proyecto-numero {
-  font-family: var(--fuente-parrafo);
+  font-family: var(--fuente-micro);
   font-size: 0.96rem;
   color: var(--color-acento);
   letter-spacing: 0.1em;
@@ -54,7 +54,6 @@
   color: var(--color-texto);
   margin: 0;
   line-height: 1;
-  letter-spacing: -0.02em;
   transition: color var(--transicion-tema);
 }
 
@@ -90,7 +89,7 @@
 
 .proyecto-rol strong,
 .proyecto-encargo strong {
-  color: var(--color-texto);
+  color: var(--color-acento);
   transition: color var(--transicion-tema);
 }
 
@@ -105,7 +104,7 @@
 }
 
 .proyecto-link {
-  font-family: var(--fuente-parrafo);
+  font-family: var(--fuente-micro);
   font-size: clamp(0.96rem, 1.2vw, 1.14rem);
   color: var(--color-acento);
   text-decoration: none;
