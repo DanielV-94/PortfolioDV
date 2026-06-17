@@ -162,7 +162,7 @@
   object-fit: contain;
   border-radius: 8px;
   scroll-snap-align: start;
-  filter: drop-shadow(0 8px 24px var(--manifiesto-drop-1));
+  filter: drop-shadow(0 8px 14px var(--manifiesto-drop-1));
   transition: transform 0.3s ease;
 }
 
@@ -176,7 +176,7 @@
   max-height: 80vh;
   width: auto;
   border-radius: 8px;
-  filter: drop-shadow(0 8px 24px var(--manifiesto-drop-1));
+  filter: drop-shadow(0 8px 14px var(--manifiesto-drop-1));
 }
 
 /* ═══════════════════════════════════════════════════════════════
