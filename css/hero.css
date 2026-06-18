@@ -609,7 +609,7 @@
 
 @media (max-width: 768px) {
   .hero-sticky-stage {
-    height: 210dvh;
+    height: 130dvh;
   }
 
   /* Nombres: centrados vertical y horizontalmente */
