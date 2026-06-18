@@ -1,0 +1,163 @@
+/* ═══════════════════════════════════════════════════════════════
+   SOBRE MÍ — Página completa con scrolltelling vertical
+   Hero + Historia + Manifiesto + Timeline + CTA
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Main ── */
+.sobre-main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO — Fullscreen con título centrado
+═══════════════════════════════════════════════════════════════ */
+
+.sobre-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sobre-hero-contenido {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 1000px;
+  padding: 0 2rem;
+}
+
+.sobre-hero-etiqueta {
+  font-family: var(--fuente-micro);
+  font-size: 0.875rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-acento);
+  margin-bottom: 2rem;
+  opacity: 0;
+  transition: color var(--transicion-tema);
+}
+
+.sobre-hero-titulo {
+  font-family: var(--fuente-dialogo);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-texto);
+  margin: 0 0 2rem;
+  transition: color var(--transicion-tema);
+}
+
+.sobre-hero-titulo .linea {
+  display: block;
+  overflow: hidden;
+}
+
+.sobre-hero-titulo .linea-inner {
+  display: block;
+  transform: translateY(100%);
+}
+
+.sobre-hero-subtitulo {
+  font-family: var(--fuente-parrafo);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-texto-suave);
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0;
+  font-weight: 300;
+  line-height: 1.6;
+  transition: color var(--transicion-tema);
+}
+
+.sobre-scroll-indicador {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+}
+
+.sobre-scroll-indicador span {
+  font-family: var(--fuente-micro);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-texto-suave);
+  transition: color var(--transicion-tema);
+}
+
+.sobre-scroll-linea {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--color-acento), transparent);
+  animation: sobre-scroll-pulso 2s ease-in-out infinite;
+}
+
+@keyframes sobre-scroll-pulso {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Hero
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet landscape ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .sobre-hero-titulo {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+  }
+}
+
+/* ── Tablet portrait ── */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .sobre-hero-titulo {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+  }
+
+  .sobre-hero-subtitulo {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+  }
+}
+
+/* ── Mobile portrait ── */
+@media (max-width: 599px) {
+  .sobre-hero {
+    height: 100dvh;
+  }
+
+  .sobre-hero-contenido {
+    padding: 0 1.2rem;
+  }
+
+  .sobre-hero-titulo {
+    font-size: clamp(2rem, 9vw, 3.5rem);
+  }
+
+  .sobre-hero-subtitulo {
+    font-size: 1rem;
+  }
+
+  .sobre-scroll-indicador {
+    bottom: 2rem;
+  }
+}
+
+/* ── Mobile landscape ── */
+@media (max-width: 768px) and (orientation: landscape) {
+  .sobre-hero-titulo {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .sobre-scroll-indicador {
+    display: none;
+  }
+}
