@@ -30,12 +30,12 @@
 :root {
   --color-fondo: #e8f2f5;
   --color-fondo-secundario: #c4dbe3;
-  --color-fondo-alt: #c50646;
+  --color-fondo-alt: #f4faef;
   --color-texto: #12232a;
-  --color-texto-suave: #7a4a7a;
+  --color-texto-suave: #b048b0;
   --color-acento: #0b50c8;
   --color-acento-hover: #6a09ab;
-  --color-grid: rgba(18, 35, 42, 0.293);
+  --color-grid: rgba(18, 35, 42, 0.726);
   --color-gradiente-ini: rgba(232, 242, 245, 0);
   --color-gradiente-fin: rgba(196, 219, 227, 0.18);
   --color-cursor-daniel: #c8145a;
@@ -69,10 +69,10 @@
   --color-fondo-secundario: #0a1420;
   --color-fondo-alt: #19c1b8;
   --color-texto: #f0fff0;
-  --color-texto-suave: #7b68ee;
+  --color-texto-suave: #ffbc02;
   --color-acento: #91ff00;
   --color-acento-hover: #ff2d9b;
-  --color-grid: rgba(145, 255, 0, 0.586);
+  --color-grid: rgba(145, 255, 0, 0.903);
   --color-gradiente-ini: rgba(10, 10, 20, 0);
   --color-gradiente-fin: rgba(10, 10, 20, 0.88);
   --color-cursor-daniel: #00f0ff;
@@ -141,9 +141,9 @@
 [data-tema="rave"] {
   --color-fondo: #050505;
   --color-fondo-secundario: #050a0a;
-  --color-fondo-alt: #cf5306;
+  --color-fondo-alt: #3806cf;
   --color-texto: #ffffff;
-  --color-texto-suave: #777777;
+  --color-texto-suave: #ebf6dc;
   --color-acento: #ff3300;
   --color-acento-hover: #00ff88;
   --color-grid: rgba(255, 153, 0, 0.564);
@@ -217,9 +217,9 @@
   --color-fondo-secundario: #f5f0ff;
   --color-fondo-alt: #f5b8b8;
   --color-texto: #1a1a2e;
-  --color-texto-suave: #555980;
-  --color-acento: #7c3aed;
-  --color-acento-hover: #06d6a0;
+  --color-texto-suave: #9106cd;
+  --color-acento: #ff00cc;
+  --color-acento-hover: #0629d6;
   --color-grid: rgba(124, 58, 237, 0.619);
   --color-gradiente-ini: rgba(245, 247, 255, 0);
   --color-gradiente-fin: rgba(234, 237, 250, 0.25);
