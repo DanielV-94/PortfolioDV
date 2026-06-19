@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="css/footer.css" />
 </head>
 
-<body data-tema="neutro" class="cursor-oculto" style="background-color: var(--color-fondo-alt);">
+<body data-tema="neutro" class="cursor-oculto" style="background-color: var(--color-fondo-secundario);">
   <!-- ══ Cursor personalizado ══ -->
   <div class="cursor-usuario" id="cursorUsuario" aria-hidden="true">
     <div class="cursor-punto"></div>
@@ -171,8 +171,23 @@
   ═══════════════════════════════════════════════════════════ -->
   <main class="sobre-main">
 
-    <!-- ═══ HERO ═══ -->
+    <!-- ═══ HERO — Espiral 3D de imágenes + texto ═══ -->
     <section class="sobre-hero">
+      <!-- Espiral 3D por detrás del texto -->
+      <div class="sobre-espiral" id="sobreEspiral" aria-hidden="true">
+        <div class="sobre-espiral-track" id="sobreEspiralTrack">
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=1" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=2" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=3" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=4" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=5" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=6" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=7" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=8" alt="" /></div>
+        </div>
+      </div>
+
+      <!-- Texto por encima de la espiral -->
       <div class="sobre-hero-contenido">
         <p class="sobre-hero-etiqueta">Sobre Mí</p>
         <h1 class="sobre-hero-titulo">
@@ -189,7 +204,179 @@
       </div>
     </section>
 
-    <!-- Las demás secciones se irán añadiendo aquí -->
+    <!-- ═══ HISTORIA 1 — Del teatro al código ═══ -->
+    <section class="sobre-historia">
+      <div class="sobre-historia-grid">
+        <div class="sobre-historia-imagen" id="tiltImagen">
+          <div class="tilt-card" id="tiltCard">
+            <div class="tilt-bg" id="tiltBg" style="background-image: url('https://image.qwenlm.ai/public_source/a2c32d48-beb3-418a-9713-e542328bdd91/1dcb51e73-25a4-4dd8-b2af-7351bfed3d8a.png');"></div>
+            <div class="tilt-front" id="tiltFront">
+              <img src="https://image.qwenlm.ai/public_source/a2c32d48-beb3-418a-9713-e542328bdd91/1dcb51e73-25a4-4dd8-b2af-7351bfed3d8a.png" alt="Danza Contemporánea" />
+            </div>
+            <div class="tilt-shine" id="tiltShine"></div>
+            <div class="tilt-glare" id="tiltGlare"></div>
+            <div class="tilt-border"></div>
+            <span class="tilt-label">Danza Contemporánea</span>
+          </div>
+          <div class="tilt-shadow" id="tiltShadow"></div>
+        </div>
+
+        <div class="sobre-historia-contenido">
+          <h2 class="sobre-historia-titulo">
+            <span class="reveal-texto">Durante años, mi escenario fue el <em>teatro</em>.</span>
+          </h2>
+          <p>
+            Como Licenciado en Danza Contemporánea, aprendí que cada movimiento cuenta una historia, que el ritmo define la emoción y que la precisión técnica es lo que separa un ensayo de una obra inolvidable.
+          </p>
+          <p>
+            Hoy cambio el escenario por el navegador, pero la esencia sigue intacta: <strong>tu sitio web no debe ser un documento estático. Debe respirar, fluir y conectar.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MANIFIESTO ═══ -->
+    <section class="sobre-manifiesto">
+      <div class="sobre-manifiesto-contenido">
+        <p>
+          En un mundo digital saturado de plantillas genéricas y diseños que se ven todos iguales, me niego a ser parte del ruido. Mi filosofía es inquebrantable: <strong>cada proyecto, sin importar su tamaño, recibe el mismo nivel de exigencia, investigación y pulido milimétrico</strong> que una producción para un cliente VIP.
+        </p>
+        <p>
+          <em>Las animaciones que diseño son parte de la narrativa. La velocidad de carga no es un lujo, es respeto por tu usuario. El diseño no es solo estética, es estrategia pura.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ HISTORIA 2 — ¿Por qué soy diferente? ═══ -->
+    <section class="sobre-historia sobre-historia--invertida">
+      <div class="sobre-historia-grid sobre-historia-grid--invertida">
+        <div class="sobre-historia-imagen">
+          <img src="https://image.qwenlm.ai/public_source/a2c32d48-beb3-418a-9713-e542328bdd91/1fc620c5f-e1a1-4829-aa7a-5519fffae288.png" alt="Desarrollo Web" class="sobre-historia-img-simple" />
+        </div>
+
+        <div class="sobre-historia-contenido">
+          <h2 class="sobre-historia-titulo">
+            <span class="reveal-texto">¿Por qué soy <em>diferente</em>?</span>
+          </h2>
+          <p>
+            Porque entiendo la experiencia humana. Mi trayectoria no es la típica ruta de un programador, y esa es mi mayor ventaja.
+          </p>
+          <p>
+            Haber coordinado eventos de alto nivel, atendido a clientes exclusivos en entornos VIP y dirigido grupos de personas me enseñó algo que ningún curso de código puede enseñar: <strong>la empatía y la obsesión por el detalle.</strong>
+          </p>
+          <p>
+            Sé cómo guiar la mirada del usuario (como guío a un público en un teatro). Sé cómo anticiparme a los problemas antes de que ocurran. Y sé que la tecnología debe estar al servicio de las personas, no al revés.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE VERTICAL — Mi Trayectoria ═══ -->
+    <section class="sobre-timeline">
+      <div class="sobre-timeline-header">
+        <h2 class="sobre-timeline-titulo">Mi Trayectoria</h2>
+        <p class="sobre-timeline-subtitulo">Del arte al código — Una evolución natural</p>
+      </div>
+
+      <div class="sobre-timeline-linea" aria-hidden="true"></div>
+
+      <div class="sobre-timeline-items">
+        <article class="sobre-timeline-item">
+          <span class="sobre-timeline-anio">2014–2018</span>
+          <h3 class="sobre-timeline-item-titulo">La Formación</h3>
+          <p class="sobre-timeline-item-sub">Licenciatura en Danza Contemporánea — ISAE</p>
+          <p class="sobre-timeline-item-desc">Cuatro años de disciplina, técnica y descubrimiento artístico. Donde aprendí que cada movimiento cuenta una historia.</p>
+        </article>
+
+        <article class="sobre-timeline-item">
+          <span class="sobre-timeline-anio">2018</span>
+          <h3 class="sobre-timeline-item-titulo">Mi Obra Maestra</h3>
+          <p class="sobre-timeline-item-sub">"INFIERNO" — Director, Productor y Coreógrafo</p>
+          <p class="sobre-timeline-item-desc">Palacio de las Vacas, Guadalajara. Una producción inmersiva basada en la Divina Comedia con más de 30 bailarines. El público recorría libremente las instalaciones.</p>
+        </article>
+
+        <article class="sobre-timeline-item">
+          <span class="sobre-timeline-anio">2018</span>
+          <h3 class="sobre-timeline-item-titulo">Escenario de Élite</h3>
+          <p class="sobre-timeline-item-sub">TEDx Guadalajara — Teatro Degollado</p>
+          <p class="sobre-timeline-item-desc">Uno de los escenarios más importantes de México. Compartir el escenario con pensadores y líderes en un evento de talla internacional.</p>
+        </article>
+
+        <article class="sobre-timeline-item">
+          <span class="sobre-timeline-anio">2018</span>
+          <h3 class="sobre-timeline-item-titulo">Consagración Competitiva</h3>
+          <p class="sobre-timeline-item-sub">1er Lugar Contemporáneo & 2do Lugar Jazz — Attitude</p>
+          <p class="sobre-timeline-item-desc">Cerrando una etapa competitiva con broche de oro, demostrando que la disciplina y el trabajo constante dan resultados.</p>
+        </article>
+
+        <article class="sobre-timeline-item">
+          <span class="sobre-timeline-anio">2019</span>
+          <h3 class="sobre-timeline-item-titulo">Intercambio Internacional</h3>
+          <p class="sobre-timeline-item-sub">Residencia Artística — Da Soul Chung</p>
+          <p class="sobre-timeline-item-desc">AGAVE Scenic Exchange. Remontaje de "Dusty Old Things" con la coreógrafa coreana. Expandir horizontes y adaptarme a nuevas metodologías.</p>
+        </article>
+
+        <article class="sobre-timeline-item">
+          <span class="sobre-timeline-anio">2020</span>
+          <h3 class="sobre-timeline-item-titulo">Emprender en la Adversidad</h3>
+          <p class="sobre-timeline-item-sub">OnLiveMovnt — Cofundador & Coordinador</p>
+          <p class="sobre-timeline-item-desc">Durante la pandemia, cofundé una academia de danza virtual. Recluté personal, diseñé estrategias de marketing y coordiné clases online.</p>
+        </article>
+
+        <article class="sobre-timeline-item">
+          <span class="sobre-timeline-anio">2023–2025</span>
+          <h3 class="sobre-timeline-item-titulo">Atención VIP & Eventos de Alto Nivel</h3>
+          <p class="sobre-timeline-item-sub">Twin Lions Casino — Hostess</p>
+          <p class="sobre-timeline-item-desc">Atención a clientes exclusivos, coordinación de eventos, presentación de shows en vivo. Habilidades de servicio y oratoria que hoy aplico en cada proyecto web.</p>
+        </article>
+
+        <article class="sobre-timeline-item sobre-timeline-item--actual">
+          <span class="sobre-timeline-anio">Presente</span>
+          <h3 class="sobre-timeline-item-titulo">Nueva Etapa</h3>
+          <p class="sobre-timeline-item-sub">💻 Diseño & Programación Web</p>
+          <p class="sobre-timeline-item-desc">Fusionando mi pasado artístico con mi futuro digital. Creando experiencias web que respiran, fluyen y conectan. Cada proyecto recibe el mismo trato VIP.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══ CTA — Mensaje final con luces de teatro ═══ -->
+    <section class="sobre-cta" id="sobreCta">
+      <div class="sobre-cta-luz sobre-cta-luz--izq" id="ctaLuzIzq"></div>
+      <div class="sobre-cta-luz sobre-cta-luz--der" id="ctaLuzDer"></div>
+      <div class="sobre-cta-glow" id="ctaGlow"></div>
+
+      <div class="sobre-cta-contenido">
+        <span class="sobre-cta-etiqueta">Un mensaje para ti</span>
+
+        <h2 class="sobre-cta-titulo">¿Estás empezando<br>tu <em>negocio</em>?</h2>
+
+        <p class="sobre-cta-parrafo">
+          Si estás dando tus primeros pasos, si apenas estás viendo tu idea tomar forma, si a veces te despiertas a las 3 de la mañana preguntándote <em>"¿de verdad fue buena idea abrir este negocio?"</em>... quiero que sepas algo:
+        </p>
+
+        <div class="sobre-cta-divisor"></div>
+
+        <p class="sobre-cta-parrafo">
+          <strong>Tu proyecto no es "demasiado pequeño" para tener una web impactante.</strong> Al contrario. El inicio es el momento más frágil y más importante de todos. Es ahí donde se define si tu marca va a ser recordada o ignorada.
+        </p>
+
+        <p class="sobre-cta-parrafo">
+          Y yo lo sé porque también he estado ahí: abriendo mis propias clases de danza de forma virtual durante la pandemia, produciendo mis propias obras, invirtiendo cada peso y cada hora de sueño en algo que apenas nacía.
+        </p>
+
+        <p class="sobre-cta-parrafo">
+          Por eso trabajo con la misma intensidad tanto con una gran empresa como con el emprendedor que está abriendo su primer negocio.
+        </p>
+
+        <div class="sobre-cta-divisor"></div>
+
+        <p class="sobre-cta-parrafo">
+          Porque creo firmemente que los que estamos construyendo algo desde cero debemos apoyarnos. <strong>Tu pasión merece una web que la refleje. Tu visión merece una plataforma que la potencie. Tu sueño merece ser tratado como algo grande, e importante, porque lo es.</strong>
+        </p>
+
+        <a href="contacto.html" class="sobre-cta-boton">Hablemos de tu proyecto</a>
+      </div>
+    </section>
 
   </main>
 
