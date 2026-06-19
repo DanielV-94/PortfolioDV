@@ -785,10 +785,10 @@
 .sobre-cta-luz--izq {
   left: 0;
   background: radial-gradient(ellipse at 0% 50%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s1) 45%, transparent) 0%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s3) 25%, transparent) 20%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s1) 12%, transparent) 40%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s5) 4%, transparent) 60%,
+    color-mix(in srgb, var(--manifiesto-neon-color1) 45%, transparent) 0%,
+    color-mix(in srgb, var(--manifiesto-neon-color3) 25%, transparent) 20%,
+    color-mix(in srgb, var(--manifiesto-neon-color1) 12%, transparent) 40%,
+    color-mix(in srgb, var(--manifiesto-neon-color5) 4%, transparent) 60%,
     transparent 85%);
   transform: translateX(-30%);
   filter: blur(30px);
@@ -797,10 +797,10 @@
 .sobre-cta-luz--der {
   right: 0;
   background: radial-gradient(ellipse at 100% 50%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s2) 45%, transparent) 0%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s4) 25%, transparent) 20%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s6) 12%, transparent) 40%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s2) 4%, transparent) 60%,
+    color-mix(in srgb, var(--manifiesto-neon-color2) 45%, transparent) 0%,
+    color-mix(in srgb, var(--manifiesto-neon-color4) 25%, transparent) 20%,
+    color-mix(in srgb, var(--manifiesto-neon-color6) 12%, transparent) 40%,
+    color-mix(in srgb, var(--manifiesto-neon-color2) 4%, transparent) 60%,
     transparent 85%);
   transform: translateX(30%);
   filter: blur(30px);
@@ -815,8 +815,8 @@
   width: 120%;
   height: 120%;
   background: radial-gradient(ellipse at 50% 50%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s5) 15%, transparent) 0%,
-    color-mix(in srgb, var(--manifiesto-neon-color-s6) 8%, transparent) 30%,
+    color-mix(in srgb, var(--manifiesto-neon-color1) 15%, transparent) 0%,
+    color-mix(in srgb, var(--manifiesto-neon-color4) 8%, transparent) 30%,
     transparent 70%);
   opacity: 0;
   z-index: 1;

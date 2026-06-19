@@ -336,12 +336,12 @@ const SobreMi = (() => {
         /* Cada partícula usa --manifiesto-neon-color como base
            y una de las variables neon-s1 a s6 como box-shadow */
         const sombras = [
-          'var(--manifiesto-neon-s1)',
-          'var(--manifiesto-neon-s2)',
-          'var(--manifiesto-neon-s3)',
-          'var(--manifiesto-neon-s4)',
-          'var(--manifiesto-neon-s5)',
-          'var(--manifiesto-neon-s6)'
+          'var(--manifiesto-neon-color1)',
+          'var(--manifiesto-neon-color2)',
+          'var(--manifiesto-neon-color3)',
+          'var(--manifiesto-neon-color4)',
+          'var(--manifiesto-neon-color5)',
+          'var(--manifiesto-neon-color6)'
         ];
 
         for (let i = 0; i < numParticulas; i++) {
@@ -351,7 +351,7 @@ const SobreMi = (() => {
           const sombra = sombras[i % sombras.length];
           particula.style.width = size + 'px';
           particula.style.height = size + 'px';
-          particula.style.background = 'var(--manifiesto-neon-color)';
+          particula.style.background = 'var(--manifiesto-neon-color2)';
           particula.style.boxShadow = sombra;
           particula.style.left = gsap.utils.random(5, 95) + '%';
           particula.style.top = gsap.utils.random(10, 90) + '%';

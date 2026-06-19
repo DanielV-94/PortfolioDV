@@ -51,12 +51,19 @@
   --manifiesto-drop-2: rgba(11, 181, 200, 0.5);
   --manifiesto-drop-3: rgba(91, 74, 158, 0.6);
   --manifiesto-neon-color: #12232a;
-  --manifiesto-neon-s1: 0 0 4px rgba(200, 20, 90, 0.6);
-  --manifiesto-neon-s2: 0 0 14px rgba(11, 181, 200, 0.5);
+  --manifiesto-neon-s1: 0 0 4px rgba(200, 20, 89, 0.818);
+  --manifiesto-neon-s2: 0 0 14px rgba(11, 181, 200, 0.815);
   --manifiesto-neon-s3: 0 0 30px rgba(200, 20, 90, 0.35);
-  --manifiesto-neon-s4: 0 0 60px rgba(91, 74, 158, 0.3);
-  --manifiesto-neon-s5: 0 0 110px rgba(11, 181, 200, 0.2);
-  --manifiesto-neon-s6: 0 0 180px rgba(123, 45, 139, 0.15);
+  --manifiesto-neon-s4: 0 0 60px rgba(91, 74, 158, 0.897);
+  --manifiesto-neon-s5: 0 0 110px rgba(11, 181, 200, 0.626);
+  --manifiesto-neon-s6: 0 0 180px rgba(123, 45, 139, 0.733);
+  --manifiesto-neon-color1:rgba(200, 20, 89);
+  --manifiesto-neon-color2:rgba(11, 181, 200);
+  --manifiesto-neon-color3:rgba(200, 20, 90);
+  --manifiesto-neon-color4:rgba(91, 74, 158);
+  --manifiesto-neon-color5:rgba(11, 181, 200);
+  --manifiesto-neon-color6:rgba(123, 45, 139);
+
 }
 
 /* ════════════════════════════════════════
@@ -88,12 +95,18 @@
   --manifiesto-drop-2: rgba(0, 238, 255, 0.918);
   --manifiesto-drop-3: rgba(103, 7, 57, 0.937);
   --manifiesto-neon-color: #91ff00;
-  --manifiesto-neon-s1: 0 0 4px #ff0066;
+  --manifiesto-neon-s1: 0 0 4px rgba(255, 0, 102, 0.936);
   --manifiesto-neon-s2: 0 0 14px rgba(157, 0, 255, 0.95);
   --manifiesto-neon-s3: 0 0 30px rgba(0, 240, 255, 0.80);
   --manifiesto-neon-s4: 0 0 60px rgba(180, 9, 97, 0.797);
   --manifiesto-neon-s5: 0 0 110px rgba(154, 249, 29, 0.844);
   --manifiesto-neon-s6: 0 0 180px rgba(5, 118, 126, 0.704);
+  --manifiesto-neon-color1:rgba(255, 0, 102);
+  --manifiesto-neon-color2:rgba(157, 0, 255);
+  --manifiesto-neon-color3:rgba(0, 240, 255);
+  --manifiesto-neon-color4:rgba(180, 9, 97);
+  --manifiesto-neon-color5:rgba(154, 249, 29);
+  --manifiesto-neon-color6:rgba(5, 118, 126);
 }
 
 /* ════════════════════════════════════════
@@ -125,12 +138,18 @@
   --manifiesto-drop-2: rgba(255, 208, 0, 0.50);
   --manifiesto-drop-3: rgba(0, 229, 255, 0.30);
   --manifiesto-neon-color: #f0fffa;
-  --manifiesto-neon-s1: 0 0 4px #13b6df;
+  --manifiesto-neon-s1: 0 0 4px rgba(19, 182, 223, 0.842);
   --manifiesto-neon-s2: 0 0 14px rgba(255, 45, 106, 0.95);
   --manifiesto-neon-s3: 0 0 30px rgba(129, 107, 255, 0.968);
   --manifiesto-neon-s4: 0 0 60px rgba(146, 255, 45, 0.751);
   --manifiesto-neon-s5: 0 0 110px rgba(0, 229, 255, 0.40);
   --manifiesto-neon-s6: 0 0 180px rgba(115, 0, 255, 0.943);
+  --manifiesto-neon-color1:rgba(19, 182, 223); 
+  --manifiesto-neon-color2:rgba(255, 45, 106);
+  --manifiesto-neon-color3:rgba(129, 107, 255);
+  --manifiesto-neon-color4:rgba(146, 255, 45);
+  --manifiesto-neon-color5:rgba(0, 229, 255);
+  --manifiesto-neon-color6:rgba(115, 0, 255);
 }
 
 /* ════════════════════════════════════════
@@ -162,12 +181,18 @@
   --manifiesto-drop-2: rgba(0, 255, 136, 0.50);
   --manifiesto-drop-3: rgba(242, 227, 19, 0.769);
   --manifiesto-neon-color: #ffffff;
-  --manifiesto-neon-s1: 0 0 4px #ffffff;
+  --manifiesto-neon-s1: 0 0 4px rgba(234, 231, 231, 0.908);
   --manifiesto-neon-s2: 0 0 14px rgba(255, 51, 0, 0.95);
   --manifiesto-neon-s3: 0 0 30px rgba(0, 255, 136, 0.8);
   --manifiesto-neon-s4: 0 0 60px rgba(136, 0, 255, 0.849);
   --manifiesto-neon-s5: 0 0 110px rgba(255, 51, 0, 0.597);
   --manifiesto-neon-s6: 0 0 180px rgba(255, 251, 0, 0.927);
+  --manifiesto-neon-color1:rgba(234, 231, 231);
+  --manifiesto-neon-color2: rgba(255, 51, 0);
+  --manifiesto-neon-color3:rgba(0, 255, 136);
+  --manifiesto-neon-color4:rgba(136, 0, 255);
+  --manifiesto-neon-color5: rgba(255, 51, 0);
+  --manifiesto-neon-color6:rgba(255, 251, 0);
 }
 
 /* ════════════════════════════════════════
@@ -199,12 +224,18 @@
   --manifiesto-drop-2: rgba(26, 20, 16, 0.5);
   --manifiesto-drop-3: rgba(0, 68, 170, 0.7);
   --manifiesto-neon-color: #1a1410;
-  --manifiesto-neon-s1: 0 0 4px rgba(204, 34, 34, 0.7);
-  --manifiesto-neon-s2: 0 0 14px rgba(204, 34, 34, 0.6);
-  --manifiesto-neon-s3: 0 0 30px rgba(0, 68, 170, 0.5);
-  --manifiesto-neon-s4: 0 0 60px rgba(0, 68, 170, 0.4);
-  --manifiesto-neon-s5: 0 0 110px rgba(204, 34, 34, 0.5);
-  --manifiesto-neon-s6: 0 0 180px rgba(0, 68, 170, 0.3);
+  --manifiesto-neon-s1: 0 0 4px rgba(30, 26, 255, 0.7);
+  --manifiesto-neon-s2: 0 0 14px rgba(232, 6, 6, 0.886);
+  --manifiesto-neon-s3: 0 0 30px rgba(10, 106, 251, 0.703);
+  --manifiesto-neon-s4: 0 0 60px rgba(10, 106, 249, 0.4);
+  --manifiesto-neon-s5: 0 0 110px rgba(245, 13, 13, 0.908);
+  --manifiesto-neon-s6: 0 0 180px rgba(16, 106, 240, 0.9);
+  --manifiesto-neon-color1:rgba(30, 26, 255);
+  --manifiesto-neon-color2:rgba(232, 6, 6);
+  --manifiesto-neon-color3:rgb(10, 207, 251);
+  --manifiesto-neon-color4:rgb(253, 207, 179);
+  --manifiesto-neon-color5:rgba(245, 13, 13);
+  --manifiesto-neon-color6:rgba(16, 106, 240);
 }
 
 /* ════════════════════════════════════════
@@ -236,10 +267,16 @@
   --manifiesto-drop-2: rgba(26, 26, 46, 0.627);
   --manifiesto-drop-3: rgba(255, 0, 111, 0.849);
   --manifiesto-neon-color: #0c9c86;
-  --manifiesto-neon-s1: 0 0 4px rgba(218, 161, 195, 0.767);
-  --manifiesto-neon-s2: 0 0 14px rgba(124, 58, 237, 0.45);
-  --manifiesto-neon-s3: 0 0 30px rgba(26, 26, 46, 0.48);
+  --manifiesto-neon-s1: 0 0 4px rgba(221, 25, 142, 0.767);
+  --manifiesto-neon-s2: 0 0 14px rgba(97, 8, 250, 0.908);
+  --manifiesto-neon-s3: 0 0 30px rgba(236, 4, 116, 0.48);
   --manifiesto-neon-s4: 0 0 60px rgba(6, 214, 160, 0.35);
-  --manifiesto-neon-s5: 0 0 110px rgba(124, 58, 237, 0.60);
-  --manifiesto-neon-s6: 0 0 180px rgba(26, 26, 46, 0.49);
+  --manifiesto-neon-s5: 0 0 110px rgba(96, 10, 244, 0.6);
+  --manifiesto-neon-s6: 0 0 180px rgba(11, 11, 251, 0.49);
+  --manifiesto-neon-color1:rgba(221, 25, 142);
+  --manifiesto-neon-color2:rgba(97, 8, 250);
+  --manifiesto-neon-color3:rgba(236, 4, 116);
+  --manifiesto-neon-color4:rgb(4, 161, 119);
+  --manifiesto-neon-color5:rgb(60, 7, 153);
+  --manifiesto-neon-color6:rgb(6, 6, 138);
 }
