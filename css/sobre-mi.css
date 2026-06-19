@@ -90,7 +90,7 @@
 
 .sobre-hero-titulo {
   font-family: var(--fuente-display);
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(3.75rem, 10vw, 8.75rem);
   font-weight: 700;
   line-height: 1.1;
   color: var(--color-texto);
@@ -111,7 +111,7 @@
 
 .sobre-hero-subtitulo {
   font-family: var(--fuente-dialogo);
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
   color: var(--color-texto-suave);
   max-width: 600px;
   margin: 0 auto;
@@ -377,7 +377,7 @@
 
 .sobre-historia-titulo {
   font-family: var(--fuente-display);
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
   font-weight: 700;
   line-height: 1.2;
   color: var(--color-texto);
@@ -393,7 +393,7 @@
 
 .sobre-historia-contenido p {
   font-family: var(--fuente-dialogo);
-  font-size: 1.125rem;
+  font-size: 1.4rem;
   color: var(--color-texto-suave);
   margin: 0 0 1.5rem;
   line-height: 1.8;
@@ -407,30 +407,37 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MANIFIESTO — Texto grande centrado
+   MANIFIESTO — Tipografía gigante con reveal escalonado
 ═══════════════════════════════════════════════════════════════ */
 
 .sobre-manifiesto {
-  padding: 8rem 2rem;
-  background: var(--color-fondo-secundario);
+  padding: 6rem 2rem;
   position: relative;
   overflow: hidden;
-  transition: background var(--transicion-tema);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sobre-manifiesto-contenido {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 .sobre-manifiesto-contenido p {
-  font-family: var(--fuente-dialogo);
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-  line-height: 1.6;
-  margin: 0 0 2rem;
+  font-family: var(--fuente-display);
+  font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 3rem;
   color: var(--color-texto);
   transition: color var(--transicion-tema);
+}
+
+.sobre-manifiesto-contenido p:last-child {
+  margin-bottom: 0;
 }
 
 .sobre-manifiesto-contenido em {
@@ -440,7 +447,15 @@
 }
 
 .sobre-manifiesto-contenido strong {
-  font-weight: 600;
+  font-weight: 900;
+}
+
+/* Palabras individuales (SplitText) */
+.sobre-manifiesto-contenido .palabra-manifiesto {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(60px) rotateX(25deg);
+  transform-origin: bottom center;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -739,14 +754,14 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   CTA — Mensaje final con luces de teatro
+   CTA — Luces neón teatrales + partículas flotando
 ═══════════════════════════════════════════════════════════════ */
 
 .sobre-cta {
   position: relative;
   padding: 10rem 2rem;
   text-align: center;
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
   overflow: hidden;
   min-height: 100vh;
@@ -755,154 +770,107 @@
   justify-content: center;
 }
 
-/* ── Luces laterales ── */
+/* ── Luces laterales pegadas al viewport ── */
 .sobre-cta-luz {
-  position: absolute;
+  position: fixed;
   top: 0;
   height: 100%;
-  width: 50%;
+  width: 300px;
   pointer-events: none;
   z-index: 1;
   opacity: 0;
-  will-change: opacity, transform;
-  filter: blur(30px);
+  will-change: opacity;
+  filter: blur(40px);
 }
 
 .sobre-cta-luz--izq {
   left: 0;
   background: radial-gradient(ellipse at 0% 50%,
-    color-mix(in srgb, var(--color-acento) 45%, transparent) 0%,
-    color-mix(in srgb, var(--color-acento) 20%, transparent) 30%,
-    transparent 70%);
-  transform: translateX(-30%);
+    color-mix(in srgb, var(--color-acento) 50%, transparent) 0%,
+    color-mix(in srgb, var(--color-acento) 25%, transparent) 35%,
+    transparent 75%);
 }
 
 .sobre-cta-luz--der {
   right: 0;
   background: radial-gradient(ellipse at 100% 50%,
-    color-mix(in srgb, var(--color-acento) 45%, transparent) 0%,
-    color-mix(in srgb, var(--color-acento) 20%, transparent) 30%,
-    transparent 70%);
-  transform: translateX(30%);
+    color-mix(in srgb, var(--color-acento) 50%, transparent) 0%,
+    color-mix(in srgb, var(--color-acento) 25%, transparent) 35%,
+    transparent 75%);
 }
 
+/* ── Glow central pulsante ── */
 .sobre-cta-glow {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.5);
-  width: 120%;
-  height: 120%;
+  transform: translate(-50%, -50%) scale(0.6);
+  width: 100%;
+  height: 100%;
   background: radial-gradient(ellipse at 50% 50%,
-    color-mix(in srgb, var(--color-acento) 15%, transparent) 0%,
+    color-mix(in srgb, var(--color-acento) 12%, transparent) 0%,
     transparent 60%);
   opacity: 0;
   z-index: 1;
   pointer-events: none;
-  filter: blur(40px);
   will-change: opacity, transform;
 }
 
-/* ── Contenido CTA ── */
+/* ── Contenedor de partículas ── */
+.sobre-cta-particulas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.sobre-cta-particula {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* ── Contenido CTA — estilo editorial/manifiesto ── */
 .sobre-cta-contenido {
   position: relative;
   z-index: 5;
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-.sobre-cta-etiqueta {
-  display: inline-block;
-  font-family: var(--fuente-micro);
-  font-size: 0.75rem;
-  letter-spacing: 0.5em;
-  text-transform: uppercase;
-  color: var(--color-acento);
-  margin-bottom: 2rem;
-  opacity: 0;
-  transition: color var(--transicion-tema);
-}
-
-.sobre-cta-titulo {
+.sobre-cta-texto {
   font-family: var(--fuente-display);
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
   color: var(--color-texto);
+  margin: 0 0 2.5rem;
+  transition: color var(--transicion-tema);
+}
+
+.sobre-cta-texto--grande {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
   margin: 0 0 3rem;
-  opacity: 0;
-  transition: color var(--transicion-tema);
 }
 
-.sobre-cta-titulo em {
+.sobre-cta-texto em {
   color: var(--color-acento);
   font-style: italic;
   transition: color var(--transicion-tema);
 }
 
-.sobre-cta-parrafo {
-  font-family: var(--fuente-dialogo);
-  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-  color: var(--color-texto-suave);
-  line-height: 1.9;
-  margin: 0 0 2rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: color var(--transicion-tema);
-}
-
-.sobre-cta-parrafo strong {
-  color: var(--color-texto);
-  font-weight: 500;
-  transition: color var(--transicion-tema);
-}
-
-.sobre-cta-parrafo em {
-  color: var(--color-acento);
-  font-style: italic;
-  transition: color var(--transicion-tema);
-}
-
-.sobre-cta-divisor {
-  width: 60px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-acento), transparent);
-  margin: 2.5rem auto;
-  opacity: 0;
-  transform: scaleX(0);
-}
-
-.sobre-cta-boton {
+/* Palabras individuales (split para reveal) */
+.sobre-cta-texto .palabra-cta {
   display: inline-block;
-  padding: 1.4rem 3.5rem;
-  background: var(--color-acento);
-  color: var(--color-fondo);
-  text-decoration: none;
-  font-family: var(--fuente-micro);
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  margin-top: 3rem;
-  border: 2px solid var(--color-acento);
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.4s ease, background var(--transicion-tema),
-              border-color var(--transicion-tema), color var(--transicion-tema);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .sobre-cta-boton:hover {
-    background: transparent;
-    color: var(--color-acento);
-  }
-}
-
-.sobre-cta-boton:focus-visible {
-  outline: 2px solid var(--color-acento);
-  outline-offset: 4px;
+  transform: translateY(60px) rotateX(25deg);
+  transform-origin: bottom center;
 }
 
 /* ═══════════════════════════════════════════════════════════════

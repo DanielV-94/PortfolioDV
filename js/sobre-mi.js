@@ -214,13 +214,38 @@ const SobreMi = (() => {
         });
       });
 
-      /* Manifiesto */
-      document.querySelectorAll('.sobre-manifiesto-contenido p').forEach(p => {
-        gsap.fromTo(p, { y: 60, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
-          scrollTrigger: { trigger: p, start: 'top 85%', toggleActions: 'play none none reverse' }
+      /* Manifiesto — Reveal escalonado palabra por palabra */
+      const manifiestoSection = document.querySelector('.sobre-manifiesto');
+      const manifiestoParrafos = document.querySelectorAll('.sobre-manifiesto-contenido p');
+
+      if (manifiestoSection && manifiestoParrafos.length) {
+        /* Envolver cada palabra en un span para animarla individualmente */
+        manifiestoParrafos.forEach(p => {
+          const html = p.innerHTML;
+          /* Preservar tags <strong> y <em> pero envolver cada palabra */
+          const wrapped = html.replace(/(\S+)/g, '<span class="palabra-manifiesto" style="display:inline-block; opacity:0; transform:translateY(60px) rotateX(25deg); transform-origin:bottom center;">$1</span>');
+          p.innerHTML = wrapped;
         });
-      });
+
+        const palabras = manifiestoSection.querySelectorAll('.palabra-manifiesto');
+
+        if (palabras.length) {
+          gsap.to(palabras, {
+            y: 0,
+            opacity: 1,
+            rotateX: 0,
+            duration: 0.6,
+            stagger: 0.03,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: manifiestoSection,
+              start: 'top 70%',
+              end: 'bottom 40%',
+              scrub: 1.5
+            }
+          });
+        }
+      }
 
       /* Timeline cards — stack con scroll y rotación */
       const timelineSection = document.getElementById('sobreTimeline');
@@ -295,44 +320,105 @@ const SobreMi = (() => {
     }
 
     /* ══════════════════════════════════════════════════════════
-       CTA — Luces de teatro con scroll
+       CTA — Luces + partículas + reveal editorial tipo manifiesto
     ══════════════════════════════════════════════════════════ */
     const ctaSection = document.getElementById('sobreCta');
     const ctaLuzIzq = document.getElementById('ctaLuzIzq');
     const ctaLuzDer = document.getElementById('ctaLuzDer');
     const ctaGlow = document.getElementById('ctaGlow');
+    const ctaParticulas = document.getElementById('ctaParticulas');
 
     if (ctaSection && !prefersReduced) {
-      const ctaTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ctaSection,
-          start: 'top bottom',
-          end: 'bottom 40%',
-          scrub: 1.2
+
+      /* ── Partículas flotando ── */
+      if (ctaParticulas) {
+        const numParticulas = 35;
+        const coloresParticulas = [
+          'rgba(200, 20, 90, 0.25)',
+          'rgba(11, 181, 200, 0.2)',
+          'rgba(91, 74, 158, 0.2)',
+          'rgba(123, 45, 139, 0.15)',
+          'rgba(200, 20, 90, 0.12)',
+          'rgba(11, 181, 200, 0.12)'
+        ];
+
+        for (let i = 0; i < numParticulas; i++) {
+          const particula = document.createElement('div');
+          particula.className = 'sobre-cta-particula';
+          const size = gsap.utils.random(2, 5);
+          const color = coloresParticulas[Math.floor(Math.random() * coloresParticulas.length)];
+          particula.style.width = size + 'px';
+          particula.style.height = size + 'px';
+          particula.style.background = color;
+          particula.style.left = gsap.utils.random(5, 95) + '%';
+          particula.style.top = gsap.utils.random(10, 90) + '%';
+          particula.style.opacity = '0';
+          ctaParticulas.appendChild(particula);
         }
+
+        const particulas = ctaParticulas.querySelectorAll('.sobre-cta-particula');
+
+        particulas.forEach((p) => {
+          const duracion = gsap.utils.random(4, 9);
+          const delay = gsap.utils.random(0, 5);
+          gsap.to(p, {
+            y: gsap.utils.random(-80, -200),
+            x: gsap.utils.random(-30, 30),
+            opacity: gsap.utils.random(0.3, 0.8),
+            duration: duracion,
+            delay: delay,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+          });
+        });
+
+        gsap.fromTo(ctaParticulas, { opacity: 0 }, {
+          opacity: 1, duration: 1,
+          scrollTrigger: { trigger: ctaSection, start: 'top 80%', end: 'top 40%', scrub: 1 }
+        });
+      }
+
+      /* ── Luces laterales con scroll + parpadeo ── */
+      const luzTl = gsap.timeline({
+        scrollTrigger: { trigger: ctaSection, start: 'top 80%', end: 'bottom 30%', scrub: 1.5 }
       });
+      luzTl.to(ctaLuzIzq, { opacity: 0.85, duration: 1 }, 0);
+      luzTl.to(ctaLuzDer, { opacity: 0.85, duration: 1 }, 0.1);
+      luzTl.to(ctaGlow, { opacity: 1, scale: 1, duration: 1 }, 0.3);
 
-      /* Luces laterales */
-      ctaTl.to(ctaLuzIzq, { opacity: 1, x: 0, duration: 1 }, 0);
-      ctaTl.to(ctaLuzDer, { opacity: 1, x: 0, duration: 1 }, 0);
-      ctaTl.to(ctaGlow, { opacity: 1, scale: 1, duration: 1 }, 0.2);
+      /* Parpadeo sutil */
+      gsap.to(ctaLuzIzq, { opacity: 0.5, duration: 1.8, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1.5 });
+      gsap.to(ctaLuzDer, { opacity: 0.5, duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2 });
+      gsap.to(ctaGlow, { scale: 1.15, opacity: 0.6, duration: 3.5, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2 });
 
-      /* Etiqueta y título */
-      ctaTl.to('.sobre-cta-etiqueta', { opacity: 1, duration: 0.3 }, 0.3);
-      ctaTl.to('.sobre-cta-titulo', { opacity: 1, duration: 0.4 }, 0.35);
+      /* ── Texto — Reveal palabra por palabra (mismo estilo manifiesto) ── */
+      const ctaTextos = ctaSection.querySelectorAll('.sobre-cta-texto');
+      if (ctaTextos.length) {
+        ctaTextos.forEach(p => {
+          const html = p.innerHTML;
+          const wrapped = html.replace(/(\S+)/g, '<span class="palabra-cta" style="display:inline-block; opacity:0; transform:translateY(60px) rotateX(25deg); transform-origin:bottom center;">$1</span>');
+          p.innerHTML = wrapped;
+        });
 
-      /* Párrafos */
-      document.querySelectorAll('.sobre-cta-parrafo').forEach((p, idx) => {
-        ctaTl.to(p, { opacity: 1, y: 0, duration: 0.3 }, 0.4 + idx * 0.08);
+        const palabrasCta = ctaSection.querySelectorAll('.palabra-cta');
+        if (palabrasCta.length) {
+          gsap.to(palabrasCta, {
+            y: 0, opacity: 1, rotateX: 0,
+            duration: 0.6, stagger: 0.025, ease: 'power3.out',
+            scrollTrigger: { trigger: ctaSection, start: 'top 65%', end: 'bottom 35%', scrub: 1.5 }
+          });
+        }
+      }
+
+      /* Ocultar luces cuando la sección sale */
+      ScrollTrigger.create({
+        trigger: ctaSection,
+        start: 'bottom 20%',
+        end: 'bottom top',
+        onLeave: () => gsap.to([ctaLuzIzq, ctaLuzDer], { opacity: 0, duration: 0.5 }),
+        onEnterBack: () => gsap.to([ctaLuzIzq, ctaLuzDer], { opacity: 0.85, duration: 0.5 })
       });
-
-      /* Divisores */
-      document.querySelectorAll('.sobre-cta-divisor').forEach((d, idx) => {
-        ctaTl.to(d, { opacity: 1, scaleX: 1, duration: 0.2 }, 0.5 + idx * 0.12);
-      });
-
-      /* Botón */
-      ctaTl.to('.sobre-cta-boton', { opacity: 1, y: 0, duration: 0.3, ease: 'back.out(1.4)' }, 0.85);
     }
   }
 
