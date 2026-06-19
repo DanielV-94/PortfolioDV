@@ -330,26 +330,29 @@ const SobreMi = (() => {
 
     if (ctaSection && !prefersReduced) {
 
-      /* ── Partículas flotando ── */
+      /* ── Partículas flotando — usan variables del tema ── */
       if (ctaParticulas) {
         const numParticulas = 35;
-        const coloresParticulas = [
-          'rgba(200, 20, 90, 0.25)',
-          'rgba(11, 181, 200, 0.2)',
-          'rgba(91, 74, 158, 0.2)',
-          'rgba(123, 45, 139, 0.15)',
-          'rgba(200, 20, 90, 0.12)',
-          'rgba(11, 181, 200, 0.12)'
+        /* Cada partícula usa --manifiesto-neon-color como base
+           y una de las variables neon-s1 a s6 como box-shadow */
+        const sombras = [
+          'var(--manifiesto-neon-s1)',
+          'var(--manifiesto-neon-s2)',
+          'var(--manifiesto-neon-s3)',
+          'var(--manifiesto-neon-s4)',
+          'var(--manifiesto-neon-s5)',
+          'var(--manifiesto-neon-s6)'
         ];
 
         for (let i = 0; i < numParticulas; i++) {
           const particula = document.createElement('div');
           particula.className = 'sobre-cta-particula';
           const size = gsap.utils.random(2, 5);
-          const color = coloresParticulas[Math.floor(Math.random() * coloresParticulas.length)];
+          const sombra = sombras[i % sombras.length];
           particula.style.width = size + 'px';
           particula.style.height = size + 'px';
-          particula.style.background = color;
+          particula.style.background = 'var(--manifiesto-neon-color)';
+          particula.style.boxShadow = sombra;
           particula.style.left = gsap.utils.random(5, 95) + '%';
           particula.style.top = gsap.utils.random(10, 90) + '%';
           particula.style.opacity = '0';
@@ -381,16 +384,17 @@ const SobreMi = (() => {
 
       /* ── Luces laterales con scroll + parpadeo ── */
       const luzTl = gsap.timeline({
-        scrollTrigger: { trigger: ctaSection, start: 'top 80%', end: 'bottom 30%', scrub: 1.5 }
+        scrollTrigger: { trigger: ctaSection, start: 'top 80%', end: 'bottom 40%', scrub: 1.2 }
       });
-      luzTl.to(ctaLuzIzq, { opacity: 0.85, duration: 1 }, 0);
-      luzTl.to(ctaLuzDer, { opacity: 0.85, duration: 1 }, 0.1);
-      luzTl.to(ctaGlow, { opacity: 1, scale: 1, duration: 1 }, 0.3);
 
-      /* Parpadeo sutil */
-      gsap.to(ctaLuzIzq, { opacity: 0.5, duration: 1.8, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1.5 });
-      gsap.to(ctaLuzDer, { opacity: 0.5, duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2 });
-      gsap.to(ctaGlow, { scale: 1.15, opacity: 0.6, duration: 3.5, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2 });
+      /* Las luces entran desde los lados */
+      luzTl.to(ctaLuzIzq, { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, 0);
+      luzTl.to(ctaLuzDer, { opacity: 1, x: 0, duration: 1, ease: 'power2.out' }, 0);
+      luzTl.to(ctaGlow, { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }, 0.2);
+
+      /* Parpadeo sutil después de aparecer */
+      gsap.to(ctaLuzIzq, { opacity: 0.95, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2 });
+      gsap.to(ctaLuzDer, { opacity: 0.95, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2.5 });
 
       /* ── Texto — Reveal palabra por palabra (mismo estilo manifiesto) ── */
       const ctaTextos = ctaSection.querySelectorAll('.sobre-cta-texto');
@@ -417,7 +421,7 @@ const SobreMi = (() => {
         start: 'bottom 20%',
         end: 'bottom top',
         onLeave: () => gsap.to([ctaLuzIzq, ctaLuzDer], { opacity: 0, duration: 0.5 }),
-        onEnterBack: () => gsap.to([ctaLuzIzq, ctaLuzDer], { opacity: 0.85, duration: 0.5 })
+        onEnterBack: () => gsap.to([ctaLuzIzq, ctaLuzDer], { opacity: 1, duration: 0.5 })
       });
     }
   }
