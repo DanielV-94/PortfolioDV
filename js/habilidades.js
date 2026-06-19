@@ -268,7 +268,6 @@ const Habilidades = (() => {
       duration: w1 / 45,
       ease: 'none',
       repeat: -1,
-      modifiers: { x: gsap.utils.unitize(x => parseFloat(x) % w1) },
     });
 
     /* Fila 2 arranca desplazada y va al contrario */
@@ -278,7 +277,6 @@ const Habilidades = (() => {
       duration: w2 / 45,
       ease: 'none',
       repeat: -1,
-      modifiers: { x: gsap.utils.unitize(x => { const v = parseFloat(x) % w2; return v > 0 ? v - w2 : v; }) },
     });
 
     /* Sin pin — la sección pasa con scroll natural */

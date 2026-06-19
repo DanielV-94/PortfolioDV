@@ -30,7 +30,7 @@
 :root {
   --color-fondo: #e8f2f5;
   --color-fondo-secundario: #c4dbe3;
-  --color-fondo-alt: #1b4d5c;
+  --color-fondo-alt: #c50646;
   --color-texto: #12232a;
   --color-texto-suave: #7a4a7a;
   --color-acento: #0b50c8;
@@ -178,7 +178,7 @@
 [data-tema="collage"] {
   --color-fondo: #e8dcc8;
   --color-fondo-secundario: #d4c4a8;
-  --color-fondo-alt: #c2a97e;
+  --color-fondo-alt: #daeaf4;
   --color-texto: #1a1410;
   --color-texto-suave: #6b5740;
   --color-acento: #cc2222;

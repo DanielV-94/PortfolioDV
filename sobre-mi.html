@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="css/footer.css" />
 </head>
 
-<body data-tema="neutro" class="cursor-oculto" style="background-color: var(--color-fondo-secundario);">
+<body data-tema="neutro" class="cursor-oculto pagina-fondo-alterno" style="background-color: var(--color-fondo-alt);">
   <!-- ══ Cursor personalizado ══ -->
   <div class="cursor-usuario" id="cursorUsuario" aria-hidden="true">
     <div class="cursor-punto"></div>
@@ -184,6 +184,10 @@
           <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=6" alt="" /></div>
           <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=7" alt="" /></div>
           <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=8" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=9" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=10" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=11" alt="" /></div>
+          <div class="sobre-espiral-item"><img src="https://picsum.photos/400/500?random=12" alt="" /></div>
         </div>
       </div>
 
@@ -271,70 +275,100 @@
       </div>
     </section>
 
-    <!-- ═══ TIMELINE VERTICAL — Mi Trayectoria ═══ -->
-    <section class="sobre-timeline">
+    <!-- ═══ TIMELINE — Cards apiladas con scroll (estilo Namma) ═══ -->
+    <section class="sobre-timeline" id="sobreTimeline">
       <div class="sobre-timeline-header">
         <h2 class="sobre-timeline-titulo">Mi Trayectoria</h2>
         <p class="sobre-timeline-subtitulo">Del arte al código — Una evolución natural</p>
       </div>
 
-      <div class="sobre-timeline-linea" aria-hidden="true"></div>
-
-      <div class="sobre-timeline-items">
-        <article class="sobre-timeline-item">
-          <span class="sobre-timeline-anio">2014–2018</span>
-          <h3 class="sobre-timeline-item-titulo">La Formación</h3>
-          <p class="sobre-timeline-item-sub">Licenciatura en Danza Contemporánea — ISAE</p>
-          <p class="sobre-timeline-item-desc">Cuatro años de disciplina, técnica y descubrimiento artístico. Donde aprendí que cada movimiento cuenta una historia.</p>
+      <div class="sobre-timeline-stack" id="sobreTimelineStack">
+        <article class="sobre-timeline-card">
+          <div class="sobre-timeline-card-img">
+            <img src="https://picsum.photos/400/300?random=20" alt="La Formación" />
+          </div>
+          <div class="sobre-timeline-card-contenido">
+            <p class="sobre-timeline-card-desc">Cuatro años de disciplina, técnica y descubrimiento artístico. Donde aprendí que cada movimiento cuenta una historia.</p>
+            <h3 class="sobre-timeline-card-titulo">La Formación</h3>
+            <span class="sobre-timeline-card-anio">2014–2018</span>
+          </div>
         </article>
 
-        <article class="sobre-timeline-item">
-          <span class="sobre-timeline-anio">2018</span>
-          <h3 class="sobre-timeline-item-titulo">Mi Obra Maestra</h3>
-          <p class="sobre-timeline-item-sub">"INFIERNO" — Director, Productor y Coreógrafo</p>
-          <p class="sobre-timeline-item-desc">Palacio de las Vacas, Guadalajara. Una producción inmersiva basada en la Divina Comedia con más de 30 bailarines. El público recorría libremente las instalaciones.</p>
+        <article class="sobre-timeline-card">
+          <div class="sobre-timeline-card-img">
+            <img src="https://picsum.photos/400/300?random=21" alt="Mi Obra Maestra" />
+          </div>
+          <div class="sobre-timeline-card-contenido">
+            <p class="sobre-timeline-card-desc">Palacio de las Vacas, Guadalajara. Una producción inmersiva basada en la Divina Comedia con más de 30 bailarines.</p>
+            <h3 class="sobre-timeline-card-titulo">INFIERNO</h3>
+            <span class="sobre-timeline-card-anio">2018</span>
+          </div>
         </article>
 
-        <article class="sobre-timeline-item">
-          <span class="sobre-timeline-anio">2018</span>
-          <h3 class="sobre-timeline-item-titulo">Escenario de Élite</h3>
-          <p class="sobre-timeline-item-sub">TEDx Guadalajara — Teatro Degollado</p>
-          <p class="sobre-timeline-item-desc">Uno de los escenarios más importantes de México. Compartir el escenario con pensadores y líderes en un evento de talla internacional.</p>
+        <article class="sobre-timeline-card">
+          <div class="sobre-timeline-card-img">
+            <img src="https://picsum.photos/400/300?random=22" alt="TEDx Guadalajara" />
+          </div>
+          <div class="sobre-timeline-card-contenido">
+            <p class="sobre-timeline-card-desc">Teatro Degollado. Compartir el escenario con pensadores y líderes en un evento de talla internacional.</p>
+            <h3 class="sobre-timeline-card-titulo">TEDx</h3>
+            <span class="sobre-timeline-card-anio">2018</span>
+          </div>
         </article>
 
-        <article class="sobre-timeline-item">
-          <span class="sobre-timeline-anio">2018</span>
-          <h3 class="sobre-timeline-item-titulo">Consagración Competitiva</h3>
-          <p class="sobre-timeline-item-sub">1er Lugar Contemporáneo & 2do Lugar Jazz — Attitude</p>
-          <p class="sobre-timeline-item-desc">Cerrando una etapa competitiva con broche de oro, demostrando que la disciplina y el trabajo constante dan resultados.</p>
+        <article class="sobre-timeline-card">
+          <div class="sobre-timeline-card-img">
+            <img src="https://picsum.photos/400/300?random=23" alt="Competencia de danza" />
+          </div>
+          <div class="sobre-timeline-card-contenido">
+            <p class="sobre-timeline-card-desc">1er Lugar Contemporáneo & 2do Lugar Jazz. La disciplina y el trabajo constante dan resultados.</p>
+            <h3 class="sobre-timeline-card-titulo">Attitude</h3>
+            <span class="sobre-timeline-card-anio">2018</span>
+          </div>
         </article>
 
-        <article class="sobre-timeline-item">
-          <span class="sobre-timeline-anio">2019</span>
-          <h3 class="sobre-timeline-item-titulo">Intercambio Internacional</h3>
-          <p class="sobre-timeline-item-sub">Residencia Artística — Da Soul Chung</p>
-          <p class="sobre-timeline-item-desc">AGAVE Scenic Exchange. Remontaje de "Dusty Old Things" con la coreógrafa coreana. Expandir horizontes y adaptarme a nuevas metodologías.</p>
+        <article class="sobre-timeline-card">
+          <div class="sobre-timeline-card-img">
+            <img src="https://picsum.photos/400/300?random=24" alt="Residencia artística" />
+          </div>
+          <div class="sobre-timeline-card-contenido">
+            <p class="sobre-timeline-card-desc">AGAVE Scenic Exchange. Remontaje de "Dusty Old Things" con la coreógrafa coreana Da Soul Chung.</p>
+            <h3 class="sobre-timeline-card-titulo">Residencia</h3>
+            <span class="sobre-timeline-card-anio">2019</span>
+          </div>
         </article>
 
-        <article class="sobre-timeline-item">
-          <span class="sobre-timeline-anio">2020</span>
-          <h3 class="sobre-timeline-item-titulo">Emprender en la Adversidad</h3>
-          <p class="sobre-timeline-item-sub">OnLiveMovnt — Cofundador & Coordinador</p>
-          <p class="sobre-timeline-item-desc">Durante la pandemia, cofundé una academia de danza virtual. Recluté personal, diseñé estrategias de marketing y coordiné clases online.</p>
+        <article class="sobre-timeline-card">
+          <div class="sobre-timeline-card-img">
+            <img src="https://picsum.photos/400/300?random=25" alt="OnLiveMovnt" />
+          </div>
+          <div class="sobre-timeline-card-contenido">
+            <p class="sobre-timeline-card-desc">Cofundé una academia de danza virtual durante la pandemia. Marketing, coordinación y reclutamiento.</p>
+            <h3 class="sobre-timeline-card-titulo">OnLiveMovnt</h3>
+            <span class="sobre-timeline-card-anio">2020</span>
+          </div>
         </article>
 
-        <article class="sobre-timeline-item">
-          <span class="sobre-timeline-anio">2023–2025</span>
-          <h3 class="sobre-timeline-item-titulo">Atención VIP & Eventos de Alto Nivel</h3>
-          <p class="sobre-timeline-item-sub">Twin Lions Casino — Hostess</p>
-          <p class="sobre-timeline-item-desc">Atención a clientes exclusivos, coordinación de eventos, presentación de shows en vivo. Habilidades de servicio y oratoria que hoy aplico en cada proyecto web.</p>
+        <article class="sobre-timeline-card">
+          <div class="sobre-timeline-card-img">
+            <img src="https://picsum.photos/400/300?random=26" alt="Twin Lions Casino" />
+          </div>
+          <div class="sobre-timeline-card-contenido">
+            <p class="sobre-timeline-card-desc">Atención a clientes exclusivos, coordinación de eventos y presentación de shows en vivo.</p>
+            <h3 class="sobre-timeline-card-titulo">VIP Events</h3>
+            <span class="sobre-timeline-card-anio">2023–2025</span>
+          </div>
         </article>
 
-        <article class="sobre-timeline-item sobre-timeline-item--actual">
-          <span class="sobre-timeline-anio">Presente</span>
-          <h3 class="sobre-timeline-item-titulo">Nueva Etapa</h3>
-          <p class="sobre-timeline-item-sub">💻 Diseño & Programación Web</p>
-          <p class="sobre-timeline-item-desc">Fusionando mi pasado artístico con mi futuro digital. Creando experiencias web que respiran, fluyen y conectan. Cada proyecto recibe el mismo trato VIP.</p>
+        <article class="sobre-timeline-card sobre-timeline-card--actual">
+          <div class="sobre-timeline-card-img">
+            <img src="https://picsum.photos/400/300?random=27" alt="Diseño y Desarrollo Web" />
+          </div>
+          <div class="sobre-timeline-card-contenido">
+            <p class="sobre-timeline-card-desc">Fusionando mi pasado artístico con mi futuro digital. Experiencias web que respiran, fluyen y conectan.</p>
+            <h3 class="sobre-timeline-card-titulo">Web Dev</h3>
+            <span class="sobre-timeline-card-anio">Presente</span>
+          </div>
         </article>
       </div>
     </section>

@@ -23,41 +23,49 @@
   overflow: hidden;
 }
 
-/* ── Espiral 3D (por detrás del texto) ── */
+/* ── Espiral 3D helicoidal horizontal (por detrás del texto) ── */
 .sobre-espiral {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 1200px;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
   z-index: 0;
+  overflow: hidden;
 }
 
 .sobre-espiral-track {
   position: relative;
-  width: 160px;
-  height: 220px;
+  width: 100%;
+  height: 100%;
   transform-style: preserve-3d;
   will-change: transform;
+  /* Ligera inclinación para dar profundidad visual a la hélice */
+  transform: rotateX(8deg) rotateZ(-2deg);
 }
 
 .sobre-espiral-item {
   position: absolute;
+  top: 50%;
+  left: 50%;
   width: 160px;
-  height: 220px;
-  border-radius: 8px;
+  height: 210px;
+  margin-left: -80px;
+  margin-top: -105px;
+  border-radius: 6px;
   overflow: hidden;
-  backface-visibility: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  will-change: transform, opacity, filter;
+  transition: box-shadow 0.3s ease;
 }
 
 .sobre-espiral-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.7) brightness(0.75);
-  opacity: 0.7;
+  filter: saturate(0.8) brightness(0.85);
 }
 
 /* ── Texto del hero (encima de la espiral) ── */
@@ -436,14 +444,13 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TIMELINE VERTICAL — Scrolltelling
+   TIMELINE — Cards apiladas con scroll (estilo Namma)
 ═══════════════════════════════════════════════════════════════ */
 
 .sobre-timeline {
-  padding: 8rem 2rem;
-  max-width: 900px;
-  margin: 0 auto;
   position: relative;
+  padding: 8rem 2rem 12rem;
+  min-height: 450vh;
 }
 
 .sobre-timeline-header {
@@ -468,98 +475,267 @@
   transition: color var(--transicion-tema);
 }
 
-/* ── Línea central ── */
-.sobre-timeline-linea {
-  position: absolute;
-  top: 16rem;
-  bottom: 8rem;
-  left: 50%;
-  width: 1px;
-  background: var(--color-grid);
-  transform: translateX(-50%);
-  transition: background var(--transicion-tema);
+/* ── Stack de cards — distribuidas por el ancho ── */
+.sobre-timeline-stack {
+  position: sticky;
+  top: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
 }
 
-/* ── Items ── */
-.sobre-timeline-items {
+/* ── Card individual ── */
+.sobre-timeline-card {
+  position: absolute;
+  width: 320px;
+  height: 440px;
+  background: var(--color-fondo);
+  border: 1px solid var(--color-grid);
+  border-radius: 12px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  will-change: transform, opacity;
+  transition: background var(--transicion-tema), border-color var(--transicion-tema);
 }
 
-.sobre-timeline-item {
-  position: relative;
-  background: var(--color-fondo-secundario);
-  border: 1px solid var(--color-grid);
-  border-radius: 4px;
-  padding: 2.5rem;
-  max-width: 500px;
-  transition: border-color 0.4s ease, transform 0.4s ease,
-              background var(--transicion-tema);
-}
-
-/* Alternar izquierda/derecha */
-.sobre-timeline-item:nth-child(odd) {
-  margin-right: auto;
-}
-
-.sobre-timeline-item:nth-child(even) {
-  margin-left: auto;
-}
-
-.sobre-timeline-item--actual {
+.sobre-timeline-card--actual {
   border-color: var(--color-acento);
 }
 
+/* ── Imagen de la card (más grande, sin punto) ── */
+.sobre-timeline-card-img {
+  width: 100%;
+  height: 55%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sobre-timeline-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: filter 0.4s ease;
+}
+
 @media (hover: hover) and (pointer: fine) {
-  .sobre-timeline-item:hover {
-    border-color: var(--color-acento);
-    transform: translateY(-4px);
+  .sobre-timeline-card:hover .sobre-timeline-card-img img {
+    filter: grayscale(0%);
   }
 }
 
-.sobre-timeline-item:focus-visible {
-  outline: 2px solid var(--color-acento);
-  outline-offset: 4px;
+/* ── Contenido de la card ── */
+.sobre-timeline-card-contenido {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.4rem 1.6rem;
+  justify-content: space-between;
 }
 
-.sobre-timeline-anio {
+.sobre-timeline-card-desc {
+  font-family: var(--fuente-parrafo);
+  font-size: 0.9rem;
+  color: var(--color-texto-suave);
+  line-height: 1.6;
+  margin: 0;
+  transition: color var(--transicion-tema);
+}
+
+.sobre-timeline-card-titulo {
+  font-family: var(--fuente-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  color: var(--color-texto);
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  transition: color var(--transicion-tema);
+}
+
+.sobre-timeline-card-anio {
   font-family: var(--fuente-micro);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-acento);
-  display: block;
-  margin-bottom: 0.75rem;
+  margin-top: 0.4rem;
   transition: color var(--transicion-tema);
 }
 
-.sobre-timeline-item-titulo {
-  font-family: var(--fuente-display);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--color-texto);
-  margin: 0 0 0.75rem;
-  line-height: 1.3;
-  transition: color var(--transicion-tema);
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Timeline Cards
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet landscape ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .sobre-timeline {
+    min-height: 400vh;
+    padding: 4rem 1.5rem;
+  }
+
+  .sobre-timeline-header {
+    margin-bottom: 3rem;
+  }
+
+  .sobre-timeline-stack {
+    height: 80vh;
+    top: 10vh;
+  }
+
+  .sobre-timeline-card {
+    width: 260px;
+    height: 360px;
+  }
+
+  .sobre-timeline-card-img {
+    height: 50%;
+  }
+
+  .sobre-timeline-card-contenido {
+    padding: 1.2rem 1.3rem;
+  }
+
+  .sobre-timeline-card-titulo {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  }
+
+  .sobre-timeline-card-desc {
+    font-size: 0.8rem;
+  }
 }
 
-.sobre-timeline-item-sub {
-  font-family: var(--fuente-parrafo);
-  font-size: 1rem;
-  color: var(--color-texto-suave);
-  margin: 0 0 1rem;
-  font-weight: 500;
-  transition: color var(--transicion-tema);
+/* ── Tablet portrait ── */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .sobre-timeline {
+    min-height: 400vh;
+    padding: 4rem 1.5rem;
+  }
+
+  .sobre-timeline-header {
+    margin-bottom: 3rem;
+  }
+
+  .sobre-timeline-stack {
+    height: 80vh;
+    top: 10vh;
+  }
+
+  .sobre-timeline-card {
+    width: 250px;
+    height: 380px;
+  }
+
+  .sobre-timeline-card-img {
+    height: 50%;
+  }
+
+  .sobre-timeline-card-contenido {
+    padding: 1.2rem 1.3rem;
+  }
+
+  .sobre-timeline-card-titulo {
+    font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+  }
+
+  .sobre-timeline-card-desc {
+    font-size: 0.8rem;
+  }
 }
 
-.sobre-timeline-item-desc {
-  font-family: var(--fuente-parrafo);
-  font-size: 0.95rem;
-  color: var(--color-texto-suave);
-  margin: 0;
-  line-height: 1.7;
-  transition: color var(--transicion-tema);
+/* ── Mobile portrait ── */
+@media (max-width: 599px) {
+  .sobre-timeline {
+    padding: 4rem 1.2rem;
+    min-height: auto;
+  }
+
+  .sobre-timeline-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .sobre-timeline-stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: auto;
+  }
+
+  .sobre-timeline-card {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .sobre-timeline-card-img {
+    height: 220px;
+  }
+
+  .sobre-timeline-card-contenido {
+    padding: 1.2rem 1.4rem;
+  }
+
+  .sobre-timeline-card-titulo {
+    font-size: 1.6rem;
+  }
+
+  .sobre-timeline-card-desc {
+    font-size: 0.9rem;
+  }
+}
+
+/* ── Mobile landscape ── */
+@media (max-width: 768px) and (orientation: landscape) {
+  .sobre-timeline {
+    padding: 3rem 2rem;
+    min-height: auto;
+  }
+
+  .sobre-timeline-stack {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    min-height: auto;
+  }
+
+  .sobre-timeline-card {
+    position: relative;
+    width: 240px;
+    height: 320px;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .sobre-timeline-card-img {
+    height: 100px;
+  }
+
+  .sobre-timeline-card-contenido {
+    padding: 1rem;
+  }
+
+  .sobre-timeline-card-titulo {
+    font-size: 1.3rem;
+  }
+
+  .sobre-timeline-card-desc {
+    font-size: 0.8rem;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -737,13 +913,6 @@
 @media (max-width: 1024px) and (orientation: landscape) {
   .sobre-historia { padding: 6rem 2rem; }
   .sobre-historia-grid { gap: 4rem; }
-  .sobre-timeline-linea { left: 2rem; }
-  .sobre-timeline-item:nth-child(odd),
-  .sobre-timeline-item:nth-child(even) {
-    margin-left: 4rem;
-    margin-right: 0;
-    max-width: 100%;
-  }
 }
 
 /* ── Tablet portrait ── */
@@ -755,13 +924,6 @@
   }
   .sobre-historia-grid--invertida { direction: ltr; }
   .sobre-historia-imagen { max-height: 50vh; aspect-ratio: auto; }
-  .sobre-timeline-linea { left: 2rem; }
-  .sobre-timeline-item:nth-child(odd),
-  .sobre-timeline-item:nth-child(even) {
-    margin-left: 4rem;
-    margin-right: 0;
-    max-width: 100%;
-  }
 }
 
 /* ── Mobile portrait ── */
@@ -779,17 +941,6 @@
   .sobre-manifiesto { padding: 4rem 1.2rem; }
   .sobre-manifiesto-contenido p { font-size: clamp(1.05rem, 4vw, 1.3rem); }
 
-  .sobre-timeline { padding: 4rem 1rem; }
-  .sobre-timeline-linea { left: 1rem; }
-  .sobre-timeline-item { padding: 1.5rem; }
-  .sobre-timeline-item:nth-child(odd),
-  .sobre-timeline-item:nth-child(even) {
-    margin-left: 2.5rem;
-    margin-right: 0;
-    max-width: 100%;
-  }
-  .sobre-timeline-item-titulo { font-size: 1.3rem; }
-
   .sobre-cta { padding: 5rem 1.2rem; min-height: auto; }
   .sobre-cta-titulo { font-size: clamp(1.8rem, 7vw, 3rem); }
   .sobre-cta-parrafo { font-size: 1rem; }
@@ -800,6 +951,5 @@
 @media (max-width: 768px) and (orientation: landscape) {
   .sobre-historia { padding: 4rem 2rem; }
   .sobre-historia-grid { gap: 3rem; }
-  .sobre-timeline { padding: 4rem 2rem; }
   .sobre-cta { padding: 5rem 2rem; min-height: auto; }
 }

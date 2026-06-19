@@ -13,33 +13,86 @@ const SobreMi = (() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* ══════════════════════════════════════════════════════════
-       ESPIRAL 3D — Cilindro horizontal de imágenes rotando
+       ESPIRAL 3D — Hélice horizontal (acostada) de imágenes
+       Cada imagen se distribuye en una trayectoria helicoidal:
+       X = avance lineal, Y = sin(θ) * radio, Z = cos(θ) * radio
+       La hélice cubre 1.5 vueltas (540°)
     ══════════════════════════════════════════════════════════ */
     const espiralTrack = document.getElementById('sobreEspiralTrack');
     const espiralItems = document.querySelectorAll('.sobre-espiral-item');
 
     if (espiralTrack && espiralItems.length) {
       const numItems = espiralItems.length;
-      const angleStep = 360 / numItems;
-      /* Radio del cilindro — más grande = imágenes más separadas */
-      const radius = 320;
+      /* Parámetros de la hélice */
+      const totalRotation = 540; /* 1.5 vueltas en grados */
+      const angleStep = totalRotation / numItems;
+      const radiusY = 200; /* radio vertical de la hélice */
+      const radiusZ = 400; /* radio de profundidad */
+      const spreadX = 900; /* extensión horizontal total */
 
-      /* Posicionar cada imagen en el cilindro */
+      /* Posicionar cada imagen en la hélice */
       espiralItems.forEach((item, i) => {
-        const angle = angleStep * i;
+        const angle = (angleStep * i) * (Math.PI / 180); /* convertir a radianes */
+        const progress = i / (numItems - 1); /* 0 → 1 progreso lineal */
+
+        /* Coordenadas helicoidales */
+        const x = (progress - 0.5) * spreadX;
+        const y = Math.sin(angle) * radiusY;
+        const z = Math.cos(angle) * radiusZ;
+
+        /* Opacidad y blur según profundidad (z negativo = atrás) */
+        const depthNormalized = (z + radiusZ) / (radiusZ * 2); /* 0 (atrás) → 1 (frente) */
+        const opacity = 0.3 + depthNormalized * 0.7;
+        const blur = (1 - depthNormalized) * 3;
+        const scale = 0.7 + depthNormalized * 0.3;
+
         gsap.set(item, {
-          rotationY: angle,
-          transformOrigin: `50% 50% -${radius}px`
+          x: x,
+          y: y,
+          z: z,
+          scale: scale,
+          opacity: opacity,
+          filter: `blur(${blur}px) saturate(${0.6 + depthNormalized * 0.4}) brightness(${0.6 + depthNormalized * 0.35})`,
+          zIndex: Math.round(depthNormalized * 100)
         });
       });
 
-      /* Rotación infinita del cilindro */
+      /* Rotación continua de la hélice */
       if (!prefersReduced) {
-        gsap.to(espiralTrack, {
-          rotationY: 360,
+        /* Animar re-posicionando los items continuamente */
+        const animState = { angle: 0 };
+        gsap.to(animState, {
+          angle: 360,
           ease: 'none',
-          duration: 30,
-          repeat: -1
+          duration: 25,
+          repeat: -1,
+          onUpdate: function() {
+            const offset = animState.angle * (Math.PI / 180);
+            espiralItems.forEach((item, i) => {
+              const baseAngle = (angleStep * i) * (Math.PI / 180);
+              const currentAngle = baseAngle + offset;
+              const progress = i / (numItems - 1);
+
+              const x = (progress - 0.5) * spreadX;
+              const y = Math.sin(currentAngle) * radiusY;
+              const z = Math.cos(currentAngle) * radiusZ;
+
+              const depthNormalized = (z + radiusZ) / (radiusZ * 2);
+              const opacity = 0.3 + depthNormalized * 0.7;
+              const blur = (1 - depthNormalized) * 3;
+              const scale = 0.7 + depthNormalized * 0.3;
+
+              gsap.set(item, {
+                x: x,
+                y: y,
+                z: z,
+                scale: scale,
+                opacity: opacity,
+                filter: `blur(${blur}px) saturate(${0.6 + depthNormalized * 0.4}) brightness(${0.6 + depthNormalized * 0.35})`,
+                zIndex: Math.round(depthNormalized * 100)
+              });
+            });
+          }
         });
       }
     }
@@ -169,13 +222,76 @@ const SobreMi = (() => {
         });
       });
 
-      /* Timeline items */
-      document.querySelectorAll('.sobre-timeline-item').forEach(item => {
-        gsap.fromTo(item, { y: 80, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
-          scrollTrigger: { trigger: item, start: 'top 85%', toggleActions: 'play none none reverse' }
-        });
-      });
+      /* Timeline cards — stack con scroll y rotación */
+      const timelineSection = document.getElementById('sobreTimeline');
+      const timelineStack = document.getElementById('sobreTimelineStack');
+      const timelineCards = document.querySelectorAll('.sobre-timeline-card');
+
+      if (timelineSection && timelineCards.length) {
+        const isMobile = window.matchMedia('(max-width: 599px)').matches;
+        const isMobileLandscape = window.matchMedia('(max-width: 768px) and (orientation: landscape)').matches;
+
+        if (!isMobile && !isMobileLandscape) {
+          /* Desktop/Tablet — Cards distribuidas por el viewport con rotación.
+             Cada card tiene una posición X destino repartida por el ancho
+             y una rotación tipo naipes esparcidos. */
+          const numCards = timelineCards.length;
+          const rotations = [-8, -5, 4, -2, 6, -4, 7, -6];
+          /* Posiciones X finales — distribuidas por el viewport (% del ancho del stack) */
+          const positionsX = [-38, -18, -5, 12, -28, 8, 28, 38];
+          /* Posiciones Y finales — ligera variación vertical */
+          const positionsY = [-8, 5, -12, 10, 15, -5, 8, -10];
+
+          /* Posicionar todas las cards ocultas debajo */
+          timelineCards.forEach((card, i) => {
+            gsap.set(card, {
+              rotation: rotations[i],
+              xPercent: -50,
+              yPercent: -50,
+              left: '50%',
+              top: '50%',
+              x: 0,
+              y: 600,
+              opacity: 0,
+              scale: 0.88
+            });
+          });
+
+          /* Cada card se revela con su propio ScrollTrigger secuencial.
+             El end de una es el start de la siguiente. */
+          const scrollPerCard = 350; /* px de scroll para revelar cada card */
+
+          timelineCards.forEach((card, i) => {
+            const vw = window.innerWidth;
+            const targetX = (positionsX[i] / 100) * vw;
+            const targetY = positionsY[i];
+
+            gsap.to(card, {
+              x: targetX,
+              y: targetY,
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: timelineSection,
+                start: `top+=${i * scrollPerCard} 50%`,
+                end: `top+=${i * scrollPerCard + scrollPerCard} 50%`,
+                scrub: 1.2
+              }
+            });
+          });
+
+        } else {
+          /* Mobile — Cards sin tilt, apilándose una sobre otra con fade in */
+          timelineCards.forEach((card) => {
+            gsap.fromTo(card, { y: 60, opacity: 0 }, {
+              y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+              scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none reverse' }
+            });
+          });
+        }
+      }
     }
 
     /* ══════════════════════════════════════════════════════════

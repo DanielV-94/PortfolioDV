@@ -171,7 +171,7 @@ body.nav-abierta .tema-selector {
 
 /* ── Override: fondo alterno para páginas internas ── */
 .pagina-fondo-alterno .fondo-grid {
-  background-color: var(--color-fondo-secundario);
+  background-color: var(--color-fondo-alt);
 }
 
 .fondo-gradiente {
