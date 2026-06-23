@@ -24,11 +24,11 @@ const SobreMi = (() => {
     if (espiralTrack && espiralItems.length) {
       const numItems = espiralItems.length;
       /* Parámetros de la hélice */
-      const totalRotation = 540; /* 1.5 vueltas en grados */
+      const totalRotation = 640; /* 1.5 vueltas en grados */
       const angleStep = totalRotation / numItems;
       const radiusY = 200; /* radio vertical de la hélice */
-      const radiusZ = 400; /* radio de profundidad */
-      const spreadX = 900; /* extensión horizontal total */
+      const radiusZ = 500; /* radio de profundidad */
+      const spreadX = 1200; /* extensión horizontal total */
 
       /* Posicionar cada imagen en la hélice */
       espiralItems.forEach((item, i) => {
@@ -351,7 +351,7 @@ const SobreMi = (() => {
           const sombra = sombras[i % sombras.length];
           particula.style.width = size + 'px';
           particula.style.height = size + 'px';
-          particula.style.background = 'var(--manifiesto-neon-color2)';
+          particula.style.background = 'var(--manifiesto-neon-color)';
           particula.style.boxShadow = sombra;
           particula.style.left = gsap.utils.random(5, 95) + '%';
           particula.style.top = gsap.utils.random(10, 90) + '%';
@@ -367,7 +367,7 @@ const SobreMi = (() => {
           gsap.to(p, {
             y: gsap.utils.random(-80, -200),
             x: gsap.utils.random(-30, 30),
-            opacity: gsap.utils.random(0.3, 0.8),
+            opacity: gsap.utils.random(0.9, 0.8),
             duration: duracion,
             delay: delay,
             repeat: -1,
