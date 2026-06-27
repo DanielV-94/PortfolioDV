@@ -102,6 +102,21 @@ const Footer = (() => {
         duration: 0.8, ease: 'power2.out', delay: 0.3
       });
     }
+
+    /* ── Ocultar flotantes y tema-selector al llegar al footer ── */
+    const flotantes = document.querySelector('.flotantes');
+    const temaSelector = document.querySelector('.tema-selector');
+    const elementosOcultar = [flotantes, temaSelector].filter(Boolean);
+
+    if (elementosOcultar.length) {
+      ScrollTrigger.create({
+        trigger: '.footer',
+        start: 'top 80%',
+        end: 'bottom bottom',
+        onEnter: () => gsap.to(elementosOcultar, { opacity: 0, pointerEvents: 'none', duration: 0.4, ease: 'power2.out' }),
+        onLeaveBack: () => gsap.to(elementosOcultar, { opacity: 1, pointerEvents: 'auto', duration: 0.4, ease: 'power2.out' })
+      });
+    }
   }
 
   return { init };

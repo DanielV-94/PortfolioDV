@@ -1,0 +1,130 @@
+/* ═══════════════════════════════════════════════════════════
+   BOTONES FLOTANTES — WhatsApp + Instagram
+   Fijos en la esquina inferior derecha de todas las páginas
+═══════════════════════════════════════════════════════════ */
+
+.flotantes {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 9999;
+}
+
+.flotante-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.flotante-btn svg {
+  width: 26px;
+  height: 26px;
+  fill: #fff;
+}
+
+/* ── WhatsApp ── */
+.flotante-btn--whatsapp {
+  background: #25d366;
+}
+
+/* ── Instagram ── */
+.flotante-btn--instagram {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+/* ── Hover (solo dispositivos con pointer fino) ── */
+@media (hover: hover) and (pointer: fine) {
+  .flotante-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* ── Focus visible ── */
+.flotante-btn:focus-visible {
+  outline: 2px solid var(--color-acento, #fff);
+  outline-offset: 3px;
+  transform: scale(1.12);
+}
+
+/* ── Tablet landscape ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .flotantes {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .flotante-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .flotante-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ── Tablet portrait ── */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .flotantes {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .flotante-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .flotante-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ── Mobile portrait ── */
+@media (max-width: 599px) {
+  .flotantes {
+    bottom: 1.2rem;
+    right: 1rem;
+  }
+
+  .flotante-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .flotante-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* ── Mobile landscape ── */
+@media (max-width: 768px) and (orientation: landscape) {
+  .flotantes {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .flotante-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .flotante-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}

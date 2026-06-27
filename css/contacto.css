@@ -1,0 +1,423 @@
+/* ═══════════════════════════════════════════════════════════════
+   CONTACTO — Página completa de contacto
+   Hero + Split (Manifiesto izq | Cierre + Cards der)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Hero fullscreen ── */
+.contacto-hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  overflow: hidden;
+}
+
+.contacto-hero-etiqueta {
+  font-family: var(--fuente-micro);
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--color-texto-suave);
+  opacity: 0;
+  margin-bottom: 2rem;
+}
+
+.contacto-hero-titulo {
+  font-family: var(--fuente-display);
+  font-size: clamp(3rem, 10vw, 8rem);
+  text-align: center;
+  line-height: 1;
+  color: var(--color-texto);
+  margin-bottom: 1.5rem;
+}
+
+.contacto-hero-titulo .linea {
+  display: block;
+  overflow: hidden;
+}
+
+.contacto-hero-titulo .linea-inner {
+  display: block;
+  transform: translateY(110%);
+}
+
+.contacto-hero-sub {
+  font-family: var(--fuente-parrafo);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--color-texto);
+  text-align: center;
+  max-width: 500px;
+  opacity: 0;
+}
+
+.contacto-hero-particulas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contacto-hero-particula {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.contacto-hero-contenido {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contacto-scroll-indicador {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+}
+
+.contacto-scroll-indicador span {
+  font-family: var(--fuente-micro);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-texto);
+  opacity: 0.5;
+}
+
+.contacto-scroll-linea {
+  width: 1px;
+  height: 40px;
+  background: var(--color-texto);
+  opacity: 0.3;
+  animation: contacto-scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes contacto-scroll-pulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.5; }
+  50% { transform: scaleY(0.5); opacity: 0.9; }
+}
+
+/* ═══ SPLIT LAYOUT — Manifiesto (izq) + Cierre/Cards (der) ═══ */
+.contacto-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 8rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* ── Columna izquierda — Manifiesto ── */
+.contacto-split-izq {
+  position: sticky;
+  top: 8rem;
+}
+
+.contacto-manifiesto-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.contacto-manifiesto-contenido p {
+  font-family: var(--fuente-parrafo);
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  line-height: 1;
+  color: var(--color-texto);
+}
+
+.contacto-manifiesto-contenido p strong{
+  color: var(--color-acento);
+}
+
+.contacto-manifiesto-contenido p em {
+  font-style: bold;
+  opacity: 1;
+}
+
+/* ── Columna derecha — Cierre + Cards ── */
+.contacto-split-der {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* ── Frase de cierre ── */
+.contacto-cierre {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.contacto-cierre-texto {
+  font-family: var(--fuente-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.3;
+  color: var(--color-texto);
+}
+
+.contacto-cierre-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-acento) 0%, transparent 70%);
+  opacity: 0;
+  filter: blur(80px);
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+/* ═══ CARDS DE CONTACTO — Estilo glassmorphism horizontal ═══ */
+.contacto-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contacto-links-titulo {
+  font-family: var(--fuente-editable);
+  font-size: clamp(0.7rem, 1vw, 0.8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-texto);
+  opacity: 0;
+  margin-bottom: 0.5rem;
+}
+
+.contacto-links-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contacto-link-card {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.4rem 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--color-texto);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.4s ease,
+              background 0.4s ease,
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(30px);
+  position: relative;
+}
+
+.contacto-link-card-icono-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.contacto-link-card-icono {
+  width: 22px;
+  height: 22px;
+  color: var(--color-texto);
+  opacity: 0.8;
+}
+
+.contacto-link-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.contacto-link-card-nombre {
+  font-family: var(--fuente-editable);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.5;
+}
+
+.contacto-link-card-valor {
+  font-family: var(--fuente-dialogo);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contacto-link-card-flecha {
+  width: 18px;
+  height: 18px;
+  opacity: 0.3;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  color: var(--color-texto);
+}
+
+/* ── Hover (solo pointer fino) ── */
+@media (hover: hover) and (pointer: fine) {
+  .contacto-link-card:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .contacto-link-card:hover .contacto-link-card-flecha {
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+}
+
+/* ── Focus visible ── */
+.contacto-link-card:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+
+/* ── Tablet landscape ── */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .contacto-split {
+    gap: 3rem;
+    padding: 6rem 3rem;
+  }
+
+  .contacto-hero-titulo {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+  }
+
+  .contacto-cierre-texto {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  }
+}
+
+/* ── Tablet portrait ── */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .contacto-split {
+    grid-template-columns: 1fr;
+    gap: 5rem;
+    padding: 6rem 2.5rem;
+  }
+
+  .contacto-split-izq {
+    position: static;
+  }
+
+  .contacto-hero-titulo {
+    font-size: clamp(2.5rem, 9vw, 5.5rem);
+  }
+
+  .contacto-cierre-texto {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+}
+
+/* ── Mobile portrait ── */
+@media (max-width: 599px) {
+  .contacto-hero {
+    padding: 3rem 1.5rem;
+  }
+
+  .contacto-hero-titulo {
+    font-size: clamp(2.2rem, 12vw, 3.5rem);
+  }
+
+  .contacto-split {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding: 4rem 1.5rem;
+  }
+
+  .contacto-split-izq {
+    position: static;
+  }
+
+  .contacto-manifiesto-contenido p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+  }
+
+  .contacto-cierre-texto {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+
+  .contacto-link-card {
+    padding: 1.2rem 1.4rem;
+    gap: 1rem;
+  }
+
+  .contacto-link-card-icono-wrap {
+    width: 38px;
+    height: 38px;
+  }
+
+  .contacto-link-card-valor {
+    font-size: 0.95rem;
+  }
+}
+
+/* ── Mobile landscape ── */
+@media (max-width: 768px) and (orientation: landscape) {
+  .contacto-hero {
+    min-height: auto;
+    padding: 4rem 2rem;
+  }
+
+  .contacto-hero-titulo {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .contacto-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 4rem 2rem;
+  }
+
+  .contacto-split-izq {
+    position: static;
+  }
+
+  .contacto-cierre-texto {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  }
+
+  .contacto-link-card {
+    padding: 1rem 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .contacto-link-card-icono-wrap {
+    width: 36px;
+    height: 36px;
+  }
+
+  .contacto-link-card-valor {
+    font-size: 0.9rem;
+  }
+}
