@@ -45,8 +45,8 @@
 }
 
 .contacto-hero-sub {
-  font-family: var(--fuente-parrafo);
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-family: var(--fuente-editable);
+  font-size:clamp(1.25rem, 2vw, 1.7rem);
   color: var(--color-texto);
   text-align: center;
   max-width: 500px;
@@ -132,7 +132,7 @@
 }
 
 .contacto-manifiesto-contenido p {
-  font-family: var(--fuente-parrafo);
+  font-family: var(--fuente-editable);
   font-size: clamp(1.25rem, 2vw, 1.7rem);
   line-height: 1;
   color: var(--color-texto);
@@ -173,7 +173,7 @@
   height: 300px;
   border-radius: 50%;
   background: radial-gradient(circle, var(--color-acento) 0%, transparent 70%);
-  opacity: 0;
+  opacity: .5;
   filter: blur(80px);
   pointer-events: none;
   top: 50%;
@@ -194,7 +194,7 @@
   text-transform: uppercase;
   letter-spacing: 0.25em;
   color: var(--color-texto);
-  opacity: 0;
+  opacity: 1;
   margin-bottom: 0.5rem;
 }
 
@@ -209,19 +209,20 @@
   align-items: center;
   gap: 1.2rem;
   padding: 1.4rem 1.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.242);
   border-radius: 14px;
   text-decoration: none;
   color: var(--color-texto);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.087);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: border-color 0.4s ease,
               background 0.4s ease,
               transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0;
+  opacity: 1;
   transform: translateY(30px);
   position: relative;
+  
 }
 
 .contacto-link-card-icono-wrap {
@@ -231,8 +232,8 @@
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.297);
+  border: 1px solid rgba(255, 255, 255, 0.235);
   flex-shrink: 0;
 }
 

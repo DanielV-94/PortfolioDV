@@ -122,54 +122,17 @@ const Contacto = (() => {
       /* ══════════════════════════════════════════════════════════
          CIERRE — Frase impactante con SplitText + glow
       ══════════════════════════════════════════════════════════ */
-      const cierreSection = document.getElementById('contactoCierre');
-      const cierreTexto = document.getElementById('contactoCierreTexto');
       const cierreGlow = document.getElementById('contactoCierreGlow');
-
-      if (cierreSection && cierreTexto) {
-        /* SplitText char-by-char para la frase de cierre */
-        if (typeof SplitText !== 'undefined') {
-          const split = new SplitText(cierreTexto, { type: 'chars,words' });
-          gsap.set(split.chars, { opacity: 0, y: 60, rotateX: -40 });
-
-          const cierreTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: cierreSection,
-              start: 'top 70%',
-              end: 'center 40%',
-              scrub: 1
-            }
-          });
-
-          cierreTl.to(split.chars, {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            stagger: 0.02,
-            ease: 'power3.out'
-          });
-
           /* Glow que aparece con el texto */
           if (cierreGlow) {
             cierreTl.to(cierreGlow, {
-              opacity: 0.15,
+              opacity: 0.45,
               scale: 1,
               duration: 1,
               ease: 'power2.out'
             }, 0.3);
           }
-        } else {
-          /* Fallback sin SplitText */
-          gsap.fromTo(cierreTexto,
-            { opacity: 0, y: 60 },
-            {
-              opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
-              scrollTrigger: { trigger: cierreSection, start: 'top 70%', toggleActions: 'play none none reverse' }
-            }
-          );
-        }
-      }
-
+       
       /* ══════════════════════════════════════════════════════════
          LINKS — Cards con stagger reveal
       ══════════════════════════════════════════════════════════ */
