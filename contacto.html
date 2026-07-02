@@ -17,7 +17,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
+  >
 
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/variables.css" />
@@ -33,12 +33,26 @@
     <div class="fondo-gradiente"></div>
   </div>
 
+  <!-- Partículas globales — toda la página -->
+  <div class="contacto-particulas-global" id="contactoParticulasGlobal" aria-hidden="true"></div>
+
+  <!-- ══ Cursores ══ -->
+  <div class="cursor-usuario" id="cursorUsuario" aria-hidden="true">
+    <div class="cursor-punto"></div>
+    <span class="cursor-etiqueta">tú</span>
+  </div>
+  <div class="cursor-daniel" id="cursorDaniel" aria-hidden="true">
+    <div class="cursor-punto"></div>
+    <span class="cursor-etiqueta">Daniel</span>
+  </div>
+
   <div class="esquina esquina--sup-izq" aria-label="Sección actual">
     <span class="esquina-linea">Sección 04</span>
     <span class="esquina-linea">CONTACTO</span>
   </div>
 
   <div class="esquina esquina--sup-der">
+    <span class="nav-menu-label" aria-hidden="true">MENU</span>
     <button class="nav-menu-btn" id="navMenuBtn" aria-label="Abrir menú de navegación" aria-expanded="false"
       aria-controls="navOverlay">
       <span></span>
@@ -175,7 +189,7 @@
             <strong>Me eliges porque no solo entrego código. Entrego presencia digital.</strong> Porque entiendo que tu marca necesita más que un lugar en internet: necesita un espacio que hable, mueva y convierta. Y porque, al igual que en el escenario, aquí no hay improvisación sin preparación: cada pixel, cada transición y cada interacción está calculada para cumplir un objetivo claro.
           </p>
           <p>
-            <em>"Si buscas un sitio web que vaya más allá de una simple tarjeta de presentación, estás en el lugar indicado. No me limito a desarrollar páginas:<span> coreografío cada interacción, animación y estructura con intención y precisión</span>; donde cada detalle <spam>guía a tu audiencia, la cautiva y la impulsa a actuar.</spam> Porque cada proyecto, sin importar su tamaño, merece un acabado impecable formando una experiencia digital hecha a la medida para dejar huella."</em>
+            <em>"Si buscas un sitio web que vaya más allá de una simple tarjeta de presentación, estás en el lugar indicado. No me limito a desarrollar páginas:<span class="contacto-highlight"> coreografío cada interacción, animación y estructura con intención y precisión</span>; donde cada detalle <span class="contacto-highlight">guía a tu audiencia, la cautiva y la impulsa a actuar.</span> Porque cada proyecto, sin importar su tamaño, <span class="contacto-highlight">merece un acabado impecable formando una experiencia digital hecha a la medida para dejar huella.</span>"</em>
           </p>
         </div>
       </div>
@@ -289,12 +303,14 @@
   <script src="gsap-public/minified/ScrambleTextPlugin.min.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/tema-selector.js"></script>
+  <script src="js/cursor.js"></script>
   <script src="js/contacto.js"></script>
   <script src="js/footer.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       if (typeof Nav !== "undefined") Nav.init();
       if (typeof TemaSelector !== "undefined") TemaSelector.init();
+      if (typeof Cursor !== "undefined") Cursor.init();
       if (typeof Contacto !== "undefined") Contacto.init();
       if (typeof Footer !== "undefined") Footer.init();
     });

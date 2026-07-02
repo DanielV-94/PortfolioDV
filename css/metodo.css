@@ -626,11 +626,11 @@
   }
 
   .metodo-acordeon-titulo-exp {
-    font-size: clamp(22px, 4vw, 36px);
+    font-size: clamp(26px, 4.8vw, 43px);
   }
 
   .metodo-acordeon-desc {
-    font-size: clamp(12px, 1.8vw, 16px);
+    font-size: clamp(14px, 2.2vw, 19px);
   }
 
   .metodo-acordeon-num-exp {
@@ -695,7 +695,7 @@
     display: none;
   }
 
-  /* Acordeón en grid 2 columnas (2+2+1) */
+  /* Acordeón vertical — cards expandidas apiladas */
   .metodo-acordeon-wrapper {
     padding: clamp(32px, 6vw, 56px) clamp(12px, 3vw, 24px);
     min-height: auto;
@@ -704,19 +704,19 @@
   }
 
   .metodo-acordeon {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(12px, 3vw, 18px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 3vw, 16px);
     height: auto;
   }
 
-  /* Todas las cards del mismo tamaño */
+  /* Cards — todas expandidas por defecto, apiladas vertical */
   .metodo-acordeon-card {
     margin-left: 0;
     margin-top: 0;
     border-radius: 16px;
-    min-height: 0;
-    aspect-ratio: 1 / 1.2;
+    min-height: 120px;
+    aspect-ratio: auto;
     box-shadow:
       0 2px 12px rgba(0, 0, 0, 0.1),
       0 4px 16px rgba(0, 0, 0, 0.06),
@@ -724,12 +724,10 @@
       inset 0 -1px 2px rgba(0, 0, 0, 0.04);
   }
 
-  /* Última card (5ta) centrada en su propia fila */
   .metodo-acordeon-card:last-child {
-    grid-column: 1 / -1;
-    max-width: calc(50% - 6px);
-    justify-self: center;
-    aspect-ratio: 1 / 1.2;
+    grid-column: unset;
+    max-width: 100%;
+    justify-self: unset;
   }
 
   .metodo-acordeon-card:first-child {
@@ -744,84 +742,31 @@
     border-radius: 16px;
   }
 
-  /* Estado colapsado: VISIBLE — solo SVG, número y nombre */
+  /* Ocultar estado colapsado — siempre mostrar expandido */
   .metodo-acordeon-colapsado {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .metodo-acordeon-expandido {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 10px;
+    position: relative;
+    padding: clamp(16px, 4vw, 24px);
+    padding-left: 35%;
+    align-items: flex-start;
+    text-align: left;
   }
 
-  .metodo-acordeon-num {
-    writing-mode: horizontal-tb;
-    transform: none;
-    font-size: clamp(8px, 2.5vw, 10px);
-    order: -1;
-  }
-
-  .metodo-acordeon-titulo-vertical {
-    writing-mode: horizontal-tb;
-    transform: none;
-    font-size: clamp(11px, 3.2vw, 15px);
-    white-space: normal;
-    text-align: center;
-    margin-top: 0;
-    line-height: 1.15;
-  }
-
-  /* SVG visible en colapsado, centrado */
   .metodo-acordeon-card-patron {
     top: 50%;
-    left: 50%;
+    left: 18%;
     transform: translate(-50%, -50%);
     opacity: 0.35;
-    width: 55%;
-    height: 55%;
-  }
-
-  /* Estado expandido: OCULTO por defecto */
-  .metodo-acordeon-expandido {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    padding: clamp(14px, 4vw, 22px);
-    align-items: center;
-    text-align: center;
-  }
-
-  /* Al hacer tap (.activa): expandir la card */
-  .metodo-acordeon-card.activa {
-    grid-column: 1 / -1;
-    aspect-ratio: auto;
-    min-height: 200px;
-    max-width: 100%;
-  }
-
-  .metodo-acordeon-card.activa .metodo-acordeon-colapsado {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .metodo-acordeon-card.activa .metodo-acordeon-expandido {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    padding-left: 35%;
-    align-items: flex-end;
-    text-align: right;
-  }
-
-  .metodo-acordeon-card.activa .metodo-acordeon-card-patron {
-    left: 18%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     width: 28%;
-    opacity: 0.45;
+    height: 60%;
   }
 
   .metodo-acordeon-titulo-exp {
@@ -829,11 +774,37 @@
   }
 
   .metodo-acordeon-desc {
-    font-size: clamp(10px, 2.8vw, 13px);
+    font-size: clamp(11px, 3vw, 14px);
+    line-height: 1.5;
   }
 
   .metodo-acordeon-num-exp {
     font-size: clamp(8px, 2.5vw, 10px);
+  }
+
+  /* No hay estado activa diferente — ya están expandidas */
+  .metodo-acordeon-card.activa {
+    aspect-ratio: auto;
+    min-height: auto;
+    max-width: 100%;
+  }
+
+  .metodo-acordeon-card.activa .metodo-acordeon-colapsado {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .metodo-acordeon-card.activa .metodo-acordeon-expandido {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .metodo-acordeon-card.activa .metodo-acordeon-card-patron {
+    left: 18%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 28%;
+    opacity: 0.4;
   }
 }
 

@@ -443,10 +443,18 @@ const Metodo = (() => {
       });
     }
 
-    /* Manifiesto — sin pin, solo reveal del texto */
+    /* Manifiesto — sin pin, solo reveal del texto (texto visible directamente) */
     const texto = section.querySelector('.metodo-manifiesto-texto');
     if (texto) {
       const palabras = texto.querySelectorAll('.metodo-palabra');
+      /* Asegurar que el texto sea legible (no binario) */
+      palabras.forEach(w => {
+        if (w.dataset.original) w.textContent = w.dataset.original;
+        gsap.set(w, { position: 'relative', x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 });
+      });
+      texto.style.height = '';
+      texto.style.position = '';
+
       ScrollTrigger.create({
         trigger: texto,
         start: 'top 80%',

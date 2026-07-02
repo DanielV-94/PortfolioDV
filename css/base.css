@@ -87,6 +87,7 @@
 html {
   /* Scroll nativo — sin smooth para no interferir con GSAP ScrollTrigger scrub */
   scroll-behavior: auto;
+  overflow-x: hidden;
 }
 
 /* Desactivar en usuarios que prefieren movimiento reducido */
@@ -101,6 +102,7 @@ body {
   color: var(--color-texto);
   font-family: var(--fuente-parrafo);
   font-weight: 300;
+  overflow-x: hidden;
   transition:
     background-color var(--transicion-tema),
     color var(--transicion-tema);
@@ -132,8 +134,7 @@ body.nav-abierta {
 
 /* Ocultar esquinas HUD cuando el menú está abierto (excepto el botón menú) */
 body.nav-abierta .esquina--sup-izq,
-body.nav-abierta .esquina--inf-izq,
-body.nav-abierta .esquina--inf-der {
+body.nav-abierta .esquina--inf-izq {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -349,17 +350,14 @@ body.nav-abierta .tema-selector {
   top: 24px;
   right: 42px;
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .esquina--inf-izq {
   bottom: 28px;
   left: 42px;
-}
-
-.esquina--inf-der {
-  bottom: 28px;
-  right: 42px;
-  align-items: flex-end;
 }
 
 .esquina-linea {
@@ -381,17 +379,7 @@ body.nav-abierta .tema-selector {
   opacity: 0.5;
 }
 
-.esquina-nombre--daniel {
-  color: var(--color-cursor-daniel);
-  opacity: 0.8;
-  transition: color var(--transicion-tema);
-}
-
-/* coordsDaniel hereda color daniel */
-#coordsDaniel {
-  color: var(--color-cursor-daniel);
-  transition: color var(--transicion-tema);
-}
+/* ── Transiciones tema ── */
 
 /* ─────────────────────────────────────────
    BOTÓN MENÚ
@@ -409,9 +397,13 @@ body.nav-abierta .tema-selector {
   pointer-events: auto;
   cursor: pointer;
   background: none;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.15);
   transition:
     background-color 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .nav-menu-btn span {
@@ -449,6 +441,25 @@ body.nav-abierta .tema-selector {
 
 .nav-menu-btn.activo span {
   background: var(--color-fondo);
+}
+
+/* ── Label "MENU" al lado del botón ── */
+.nav-menu-label {
+  font-family: var(--fuente-micro);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-texto);
+  pointer-events: none;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: color var(--transicion-tema), opacity 0.3s ease;
+}
+
+/* Ocultar label cuando el menú está activo */
+.esquina--sup-der:has(.nav-menu-btn.activo) .nav-menu-label {
+  opacity: 0;
 }
 
 /* ─────────────────────────────────────────
@@ -655,6 +666,7 @@ body.nav-abierta .tema-selector {
   inset: 0;
   z-index: 95;
   display: block;
+  overflow: hidden;
   background: var(--color-nav-fondo);
   backdrop-filter: blur(8px);
   opacity: 0;
@@ -974,14 +986,13 @@ body.nav-abierta .hero-intro-flash {
     left: 20px;
   }
 
-  .esquina--inf-der {
-    bottom: 18px;
-    right: 20px;
-  }
-
   .nav-menu-btn {
     width: 52px;
     height: 52px;
+  }
+
+  .nav-menu-label {
+    font-size: 0.6rem;
   }
 }
 
@@ -1051,62 +1062,6 @@ body.nav-abierta .hero-intro-flash {
 }
 
 /* ─────────────────────────────────────────
-   PÁGINAS INTERNAS
-───────────────────────────────────────── */
-
-.page-main {
-  position: relative;
-  z-index: 1;
-  min-height: 100dvh;
-  display: grid;
-  place-items: center;
-  padding: 130px 32px 42px;
-}
-
-.page-card {
-  width: min(960px, 100%);
-  border: 1px solid color-mix(in srgb, var(--color-texto) 24%, transparent);
-  background: color-mix(in srgb, var(--color-fondo) 76%, transparent);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  padding: clamp(28px, 5vw, 58px);
-}
-
-.page-kicker {
-  font-family: var(--fuente-micro);
-  font-size: clamp(12px, 1vw, 14px);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-texto-suave);
-  margin-bottom: 16px;
-}
-
-.page-title {
-  font-family: var(--fuente-navbar);
-  font-size: clamp(48px, 8vw, 120px);
-  line-height: 0.9;
-  text-transform: uppercase;
-  margin-bottom: 18px;
-}
-
-.page-description {
-  font-family: var(--fuente-parrafo-light);
-  font-size: clamp(22px, 1.42vw, 30px);
-  max-width: 32ch;
-  color: color-mix(in srgb, var(--color-texto) 74%, transparent);
-}
-
-.page-back-link {
-  display: inline-block;
-  margin-top: 22px;
-  font-family: var(--fuente-micro);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
-
-/* ─────────────────────────────────────────
    RESPONSIVE — Base
 ───────────────────────────────────────── */
 
@@ -1134,11 +1089,6 @@ body.nav-abierta .hero-intro-flash {
   .esquina--inf-izq {
     bottom: 14px;
     left: 14px;
-  }
-
-  .esquina--inf-der {
-    bottom: 14px;
-    right: 14px;
   }
 
   .esquina-nombre {
@@ -1231,14 +1181,13 @@ body.nav-abierta .hero-intro-flash {
     left: 14px;
   }
 
-  .esquina--inf-der {
-    bottom: 10px;
-    right: 14px;
-  }
-
   .nav-menu-btn {
     width: 44px;
     height: 44px;
+  }
+
+  .nav-menu-label {
+    font-size: 0.55rem;
   }
 
   .nav-overlay-shell {

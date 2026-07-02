@@ -47,35 +47,135 @@ const Contacto = (() => {
         }
       });
 
-      /* ── Partículas flotando en el hero ── */
-      if (heroParticulas) {
-        const numParticulas = 25;
-        const colores = [
+      /* ── Partículas globales — toda la página con reacción al mouse (desktop) ── */
+      const globalParticulas = document.getElementById('contactoParticulasGlobal');
+      if (globalParticulas) {
+        const numParticulas = 90;
+        const coloresNeon = [
           'var(--color-acento)',
-          'var(--color-texto-suave)',
-          'var(--color-acento-hover)'
+          'var(--manifiesto-neon-color1, var(--color-acento))',
+          'var(--manifiesto-neon-color2, var(--color-acento))',
+          'var(--manifiesto-neon-color3, var(--color-texto-suave))',
+          'var(--color-acento-hover)',
+          'var(--manifiesto-neon-color4, var(--color-acento))'
         ];
+
+        const particulasData = [];
 
         for (let i = 0; i < numParticulas; i++) {
           const particula = document.createElement('div');
-          particula.className = 'contacto-hero-particula';
-          const size = gsap.utils.random(2, 5);
+          particula.className = 'particula-global';
+          const size = gsap.utils.random(3, 12);
+          const color = coloresNeon[i % coloresNeon.length];
           particula.style.width = size + 'px';
           particula.style.height = size + 'px';
-          particula.style.background = colores[i % colores.length];
-          particula.style.left = gsap.utils.random(5, 95) + '%';
-          particula.style.top = gsap.utils.random(10, 90) + '%';
+          particula.style.background = color;
+          particula.style.boxShadow = `0 0 ${size}px ${color}, 0 0 ${size * 2}px ${color}, 0 0 ${size * 3.5}px ${color}`;
+          const x = gsap.utils.random(2, 98);
+          const y = gsap.utils.random(2, 98);
+          particula.style.left = x + '%';
+          particula.style.top = y + '%';
+          particula.style.opacity = '0';
+          globalParticulas.appendChild(particula);
+          particulasData.push({ el: particula, baseX: x, baseY: y, size: size });
+        }
+
+        const allParticulas = globalParticulas.querySelectorAll('.particula-global');
+
+        /* Animación flotante base */
+        allParticulas.forEach((p) => {
+          gsap.to(p, {
+            y: gsap.utils.random(-80, -180),
+            x: gsap.utils.random(-30, 30),
+            opacity: gsap.utils.random(0.4, 0.9),
+            duration: gsap.utils.random(5, 10),
+            delay: gsap.utils.random(0, 3),
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+          });
+        });
+
+        /* Reacción al mouse — solo en desktop */
+        const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (isDesktop) {
+          let mouseX = window.innerWidth / 2;
+          let mouseY = window.innerHeight / 2;
+
+          document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+          });
+
+          function animarRepulsion() {
+            particulasData.forEach((data) => {
+              const rect = data.el.getBoundingClientRect();
+              const px = rect.left + rect.width / 2;
+              const py = rect.top + rect.height / 2;
+              const dx = px - mouseX;
+              const dy = py - mouseY;
+              const distancia = Math.sqrt(dx * dx + dy * dy);
+              const radio = 250;
+
+              if (distancia < radio) {
+                const fuerza = (1 - distancia / radio) * 120;
+                const angulo = Math.atan2(dy, dx);
+                const empujeX = Math.cos(angulo) * fuerza;
+                const empujeY = Math.sin(angulo) * fuerza;
+                gsap.to(data.el, {
+                  x: empujeX,
+                  y: empujeY,
+                  scale: 1.5,
+                  duration: 0.3,
+                  ease: 'power2.out',
+                  overwrite: 'auto'
+                });
+              } else {
+                gsap.to(data.el, {
+                  scale: 1,
+                  duration: 1.5,
+                  ease: 'elastic.out(1, 0.4)',
+                  overwrite: 'auto'
+                });
+              }
+            });
+            requestAnimationFrame(animarRepulsion);
+          }
+          animarRepulsion();
+        }
+      }
+
+      /* ── Partículas extra en el hero para densidad ── */
+      if (heroParticulas) {
+        const numHero = 30;
+        const coloresHero = [
+          'var(--color-acento)',
+          'var(--manifiesto-neon-color1, var(--color-acento))',
+          'var(--manifiesto-neon-color2, var(--color-acento))'
+        ];
+
+        for (let i = 0; i < numHero; i++) {
+          const particula = document.createElement('div');
+          particula.className = 'contacto-hero-particula';
+          const size = gsap.utils.random(5, 16);
+          const color = coloresHero[i % coloresHero.length];
+          particula.style.width = size + 'px';
+          particula.style.height = size + 'px';
+          particula.style.background = color;
+          particula.style.boxShadow = `0 0 ${size}px ${color}, 0 0 ${size * 2.5}px ${color}, 0 0 ${size * 4}px ${color}`;
+          particula.style.left = gsap.utils.random(2, 98) + '%';
+          particula.style.top = gsap.utils.random(5, 95) + '%';
           heroParticulas.appendChild(particula);
         }
 
         const particulas = heroParticulas.querySelectorAll('.contacto-hero-particula');
         particulas.forEach((p) => {
           gsap.to(p, {
-            y: gsap.utils.random(-60, -150),
-            x: gsap.utils.random(-20, 20),
-            opacity: gsap.utils.random(0.3, 0.7),
-            duration: gsap.utils.random(5, 10),
-            delay: gsap.utils.random(0, 4),
+            y: gsap.utils.random(-100, -250),
+            x: gsap.utils.random(-40, 40),
+            opacity: gsap.utils.random(0.5, 1),
+            duration: gsap.utils.random(4, 9),
+            delay: gsap.utils.random(0, 3),
             repeat: -1,
             yoyo: true,
             ease: 'sine.inOut'
@@ -85,7 +185,7 @@ const Contacto = (() => {
     }
 
     /* ══════════════════════════════════════════════════════════
-       MANIFIESTO — Reveal palabra por palabra con scroll
+       MANIFIESTO — Reveal por bloque con scroll
     ══════════════════════════════════════════════════════════ */
     if (!prefersReduced) {
       const manifiestoSection = document.getElementById('contactoManifiesto');
@@ -93,45 +193,65 @@ const Contacto = (() => {
         manifiestoSection.querySelectorAll('.contacto-manifiesto-contenido p') : [];
 
       if (manifiestoSection && manifiestoParrafos.length) {
-        manifiestoParrafos.forEach(p => {
-          const html = p.innerHTML;
-          const wrapped = html.replace(/(\S+)/g,
-            '<span class="palabra-contacto" style="display:inline-block; opacity:0; transform:translateY(50px) rotateX(20deg); transform-origin:bottom center;">$1</span>');
-          p.innerHTML = wrapped;
-        });
+        /* Animar cada párrafo como bloque completo */
+        gsap.set(manifiestoParrafos, { opacity: 0, y: 40 });
 
-        const palabras = manifiestoSection.querySelectorAll('.palabra-contacto');
-        if (palabras.length) {
-          gsap.to(palabras, {
-            y: 0,
-            opacity: 1,
-            rotateX: 0,
-            duration: 0.5,
-            stagger: 0.02,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: manifiestoSection,
-              start: 'top 75%',
-              end: 'bottom 45%',
-              scrub: 1.2
-            }
-          });
-        }
+        gsap.to(manifiestoParrafos, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.3,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: manifiestoSection,
+            start: 'top 75%',
+            end: 'bottom 50%',
+            scrub: 1
+          }
+        });
       }
 
       /* ══════════════════════════════════════════════════════════
          CIERRE — Frase impactante con SplitText + glow
       ══════════════════════════════════════════════════════════ */
+      const cierreSection = document.getElementById('contactoCierre');
+      const cierreTexto = document.getElementById('contactoCierreTexto');
       const cierreGlow = document.getElementById('contactoCierreGlow');
-          /* Glow que aparece con el texto */
+
+      if (cierreSection && cierreTexto) {
+        if (typeof SplitText !== 'undefined') {
+          const split = new SplitText(cierreTexto, { type: 'chars,words' });
+          gsap.set(split.chars, { opacity: 0, y: 60, rotateX: -40 });
+
+          const cierreTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: cierreSection,
+              start: 'top 70%',
+              end: 'center 40%',
+              scrub: 1
+            }
+          });
+
+          cierreTl.to(split.chars, {
+            opacity: 1, y: 0, rotateX: 0,
+            stagger: 0.02, ease: 'power3.out'
+          });
+
           if (cierreGlow) {
             cierreTl.to(cierreGlow, {
-              opacity: 0.45,
-              scale: 1,
-              duration: 1,
-              ease: 'power2.out'
+              opacity: 0.15, scale: 1, duration: 1, ease: 'power2.out'
             }, 0.3);
           }
+        } else {
+          gsap.fromTo(cierreTexto,
+            { opacity: 0, y: 60 },
+            {
+              opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
+              scrollTrigger: { trigger: cierreSection, start: 'top 70%', toggleActions: 'play none none reverse' }
+            }
+          );
+        }
+      }
        
       /* ══════════════════════════════════════════════════════════
          LINKS — Cards con stagger reveal

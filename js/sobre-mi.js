@@ -206,6 +206,20 @@ const SobreMi = (() => {
         });
       });
 
+      /* Tablet portrait: blur imagen cuando texto aparece */
+      document.querySelectorAll('.sobre-historia').forEach(section => {
+        const imagen = section.querySelector('.sobre-historia-imagen');
+        const contenido = section.querySelector('.sobre-historia-contenido');
+        if (imagen && contenido) {
+          ScrollTrigger.create({
+            trigger: contenido,
+            start: 'top 85%',
+            onEnter: () => imagen.classList.add('texto-visible'),
+            onLeaveBack: () => imagen.classList.remove('texto-visible'),
+          });
+        }
+      });
+
       /* Títulos de historia (reveal char by char) */
       document.querySelectorAll('.reveal-texto').forEach(text => {
         gsap.fromTo(text, { y: 30, opacity: 0 }, {
@@ -249,28 +263,25 @@ const SobreMi = (() => {
 
       /* Timeline cards — stack con scroll y rotación */
       const timelineSection = document.getElementById('sobreTimeline');
-      const timelineStack = document.getElementById('sobreTimelineStack');
       const timelineCards = document.querySelectorAll('.sobre-timeline-card');
 
       if (timelineSection && timelineCards.length) {
         const isMobile = window.matchMedia('(max-width: 599px)').matches;
         const isMobileLandscape = window.matchMedia('(max-width: 768px) and (orientation: landscape)').matches;
+        const isTablet = window.matchMedia('(max-width: 1024px) and (min-width: 600px)').matches;
 
-        if (!isMobile && !isMobileLandscape) {
-          /* Desktop/Tablet — Cards distribuidas por el viewport con rotación.
-             Cada card tiene una posición X destino repartida por el ancho
-             y una rotación tipo naipes esparcidos. */
-          const numCards = timelineCards.length;
+        if (!isMobile && !isMobileLandscape && !isTablet) {
+          /* Desktop — Cards reveladas secuencialmente con pin.
+             Una sola timeline scrubbeada que pinnea la sección
+             y revela cards una por una. */
           const rotations = [-8, -5, 4, -2, 6, -4, 7, -6];
-          /* Posiciones X finales — distribuidas por el viewport (% del ancho del stack) */
           const positionsX = [-38, -18, -5, 12, -28, 8, 28, 38];
-          /* Posiciones Y finales — ligera variación vertical */
-          const positionsY = [-8, 5, -12, 10, 15, -5, 8, -10];
+          const positionsY = [-100, -85, -105, -80, -75, -95, -82, -98];
 
           /* Posicionar todas las cards ocultas debajo */
           timelineCards.forEach((card, i) => {
             gsap.set(card, {
-              rotation: rotations[i],
+              rotation: rotations[i % rotations.length],
               xPercent: -50,
               yPercent: -50,
               left: '50%',
@@ -282,31 +293,44 @@ const SobreMi = (() => {
             });
           });
 
-          /* Cada card se revela con su propio ScrollTrigger secuencial.
-             El end de una es el start de la siguiente. */
-          const scrollPerCard = 350; /* px de scroll para revelar cada card */
+          /* Timeline única con pin — revela una card por segmento */
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: timelineSection,
+              start: 'top top',
+              end: `+=${timelineCards.length * 350}`,
+              pin: true,
+              scrub: 1,
+              invalidateOnRefresh: true,
+            }
+          });
 
           timelineCards.forEach((card, i) => {
             const vw = window.innerWidth;
-            const targetX = (positionsX[i] / 100) * vw;
-            const targetY = positionsY[i];
+            const targetX = (positionsX[i % positionsX.length] / 100) * vw;
+            const targetY = positionsY[i % positionsY.length];
 
-            gsap.to(card, {
+            tl.to(card, {
               x: targetX,
               y: targetY,
               opacity: 1,
               scale: 1,
               duration: 1,
               ease: 'power2.out',
-              scrollTrigger: {
-                trigger: timelineSection,
-                start: `top+=${i * scrollPerCard} 50%`,
-                end: `top+=${i * scrollPerCard + scrollPerCard} 50%`,
-                scrub: 1.2
-              }
-            });
+            }, i * 0.8);
           });
 
+          /* Pequeña pausa al final para que se vean todas */
+          tl.to({}, { duration: 0.5 });
+
+        } else if (isTablet) {
+          /* Tablet — Cards en grid 2 columnas con fade in al scroll */
+          timelineCards.forEach((card) => {
+            gsap.fromTo(card, { opacity: 0, y: 40 }, {
+              opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+              scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none reverse' }
+            });
+          });
         } else {
           /* Mobile — Cards sin tilt, apilándose una sobre otra con fade in */
           timelineCards.forEach((card) => {
@@ -316,6 +340,79 @@ const SobreMi = (() => {
             });
           });
         }
+
+        /* ── Card modal — click to expand ── */
+        const overlay = document.getElementById('sobreTimelineOverlay');
+        let cardExpandidaOriginalParent = null;
+        let cardExpandidaNextSibling = null;
+
+        function expandirCard(card) {
+          /* Guardar posición original en el DOM */
+          cardExpandidaOriginalParent = card.parentNode;
+          cardExpandidaNextSibling = card.nextSibling;
+          /* Guardar estilos inline originales para restaurar después */
+          card._estiloOriginal = card.getAttribute('style') || '';
+          /* Mover card al body para escapar de stacking contexts */
+          document.body.appendChild(card);
+          /* Limpiar estilos inline de GSAP que interfieren */
+          card.removeAttribute('style');
+          card.style.cursor = 'pointer';
+          card.classList.add('card-expandida');
+          if (overlay) overlay.classList.add('activo');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarCard() {
+          const cardExpandida = document.querySelector('.sobre-timeline-card.card-expandida');
+          if (cardExpandida) {
+            cardExpandida.classList.remove('card-expandida');
+            /* Devolver card a su posición original en el DOM */
+            if (cardExpandidaOriginalParent) {
+              if (cardExpandidaNextSibling) {
+                cardExpandidaOriginalParent.insertBefore(cardExpandida, cardExpandidaNextSibling);
+              } else {
+                cardExpandidaOriginalParent.appendChild(cardExpandida);
+              }
+            }
+            /* Restaurar estilos inline originales (posición GSAP) */
+            if (cardExpandida._estiloOriginal) {
+              cardExpandida.setAttribute('style', cardExpandida._estiloOriginal);
+            }
+            cardExpandidaOriginalParent = null;
+            cardExpandidaNextSibling = null;
+          }
+          if (overlay) overlay.classList.remove('activo');
+          document.body.style.overflow = '';
+        }
+
+        timelineCards.forEach(card => {
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', (e) => {
+            /* No expandir si se clickeó un enlace */
+            if (e.target.closest('a')) return;
+            /* No expandir si ya está expandida o si se clickeó el botón cerrar */
+            if (card.classList.contains('card-expandida')) return;
+            expandirCard(card);
+          });
+
+          const cerrarBtn = card.querySelector('.sobre-timeline-card-cerrar');
+          if (cerrarBtn) {
+            cerrarBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              cerrarCard();
+            });
+          }
+        });
+
+        /* Cerrar al hacer click en el overlay */
+        if (overlay) {
+          overlay.addEventListener('click', cerrarCard);
+        }
+
+        /* Cerrar con Escape */
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') cerrarCard();
+        });
       }
     }
 
@@ -332,7 +429,8 @@ const SobreMi = (() => {
 
       /* ── Partículas flotando — usan variables del tema ── */
       if (ctaParticulas) {
-        const numParticulas = 35;
+        const esMovilTablet = window.matchMedia('(max-width: 1024px)').matches;
+        const numParticulas = esMovilTablet ? 90 : 60;
         /* Cada partícula usa --manifiesto-neon-color como base
            y una de las variables neon-s1 a s6 como box-shadow */
         const sombras = [
@@ -347,14 +445,14 @@ const SobreMi = (() => {
         for (let i = 0; i < numParticulas; i++) {
           const particula = document.createElement('div');
           particula.className = 'sobre-cta-particula';
-          const size = gsap.utils.random(2, 5);
+          const size = esMovilTablet ? gsap.utils.random(5, 14) : gsap.utils.random(3, 9);
           const sombra = sombras[i % sombras.length];
           particula.style.width = size + 'px';
           particula.style.height = size + 'px';
           particula.style.background = 'var(--manifiesto-neon-color)';
-          particula.style.boxShadow = sombra;
-          particula.style.left = gsap.utils.random(5, 95) + '%';
-          particula.style.top = gsap.utils.random(10, 90) + '%';
+          particula.style.boxShadow = `0 0 ${size * 3}px ${sombra}, 0 0 ${size * 6}px ${sombra}`;
+          particula.style.left = gsap.utils.random(2, 98) + '%';
+          particula.style.top = gsap.utils.random(2, 98) + '%';
           particula.style.opacity = '0';
           ctaParticulas.appendChild(particula);
         }
@@ -362,12 +460,12 @@ const SobreMi = (() => {
         const particulas = ctaParticulas.querySelectorAll('.sobre-cta-particula');
 
         particulas.forEach((p) => {
-          const duracion = gsap.utils.random(4, 9);
-          const delay = gsap.utils.random(0, 5);
+          const duracion = gsap.utils.random(3, 8);
+          const delay = gsap.utils.random(0, 4);
           gsap.to(p, {
-            y: gsap.utils.random(-80, -200),
-            x: gsap.utils.random(-30, 30),
-            opacity: gsap.utils.random(0.9, 0.8),
+            y: gsap.utils.random(-100, -250),
+            x: gsap.utils.random(-50, 50),
+            opacity: gsap.utils.random(0.7, 1),
             duration: duracion,
             delay: delay,
             repeat: -1,
@@ -377,8 +475,8 @@ const SobreMi = (() => {
         });
 
         gsap.fromTo(ctaParticulas, { opacity: 0 }, {
-          opacity: 1, duration: 1,
-          scrollTrigger: { trigger: ctaSection, start: 'top 80%', end: 'top 40%', scrub: 1 }
+          opacity: 1, duration: esMovilTablet ? 0.5 : 1,
+          scrollTrigger: esMovilTablet ? undefined : { trigger: ctaSection, start: 'top 80%', end: 'top 40%', scrub: 1 }
         });
       }
 
@@ -398,7 +496,9 @@ const SobreMi = (() => {
 
       /* ── Texto — Reveal palabra por palabra (mismo estilo manifiesto) ── */
       const ctaTextos = ctaSection.querySelectorAll('.sobre-cta-texto');
-      if (ctaTextos.length) {
+      const esMovilOTablet = window.matchMedia('(max-width: 1024px)').matches;
+
+      if (ctaTextos.length && !esMovilOTablet) {
         ctaTextos.forEach(p => {
           const html = p.innerHTML;
           const wrapped = html.replace(/(\S+)/g, '<span class="palabra-cta" style="display:inline-block; opacity:0; transform:translateY(60px) rotateX(25deg); transform-origin:bottom center;">$1</span>');

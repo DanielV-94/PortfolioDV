@@ -1,66 +1,38 @@
 /* ═══════════════════════════════════════════════════════════════
-   TRANSICIÓN HERO — SVG de acento + frase ascendente
+   TRANSICIÓN HERO — Texto estático (sin animación)
 ═══════════════════════════════════════════════════════════════ */
 
 .transicion-hero {
   position: relative;
   z-index: 4;
-  margin-top: -100dvh;
-  min-height: 200dvh;
+  margin-top: 0;
+  min-height: auto;
   pointer-events: none;
   overflow: clip;
+  background: linear-gradient(
+    to bottom,
+    var(--color-fondo) 0%,
+    var(--color-fondo-alt) 100%
+  );
+  padding-block: 8vh 6vh;
 }
 
 .transicion-hero-stage {
-  position: sticky;
-  top: 0;
-  height: 100dvh;
-  z-index: 999;
+  position: relative;
+  height: auto;
   display: grid;
   place-items: center;
   background: transparent;
-  /* Perspectiva corta para que el rotationX de las líneas se sienta */
-  perspective: 800px;
-  transform-style: preserve-3d;
-  transition: background var(--transicion-tema);
-}
-
-.transicion-hero-gradient {
-  position: absolute;
-  inset: 0;
-  /* Linear gradient hacia abajo: fondo → fondo alterno */
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0) 35%,
-    var(--color-fondo-alt) 100%
-  );
-  opacity: 0;
-  pointer-events: none;
-  mix-blend-mode: normal;
-  transition: opacity var(--transicion-tema);
-}
-
-/* Asegurar que los wrappers generados por SplitText hereden/usen el color del tema */
-.transicion-hero-gradient .trans-line,
-.transicion-hero-gradient .transicion-hero-copy p {
-  color: var(--color-texto);
 }
 
 .transicion-hero-copy {
-  position: absolute;
-  inset: 0;
+  position: relative;
   display: grid;
   align-content: center;
   justify-items: center;
   gap: clamp(0px, 0.45vh, 7px);
-  padding-top: 0;
   padding-inline: 4vw;
   text-align: center;
-  will-change: transform;
-  opacity: 1;
-  /* Oculta las líneas antes de que entren (rotationX inicial) */
-  overflow: hidden;
 }
 
 .transicion-hero-copy p {
@@ -74,10 +46,6 @@
   color: var(--color-texto);
   text-shadow: 0 4px 14px
     color-mix(in srgb, var(--color-fondo) 40%, transparent);
-  opacity: 1;
-  transform: translateY(20px);
-  will-change: transform, opacity;
-  /* Ligaduras de Cloudsters */
   font-feature-settings:
     "liga" 1,
     "clig" 1,
@@ -87,10 +55,6 @@
 }
 
 @media (max-width: 900px) {
-  .transicion-hero {
-    min-height: 200dvh;
-  }
-
   .transicion-hero-copy p {
     max-width: 14ch;
     font-size: clamp(30.2px, 10.58vw, 69.1px);
@@ -98,58 +62,9 @@
 }
 
 @media (max-width: 767px) {
-  /* En móvil: flujo normal (sin overlap sobre el hero),
-     degradado del color de fondo al color acento */
-  .transicion-hero {
-    margin-top: 0;
-    min-height: auto;
-    overflow: visible;
-    /* Degradado que conecta visualmente el hero con la sección fondo-alt */
-    background: linear-gradient(
-      to bottom,
-      var(--color-fondo) 0%,
-      var(--color-fondo-alt) 28%
-    );
-    padding-block: 6vh 4vh;
-  }
-
-  /* Stage no-sticky en móvil: flujo normal, centrado verticalmente */
-  .transicion-hero-stage {
-    position: relative;
-    top: auto;
-    height: auto;
-    min-height: auto;
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 4vh;
-  }
-
-  /* Copy: position relative (ya no absolute) */
-  .transicion-hero-copy {
-    position: relative;
-    inset: auto;
-    overflow: visible;
-  }
-
   .transicion-hero-copy p {
     font-size: clamp(22px, 7vw, 44px);
     max-width: 100%;
     line-height: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .transicion-hero {
-    margin-top: 0;
-    min-height: 100dvh;
-  }
-
-  .transicion-hero-copy,
-  .transicion-hero-copy p {
-    transform: none !important;
-    opacity: 1 !important;
   }
 }

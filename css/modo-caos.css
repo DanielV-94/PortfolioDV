@@ -22,11 +22,6 @@ body.modo-caos-activo .caos-sticker:active {
   cursor: grabbing !important;
 }
 
-/* ── Botón de activación ── */
-.modo-caos-btn {
-  display: none; /* Reemplazado por la barra de modos */
-}
-
 /* ── Contenedor de stickers — cubre todo el documento ── */
 .modo-caos-layer {
   position: absolute;
@@ -96,28 +91,14 @@ body.modo-caos-activo .caos-sticker:active {
 
 /* ── Responsive ── */
 @media (max-width: 1024px) and (orientation: landscape) {
-  .modo-caos-btn {
-    bottom: 18px;
-    right: 20px;
-    padding: 8px 14px;
-  }
+  /* Sin cambios — hereda de base */
 }
 
 @media (max-width: 1024px) and (orientation: portrait) {
-  .modo-caos-btn {
-    bottom: 22px;
-    right: 20px;
-  }
+  /* Sin cambios — hereda de base */
 }
 
 @media (max-width: 599px) {
-  .modo-caos-btn {
-    bottom: 16px;
-    right: 16px;
-    padding: 8px 12px;
-    font-size: 8px;
-  }
-
   .caos-sticker--xl {
     width: clamp(156px, 39vw, 260px);
     height: clamp(156px, 39vw, 260px);
@@ -140,12 +121,7 @@ body.modo-caos-activo .caos-sticker:active {
 }
 
 @media (max-width: 768px) and (orientation: landscape) {
-  .modo-caos-btn {
-    bottom: 10px;
-    right: 14px;
-    padding: 6px 10px;
-    font-size: 7px;
-  }
+  /* Sin cambios — hereda de base */
 }
 
 /* ── Reduced motion ── */

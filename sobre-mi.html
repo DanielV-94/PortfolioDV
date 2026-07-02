@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
+  
 </head>
 
 <body data-tema="neutro" class="cursor-oculto pagina-fondo-alterno" style="background-color: var(--color-fondo-alt);">
@@ -52,6 +52,7 @@
   </div>
 
   <div class="esquina esquina--sup-der">
+    <span class="nav-menu-label" aria-hidden="true">MENU</span>
     <button class="nav-menu-btn" id="navMenuBtn" aria-label="Abrir menú de navegación" aria-expanded="false"
       aria-controls="navOverlay">
       <span></span>
@@ -298,6 +299,7 @@
 
       <div class="sobre-timeline-stack" id="sobreTimelineStack">
         <article class="sobre-timeline-card">
+          <button class="sobre-timeline-card-cerrar" aria-label="Cerrar">&times;</button>
           <div class="sobre-timeline-card-img">
             <img src="Rsc/Img/daniel/isae.png" alt="La Formación" />
           </div>
@@ -309,17 +311,19 @@
         </article>
 
         <article class="sobre-timeline-card">
+          <button class="sobre-timeline-card-cerrar" aria-label="Cerrar">&times;</button>
           <div class="sobre-timeline-card-img">
             <img src="Rsc/Img/daniel/infierno.jpeg" alt="Mi Obra Maestra" />
           </div>
           <div class="sobre-timeline-card-contenido">
             <p class="sobre-timeline-card-desc">Palacio de las Vacas, Guadalajara. Una producción inmersiva basada en la Divina Comedia con más de 30 bailarines.</p>
-            <h3 class="sobre-timeline-card-titulo">INFIERNO</h3>
+            <h3 class="sobre-timeline-card-titulo"><a href="https://drive.google.com/file/d/1qKvRtqvOnyr-wswPnKR9cxweKL1eUlg5/view?usp=sharing" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:0.15em"></a>INFIERNO</a></h3>
             <span class="sobre-timeline-card-anio">2018</span>
           </div>
         </article>
 
         <article class="sobre-timeline-card">
+          <button class="sobre-timeline-card-cerrar" aria-label="Cerrar">&times;</button>
           <div class="sobre-timeline-card-img">
             <img src="Rsc/Img/daniel/teatro.png" alt="TEDx Guadalajara" />
           </div>
@@ -331,6 +335,7 @@
         </article>
 
         <article class="sobre-timeline-card">
+          <button class="sobre-timeline-card-cerrar" aria-label="Cerrar">&times;</button>
           <div class="sobre-timeline-card-img">
             <img src="Rsc/Img/daniel/concurso.png" alt="Competencia de danza" />
           </div>
@@ -342,6 +347,7 @@
         </article>
 
         <article class="sobre-timeline-card">
+          <button class="sobre-timeline-card-cerrar" aria-label="Cerrar">&times;</button>
           <div class="sobre-timeline-card-img">
             <img src="Rsc/Img/daniel/agave.jpeg"Residencia artística" />
           </div>
@@ -353,6 +359,7 @@
         </article>
 
         <article class="sobre-timeline-card">
+          <button class="sobre-timeline-card-cerrar" aria-label="Cerrar">&times;</button>
           <div class="sobre-timeline-card-img">
             <img src="Rsc/Img/daniel/onlive.png" alt="OnLiveMovnt" />
           </div>
@@ -364,6 +371,7 @@
         </article>
 
         <article class="sobre-timeline-card">
+          <button class="sobre-timeline-card-cerrar" aria-label="Cerrar">&times;</button>
           <div class="sobre-timeline-card-img">
             <img src="Rsc/Img/daniel/twwinlions.jpeg" alt="Twin Lions Casino" />
           </div>
@@ -375,6 +383,7 @@
         </article>
 
         <article class="sobre-timeline-card sobre-timeline-card--actual">
+          <button class="sobre-timeline-card-cerrar" aria-label="Cerrar">&times;</button>
           <div class="sobre-timeline-card-img">
             <img src="Rsc/Img/daniel/presente.png" alt="Diseño y Desarrollo Web" />
           </div>
@@ -494,6 +503,9 @@
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
     </a>
   </div>
+
+  <!-- Overlay para card modal timeline -->
+  <div class="sobre-timeline-overlay" id="sobreTimelineOverlay"></div>
 </body>
 
 </html>

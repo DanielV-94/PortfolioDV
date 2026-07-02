@@ -150,7 +150,7 @@
 }
 
 @keyframes sobre-scroll-pulso {
-  0%, 100% { opacity: 0.5s; transform: scaleY(0.5); }
+  0%, 100% { opacity: 0.5; transform: scaleY(0.5); }
   50% { opacity: 1; transform: scaleY(1); }
 }
 
@@ -464,8 +464,7 @@
 
 .sobre-timeline {
   position: relative;
-  padding: 8rem 2rem 12rem;
-  min-height: 450vh;
+  padding: 8rem 2rem 4rem;
 }
 
 .sobre-timeline-header {
@@ -493,7 +492,7 @@
 /* ── Stack de cards — distribuidas por el ancho ── */
 .sobre-timeline-stack {
   position: sticky;
-  top: 10vh;
+  top: 5vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -586,14 +585,122 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   TIMELINE CARD — Modal expandido (click to expand)
+═══════════════════════════════════════════════════════════════ */
+
+/* Overlay oscuro detrás de la card expandida */
+.sobre-timeline-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.sobre-timeline-overlay.activo {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Card en estado expandido/modal */
+.sobre-timeline-card.card-expandida {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(0deg) !important;
+  width: min(90vw, 480px) !important;
+  height: auto !important;
+  max-height: 85vh;
+  z-index: 9995 !important;
+  opacity: 1 !important;
+  overflow-y: auto;
+  border-radius: 16px;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(0, 0, 0, 0.4);
+  animation: card-modal-entrada 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes card-modal-entrada {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85) rotate(0deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+}
+
+.sobre-timeline-card.card-expandida .sobre-timeline-card-img {
+  height: 300px;
+}
+
+.sobre-timeline-card.card-expandida .sobre-timeline-card-img img {
+  filter: grayscale(0%);
+}
+
+.sobre-timeline-card.card-expandida .sobre-timeline-card-contenido {
+  padding: 2rem;
+}
+
+.sobre-timeline-card.card-expandida .sobre-timeline-card-desc {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.sobre-timeline-card.card-expandida .sobre-timeline-card-titulo {
+  font-size: 2rem;
+}
+
+.sobre-timeline-card.card-expandida .sobre-timeline-card-anio {
+  font-size: 0.9rem;
+}
+
+/* Botón cerrar */
+.sobre-timeline-card-cerrar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 18px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.sobre-timeline-card.card-expandida .sobre-timeline-card-cerrar {
+  display: flex;
+}
+
+.sobre-timeline-card-cerrar:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* ═══════════════════════════════════════════════════════════════
    RESPONSIVE — Timeline Cards
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── Tablet landscape ── */
 @media (max-width: 1024px) and (orientation: landscape) {
   .sobre-timeline {
-    min-height: 400vh;
-    padding: 4rem 1.5rem;
+    min-height: auto;
+    padding: 4rem 2rem;
   }
 
   .sobre-timeline-header {
@@ -601,17 +708,27 @@
   }
 
   .sobre-timeline-stack {
-    height: 80vh;
-    top: 10vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    height: auto;
+    top: auto;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   .sobre-timeline-card {
-    width: 260px;
-    height: 360px;
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    opacity: 1;
   }
 
   .sobre-timeline-card-img {
-    height: 50%;
+    height: 216px;
   }
 
   .sobre-timeline-card-contenido {
@@ -630,7 +747,7 @@
 /* ── Tablet portrait ── */
 @media (max-width: 1024px) and (orientation: portrait) {
   .sobre-timeline {
-    min-height: 400vh;
+    min-height: auto;
     padding: 4rem 1.5rem;
   }
 
@@ -639,29 +756,40 @@
   }
 
   .sobre-timeline-stack {
-    height: 80vh;
-    top: 10vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    height: auto;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
   }
 
   .sobre-timeline-card {
-    width: 250px;
-    height: 380px;
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    opacity: 1;
   }
 
   .sobre-timeline-card-img {
-    height: 50%;
+    height: 264px;
   }
 
   .sobre-timeline-card-contenido {
-    padding: 1.2rem 1.3rem;
+    padding: 1.4rem 1.5rem;
   }
 
   .sobre-timeline-card-titulo {
-    font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
   }
 
   .sobre-timeline-card-desc {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
   }
 }
 
@@ -894,13 +1022,94 @@
 
 /* ── Tablet portrait ── */
 @media (max-width: 1024px) and (orientation: portrait) {
-  .sobre-historia { padding: 6rem 2rem; }
+  .sobre-historia {
+    padding: 0;
+    min-height: 100dvh;
+    display: flex;
+    align-items: stretch;
+  }
+
   .sobre-historia-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-rows: 1fr;
+    gap: 0;
+    position: relative;
+    width: 100%;
+    min-height: 100dvh;
   }
+
   .sobre-historia-grid--invertida { direction: ltr; }
-  .sobre-historia-imagen { max-height: 50vh; aspect-ratio: auto; }
+
+  /* Imagen como fondo de toda la sección */
+  .sobre-historia-imagen {
+    position: absolute;
+    inset: 0;
+    max-height: none;
+    height: 100%;
+    width: 100%;
+    aspect-ratio: auto;
+    z-index: 0;
+  }
+
+  .sobre-historia-img-simple,
+  .tilt-card {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 0;
+    filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.45))
+            drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    transition: filter 0.5s ease;
+  }
+
+  /* Blur cuando el texto aparece */
+  .sobre-historia-imagen.texto-visible .sobre-historia-img-simple,
+  .sobre-historia-imagen.texto-visible .tilt-card {
+    filter: blur(5px) brightness(0.7)
+            drop-shadow(0 12px 32px rgba(0, 0, 0, 0.45))
+            drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Contenido superpuesto sobre la imagen */
+  .sobre-historia-contenido {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: clamp(80px, 12vh, 140px) clamp(32px, 7vw, 64px);
+  }
+
+  /* Título arriba (zona del primer rectángulo) */
+  .sobre-historia-titulo {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    margin-bottom: auto;
+    padding-top: clamp(20px, 4vh, 60px);
+    text-shadow:
+      0 2px 12px rgba(0, 0, 0, 0.6),
+      0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Texto en el centro-bajo (zona del segundo rectángulo) */
+  .sobre-historia-contenido p {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    text-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.6),
+      0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .sobre-historia-contenido p:last-child {
+    margin-bottom: auto;
+  }
+}
+
+  .sobre-historia-contenido {
+    padding: 2rem 0;
+  }
 }
 
 /* ── Mobile portrait ── */
@@ -916,7 +1125,7 @@
   .sobre-historia-contenido p { font-size: 1rem; }
 
   .sobre-manifiesto { padding: 4rem 1.2rem; }
-  .sobre-manifiesto-contenido p { font-size: clamp(1.05rem, 4vw, 1.3rem); }
+  .sobre-manifiesto-contenido p { font-size: clamp(1.4rem, 5.2vw, 1.7rem); }
 
   .sobre-cta { padding: 5rem 1.2rem; min-height: auto; }
   .sobre-cta-titulo { font-size: clamp(1.8rem, 7vw, 3rem); }
@@ -929,4 +1138,57 @@
   .sobre-historia { padding: 4rem 2rem; }
   .sobre-historia-grid { gap: 3rem; }
   .sobre-cta { padding: 5rem 2rem; min-height: auto; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA — Tablet & Mobile (≤1024px): sin animación texto,
+   partículas notorias, sombras de profundidad
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  /* Texto ya visible sin animación */
+  .sobre-cta-texto .palabra-cta {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Contenido con sombra de texto para profundidad */
+  .sobre-cta-texto {
+    text-shadow:
+      0 2px 12px rgba(0, 0, 0, 0.4),
+      0 4px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .sobre-cta-texto--grande {
+    text-shadow:
+      0 3px 16px rgba(0, 0, 0, 0.5),
+      0 6px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Partículas más grandes y notorias */
+  .sobre-cta-particula {
+    filter: blur(0.5px);
+  }
+
+  /* Sombra interior en la sección para profundidad */
+  .sobre-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    box-shadow:
+      inset 0 40px 60px -20px rgba(0, 0, 0, 0.4),
+      inset 0 -40px 60px -20px rgba(0, 0, 0, 0.4);
+    border-radius: 0;
+  }
+
+  /* Contenido con z-index elevado sobre la sombra */
+  .sobre-cta-contenido {
+    z-index: 5;
+  }
+
+  /* Partículas contenedor siempre visible */
+  .sobre-cta-particulas {
+    opacity: 1;
+  }
 }

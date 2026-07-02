@@ -8,7 +8,7 @@
 
 .hero-sticky-stage {
   position: relative;
-  height: 210dvh;
+  height: 110dvh;
   /* Perspectiva más corta = efecto 3D más pronunciado en el tilt/shrink */
   perspective: 900px;
   transform-style: preserve-3d;
@@ -607,9 +607,61 @@
   }
 }
 
+/* ─── Tablet portrait (600px – 1024px, orientation: portrait) ─── */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .hero-nombres-area {
+    right: auto;
+    left: 50%;
+    top: 42%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 94vw;
+  }
+
+  .hero-nombre-daniel {
+    font-size: clamp(120px, 28vw, 260px);
+    display: block;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-nombre-velez {
+    font-size: clamp(110px, 26vw, 240px);
+    display: block;
+    text-align: center;
+    left: 0;
+    -webkit-text-stroke-width: 3px;
+  }
+
+  .hero-editable-area {
+    bottom: clamp(52px, 7vh, 80px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .hero-frase-editable-contenedor > :nth-child(2),
+  .hero-frase-editable-contenedor > :nth-child(3) {
+    padding-left: 0;
+  }
+
+  .hero-frase-fija {
+    text-align: center;
+  }
+
+  .hero-frase-fija,
+  .hero-frase-editable {
+    font-size: clamp(20px, 4vw, 36px);
+  }
+
+  .hero-drag-hint {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-sticky-stage {
-    height: 130dvh;
+    height: 100dvh;
   }
 
   /* Nombres: centrados vertical y horizontalmente */
