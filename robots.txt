@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.danielvelez-webdev.com/sitemap.xml
+
+# Bloquear recursos internos que no aportan al SEO
+Disallow: /gsap-public/
+Disallow: /Rsc/Fonts/
