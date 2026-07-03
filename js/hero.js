@@ -1,19 +1,10 @@
-/* ═══════════════════════════════════════════════════════════════
-   HERO — Animación de entrada coreografiada, DANIEL draggable,
-   frase editable con respuesta interactiva de Daniel
-═══════════════════════════════════════════════════════════════ */
-
 const Hero = (() => {
-  /* ── Elementos DOM ── */
   const elNombreDaniel = document.getElementById("nombreDaniel");
   const elNombreVelez = document.getElementById("nombreVelez");
   const elFrasesEditables = document.querySelectorAll(".hero-frase-editable");
   const elFrasesFijas = document.querySelectorAll(".hero-frase-fija");
   const elReloj = document.getElementById("relojHero");
 
-  /* ─────────────────────────────────────────
-     RELOJ EN TIEMPO REAL — GDL (CST/CDT)
-  ───────────────────────────────────────── */
   function iniciarReloj() {
     const actualizar = () => {
       if (!elReloj) return;
@@ -32,10 +23,6 @@ const Hero = (() => {
     setInterval(actualizar, 1000);
   }
 
-  /* ─────────────────────────────────────────
-     CONFIG — Variables maestras de la secuencia
-     Ajusta delays, duraciones y textos aquí
-  ───────────────────────────────────────── */
   const INTRO_CFG = {
     extra_duracion_anim: 0.1,
     texto_leyenda:      'Daniel está editando...',
@@ -57,7 +44,6 @@ const Hero = (() => {
     delay_entre_frases: 0.6,
   };
 
-  /* Registro de overlays efímeros para limpiar al final */
   let _overlays = [];
   let _introTl = null;
   let _introSkipBound = false;
@@ -77,12 +63,6 @@ const Hero = (() => {
     document.body.classList.remove('cursor-oculto');
   }
 
-  /* ─────────────────────────────────────────
-     OVERLAY HELPERS
-     Elementos DOM posicionados con
-     getBoundingClientRect() + GSAP transform.
-     Nunca tocan el layout — solo opacity/transform.
-  ───────────────────────────────────────── */
   function _regOverlay(el) { _overlays.push(el); return el; }
 
   function _crearLeyenda(texto) {
@@ -95,8 +75,6 @@ const Hero = (() => {
     document.body.appendChild(el);
     return el; // no se registra — se gestiona por separado
   }
-
-  // Flash de pantalla para reforzar sensación de edición "en vivo"
   function _crearFlashIntro() {
     const el = document.createElement('div');
     el.className = 'hero-intro-flash';
@@ -104,9 +82,6 @@ const Hero = (() => {
     document.body.appendChild(el);
     return el;
   }
-
-  // Bounding box: tamaño via style inline, posición via GSAP transform
-  // Mide el rect REAL del texto visible (no el bloque contenedor)
   function _textRect(el) {
     const range = document.createRange();
     range.selectNodeContents(el);
@@ -118,15 +93,11 @@ const Hero = (() => {
     const bottom = Math.max(...rects.map(r => r.bottom));
     return { left, top, right, bottom, width: right - left, height: bottom - top };
   }
-
-  // Bounding box basado en texto real con Range
   function _crearBbox(targetEl) {
     const PAD_X = 16;
     const PAD_TOP = 8;
     const esVelez = targetEl.classList.contains('hero-nombre-velez');
     const r  = _textRect(targetEl);
-    // Las fuentes display incluyen espacio de descendentes (~18%) aunque no haya descendentes visibles.
-    // Recortamos ese espacio para que el borde inferior quede pegado a las letras.
     const descenderCrop = Math.round(r.height * 0.18);
     const PAD_BOTTOM = -descenderCrop;
     const el = document.createElement('div');
@@ -147,15 +118,11 @@ const Hero = (() => {
     document.body.appendChild(el);
     return _regOverlay(el);
   }
-
-  // Label alineada al borde real del bbox
   function _crearLabel(targetEl, texto, posicion, bboxEl) {
     const r  = _textRect(targetEl);
     const el = document.createElement('div');
     el.className   = 'hero-intro-label';
     el.textContent = texto;
-
-    // Medir primero para colocar y mantener visible en viewport
     el.style.visibility = 'hidden';
     document.body.appendChild(el);
     const lblW = el.offsetWidth;
@@ -175,8 +142,6 @@ const Hero = (() => {
       const bboxBottom = bboxTop + (bboxEl ? bboxEl.offsetHeight : r.height + 9);
       fx = bboxRight - lblW;
       fy = bboxBottom + 8;
-
-      // Si no cabe debajo (caso VELEZ cerca del borde), subirlo arriba del bbox
       if (fy + lblH > vh - pad) {
         fy = bboxTop - lblH - 8;
       }
@@ -198,8 +163,6 @@ const Hero = (() => {
     gsap.set(el, { x: fx, y: fy + 10, opacity: 0 });
     return _regOverlay(el);
   }
-
-  // Tooltip glassmorphism — borde derecho alineado al borde izquierdo del bbox
   function _crearTooltip(targetEl, props, bboxEl) {
     const r  = _textRect(targetEl);
     const el = document.createElement('div');
@@ -219,8 +182,6 @@ const Hero = (() => {
     gsap.set(el, { x: fx + 18, y: fy, opacity: 0 });
     return _regOverlay(el);
   }
-
-  // Fade-out y destrucción de todos los overlays registrados
   function _limpiarOverlays() {
     if (!_overlays.length) return;
     gsap.to(_overlays, {
@@ -254,7 +215,6 @@ const Hero = (() => {
 
     _removeIntroArtifactsImmediate();
 
-    /* Revelar esquinas HUD que quedaron en opacity: 0 */
     const esquinas = document.querySelectorAll('.esquina');
     gsap.set(esquinas, { opacity: 1 });
 
@@ -282,8 +242,6 @@ const Hero = (() => {
 
     window.addEventListener('scroll', maybeSkip, { passive: true });
   }
-
-  // Typewriter con cursor parpadeante que simula escritura real
   function _typeWriter(tl, el, texto, t0) {
     el.textContent = '';
     const cursor = document.createElement('span');
@@ -310,10 +268,6 @@ const Hero = (() => {
     return tEnd;
   }
 
-  /* ─────────────────────────────────────────
-     ANIMACIÓN DE ENTRADA COREOGRAFIADA
-     "Behind the scenes" — Daniel diseñando en vivo
-  ───────────────────────────────────────── */
   function animarEntrada() {
     const C        = INTRO_CFG;
     const dur      = (valorBase) => valorBase + C.extra_duracion_anim;
@@ -321,11 +275,8 @@ const Hero = (() => {
     const isMobile = window.innerWidth < 768;
     const editables = [...document.querySelectorAll('.hero-frase-editable')];
     const textos    = editables.map(el => el.textContent.trim());
-
-    // Durante la intro no se debe ver ningún cursor
     activarBloqueoCursorIntro();
 
-    /* — prefers-reduced-motion: saltar al estado final — */
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.set([elNombreDaniel, elNombreVelez], { opacity: 1, y: 0, scale: 1 });
       gsap.set(elFrasesFijas, { opacity: 1, y: 0 });
@@ -334,7 +285,6 @@ const Hero = (() => {
       return;
     }
 
-    /* — Estado inicial: todo invisible — */
     gsap.set(esquinas,       { opacity: 0 });
     gsap.set(elNombreDaniel, { opacity: 0, y: 50, scale: 0.96 });
     gsap.set(elNombreVelez,  { opacity: 0, y: 50, scale: 0.96 });
@@ -347,12 +297,10 @@ const Hero = (() => {
 
     _bindIntroSkip();
 
-    /* ══ FASE 0: Esquinas HUD ══ */
     tl.to(esquinas, {
       opacity: 1, duration: dur(0.7), stagger: 0.18, ease: 'power2.out',
     }, C.delay_esquinas);
 
-    /* ══ FASE 0a: Doble parpadeo — "live editing" ══ */
     tl.call(() => {
       const flash = _crearFlashIntro();
       gsap.timeline({ onComplete: () => flash.remove() })
@@ -362,7 +310,6 @@ const Hero = (() => {
         .to(flash, { opacity: 0.00, duration: 0.16, ease: 'power1.in' });
     }, [], C.delay_leyenda - 0.18);
 
-    /* ══ FASE 0b: Leyenda "Daniel está editando..." ══ */
     tl.to(leyenda, {
       opacity: 1, duration: dur(0.9), ease: 'power2.out',
     }, C.delay_leyenda);
@@ -374,7 +321,6 @@ const Hero = (() => {
       );
     }, [], C.delay_leyenda + 1.0);
 
-    /* ══ FASE 1: DANIEL ══ */
     const t_daniel = C.delay_daniel;
 
     tl.to(elNombreDaniel, {
@@ -407,7 +353,6 @@ const Hero = (() => {
       gsap.to(tip, { opacity: 1, x: parseFloat(tip.dataset.fx), duration: dur(C.dur_tooltip), ease: C.ease_bbox });
     }, [], t_daniel_overlays + 0.55);
 
-    /* ══ FASE 2: VELEZ ══ */
     const t_velez = t_daniel_overlays + C.dur_pausa_daniel + C.delay_velez_offset;
 
     tl.to(elNombreVelez, {
@@ -441,7 +386,6 @@ const Hero = (() => {
       gsap.to(tip, { opacity: 1, x: parseFloat(tip.dataset.fx), duration: dur(C.dur_tooltip), ease: C.ease_bbox });
     }, [], t_velez_overlays + 0.55);
 
-    /* ══ FASE 3: Typewriter — overlays persisten durante la escritura ══ */
     const t_frases_inicio = t_velez_overlays + C.dur_pausa_velez + C.delay_frases_offset;
     let tCursor = t_frases_inicio;
 
@@ -455,10 +399,8 @@ const Hero = (() => {
       }
     });
 
-    /* Overlays desaparecen DESPUÉS de la última frase */
     tl.call(_limpiarOverlays, [], tCursor + 0.3);
 
-    /* ══ FASE 4: Cierre ══ */
     const tFinal = tCursor + C.dur_pausa_final;
 
     tl.call(() => {
@@ -481,11 +423,6 @@ const Hero = (() => {
     return tl;
   }
 
-  /* ─────────────────────────────────────────
-     RESPUESTA EDITABLE — GSAP (3 palabras)
-     Estados: IDLE → DRAGGING → RETURNING →
-     MESSAGING → IDLE
-  ───────────────────────────────────────── */
   const EDIT_CFG = {
     mensajes: [
       "mmmm mejor no!",
@@ -546,7 +483,6 @@ const Hero = (() => {
   function ensureEditOverlays() {
     if (!editCursorEl) {
       editCursorEl = document.createElement("div");
-      /* Reutiliza el mismo cursor visual que el drag */
       editCursorEl.className = "hero-drag-custom-cursor";
       editCursorEl.setAttribute("aria-hidden", "true");
       document.body.appendChild(editCursorEl);
@@ -555,7 +491,6 @@ const Hero = (() => {
 
     if (!editBubbleEl) {
       editBubbleEl = document.createElement("div");
-      /* Reutiliza el mismo estilo de burbuja que el drag */
       editBubbleEl.className = "hero-drag-bubble";
       editBubbleEl.setAttribute("aria-live", "polite");
       editBubbleEl.setAttribute("aria-atomic", "true");
@@ -569,21 +504,15 @@ const Hero = (() => {
       editTl.kill();
       editTl = null;
     }
-    /* Restaurar cursor de usuario si quedó oculto */
     liberarCursorSiProcede();
   }
 
-  /* Typewriter pausado y realista:
-     pausa extra en puntuación y espacios,
-     variación aleatoria entre caracteres */
   function typewriterCallSequence(tl, text, startAt, onChar) {
     const chars = [...text];
     let t = startAt;
     chars.forEach((char, i) => {
       tl.call(() => onChar(char, i), [], t);
-      /* Pausa base + variación aleatoria */
       let delay = EDIT_CFG.charMensaje + (Math.random() * 0.05);
-      /* Pausa extra en signos y espacios */
       if (/[.!?,;]/.test(char))  delay += 0.28 + Math.random() * 0.18;
       else if (char === " ")     delay += 0.06 + Math.random() * 0.06;
       t += delay;
@@ -598,7 +527,6 @@ const Hero = (() => {
   }
 
   function activarRespuestaDaniel(elEditable) {
-        // Parpadeo visual antes de la reacción de Daniel
         const flash = (typeof _crearFlashIntro === 'function') ? _crearFlashIntro() : null;
         if (flash) {
           gsap.timeline({ onComplete: () => flash.remove() })
@@ -615,14 +543,11 @@ const Hero = (() => {
     if (!original || !escrito || escrito === original) return;
     killEditTimeline();
 
-    /* Elegir el siguiente mensaje en secuencia */
     const mensaje = _getSiguienteMensaje();
 
     const rect = getWordRect(elEditable);
     const targetX = rect.left + rect.width * 0.5;
     const targetY = rect.top + rect.height * 0.56;
-    /* En móvil: burbuja centrada horizontalmente en la parte alta de pantalla.
-       En desktop: clamp para no salirse del viewport. */
     const isMobile = window.innerWidth <= 1024;
     let bubbleX, bubbleY, bubbleXPercent;
     if (isMobile) {
@@ -652,13 +577,11 @@ const Hero = (() => {
     });
 
     editArea.classList.add("is-edit-reacting");
-    /* Ocultar cursor nativo del usuario mientras Daniel reacciona */
     document.body.classList.add("cursor-oculto");
 
     const startX = window.innerWidth * 0.84;
     const startY = Math.max(24, targetY - 140);
 
-    /* t=0 — cursor aparece en esquina superior derecha */
     editTl
       .set(editCursorEl, {
         x: startX,
@@ -672,18 +595,15 @@ const Hero = (() => {
         duration: EDIT_CFG.durCursorEntrada,
         ease: "power2.out",
       }, 0)
-      /* t=0.06 — se mueve lentamente hacia la palabra */
       .to(editCursorEl, {
         x: targetX,
         y: targetY,
         duration: EDIT_CFG.durCursorMove,
         ease: "power2.inOut",
       }, 0.06)
-      /* Cuando llega: selecciona la palabra */
       .call(() => {
         seleccionarPalabra(elEditable);
       }, [], 0.06 + EDIT_CFG.durCursorMove * 0.85)
-      /* Pequeña pausa dramática antes de la burbuja */
       .set(editBubbleEl, {
         x: bubbleX,
         xPercent: bubbleXPercent,
@@ -700,13 +620,11 @@ const Hero = (() => {
         editBubbleEl.textContent = "";
       }, [], 0.06 + EDIT_CFG.durCursorMove + 0.28);
 
-    /* Typewriter del mensaje — inicia 0.32s después de que aparece la burbuja */
     const tTwStart = 0.06 + EDIT_CFG.durCursorMove + 0.32;
     let tMensajeEnd = typewriterCallSequence(editTl, mensaje, tTwStart, (char) => {
       editBubbleEl.textContent += char;
     });
 
-    /* Restaurar texto original letra a letra */
     const tRestoreStart = tMensajeEnd + 0.55;
     editTl.call(() => {
       elEditable.classList.remove("modificada");
@@ -739,9 +657,6 @@ const Hero = (() => {
       }, [], tBubbleOut + EDIT_CFG.durBubbleOut + 0.08);
   }
 
-  /* ─────────────────────────────────────────
-     FRASE EDITABLE — Eventos (3 palabras)
-  ───────────────────────────────────────── */
   function iniciarEditable() {
     if (!elFrasesEditables.length) return;
 
@@ -813,10 +728,6 @@ const Hero = (() => {
     });
   }
 
-  /* ─────────────────────────────────────────
-     DRAG COREOGRAFIADO — DANIEL
-     IDLE → DRAGGING → RETURNING → MESSAGING → IDLE
-  ───────────────────────────────────────── */
   function iniciarDrag() {
     if (!elNombreDaniel) return;
 
@@ -856,10 +767,6 @@ const Hero = (() => {
     let typewriterTimer = null;
 
     const areaNombres = document.querySelector('.hero-nombres-area') || document.body;
-
-    // Origen fijo de reposo: sin transform aplicada.
-    // IMPORTANTE: no leer aquí gsap.getProperty porque durante la intro
-    // el elemento arranca en y=50 y eso desplaza el "home" incorrectamente.
     const homeTransform = {
       x: 0,
       y: 0,
@@ -971,8 +878,6 @@ const Hero = (() => {
 
     const showMessageBubble = () => {
       state = STATES.MESSAGING;
-
-      // Garantía dura: antes de la burbuja, DANIEL ya debe estar en casa.
       gsap.set(elNombreDaniel, {
         x: homeTransform.x,
         y: homeTransform.y,
@@ -1034,7 +939,6 @@ const Hero = (() => {
       state = STATES.IDLE;
       activePointerId = null;
       areaNombres.classList.remove('is-drag-active');
-      // Garantía dura: cerrar SIEMPRE en la posición original.
       gsap.set(elNombreDaniel, {
         x: homeTransform.x,
         y: homeTransform.y,
@@ -1090,14 +994,10 @@ const Hero = (() => {
         x: dragOriginPoint.x,
         y: dragOriginPoint.y,
       };
-
-      // La palabra queda exactamente donde el usuario la soltó.
       gsap.set(elNombreDaniel, { x: droppedX, y: droppedY });
       const droppedPoint = getOriginPoint();
 
       areaNombres.classList.add('is-drag-active');
-
-      // Se ocultan ayudas de drag, pero la palabra se queda donde fue soltada.
       gsap.to(dragTip, {
         autoAlpha: 0,
         duration: 0.14,
@@ -1108,8 +1008,6 @@ const Hero = (() => {
         duration: 0.18,
         ease: 'power1.out',
       });
-
-      // El cursor asistente aparece DESPUÉS y "toma" la palabra en su nueva posición.
       dropTl = gsap.timeline({ defaults: { overwrite: 'auto' } });
       dropTl
         .set(customCursor, {
@@ -1167,9 +1065,6 @@ const Hero = (() => {
     const onPointerDown = (ev) => {
       if (state === STATES.DRAGGING) return;
       if (ev.button !== 0) return;
-
-      // Interrupción explícita: si el usuario vuelve a arrastrar,
-      // cancelamos retorno/mensaje y retomamos control inmediato.
       if (state === STATES.RETURNING || state === STATES.MESSAGING) {
         clearTimelines();
         resetToIdle();
@@ -1197,7 +1092,7 @@ const Hero = (() => {
       updateTooltip(ev.clientX, ev.clientY);
 
       if (ev.pointerId != null && typeof elNombreDaniel.setPointerCapture === 'function') {
-        try { elNombreDaniel.setPointerCapture(ev.pointerId); } catch (_) { /* noop */ }
+        try { elNombreDaniel.setPointerCapture(ev.pointerId); } catch (_) { }
       }
       document.addEventListener('pointermove', onPointerMove, { passive: true });
       document.addEventListener('pointerup', onPointerUp, { passive: true });
@@ -1254,9 +1149,6 @@ const Hero = (() => {
     resetToIdle();
   }
 
-  /* ─────────────────────────────────────────
-     INIT
-  ───────────────────────────────────────── */
   function init() {
     iniciarReloj();
     animarEntrada();

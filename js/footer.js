@@ -1,16 +1,8 @@
-/* ═══════════════════════════════════════════════════════════════
-   FOOTER — Animación de entrada del CTA con ScrollTrigger
-   Módulo IIFE con revelado al entrar al viewport
-═══════════════════════════════════════════════════════════════ */
-
 const Footer = (() => {
-  /* ── Inicialización ── */
   function init() {
-    /* ── Guard clauses: dependencias GSAP ── */
     if (typeof gsap === 'undefined') return;
     if (typeof ScrollTrigger === 'undefined') return;
 
-    /* ── Registrar plugins ── */
     gsap.registerPlugin(ScrollTrigger);
     if (typeof SplitText !== 'undefined') {
       gsap.registerPlugin(SplitText);
@@ -21,13 +13,11 @@ const Footer = (() => {
     const titulo = document.querySelector('.footer-titulo');
     if (!footerCta || !subtitulo || !titulo) return;
 
-    /* ── Detección de prefers-reduced-motion ── */
     const prefersReduced = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
     if (prefersReduced) return;
 
-    /* ── Animación del subtítulo ── */
     gsap.set(subtitulo, { opacity: 0, y: 20 });
 
     gsap.to(subtitulo, {
@@ -42,14 +32,12 @@ const Footer = (() => {
       ease: 'power2.out'
     });
 
-    /* ── Animación del título con SplitText (si disponible) ── */
     if (typeof SplitText !== 'undefined') {
       const split = new SplitText(titulo, { type: 'chars' });
       gsap.set(split.chars, { opacity: 0, y: 80, rotateX: -90 });
 
       const mm = gsap.matchMedia();
 
-      /* ── Desktop (≥1025px) ── */
       mm.add('(min-width: 1025px)', () => {
         gsap.to(split.chars, {
           scrollTrigger: { trigger: '.footer', start: 'top 75%', once: true },
@@ -58,7 +46,6 @@ const Footer = (() => {
         });
       });
 
-      /* ── Tablet landscape (≤1024px, landscape) ── */
       mm.add('(max-width: 1024px) and (orientation: landscape)', () => {
         gsap.to(split.chars, {
           scrollTrigger: { trigger: '.footer', start: 'top 80%', once: true },
@@ -67,7 +54,6 @@ const Footer = (() => {
         });
       });
 
-      /* ── Tablet portrait (≤1024px, portrait) ── */
       mm.add('(max-width: 1024px) and (orientation: portrait)', () => {
         gsap.to(split.chars, {
           scrollTrigger: { trigger: '.footer', start: 'top 80%', once: true },
@@ -76,7 +62,6 @@ const Footer = (() => {
         });
       });
 
-      /* ── Mobile portrait (≤599px) ── */
       mm.add('(max-width: 599px)', () => {
         gsap.to(split.chars, {
           scrollTrigger: { trigger: '.footer', start: 'top 85%', once: true },
@@ -85,7 +70,6 @@ const Footer = (() => {
         });
       });
 
-      /* ── Mobile landscape (≤768px, landscape) ── */
       mm.add('(max-width: 768px) and (orientation: landscape)', () => {
         gsap.to(split.chars, {
           scrollTrigger: { trigger: '.footer', start: 'top 85%', once: true },
@@ -94,7 +78,6 @@ const Footer = (() => {
         });
       });
     } else {
-      /* ── Fallback sin SplitText ── */
       gsap.set(titulo, { opacity: 0, y: 60 });
       gsap.to(titulo, {
         scrollTrigger: { trigger: '.footer', start: 'top 80%', once: true },
@@ -103,7 +86,6 @@ const Footer = (() => {
       });
     }
 
-    /* ── Ocultar flotantes y tema-selector al llegar al footer ── */
     const flotantes = document.querySelector('.flotantes');
     const temaSelector = document.querySelector('.tema-selector');
     const elementosOcultar = [flotantes, temaSelector].filter(Boolean);

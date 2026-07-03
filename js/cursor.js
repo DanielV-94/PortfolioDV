@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   CURSOR — Sistema de doble cursor
-   · Usuario: punto neutro + etiqueta "tú"
-   · Daniel:  punto neón + etiqueta "Daniel" + movimiento animado
-═══════════════════════════════════════════════════════════════ */
-
 const Cursor = (() => {
   const elUsuario = document.getElementById("cursorUsuario");
   const elDaniel = document.getElementById("cursorDaniel");
@@ -14,13 +8,11 @@ const Cursor = (() => {
   let curPosY = mousePosY;
   let etiquetaMostrada = false;
 
-  /* ── Posición directa del cursor usuario (sin suavizado) ── */
   function actualizarCursor() {
     gsap.set(elUsuario, { x: mousePosX, y: mousePosY });
     requestAnimationFrame(actualizarCursor);
   }
 
-  /* ── Registrar hover en elementos interactivos ── */
   function registrarHovers() {
     const selectores = "a, button, [contenteditable], .hero-nombre-daniel";
     document.querySelectorAll(selectores).forEach((el) => {
@@ -41,14 +33,11 @@ const Cursor = (() => {
     });
   }
 
-  /* ── Init ── */
   function init() {
     const usaPunteroFino = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!usaPunteroFino || !elUsuario || !elDaniel) return;
 
     document.body.classList.add("usa-cursor-custom");
-
-    // Posición inicial off-screen
     gsap.set(elUsuario, { x: -200, y: -200 });
     gsap.set(elDaniel, { x: -300, y: -300 });
 

@@ -1,8 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   HABILIDADES — Carrusel 3D en arco con cards liquid glass
-   Scroll-triggered en desktop, swipe en mobile
-═══════════════════════════════════════════════════════════════ */
-
 .habilidades {
   position: relative;
   z-index: 4;
@@ -20,7 +15,6 @@
   overflow: hidden;
 }
 
-/* ── Contenedor del carrusel ── */
 .habilidades-carrusel {
   position: relative;
   width: 100%;
@@ -30,7 +24,6 @@
   justify-content: center;
 }
 
-/* ═══ CARD BASE — Liquid Glass ═══ */
 .habilidades-card {
   position: absolute;
   width: clamp(220px, 22vw, 320px);
@@ -62,7 +55,6 @@
     box-shadow var(--transicion-tema);
 }
 
-/* ── Reflejo superior (efecto liquid glass) ── */
 .habilidades-card::before {
   content: '';
   position: absolute;
@@ -80,7 +72,6 @@
   pointer-events: none;
 }
 
-/* ── Borde luminoso interior ── */
 .habilidades-card::after {
   content: '';
   position: absolute;
@@ -90,7 +81,6 @@
   pointer-events: none;
 }
 
-/* ═══ CARD DE CATEGORÍA — Tinte editable ═══ */
 .habilidades-card--categoria {
   background:
     linear-gradient(
@@ -108,7 +98,6 @@
   overflow: hidden;
 }
 
-/* ── Título central de categoría ── */
 .habilidades-cat-titulo {
   font-family: var(--fuente-display);
   font-size: clamp(24px, 2.8vw, 40px);
@@ -121,7 +110,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* ═══ CARD DE HABILIDAD — Contenido ═══ */
 .habilidades-card-contenido {
   position: relative;
   z-index: 1;
@@ -133,7 +121,6 @@
   padding: 20px;
 }
 
-/* ── Logo centrado — GRANDE ── */
 .habilidades-card-logo {
   width: clamp(72px, 8vw, 110px);
   height: clamp(72px, 8vw, 110px);
@@ -142,7 +129,6 @@
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
 }
 
-/* ── Numeración esquina superior derecha — fuente editable, grande ── */
 .habilidades-card-num {
   position: absolute;
   top: 16px;
@@ -155,7 +141,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* ── Nombre esquina inferior izquierda — fuente display, grande ── */
 .habilidades-card-nombre {
   position: absolute;
   bottom: 16px;
@@ -169,11 +154,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Tablet landscape (≤1024px, orientation: landscape) ── */
 @media (max-width: 1024px) and (orientation: landscape) {
   .habilidades-stage {
     height: 100dvh;
@@ -203,7 +183,6 @@
   }
 }
 
-/* ── Tablet portrait (≤1024px, orientation: portrait) ── */
 @media (max-width: 1024px) and (orientation: portrait) {
   .habilidades-stage {
     height: auto;
@@ -236,7 +215,6 @@
   }
 }
 
-/* ── Mobile portrait (≤599px) ── */
 @media (max-width: 599px) {
   .habilidades-stage {
     height: auto;
@@ -295,7 +273,6 @@
   }
 }
 
-/* ── Mobile landscape (≤768px, orientation: landscape) ── */
 @media (max-width: 768px) and (orientation: landscape) {
   .habilidades-stage {
     height: auto;
@@ -339,7 +316,6 @@
   }
 }
 
-/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .habilidades-card {
     opacity: 1 !important;

@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   TRANSICIÓN HERO — Texto estático (sin animación)
-═══════════════════════════════════════════════════════════════ */
-
 .transicion-hero {
   position: relative;
   z-index: 4;

@@ -1,15 +1,8 @@
-/* ═══════════════════════════════════════════════════════════════
-   MÉTODO — 3 partes: Intro (reveal) → Manifiesto (pin) → Actos (acordeón)
-   Liquid glass, SplitText por chars, ScrambleText
-═══════════════════════════════════════════════════════════════ */
-
 .metodo {
   position: relative;
   z-index: 4;
   background: transparent;
 }
-
-/* ═══ PARTE 1: INTRO — Título principal ═══ */
 
 .metodo-stage {
   position: relative;
@@ -78,8 +71,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* ═══ PARTE 2: MANIFIESTO — Párrafo con ScrambleText ═══ */
-
 .metodo-manifiesto-wrapper {
   position: relative;
   width: 100%;
@@ -140,12 +131,6 @@
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PARTE 3: ACORDEÓN HORIZONTAL — 5 Actos con expand/collapse
-   Efecto liquid glass / burbuja
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Contenedor principal ── */
 .metodo-acordeon-wrapper {
   position: relative;
   width: 100%;
@@ -157,7 +142,6 @@
   overflow: hidden;
 }
 
-/* ── Contenedor flex del acordeón ── */
 .metodo-acordeon {
   display: flex;
   flex-direction: row;
@@ -169,7 +153,6 @@
   gap: 12px;
 }
 
-/* ── Card base (colapsada por defecto) — Liquid glass transparente con borde neon degradado ── */
 .metodo-acordeon-card {
   position: relative;
   flex: 1 1 0;
@@ -182,15 +165,12 @@
   -webkit-backdrop-filter: none;
   border: none;
   box-shadow:
-    /* Glow externo neon degradado */
     0 0 10px color-mix(in srgb, var(--color-editable) 35%, transparent),
     0 0 24px color-mix(in srgb, var(--color-editable-activo) 20%, transparent),
     0 0 48px color-mix(in srgb, var(--color-editable) 8%, transparent),
-    /* Sombra de profundidad — volumen */
     0 4px 6px rgba(0, 0, 0, 0.04),
     0 10px 20px rgba(0, 0, 0, 0.06),
     0 20px 40px rgba(0, 0, 0, 0.04),
-    /* Inner glow en bordes */
     inset 0 0 14px color-mix(in srgb, var(--color-editable) 8%, transparent);
   transition:
     flex 0.6s cubic-bezier(0.16, 1, 0.3, 1),
@@ -200,7 +180,6 @@
   z-index: 1;
 }
 
-/* Borde degradado con zonas transparentes (liquid glass feel) */
 .metodo-acordeon-card::before {
   content: '';
   position: absolute;
@@ -234,7 +213,6 @@
   margin-left: 0;
 }
 
-/* ── Reflejos especulares + glare animado (liquid glass real) ── */
 .metodo-acordeon-card-bg {
   position: absolute;
   inset: 0;
@@ -244,7 +222,6 @@
   overflow: hidden;
 }
 
-/* Glare animado — destello diagonal que se mueve */
 .metodo-acordeon-card-bg::before {
   content: '';
   position: absolute;
@@ -262,7 +239,6 @@
   animation: glare-drift 6s ease-in-out infinite;
 }
 
-/* Segundo glare más sutil, dirección opuesta */
 .metodo-acordeon-card-bg::after {
   content: '';
   position: absolute;
@@ -291,7 +267,6 @@
   50% { transform: translateX(-15%) translateY(-8%); }
 }
 
-/* Glare intensificado al expandir */
 .metodo-acordeon-card.activa .metodo-acordeon-card-bg::before {
   background: linear-gradient(
     125deg,
@@ -320,7 +295,6 @@
   animation-duration: 5s;
 }
 
-/* ── Patrón SVG — pintado en el liquid glass con color acento ── */
 .metodo-acordeon-card-patron {
   position: absolute;
   top: 50%;
@@ -330,7 +304,6 @@
   height: 90%;
   z-index: 1;
   pointer-events: none;
-  /* SVG como máscara, fondo = color acento */
   background: var(--color-acento);
   -webkit-mask-size: contain;
   -webkit-mask-position: center;
@@ -342,7 +315,6 @@
   transition: opacity 0.5s ease, left 0.5s cubic-bezier(0.16, 1, 0.3, 1), width 0.5s cubic-bezier(0.16, 1, 0.3, 1), background var(--transicion-tema);
 }
 
-/* Al expandir: SVG se mueve a la izquierda */
 .metodo-acordeon-card.activa .metodo-acordeon-card-patron {
   left: 22%;
   width: 35%;
@@ -351,7 +323,6 @@
           drop-shadow(6px 6px 1px var(--manifiesto-drop-1));
 }
 
-/* ── Glow interior bordes (refuerza neon interno) ── */
 .metodo-acordeon-card-glow {
   position: absolute;
   inset: 0;
@@ -366,7 +337,6 @@
     inset 0 0 50px color-mix(in srgb, var(--color-editable-activo) 3%, transparent);
 }
 
-/* ── Estado colapsado (visible por defecto) ── */
 .metodo-acordeon-colapsado {
   position: absolute;
   inset: 0;
@@ -411,7 +381,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* ── Estado expandido (oculto por defecto) ── */
 .metodo-acordeon-expandido {
   position: absolute;
   inset: 0;
@@ -467,7 +436,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* ── Card activa (expandida) — Neon intensificado ── */
 .metodo-acordeon-card.activa {
   flex: 4 1 0;
   z-index: 10 !important;
@@ -475,13 +443,10 @@
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow:
-    /* Neon externo intenso */
     0 0 14px color-mix(in srgb, var(--color-editable-activo) 55%, transparent),
     0 0 32px color-mix(in srgb, var(--color-editable) 35%, transparent),
     0 0 64px color-mix(in srgb, var(--color-editable-activo) 18%, transparent),
-    /* Profundidad */
     0 12px 48px rgba(0, 0, 0, 0.1),
-    /* Inner neon intenso */
     inset 0 0 24px color-mix(in srgb, var(--color-editable-activo) 12%, transparent);
 }
 
@@ -517,11 +482,6 @@
   transition: opacity 0.4s ease 0.25s, visibility 0s 0s;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Tablet landscape ── */
 @media (max-width: 1024px) and (orientation: landscape) {
   .metodo-titulo-linea {
     font-size: clamp(36px, 7vw, 90px);
@@ -544,7 +504,6 @@
   }
 }
 
-/* ── Tablet portrait ── */
 @media (max-width: 1024px) and (orientation: portrait) {
   .metodo-panel--intro {
     justify-content: flex-start;
@@ -564,12 +523,10 @@
     opacity: 1;
   }
 
-  /* Texto manifiesto del método 30% más grande */
   .metodo-manifiesto-texto .metodo-palabra {
     font-size: clamp(28px, 4vw, 68px);
   }
 
-  /* Acordeón vertical — TODAS las cards siempre expandidas */
   .metodo-acordeon-wrapper {
     padding: clamp(48px, 6vw, 80px) clamp(24px, 4vw, 48px);
   }
@@ -604,7 +561,6 @@
     border-radius: 20px;
   }
 
-  /* Ocultar estado colapsado — siempre mostrar expandido */
   .metodo-acordeon-colapsado {
     opacity: 0;
     visibility: hidden;
@@ -638,7 +594,6 @@
   }
 }
 
-/* ── Mobile portrait ── */
 @media (max-width: 599px) {
   .metodo-stage {
     height: auto;
@@ -695,7 +650,6 @@
     display: none;
   }
 
-  /* Acordeón vertical — cards expandidas apiladas */
   .metodo-acordeon-wrapper {
     padding: clamp(32px, 6vw, 56px) clamp(12px, 3vw, 24px);
     min-height: auto;
@@ -710,7 +664,6 @@
     height: auto;
   }
 
-  /* Cards — todas expandidas por defecto, apiladas vertical */
   .metodo-acordeon-card {
     margin-left: 0;
     margin-top: 0;
@@ -743,7 +696,6 @@
     border-radius: 16px;
   }
 
-  /* Ocultar estado colapsado — siempre mostrar expandido */
   .metodo-acordeon-colapsado {
     opacity: 0;
     visibility: hidden;
@@ -783,7 +735,6 @@
     font-size: clamp(9px, 2.8vw, 11px);
   }
 
-  /* No hay estado activa diferente — ya están expandidas */
   .metodo-acordeon-card.activa {
     aspect-ratio: auto;
     min-height: auto;
@@ -809,13 +760,11 @@
   }
 }
 
-/* ── Mobile landscape ── */
 @media (max-width: 768px) and (orientation: landscape) {
   .metodo-titulo-linea {
     font-size: clamp(28px, 6vw, 52px);
   }
 
-  /* Acordeón vertical */
   .metodo-acordeon-wrapper {
     padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 32px);
   }
@@ -893,7 +842,6 @@
   }
 }
 
-/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .metodo-titulo-linea {
     opacity: 1 !important;

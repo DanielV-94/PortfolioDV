@@ -1,27 +1,14 @@
-/* ═══════════════════════════════════════════════════════════════
-   MODO CREATIVO — Disparar stickers como proyectiles
-   · El cursor se convierte en un sticker pequeño
-   · Al click, el sticker se "lanza" y se pega donde impactó
-   · Si impacta un link/botón, redirige automáticamente
-   · Sacudida al impactar
-   · Stickers del tema activo (neutro = todos)
-═══════════════════════════════════════════════════════════════ */
-
 const ModoCreativo = (() => {
 
-  /* ── Reutilizar catálogo del Modo Caos ── */
   function obtenerPool() {
     if (typeof ModoCaos !== 'undefined' && ModoCaos._obtenerPool) {
       return ModoCaos._obtenerPool();
     }
-    /* Fallback: leer tema y construir pool */
     const tema = document.documentElement.getAttribute('data-tema') ||
                  document.body.getAttribute('data-tema') || 'neutro';
-    /* Si ModoCaos no expone el pool, usar un catálogo inline simplificado */
     return [];
   }
 
-  /* ── Estado ── */
   let activo       = false;
   let cursorEl     = null;
   let layer        = null;
@@ -32,7 +19,6 @@ const ModoCreativo = (() => {
 
   const TAMANIOS = ['xl', 'grande', 'mediano', 'mediano', 'chico', 'chico'];
 
-  /* ── Obtener siguiente sticker aleatorio ── */
   function siguienteSticker() {
     if (!pool.length) return '';
     const src = pool[poolIdx % pool.length];
@@ -40,7 +26,6 @@ const ModoCreativo = (() => {
     return src;
   }
 
-  /* ── Crear cursor sticker ── */
   function crearCursor() {
     cursorEl = document.createElement('div');
     cursorEl.className = 'creativo-cursor';
@@ -61,14 +46,12 @@ const ModoCreativo = (() => {
     });
   }
 
-  /* ── Actualizar posición del cursor ── */
   function onMouseMove(e) {
     if (!cursorEl) return;
     cursorEl.style.left = e.clientX + 'px';
     cursorEl.style.top  = e.clientY + 'px';
   }
 
-  /* ── Disparar sticker ── */
   function disparar(e) {
     if (!activo || !cursorEl) return;
 
@@ -76,14 +59,11 @@ const ModoCreativo = (() => {
     const clickY = e.clientY;
     const docY   = clickY + window.scrollY;
 
-    /* Obtener el src actual del cursor */
     const imgCursor = cursorEl.querySelector('img');
     const src = imgCursor ? imgCursor.src : '';
 
-    /* Determinar tamaño aleatorio del sticker pegado */
     const tamanio = TAMANIOS[Math.floor(Math.random() * TAMANIOS.length)];
 
-    /* Crear sticker pegado */
     const el = document.createElement('div');
     el.className = `creativo-sticker-pegado creativo-sticker-pegado--${tamanio}`;
     el.setAttribute('aria-hidden', 'true');
@@ -94,7 +74,6 @@ const ModoCreativo = (() => {
     img.draggable = false;
     el.appendChild(img);
 
-    /* Posicionar en el documento (absolute, no fixed) */
     const rotacion = (Math.random() - 0.5) * 30;
 
     gsap.set(el, {
@@ -107,14 +86,12 @@ const ModoCreativo = (() => {
 
     layer.appendChild(el);
 
-    /* Animación de impacto: escala rápida + sacudida */
     gsap.to(el, {
       autoAlpha: 1,
       scale: 1,
       duration: 0.15,
       ease: 'power4.out',
       onComplete: () => {
-        /* Sacudida */
         gsap.to(el, {
           x: `+=${(Math.random() - 0.5) * 8}`,
           y: `+=${(Math.random() - 0.5) * 6}`,
@@ -129,21 +106,18 @@ const ModoCreativo = (() => {
 
     pegados.push(el);
 
-    /* Detectar si hay un link/botón debajo */
     const elementoDebajo = document.elementFromPoint(clickX, clickY);
     const linkDebajo = elementoDebajo
       ? elementoDebajo.closest('a[href], button[data-nav-link], [data-nav-link]')
       : null;
 
     if (linkDebajo) {
-      /* El sticker se pega y después redirige */
       el.style.pointerEvents = 'auto';
       el.style.cursor = 'pointer';
 
       setTimeout(() => {
         const href = linkDebajo.getAttribute('href');
         if (href && href !== '#') {
-          /* Efecto visual antes de redirigir */
           gsap.to(el, {
             scale: 1.3,
             autoAlpha: 0,
@@ -161,10 +135,8 @@ const ModoCreativo = (() => {
       }, 400);
     }
 
-    /* Cargar siguiente sticker en el cursor */
     const nuevoSrc = siguienteSticker();
     if (imgCursor && nuevoSrc) {
-      /* Pequeña animación de recarga */
       gsap.to(cursorEl, {
         scale: 0.5,
         duration: 0.1,
@@ -181,51 +153,41 @@ const ModoCreativo = (() => {
     }
   }
 
-  /* ── Sincronizar botones ── */
   function sincronizarBtns(estado) {
     btns.forEach(b => b && b.setAttribute('aria-pressed', estado ? 'true' : 'false'));
   }
 
-  /* ── Activar ── */
   function activar() {
     if (activo) return;
     activo = true;
     sincronizarBtns(true);
     document.body.classList.add('modo-creativo-activo');
 
-    /* Obtener pool del ModoCaos (reutilizar catálogo) */
     if (typeof ModoCaos !== 'undefined') {
       const tema = document.documentElement.getAttribute('data-tema') ||
                    document.body.getAttribute('data-tema') || 'neutro';
-      /* Acceder al catálogo directamente no es posible, así que usamos la misma lógica */
       pool = _buildPool(tema);
     }
-    /* Mezclar */
     pool = mezclar(pool);
     poolIdx = 0;
 
-    /* Crear layer para stickers pegados */
     layer = document.createElement('div');
     layer.className = 'modo-creativo-layer';
     layer.style.height = document.body.scrollHeight + 'px';
     document.body.appendChild(layer);
 
-    /* Crear cursor */
     crearCursor();
 
-    /* Eventos */
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('click', disparar);
   }
 
-  /* ── Desactivar ── */
   function desactivar() {
     if (!activo) return;
     activo = false;
     sincronizarBtns(false);
     document.body.classList.remove('modo-creativo-activo');
 
-    /* Remover cursor */
     if (cursorEl) {
       gsap.to(cursorEl, {
         autoAlpha: 0, scale: 0.3,
@@ -234,7 +196,6 @@ const ModoCreativo = (() => {
       });
     }
 
-    /* Animar salida de stickers pegados */
     gsap.to(pegados, {
       autoAlpha: 0, scale: 0.3, rotation: '+=20',
       duration: 0.3, ease: 'power2.in',
@@ -246,15 +207,12 @@ const ModoCreativo = (() => {
       },
     });
 
-    /* Remover eventos */
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('click', disparar);
   }
 
-  /* ── Toggle ── */
   function toggle() {
     if (!activo) {
-      /* Desactivar modo caos si está activo */
       if (typeof ModoCaos !== 'undefined' && ModoCaos.desactivar) {
         ModoCaos.desactivar();
       }
@@ -264,7 +222,6 @@ const ModoCreativo = (() => {
     }
   }
 
-  /* ── Mezclar array ── */
   function mezclar(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -274,7 +231,6 @@ const ModoCreativo = (() => {
     return a;
   }
 
-  /* ── Construir pool (misma lógica que ModoCaos) ── */
   function _buildPool(tema) {
     const CATALOGO = {
       acid: [
@@ -322,7 +278,6 @@ const ModoCreativo = (() => {
     return CATALOGO[tema] || Object.values(CATALOGO).flat();
   }
 
-  /* ── Init ── */
   function init() {
     if (typeof gsap === 'undefined') return;
 
@@ -330,7 +285,6 @@ const ModoCreativo = (() => {
     const btnNav   = document.getElementById('navModoCreativoToggle');
     btns = [btnBarra, btnNav].filter(Boolean);
 
-    /* Habilitar los botones (estaban disabled) */
     btns.forEach(b => {
       b.removeAttribute('disabled');
       b.addEventListener('click', (e) => {
@@ -339,7 +293,6 @@ const ModoCreativo = (() => {
       });
     });
 
-    /* Actualizar layer height al resize */
     window.addEventListener('resize', () => {
       if (activo && layer) {
         layer.style.height = document.body.scrollHeight + 'px';

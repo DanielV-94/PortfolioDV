@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   NAV — Menú fullscreen (overlay)
-   · Toggle con botón hamburguesa
-   · Cierre con ESC / click afuera / click en enlace
-═══════════════════════════════════════════════════════════════ */
-
 const Nav = (() => {
   const elBtn = document.getElementById("navMenuBtn");
   const elOverlay = document.getElementById("navOverlay");

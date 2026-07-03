@@ -1,15 +1,4 @@
-﻿/* =================================================================
-   MANIFIESTO — Layout 50/50
-   Izquierda : texto Cloudsters, palabras aparecen una a una (scrub)
-   Derecha   : retrato Daniel, fade-in progresivo (scrub)
-   Pin activo: el scroll actúa como revelador
-
-   MÓVIL (≤767px): imagen ocupa toda la pantalla → aparece primero
-   → scroll aplica blur progresivo → palabras emergen encima
-================================================================= */
-
 const Manifiesto = (() => {
-  /* ── Utilidad: divide párrafo en .manifiesto-word preservando <span> ── */
   function splitWords(parrafo) {
     const rawHTML = parrafo.innerHTML;
     const tokens = [];
@@ -38,26 +27,18 @@ const Manifiesto = (() => {
 
     if (!stage || !bloque || !retrato || !parrafo) return;
 
-    /* SVG compartido de convergencia */
     const svg = document.querySelector(
       "#convergencia .convergencia-fila--fill",
     );
 
-    /* Guardar el HTML original del párrafo UNA sola vez —
-       al cambiar de breakpoint mm.add corre cleanup + re-init,
-       y splitWords se llamaría sobre HTML ya fragmentado.       */
     const originalParrafoHTML = parrafo.innerHTML;
 
     const mm = gsap.matchMedia();
 
-    /* ================================================================
-       DESKTOP (≥768px) — comportamiento original: 50/50, texto izq
-    ================================================================ */
     mm.add(
       "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
       () => {
-        parrafo.innerHTML = originalParrafoHTML; /* restaurar antes de split */
-        const words = splitWords(parrafo);
+        parrafo.innerHTML = originalParrafoHTML; const words = splitWords(parrafo);
         const totalWords = words.length;
         const wordsDur = totalWords * 0.08;
 
@@ -148,36 +129,20 @@ const Manifiesto = (() => {
       },
     );
 
-    /* ================================================================
-       MÓVIL (≤767px) — imagen primero → blur → texto encima
-       Fases:
-         0  → SVG sale hacia arriba
-         1  → imagen aparece (fade-in)
-         2  → imagen recibe blur progresivo + overlay oscuro activo
-         3  → palabras emergen una a una sobre la imagen desenfocada
-    ================================================================ */
     mm.add(
       "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
       () => {
-        parrafo.innerHTML = originalParrafoHTML; /* restaurar antes de split */
-        const words = splitWords(parrafo);
+        parrafo.innerHTML = originalParrafoHTML; const words = splitWords(parrafo);
         const totalWords = words.length;
 
-        /* Estado inicial: imagen y texto invisibles */
         gsap.set(retrato, { autoAlpha: 0, scale: 1.05, clipPath: "inset(6% 3% 6% 3%)" });
         gsap.set(colImagen, { filter: "blur(0px)" });
         gsap.set(words, { autoAlpha: 0, y: 8 });
         if (insetShadow) gsap.set(insetShadow, { autoAlpha: 0 });
-        /* En móvil el SVG de convergencia no participa — se oculta directamente */
         if (svg) gsap.set(svg, { autoAlpha: 0 });
 
-        /* Referencia a las capas de glitch para el flash automático */
         const glitchLayers = section.querySelector(".manifiesto-glitch-layers");
 
-        /* ── Pre-animación: la foto aparece mientras la sección sube al viewport ──
-           Empieza cuando el top de la sección entra al 85% del viewport,
-           termina cuando llega al top (antes de que se pinie).
-           Así el usuario ya ve la foto antes de que empiece el scrub del texto. */
         let glitchFlashDisparado = false;
         ScrollTrigger.create({
           trigger: section,
@@ -192,16 +157,13 @@ const Manifiesto = (() => {
               scale: 1.05 - (0.05 * p),
               clipPath: `inset(${6 - 6 * p}% ${3 - 3 * p}% ${6 - 6 * p}% ${3 - 3 * p}%)`,
             });
-            /* Dispara el glitch flash cuando la imagen está ~70% visible */
             if (!glitchFlashDisparado && p >= 0.7 && glitchLayers) {
               glitchFlashDisparado = true;
               glitchLayers.classList.add("glitch-flash");
-              /* Apagar el flash después de 1.2s */
               setTimeout(() => {
                 glitchLayers.classList.remove("glitch-flash");
               }, 1200);
             }
-            /* Resetear si el usuario scrollea hacia arriba */
             if (glitchFlashDisparado && p < 0.5) {
               glitchFlashDisparado = false;
             }
@@ -218,16 +180,13 @@ const Manifiesto = (() => {
             anticipatePin: 1,
             invalidateOnRefresh: true,
             onLeaveBack: () => {
-              /* Quitar overlay oscuro si el usuario vuelve atrás */
               if (colImagen) colImagen.classList.remove("overlay-activo");
             },
           },
         });
 
-        /* Fase 1 (0→0.18): foto ya llega visible — asegurar estado final del reveal */
         tl.to(retrato, { autoAlpha: 1, scale: 1, clipPath: "inset(0% 0% 0% 0%)", duration: 0.18, ease: "none" }, 0);
 
-        /* Fase 2 (0.18→0.44): imagen recibe blur progresivo */
         tl.to(
           colImagen,
           {
@@ -249,7 +208,6 @@ const Manifiesto = (() => {
           );
         }
 
-        /* Fase 3 (0.46→fin): palabras emergen una a una encima */
         tl.to(
           words,
           {

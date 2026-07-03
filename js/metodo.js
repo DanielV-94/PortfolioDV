@@ -1,8 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   MÉTODO — 3 partes: Intro (reveal) → Manifiesto (pin) → Actos (acordeón horizontal)
-   SplitText por chars, parallax interno, watermark dramático
-═══════════════════════════════════════════════════════════════ */
-
 const Metodo = (() => {
   const soportaHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -15,23 +10,18 @@ const Metodo = (() => {
 
     const mm = gsap.matchMedia();
 
-    /* ══ DESKTOP (≥1025px) ══ */
     mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', () => {
       const kills = [];
 
-      /* ── PARTE 1: Intro (título) — reveal ── */
       _initIntro(section, kills);
 
-      /* ── PARTE 2: Manifiesto — pinneado con decodificación ── */
       _initManifiestoPinned(section, kills);
 
-      /* ── PARTE 3: Actos — cards con hover ── */
       _initActosCards(section, kills);
 
       return () => { kills.forEach(k => k()); };
     });
 
-    /* ══ TABLET LANDSCAPE (≤1024px landscape) ══ */
     mm.add('(max-width: 1024px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
       const kills = [];
 
@@ -42,7 +32,6 @@ const Metodo = (() => {
       return () => { kills.forEach(k => k()); };
     });
 
-    /* ══ TABLET PORTRAIT (≤1024px portrait, ≥600px) ══ */
     mm.add('(max-width: 1024px) and (orientation: portrait) and (min-width: 600px) and (prefers-reduced-motion: no-preference)', () => {
       const kills = [];
 
@@ -53,22 +42,16 @@ const Metodo = (() => {
       return () => { kills.forEach(k => k()); };
     });
 
-    /* ══ MOBILE PORTRAIT (<600px): todo vertical ══ */
     mm.add('(max-width: 599px) and (prefers-reduced-motion: no-preference)', () => {
       _initMobileVertical(section);
       return () => {};
     });
 
-    /* ══ MOBILE LANDSCAPE (≤768px landscape): todo vertical ══ */
     mm.add('(max-width: 768px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
       _initMobileVertical(section);
       return () => {};
     });
   }
-
-  /* ═══════════════════════════════════════════════════════════════
-     PARTE 1: INTRO — Reveal del título
-  ═══════════════════════════════════════════════════════════════ */
 
   function _initIntro(section, kills) {
     const stageIntro = section.querySelector('.metodo-stage--intro');
@@ -117,10 +100,6 @@ const Metodo = (() => {
     });
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     PARTE 2: MANIFIESTO — Pinneado con decodificación binaria
-  ═══════════════════════════════════════════════════════════════ */
-
   function _initManifiestoPinned(section, kills) {
     const wrapper = section.querySelector('.metodo-manifiesto-wrapper');
     const panel   = section.querySelector('.metodo-panel--manifiesto');
@@ -131,14 +110,12 @@ const Metodo = (() => {
     const words = texto.querySelectorAll('.metodo-palabra');
     if (!words.length) return;
 
-    /* Guardar textos originales */
     const originals = [];
     words.forEach(w => {
       if (!w.dataset.original) w.dataset.original = w.textContent;
       originals.push(w.dataset.original);
     });
 
-    /* Configurar posiciones dispersas con grid inteligente */
     texto.style.position = 'relative';
     texto.style.width = '100%';
     texto.style.height = '100%';
@@ -149,7 +126,6 @@ const Metodo = (() => {
     const paddingY = panelH * 0.03;
     const floatTimelines = [];
 
-    /* ── Grid disperso: distribuye las palabras por TODO el viewport ── */
     const totalWords = words.length;
     const cols = Math.ceil(Math.sqrt(totalWords * (panelW / panelH)));
     const rows = Math.ceil(totalWords / cols);
@@ -162,7 +138,6 @@ const Metodo = (() => {
       const col = i % cols;
       const row = Math.floor(i / cols);
 
-      /* Posición base centrada en la celda + jitter aleatorio */
       const jitterX = gsap.utils.random(-cellW * 0.3, cellW * 0.3);
       const jitterY = gsap.utils.random(-cellH * 0.3, cellH * 0.3);
       const baseX = paddingX + col * cellW + cellW * 0.5 + jitterX;
@@ -185,13 +160,11 @@ const Metodo = (() => {
       w.dataset.disperseScale = randScale;
       w.dataset.disperseRotation = randRotation;
 
-      /* Mostrar como binario */
       const binLen = originals[i].length;
       let bin = '';
       for (let j = 0; j < binLen; j++) bin += Math.random() > 0.5 ? '1' : '0';
       w.textContent = bin;
 
-      /* Flotación sutil — cada palabra oscila suavemente */
       const floatTl = gsap.to(w, {
         y: `+=${gsap.utils.random(-12, 12)}`,
         x: `+=${gsap.utils.random(-6, 6)}`,
@@ -204,7 +177,6 @@ const Metodo = (() => {
       floatTimelines.push(floatTl);
     });
 
-    /* ScrollTrigger pinneado — controla toda la animación */
     let lastRevealed = -1;
     let reordered = false;
 
@@ -218,14 +190,12 @@ const Metodo = (() => {
         const progress = self.progress;
         const totalWords = words.length;
 
-        /* Fase 1 (0% - 60%): Decodificar con glow cinematográfico */
         if (progress < 0.60) {
           const decodeProgress = progress / 0.60;
           const shouldReveal = Math.floor(decodeProgress * totalWords);
 
           if (shouldReveal > lastRevealed) {
             for (let i = lastRevealed + 1; i <= Math.min(shouldReveal, totalWords - 1); i++) {
-              /* Glow al decodificar */
               gsap.to(words[i], {
                 duration: 0.6,
                 scrambleText: { text: originals[i], chars: '01', revealDelay: 0.1, speed: 0.6 },
@@ -233,7 +203,6 @@ const Metodo = (() => {
                 textShadow: '0 0 12px var(--color-acento), 0 0 30px var(--color-acento)',
                 opacity: 1,
                 onComplete: () => {
-                  /* Quitar glow después de decodificar */
                   gsap.to(words[i], {
                     color: 'var(--color-texto)',
                     textShadow: 'none',
@@ -242,7 +211,6 @@ const Metodo = (() => {
                   });
                 }
               });
-              /* Detener flotación de esta palabra */
               if (floatTimelines[i]) floatTimelines[i].kill();
             }
           } else if (shouldReveal < lastRevealed) {
@@ -261,7 +229,6 @@ const Metodo = (() => {
           }
           lastRevealed = shouldReveal;
 
-          /* Si estábamos reordenados y volvemos atrás, dispersar de nuevo */
           if (reordered) {
             reordered = false;
             texto.style.fontFeatureSettings = '';
@@ -282,18 +249,14 @@ const Metodo = (() => {
           }
         }
 
-        /* Fase 2 (60% - 100%): Reordenar a párrafo con efecto cinematográfico */
         if (progress >= 0.60 && !reordered) {
           reordered = true;
 
-          /* Matar todas las flotaciones restantes */
           floatTimelines.forEach(ft => ft.kill());
 
-          /* Activar ligatures en el contenedor */
           texto.style.fontFeatureSettings = '"liga" 1, "dlig" 1, "calt" 1';
           texto.style.fontVariantLigatures = 'discretionary-ligatures common-ligatures contextual';
 
-          /* Animar cada palabra a su posición natural */
           words.forEach((w, i) => {
             gsap.to(w, {
               x: 0, y: 0,
@@ -307,7 +270,6 @@ const Metodo = (() => {
             });
           });
 
-          /* Asegurar que todas estén decodificadas */
           words.forEach((w, i) => {
             if (w.textContent !== originals[i]) {
               gsap.to(w, {
@@ -323,7 +285,6 @@ const Metodo = (() => {
       },
     });
 
-    /* Hover scramble en desktop */
     if (soportaHover && typeof ScrambleTextPlugin !== 'undefined') {
       texto.addEventListener('mouseenter', (e) => {
         const word = e.target.closest('.metodo-palabra');
@@ -337,10 +298,6 @@ const Metodo = (() => {
     kills.push(() => { st.kill(); floatTimelines.forEach(ft => ft.kill()); });
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     PARTE 3: ACORDEÓN HORIZONTAL — Expand/Collapse con hover/click
-  ═══════════════════════════════════════════════════════════════ */
-
   function _initActosCards(section, kills) {
     const wrapper = section.querySelector('.metodo-acordeon-wrapper');
     if (!wrapper) return;
@@ -353,28 +310,23 @@ const Metodo = (() => {
 
     let cardActiva = null;
 
-    /* Función para activar una card */
     function activarCard(card) {
       if (card === cardActiva) return;
 
-      /* Desactivar la anterior */
       if (cardActiva) {
         cardActiva.classList.remove('activa');
       }
 
-      /* Activar la nueva */
       card.classList.add('activa');
       cardActiva = card;
     }
 
-    /* Función para desactivar todas */
     function desactivarTodas() {
       if (!cardActiva) return;
       cardActiva.classList.remove('activa');
       cardActiva = null;
     }
 
-    /* Desktop: hover */
     if (soportaHover) {
       cards.forEach(card => {
         card.addEventListener('mouseenter', () => activarCard(card));
@@ -382,7 +334,6 @@ const Metodo = (() => {
 
       acordeon.addEventListener('mouseleave', () => desactivarTodas());
     } else {
-      /* Touch: click */
       cards.forEach(card => {
         card.addEventListener('click', () => {
           if (card === cardActiva) {
@@ -394,7 +345,6 @@ const Metodo = (() => {
       });
     }
 
-    /* Animación de entrada con ScrollTrigger */
     ScrollTrigger.create({
       trigger: wrapper,
       start: 'top 80%',
@@ -425,12 +375,7 @@ const Metodo = (() => {
     });
   }
 
-  /* ═══════════════════════════════════════════════════════════════
-     MOBILE — Todo vertical, acordeón vertical con click
-  ═══════════════════════════════════════════════════════════════ */
-
   function _initMobileVertical(section) {
-    /* Reveals simples por scroll */
     const lineas = section.querySelectorAll('.metodo-titulo-linea');
     if (lineas.length) {
       ScrollTrigger.create({
@@ -443,11 +388,9 @@ const Metodo = (() => {
       });
     }
 
-    /* Manifiesto — sin pin, solo reveal del texto (texto visible directamente) */
     const texto = section.querySelector('.metodo-manifiesto-texto');
     if (texto) {
       const palabras = texto.querySelectorAll('.metodo-palabra');
-      /* Asegurar que el texto sea legible (no binario) */
       palabras.forEach(w => {
         if (w.dataset.original) w.textContent = w.dataset.original;
         gsap.set(w, { position: 'relative', x: 0, y: 0, scale: 1, rotation: 0, opacity: 1 });
@@ -467,7 +410,6 @@ const Metodo = (() => {
       });
     }
 
-    /* Acordeón — vertical con click */
     const acordeon = section.querySelector('.metodo-acordeon');
     if (!acordeon) return;
 
@@ -487,7 +429,6 @@ const Metodo = (() => {
       });
     });
 
-    /* Entrada animada */
     ScrollTrigger.create({
       trigger: acordeon,
       start: 'top 80%',

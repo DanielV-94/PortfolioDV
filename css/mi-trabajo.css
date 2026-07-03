@@ -1,17 +1,7 @@
-/* ═══════════════════════════════════════════════════════════════
-   MI TRABAJO — Proyectos con galería horizontal
-   Cada proyecto ocupa 100vh, dos mitades: info + galería
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Main ── */
 .trabajos-main {
   position: relative;
   z-index: 1;
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   PROYECTO — Layout base (100vh, 2 columnas)
-═══════════════════════════════════════════════════════════════ */
 
 .proyecto {
   position: relative;
@@ -20,11 +10,6 @@
   border-bottom: 1px solid var(--color-grid, rgba(255, 255, 255, 0.1));
   transition: border-color var(--transicion-tema);
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   INFO — Lado izquierdo (título, rol, descripción)
-   Se posiciona de forma absoluta para que la galería pase por encima
-═══════════════════════════════════════════════════════════════ */
 
 .proyecto-info {
   position: absolute;
@@ -125,10 +110,6 @@
   border-radius: 4px;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   GALERÍA — Lado derecho (scroll horizontal)
-═══════════════════════════════════════════════════════════════ */
-
 .proyecto-galeria {
   position: absolute;
   top: 0;
@@ -153,7 +134,6 @@
   display: none;
 }
 
-/* ── Imágenes ── */
 .proyecto-img {
   flex-shrink: 0;
   height: 100%;
@@ -170,7 +150,6 @@
   max-height: 80vh;
 }
 
-/* ── Videos ── */
 .proyecto-video {
   height: auto;
   max-height: 80vh;
@@ -178,13 +157,6 @@
   border-radius: 8px;
   filter: drop-shadow(0 8px 14px var(--manifiesto-drop-1));
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE — Tablet landscape (≤1024px, landscape)
-   Dos columnas, info más ancha para legibilidad.
-   Texto ~20% más grande que el breakpoint anterior.
-   La galería empieza más a la derecha (controlado vía JS).
-═══════════════════════════════════════════════════════════════ */
 
 @media (max-width: 1024px) and (orientation: landscape) {
   .proyecto-info {
@@ -240,13 +212,6 @@
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE — Tablet portrait (≤1024px, portrait)
-   Layout: título (número + nombre) en franja superior,
-   debajo la info (rol, encargo, descripción, link) con texto grande.
-   La galería empieza más a la derecha (controlado vía JS).
-═══════════════════════════════════════════════════════════════ */
-
 @media (max-width: 1024px) and (orientation: portrait) {
   .proyecto-info {
     width: 55%;
@@ -255,7 +220,6 @@
     justify-content: flex-start;
   }
 
-  /* ── Franja superior: número + título ── */
   .proyecto-numero {
     padding: 2rem 2rem 0.5rem;
     font-size: 1.2rem;
@@ -273,7 +237,6 @@
     margin: 1rem 0 0 2rem;
   }
 
-  /* ── Bloque inferior: meta + descripción + link ── */
   .proyecto-meta {
     padding: 1.2rem 2rem 0;
     gap: 0.5rem;
@@ -317,13 +280,6 @@
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE — Mobile portrait (≤599px)
-   Layout apilado 50/50: info arriba, marquee infinito abajo.
-   Sin ScrollTrigger pin — scroll natural entre proyectos.
-   Tap en imagen → pausa marquee y agranda la imagen.
-═══════════════════════════════════════════════════════════════ */
-
 @media (max-width: 599px) {
   .proyecto {
     display: flex;
@@ -332,7 +288,6 @@
     height: 100dvh;
   }
 
-  /* ── Info: parte superior (60%) ── */
   .proyecto-info {
     position: relative;
     width: 100%;
@@ -377,7 +332,6 @@
     margin-top: 0.4rem;
   }
 
-  /* ── Galería: parte inferior (40%) — contenedor del marquee ── */
   .proyecto-galeria {
     position: relative;
     width: 100%;
@@ -419,7 +373,6 @@
     cursor: pointer;
   }
 
-  /* ── Imagen expandida (overlay) ── */
   .proyecto-img-expandida {
     position: fixed;
     top: 0;
@@ -468,11 +421,6 @@
     line-height: 1;
   }
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE — Mobile landscape (≤768px, landscape)
-   Dos columnas compactas, info reducida para maximizar galería.
-═══════════════════════════════════════════════════════════════ */
 
 @media (max-width: 768px) and (orientation: landscape) {
   .proyecto-info {
@@ -528,10 +476,6 @@
     max-height: 82vh;
   }
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   REDUCED MOTION
-═══════════════════════════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
   .proyecto-img {

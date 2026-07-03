@@ -1,10 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   HABILIDADES — Carrusel 3D en arco tipo "cinta transportadora"
-   Las cards recorren un arco curvo conforme se hace scroll.
-   Entran por la derecha, recorren la curva, salen por la izquierda.
-   Cuando la última card sale, el pin se libera.
-═══════════════════════════════════════════════════════════════ */
-
 const Habilidades = (() => {
   function init() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -18,39 +11,24 @@ const Habilidades = (() => {
 
     const mm = gsap.matchMedia();
 
-    /* ══════════════════════════════════════════════════════════
-       DESKTOP + TABLET LANDSCAPE (≥1025px O landscape >768px): Arco 3D
-    ══════════════════════════════════════════════════════════ */
     mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', () => {
       const total = cards.length;
 
-      /* Configuración del arco — de esquina inf-der a esquina sup-izq
-         como medio arcoíris ascendente */
       const vw = window.innerWidth;
       const vh = window.innerHeight;
       const radius   = Math.min(vw * 0.52, 620);
-      /* Centro del arco: esquina inferior derecha del viewport */
       const centerX  = vw * 0.38;
       const centerY  = vh * 0.38;
 
-      /* Cada card ocupa un "slot" angular en el arco.
-         El progreso del scroll mueve todas las cards a lo largo del arco.
-         Arco va de ~0° (abajo-derecha) a ~90° (arriba-izquierda) */
       const slotSpacing = 26; // grados entre cada card
       const arcStart = 0;     // ángulo de entrada (abajo-derecha)
       const arcEnd   = 95;    // ángulo de salida (arriba-izquierda)
       const arcDeg   = arcEnd - arcStart;
 
-      /* Duración total del scroll: la última card llega al centro del arco
-         y ahí se libera el pin. */
       const scrollLength = total * 180;
 
-      /* Estado inicial: todas invisibles */
       gsap.set(cards, { opacity: 0, scale: 0.7 });
 
-      /* Función: dado un ángulo en el arco (0°=derecha, 90°=arriba),
-         devuelve x, y para posicionar en un arco ascendente
-         desde inf-der hacia sup-izq */
       function getArcPosition(angleDeg) {
         const rad = (angleDeg * Math.PI) / 180;
         return {
@@ -60,12 +38,9 @@ const Habilidades = (() => {
         };
       }
 
-      /* El rango angular visible */
       const visibleMin = arcStart - 15;
       const visibleMax = arcEnd + 15;
 
-      /* ScrollTrigger principal — pin cuando llega al top,
-         pero las cards empiezan a aparecer inmediatamente */
       const st = ScrollTrigger.create({
         trigger: section,
         start: 'top top',
@@ -77,27 +52,20 @@ const Habilidades = (() => {
         onUpdate: (self) => {
           const progress = self.progress;
 
-          /* El "offset" angular total que se ha recorrido.
-             Al inicio (progress=0) la primera card entra por abajo-derecha.
-             Al final (progress=1) la última card llega al centro del arco (~47°). */
           const centerAngle = arcDeg * 0.5; // centro del arco
           const totalTravel = (total - 1) * slotSpacing + centerAngle;
           const currentOffset = progress * totalTravel;
 
           cards.forEach((card, i) => {
-            /* Ángulo actual de esta card en el arco */
             const cardAngle = arcStart + (currentOffset - i * slotSpacing);
 
-            /* ¿Está dentro del rango visible? */
             if (cardAngle < visibleMin || cardAngle > visibleMax) {
               gsap.set(card, { opacity: 0, scale: 0.7 });
               return;
             }
 
-            /* Calcular posición en el arco */
             const pos = getArcPosition(cardAngle);
 
-            /* Fade in/out en los bordes */
             let opacity = 1;
             const fadeZone = 18;
             if (cardAngle < arcStart + fadeZone) {
@@ -107,7 +75,6 @@ const Habilidades = (() => {
             }
             opacity = gsap.utils.clamp(0, 1, opacity);
 
-            /* Escala: ligeramente más pequeña en los bordes */
             const normalizedPos = (cardAngle - arcStart) / arcDeg;
             const distFromCenter = Math.abs(normalizedPos - 0.5) * 2;
             const scale = 1 - distFromCenter * 0.12;
@@ -132,32 +99,18 @@ const Habilidades = (() => {
       };
     });
 
-    /* ══════════════════════════════════════════════════════════
-       TABLET LANDSCAPE (≤1024px landscape): Doble marquee con pin
-       Fila 1 va a la derecha, Fila 2 va a la izquierda
-    ══════════════════════════════════════════════════════════ */
     mm.add('(max-width: 1024px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
       return _initDoubleMarqueePinned(section, carrusel, cards);
     });
 
-    /* ══════════════════════════════════════════════════════════
-       TABLET PORTRAIT (600px–1024px, portrait): Doble marquee con pin
-    ══════════════════════════════════════════════════════════ */
     mm.add('(max-width: 1024px) and (orientation: portrait) and (min-width: 600px) and (prefers-reduced-motion: no-preference)', () => {
       return _initDoubleMarqueePinned(section, carrusel, cards);
     });
 
-    /* ══════════════════════════════════════════════════════════
-       MOBILE PORTRAIT (<600px): Doble marquee (2 filas)
-       Fila 1 → derecha, Fila 2 → izquierda
-    ══════════════════════════════════════════════════════════ */
     mm.add('(max-width: 599px) and (prefers-reduced-motion: no-preference)', () => {
       return _initDoubleMarqueePinned(section, carrusel, cards);
     });
 
-    /* ══════════════════════════════════════════════════════════
-       MOBILE LANDSCAPE (≤768px landscape): Marquee infinito
-    ══════════════════════════════════════════════════════════ */
     mm.add('(max-width: 768px) and (orientation: landscape) and (prefers-reduced-motion: no-preference)', () => {
       const carrusel = section.querySelector('.habilidades-carrusel');
       const originalCards = Array.from(carrusel.children);
@@ -198,27 +151,19 @@ const Habilidades = (() => {
     });
   }
 
-  /* ══════════════════════════════════════════════════════════
-     DOBLE MARQUEE CON PIN — Dos filas, direcciones opuestas
-     Sección se pinnea, cards se mueven infinitamente
-  ══════════════════════════════════════════════════════════ */
   function _initDoubleMarqueePinned(section, carrusel, cards) {
-    /* Dividir cards en dos filas */
     const mitad = Math.ceil(cards.length / 2);
     const fila1Cards = cards.slice(0, mitad);
     const fila2Cards = cards.slice(mitad);
 
-    /* Crear contenedores de fila */
     const fila1 = document.createElement('div');
     fila1.className = 'habilidades-fila-marquee habilidades-fila-1';
     const fila2 = document.createElement('div');
     fila2.className = 'habilidades-fila-marquee habilidades-fila-2';
 
-    /* Mover cards originales a sus filas */
     fila1Cards.forEach(c => fila1.appendChild(c));
     fila2Cards.forEach(c => fila2.appendChild(c));
 
-    /* Duplicar para loop infinito */
     const clones1 = fila1Cards.map(c => {
       const cl = c.cloneNode(true);
       cl.setAttribute('aria-hidden', 'true');
@@ -234,12 +179,10 @@ const Habilidades = (() => {
       return cl;
     });
 
-    /* Insertar filas en el carrusel */
     carrusel.innerHTML = '';
     carrusel.appendChild(fila1);
     carrusel.appendChild(fila2);
 
-    /* Estilos inline para las filas */
     [fila1, fila2].forEach(f => {
       f.style.display = 'flex';
       f.style.flexDirection = 'row';
@@ -255,11 +198,9 @@ const Habilidades = (() => {
     carrusel.style.height = '100%';
     carrusel.style.justifyContent = 'center';
 
-    /* Hacer cards visibles */
     const allCards = carrusel.querySelectorAll('.habilidades-card');
     gsap.set(allCards, { opacity: 1, scale: 1, x: 0, y: 0, rotation: 0, position: 'relative' });
 
-    /* Marquees: fila 1 → derecha, fila 2 → izquierda */
     const w1 = fila1.scrollWidth / 2;
     const w2 = fila2.scrollWidth / 2;
 
@@ -270,7 +211,6 @@ const Habilidades = (() => {
       repeat: -1,
     });
 
-    /* Fila 2 arranca desplazada y va al contrario */
     gsap.set(fila2, { x: -w2 });
     const marquee2 = gsap.to(fila2, {
       x: 0,
@@ -279,7 +219,6 @@ const Habilidades = (() => {
       repeat: -1,
     });
 
-    /* Sin pin — la sección pasa con scroll natural */
     const pauseAll = () => { marquee1.pause(); marquee2.pause(); };
     const playAll = () => { marquee1.play(); marquee2.play(); };
     carrusel.addEventListener('touchstart', pauseAll, { passive: true });
@@ -290,7 +229,6 @@ const Habilidades = (() => {
       marquee2.kill();
       carrusel.removeEventListener('touchstart', pauseAll);
       carrusel.removeEventListener('touchend', playAll);
-      /* Restaurar cards originales al carrusel */
       carrusel.innerHTML = '';
       carrusel.style.cssText = '';
       [...fila1Cards, ...fila2Cards].forEach(c => carrusel.appendChild(c));

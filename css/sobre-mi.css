@@ -1,18 +1,7 @@
-/* ═══════════════════════════════════════════════════════════════
-   SOBRE MÍ — Página completa con scrolltelling vertical
-   Hero (espiral 3D) + Historia + Manifiesto + Timeline + CTA
-   Fuentes: --fuente-display para títulos, --fuente-dialogo para textos
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Main ── */
 .sobre-main {
   position: relative;
   z-index: 1;
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   HERO — Espiral 3D horizontal de imágenes + texto encima
-═══════════════════════════════════════════════════════════════ */
 
 .sobre-hero {
   position: relative;
@@ -23,7 +12,6 @@
   overflow: hidden;
 }
 
-/* ── Espiral 3D helicoidal horizontal (por detrás del texto) ── */
 .sobre-espiral {
   position: absolute;
   inset: 0;
@@ -42,7 +30,6 @@
   height: 100%;
   transform-style: preserve-3d;
   will-change: transform;
-  /* Ligera inclinación para dar profundidad visual a la hélice */
   transform: rotateX(8deg) rotateZ(-2deg);
 }
 
@@ -68,7 +55,6 @@
   filter: saturate(0.8) brightness(0.95);
 }
 
-/* ── Texto del hero (encima de la espiral) ── */
 .sobre-hero-contenido {
   position: relative;
   z-index: 2;
@@ -154,18 +140,12 @@
   50% { opacity: 1; transform: scaleY(1); }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE — Hero
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Tablet landscape ── */
 @media (max-width: 1024px) and (orientation: landscape) {
   .sobre-hero-titulo {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
   }
 }
 
-/* ── Tablet portrait ── */
 @media (max-width: 1024px) and (orientation: portrait) {
   .sobre-hero-titulo {
     font-size: clamp(2.5rem, 7vw, 5rem);
@@ -176,7 +156,6 @@
   }
 }
 
-/* ── Mobile portrait ── */
 @media (max-width: 599px) {
   .sobre-hero {
     height: 100dvh;
@@ -199,7 +178,6 @@
   }
 }
 
-/* ── Mobile landscape ── */
 @media (max-width: 768px) and (orientation: landscape) {
   .sobre-hero-titulo {
     font-size: clamp(2rem, 5vw, 3rem);
@@ -210,10 +188,6 @@
   }
 }
 
-
-/* ═══════════════════════════════════════════════════════════════
-   HISTORIA — Grid 2 columnas (imagen + texto)
-═══════════════════════════════════════════════════════════════ */
 
 .sobre-historia {
   padding: 10rem 2rem;
@@ -236,7 +210,6 @@
   direction: ltr;
 }
 
-/* ── Imagen con tilt 3D ── */
 .sobre-historia-imagen {
   position: relative;
   overflow: visible;
@@ -356,7 +329,6 @@
   .tilt-card:hover .tilt-label { opacity: 1; }
 }
 
-/* ── Imagen simple (sin tilt) ── */
 .sobre-historia-img-simple {
   width: 100%;
   height: 100%;
@@ -370,7 +342,6 @@
   .sobre-historia-img-simple:hover { filter: grayscale(0%); }
 }
 
-/* ── Contenido texto ── */
 .sobre-historia-contenido {
   padding: 2rem 0;
 }
@@ -405,10 +376,6 @@
   font-weight: 500;
   transition: color var(--transicion-tema);
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   MANIFIESTO — Tipografía gigante con reveal escalonado
-═══════════════════════════════════════════════════════════════ */
 
 .sobre-manifiesto {
   padding: 6rem 2rem;
@@ -450,17 +417,12 @@
   font-weight: 900;
 }
 
-/* Palabras individuales (SplitText) */
 .sobre-manifiesto-contenido .palabra-manifiesto {
   display: inline-block;
   opacity: 0;
   transform: translateY(60px) rotateX(25deg);
   transform-origin: bottom center;
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   TIMELINE — Cards apiladas con scroll (estilo Namma)
-═══════════════════════════════════════════════════════════════ */
 
 .sobre-timeline {
   position: relative;
@@ -489,7 +451,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* ── Stack de cards — distribuidas por el ancho ── */
 .sobre-timeline-stack {
   position: sticky;
   top: 5vh;
@@ -502,7 +463,6 @@
   margin: 0 auto;
 }
 
-/* ── Card individual ── */
 .sobre-timeline-card {
   position: absolute;
   width: 320px;
@@ -522,7 +482,6 @@
   border-color: var(--color-acento);
 }
 
-/* ── Imagen de la card (más grande, sin punto) ── */
 .sobre-timeline-card-img {
   width: 100%;
   height: 55%;
@@ -544,7 +503,6 @@
   }
 }
 
-/* ── Contenido de la card ── */
 .sobre-timeline-card-contenido {
   display: flex;
   flex-direction: column;
@@ -584,11 +542,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   TIMELINE CARD — Modal expandido (click to expand)
-═══════════════════════════════════════════════════════════════ */
-
-/* Overlay oscuro detrás de la card expandida */
 .sobre-timeline-overlay {
   position: fixed;
   inset: 0;
@@ -606,7 +559,6 @@
   pointer-events: auto;
 }
 
-/* Card en estado expandido/modal */
 .sobre-timeline-card.card-expandida {
   position: fixed !important;
   top: 50% !important;
@@ -661,7 +613,6 @@
   font-size: 0.9rem;
 }
 
-/* Botón cerrar */
 .sobre-timeline-card-cerrar {
   position: absolute;
   top: 12px;
@@ -692,11 +643,6 @@
   border-color: rgba(255, 255, 255, 0.8);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE — Timeline Cards
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Tablet landscape ── */
 @media (max-width: 1024px) and (orientation: landscape) {
   .sobre-timeline {
     min-height: auto;
@@ -744,7 +690,6 @@
   }
 }
 
-/* ── Tablet portrait ── */
 @media (max-width: 1024px) and (orientation: portrait) {
   .sobre-timeline {
     min-height: auto;
@@ -793,7 +738,6 @@
   }
 }
 
-/* ── Mobile portrait ── */
 @media (max-width: 599px) {
   .sobre-timeline {
     padding: 4rem 1.2rem;
@@ -839,7 +783,6 @@
   }
 }
 
-/* ── Mobile landscape ── */
 @media (max-width: 768px) and (orientation: landscape) {
   .sobre-timeline {
     padding: 3rem 2rem;
@@ -881,10 +824,6 @@
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   CTA — Luces neón teatrales + partículas flotando
-═══════════════════════════════════════════════════════════════ */
-
 .sobre-cta {
   position: relative;
   padding: 10rem 2rem;
@@ -898,7 +837,6 @@
   justify-content: center;
 }
 
-/* ── Luces laterales pegadas al viewport (estilo teatro) ── */
 .sobre-cta-luz {
   position: fixed;
   top: 0;
@@ -934,7 +872,6 @@
   filter: blur(30px);
 }
 
-/* ── Glow central ── */
 .sobre-cta-glow {
   position: absolute;
   top: 50%;
@@ -953,7 +890,6 @@
   will-change: opacity, transform;
 }
 
-/* ── Contenedor de partículas ── */
 .sobre-cta-particulas {
   position: absolute;
   inset: 0;
@@ -969,7 +905,6 @@
   pointer-events: none;
 }
 
-/* ── Contenido CTA — estilo editorial/manifiesto ── */
 .sobre-cta-contenido {
   position: relative;
   z-index: 5;
@@ -1002,7 +937,6 @@
   transition: color var(--transicion-tema);
 }
 
-/* Palabras individuales (split para reveal) */
 .sobre-cta-texto .palabra-cta {
   display: inline-block;
   opacity: 0;
@@ -1010,17 +944,11 @@
   transform-origin: bottom center;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE — Secciones interiores
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Tablet landscape ── */
 @media (max-width: 1024px) and (orientation: landscape) {
   .sobre-historia { padding: 6rem 2rem; }
   .sobre-historia-grid { gap: 4rem; }
 }
 
-/* ── Tablet portrait ── */
 @media (max-width: 1024px) and (orientation: portrait) {
   .sobre-historia {
     padding: 0;
@@ -1040,7 +968,6 @@
 
   .sobre-historia-grid--invertida { direction: ltr; }
 
-  /* Imagen como fondo de toda la sección */
   .sobre-historia-imagen {
     position: absolute;
     inset: 0;
@@ -1063,7 +990,6 @@
     transition: filter 0.5s ease;
   }
 
-  /* Blur cuando el texto aparece */
   .sobre-historia-imagen.texto-visible .sobre-historia-img-simple,
   .sobre-historia-imagen.texto-visible .tilt-card {
     filter: blur(5px) brightness(0.7)
@@ -1071,7 +997,6 @@
             drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
   }
 
-  /* Contenido superpuesto sobre la imagen */
   .sobre-historia-contenido {
     position: relative;
     z-index: 2;
@@ -1082,7 +1007,6 @@
     padding: clamp(80px, 12vh, 140px) clamp(32px, 7vw, 64px);
   }
 
-  /* Título arriba (zona del primer rectángulo) */
   .sobre-historia-titulo {
     font-size: clamp(2.8rem, 6vw, 4.5rem);
     margin-bottom: auto;
@@ -1092,7 +1016,6 @@
       0 4px 24px rgba(0, 0, 0, 0.4);
   }
 
-  /* Texto en el centro-bajo (zona del segundo rectángulo) */
   .sobre-historia-contenido p {
     font-size: 1.6rem;
     line-height: 1.7;
@@ -1112,7 +1035,6 @@
   }
 }
 
-/* ── Mobile portrait ── */
 @media (max-width: 599px) {
   .sobre-historia { padding: 4rem 1.2rem; }
   .sobre-historia-grid {
@@ -1133,25 +1055,18 @@
   .sobre-cta-boton { padding: 1.1rem 2.5rem; font-size: 0.8rem; }
 }
 
-/* ── Mobile landscape ── */
 @media (max-width: 768px) and (orientation: landscape) {
   .sobre-historia { padding: 4rem 2rem; }
   .sobre-historia-grid { gap: 3rem; }
   .sobre-cta { padding: 5rem 2rem; min-height: auto; }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   CTA — Tablet & Mobile (≤1024px): sin animación texto,
-   partículas notorias, sombras de profundidad
-═══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  /* Texto ya visible sin animación */
   .sobre-cta-texto .palabra-cta {
     opacity: 1 !important;
     transform: none !important;
   }
 
-  /* Contenido con sombra de texto para profundidad */
   .sobre-cta-texto {
     text-shadow:
       0 2px 12px rgba(0, 0, 0, 0.4),
@@ -1164,12 +1079,10 @@
       0 6px 32px rgba(0, 0, 0, 0.25);
   }
 
-  /* Partículas más grandes y notorias */
   .sobre-cta-particula {
     filter: blur(0.5px);
   }
 
-  /* Sombra interior en la sección para profundidad */
   .sobre-cta::before {
     content: '';
     position: absolute;
@@ -1182,12 +1095,10 @@
     border-radius: 0;
   }
 
-  /* Contenido con z-index elevado sobre la sombra */
   .sobre-cta-contenido {
     z-index: 5;
   }
 
-  /* Partículas contenedor siempre visible */
   .sobre-cta-particulas {
     opacity: 1;
   }

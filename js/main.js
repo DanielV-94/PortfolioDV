@@ -1,10 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════
-   MAIN — Inicialización global del portfolio
-   Registra plugins GSAP y arranca todos los módulos
-═══════════════════════════════════════════════════════════════ */
-
 document.addEventListener("DOMContentLoaded", () => {
-  /* ── Registrar plugins GSAP ── */
   const pluginsGSAP = [];
   if (typeof ScrollTrigger !== "undefined") pluginsGSAP.push(ScrollTrigger);
   if (typeof MorphSVGPlugin !== "undefined") pluginsGSAP.push(MorphSVGPlugin);
@@ -13,13 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(...pluginsGSAP);
   }
 
-  /* ── Configuración global GSAP ── */
   gsap.defaults({
     ease: "power2.inOut",
     duration: 0.8,
   });
 
-  /* ── Inicializar módulos ── */
   Cursor.init();
   Hero.init();
   if (typeof TransicionHero !== "undefined") {

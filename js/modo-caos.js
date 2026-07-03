@@ -1,14 +1,5 @@
-/* ═══════════════════════════════════════════════════════════════
-   MODO CAOS — Stickers flotando por todo el documento
-   Dos capas de profundidad:
-   · Lejana: blur, no draggable, detrás del contenido
-   · Cercana: nítida, draggable, encima del contenido
-   Sin repulsión — el usuario mueve stickers manualmente (drag)
-═══════════════════════════════════════════════════════════════ */
-
 const ModoCaos = (() => {
 
-  /* ── Catálogo de stickers por tema — nombres exactos ── */
   const CATALOGO = {
     acid: [
       'acid','acid1','acid2','acid3','acid4','acid5','acid6','acid7','acid8','acid9',
@@ -55,7 +46,6 @@ const ModoCaos = (() => {
     ].map(n => `Rsc/Stickers/holographic/${n}.svg`),
   };
 
-  /* ── Dos capas de profundidad ── */
   const CAPAS = {
     lejana: {
       tamanios: ['chico', 'chico', 'mediano'],
@@ -79,7 +69,6 @@ const ModoCaos = (() => {
     },
   };
 
-  /* ── Estado ── */
   let activo       = false;
   let layerLejana  = null;
   let layerCercana = null;
@@ -88,7 +77,6 @@ const ModoCaos = (() => {
   let tweensFlot   = [];
   let btns         = [];
 
-  /* ── Pool de stickers según tema activo ── */
   function obtenerPool() {
     const tema = document.documentElement.getAttribute('data-tema') ||
                  document.body.getAttribute('data-tema') || 'neutro';
@@ -96,7 +84,6 @@ const ModoCaos = (() => {
     return CATALOGO[tema] || Object.values(CATALOGO).flat();
   }
 
-  /* ── Fisher-Yates shuffle ── */
   function mezclar(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -106,14 +93,12 @@ const ModoCaos = (() => {
     return a;
   }
 
-  /* ── Cantidad dinámica — caos visual real ── */
   function calcularCantidad(pool, alturaDoc) {
     const area = window.innerWidth * alturaDoc;
     const base = Math.floor(area / 1500);
     return Math.min(pool.length * 20, Math.max(800, base));
   }
 
-  /* ── Crear un sticker DOM ── */
   function crearSticker(src, tamanio, x, y, rot, capa) {
     const el = document.createElement('div');
     el.className = `caos-sticker caos-sticker--${tamanio}`;
@@ -145,7 +130,6 @@ const ModoCaos = (() => {
     return el;
   }
 
-  /* ── Flotación continua ── */
   function iniciarFlotacion(el, capa) {
     const cfg  = CAPAS[capa];
     const dur  = (3 + Math.random() * 4) / cfg.velocidad;
@@ -164,18 +148,15 @@ const ModoCaos = (() => {
     return t;
   }
 
-  /* ── Sincronizar botones ── */
   function sincronizarBtns(estado) {
     btns.forEach(b => b && b.setAttribute('aria-pressed', estado ? 'true' : 'false'));
   }
 
-  /* ── Activar ── */
   function activar() {
     if (activo) return;
     activo = true;
     sincronizarBtns(true);
 
-    /* Ocultar cursor personalizado y mostrar cursor nativo */
     document.body.classList.add('modo-caos-activo');
     document.body.classList.remove('usa-cursor-custom');
     document.body.classList.remove('cursor-oculto');
@@ -184,7 +165,6 @@ const ModoCaos = (() => {
     const vw        = window.innerWidth;
     const margen    = 60;
 
-    /* Crear los dos layers */
     function mkLayer(cls) {
       const l = document.createElement('div');
       l.className = `modo-caos-layer ${cls}`;
@@ -232,7 +212,6 @@ const ModoCaos = (() => {
     generar(cantLejana,  'lejana');
     generar(cantCercana, 'cercana');
 
-    /* Draggable solo en capa cercana — el usuario mueve stickers manualmente */
     setTimeout(() => {
       if (!activo) return;
       const elsCercana = stickers.filter(s => s.capa === 'cercana').map(s => s.el);
@@ -244,7 +223,6 @@ const ModoCaos = (() => {
         cursor: 'grab',
         activeCursor: 'grabbing',
         onDragStart() {
-          /* Efecto de "agarrar" — escala + sombra + z-index al frente */
           gsap.killTweensOf(this.target, 'x,y,rotation');
           gsap.to(this.target, {
             scale: 1.15,
@@ -255,7 +233,6 @@ const ModoCaos = (() => {
           this.target.style.zIndex = '200';
         },
         onDragEnd() {
-          /* Efecto de "soltar" — vuelve a escala normal */
           gsap.to(this.target, {
             scale: 1,
             filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.18))',
@@ -265,7 +242,6 @@ const ModoCaos = (() => {
               this.target.style.zIndex = '';
             },
           });
-          /* Reanudar flotación después de la inercia */
           const info = stickers.find(s => s.el === this.target);
           const target = this.target;
           setTimeout(() => {
@@ -277,13 +253,11 @@ const ModoCaos = (() => {
     }, 600);
   }
 
-  /* ── Desactivar ── */
   function desactivar() {
     if (!activo) return;
     activo = false;
     sincronizarBtns(false);
 
-    /* Restaurar cursor personalizado */
     document.body.classList.remove('modo-caos-activo');
     document.body.classList.add('usa-cursor-custom');
 
@@ -310,10 +284,8 @@ const ModoCaos = (() => {
     });
   }
 
-  /* ── Toggle ── */
   function toggle() {
     if (!activo) {
-      /* Desactivar modo creativo si está activo */
       if (typeof ModoCreativo !== 'undefined' && ModoCreativo.desactivar) {
         ModoCreativo.desactivar();
       }
@@ -323,7 +295,6 @@ const ModoCaos = (() => {
     }
   }
 
-  /* ── Init ── */
   function init() {
     if (typeof gsap === 'undefined' || typeof Draggable === 'undefined') return;
 
@@ -342,13 +313,11 @@ const ModoCaos = (() => {
       toggle();
     }));
 
-    /* Entrada animada de la barra de modos */
     const barra = document.querySelector('.modos-barra');
     if (barra) {
       gsap.to(barra, { opacity: 1, duration: 0.6, ease: 'power2.out', delay: 2.8 });
     }
 
-    /* Actualizar altura de layers al redimensionar */
     window.addEventListener('resize', () => {
       if (!activo) return;
       const h = document.body.scrollHeight + 'px';

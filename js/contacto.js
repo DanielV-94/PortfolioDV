@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   CONTACTO — Animaciones GSAP premium
-   Hero (SplitText + partículas) + Manifiesto (reveal palabras)
-   + Cierre (ScrambleText + glow) + Links (stagger cards)
-═══════════════════════════════════════════════════════════════ */
-
 const Contacto = (() => {
   function init() {
     if (typeof gsap === 'undefined') return;
@@ -15,9 +9,6 @@ const Contacto = (() => {
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ══════════════════════════════════════════════════════════
-       HERO — Intro animada con SplitText y partículas
-    ══════════════════════════════════════════════════════════ */
     const heroEtiqueta = document.querySelector('.contacto-hero-etiqueta');
     const heroLineas = document.querySelectorAll('.contacto-hero-titulo .linea-inner');
     const heroSub = document.querySelector('.contacto-hero-sub');
@@ -30,7 +21,6 @@ const Contacto = (() => {
       if (heroSub) heroSub.style.opacity = '1';
       if (scrollIndicador) scrollIndicador.style.opacity = '1';
     } else {
-      /* Timeline del hero */
       const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       heroTl
         .to(heroEtiqueta, { opacity: 1, duration: 1, delay: 0.3 })
@@ -38,7 +28,6 @@ const Contacto = (() => {
         .to(heroSub, { opacity: 0.7, duration: 1 }, '-=0.7')
         .to(scrollIndicador, { opacity: 1, duration: 1 }, '-=0.5');
 
-      /* Ocultar scroll indicador al hacer scroll */
       ScrollTrigger.create({
         start: 'top top',
         end: '200px top',
@@ -47,7 +36,6 @@ const Contacto = (() => {
         }
       });
 
-      /* ── Partículas globales — toda la página con reacción al mouse (desktop) ── */
       const globalParticulas = document.getElementById('contactoParticulasGlobal');
       if (globalParticulas) {
         const numParticulas = 90;
@@ -82,7 +70,6 @@ const Contacto = (() => {
 
         const allParticulas = globalParticulas.querySelectorAll('.particula-global');
 
-        /* Animación flotante base */
         allParticulas.forEach((p) => {
           gsap.to(p, {
             y: gsap.utils.random(-80, -180),
@@ -96,7 +83,6 @@ const Contacto = (() => {
           });
         });
 
-        /* Reacción al mouse — solo en desktop */
         const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
         if (isDesktop) {
           let mouseX = window.innerWidth / 2;
@@ -145,7 +131,6 @@ const Contacto = (() => {
         }
       }
 
-      /* ── Partículas extra en el hero para densidad ── */
       if (heroParticulas) {
         const numHero = 30;
         const coloresHero = [
@@ -184,16 +169,12 @@ const Contacto = (() => {
       }
     }
 
-    /* ══════════════════════════════════════════════════════════
-       MANIFIESTO — Reveal por bloque con scroll
-    ══════════════════════════════════════════════════════════ */
     if (!prefersReduced) {
       const manifiestoSection = document.getElementById('contactoManifiesto');
       const manifiestoParrafos = manifiestoSection ?
         manifiestoSection.querySelectorAll('.contacto-manifiesto-contenido p') : [];
 
       if (manifiestoSection && manifiestoParrafos.length) {
-        /* Animar cada párrafo como bloque completo */
         gsap.set(manifiestoParrafos, { opacity: 0, y: 40 });
 
         gsap.to(manifiestoParrafos, {
@@ -211,9 +192,6 @@ const Contacto = (() => {
         });
       }
 
-      /* ══════════════════════════════════════════════════════════
-         CIERRE — Frase impactante con SplitText + glow
-      ══════════════════════════════════════════════════════════ */
       const cierreSection = document.getElementById('contactoCierre');
       const cierreTexto = document.getElementById('contactoCierreTexto');
       const cierreGlow = document.getElementById('contactoCierreGlow');
@@ -253,15 +231,11 @@ const Contacto = (() => {
         }
       }
        
-      /* ══════════════════════════════════════════════════════════
-         LINKS — Cards con stagger reveal
-      ══════════════════════════════════════════════════════════ */
       const linksSection = document.getElementById('contactoLinks');
       const linksTitulo = linksSection ? linksSection.querySelector('.contacto-links-titulo') : null;
       const linksCards = linksSection ? linksSection.querySelectorAll('.contacto-link-card') : [];
 
       if (linksSection && linksCards.length) {
-        /* Título */
         if (linksTitulo) {
           gsap.to(linksTitulo, {
             opacity: 1, duration: 0.8, ease: 'power2.out',
@@ -269,7 +243,6 @@ const Contacto = (() => {
           });
         }
 
-        /* Cards con stagger */
         gsap.to(linksCards, {
           opacity: 1,
           y: 0,

@@ -1,8 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   MODO CREATIVO — Disparar stickers como proyectiles
-═══════════════════════════════════════════════════════════════ */
-
-/* ── Cursor sticker (reemplaza el cursor normal) ── */
 .creativo-cursor {
   position: fixed;
   z-index: 9990;
@@ -23,7 +18,6 @@
   -webkit-user-drag: none;
 }
 
-/* ── Sticker pegado en la página ── */
 .creativo-sticker-pegado {
   position: absolute;
   pointer-events: auto;
@@ -43,7 +37,6 @@
   -webkit-user-drag: none;
 }
 
-/* Tamaños aleatorios de stickers pegados */
 .creativo-sticker-pegado--xl {
   width: clamp(143px, 17vw, 234px);
   height: clamp(143px, 17vw, 234px);
@@ -64,7 +57,6 @@
   height: clamp(65px, 7.5vw, 110px);
 }
 
-/* ── Layer para stickers pegados ── */
 .modo-creativo-layer {
   position: absolute;
   top: 0;
@@ -75,13 +67,11 @@
   overflow: visible;
 }
 
-/* ── Ocultar cursor nativo cuando modo creativo está activo ── */
 body.modo-creativo-activo,
 body.modo-creativo-activo * {
   cursor: none !important;
 }
 
-/* ── Responsive ── */
 @media (max-width: 1024px) and (orientation: landscape) {
   .creativo-cursor img {
     width: 36px;
@@ -125,7 +115,6 @@ body.modo-creativo-activo * {
   }
 }
 
-/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .creativo-sticker-pegado {
     transition: none !important;

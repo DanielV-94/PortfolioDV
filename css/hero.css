@@ -1,19 +1,8 @@
-/* ═══════════════════════════════════════════════════════════════
-   HERO — Layout, tipografía, frase editable, nombre principal
-═══════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────
-   CONTENEDOR HERO
-───────────────────────────────────────── */
-
 .hero-sticky-stage {
   position: relative;
   height: 110dvh;
-  /* Perspectiva más corta = efecto 3D más pronunciado en el tilt/shrink */
   perspective: 900px;
   transform-style: preserve-3d;
-  /* overflow en el stage (no en el hero) para que el tilt no se recorte
-     pero tampoco tape los elementos fixed de las esquinas y el nav */
   overflow: hidden;
 }
 
@@ -28,7 +17,6 @@
   transform-style: preserve-3d;
 }
 
-/* ── Bloque NOMBRES — anclado a la derecha ── */
 .hero-nombres-area {
   position: absolute;
   right: 18vw;
@@ -38,17 +26,11 @@
   user-select: none;
 }
 
-/* ── Bloque FRASE — anclado bottom-left ── */
 .hero-editable-area {
   position: absolute;
   bottom: calc(52px + 9vh);
   left: calc(42px + 3vw);
 }
-
-/* ─────────────────────────────────────────
-   FRASE EDITABLE
-   Chiqueta Light — expresiva, editable
-───────────────────────────────────────── */
 
 .hero-frase-editable-contenedor {
   position: relative;
@@ -65,7 +47,6 @@
   line-height: 1;
   color: var(--color-editable);
   text-transform: uppercase;
-  /* Ligaduras discrecionales de Chiqueta */
   font-feature-settings:
     "dlig" 1,
     "liga" 1,
@@ -77,7 +58,6 @@
 }
 
 .hero-frase-fija {
-  /* Estado inicial para GSAP */
   opacity: 0;
   transform: translateY(28px);
 }
@@ -110,7 +90,6 @@
   margin-top: clamp(2px, 0.35vw, 8px);
 }
 
-/* Desfase escalonado: cada línea sangra más hacia la derecha */
 .hero-frase-editable-contenedor > :nth-child(2) {
   padding-left: clamp(10px, 2.2vw, 36px);
 }
@@ -129,7 +108,6 @@
   color: var(--color-fondo);
 }
 
-/* Línea indicador inferior — crece al hacer foco */
 .hero-frase-editable-contenedor::after {
   content: "";
   position: absolute;
@@ -145,7 +123,6 @@
   width: 100%;
 }
 
-/* Hint "← editar" — aparece inline al lado de cada palabra editable */
 .hero-hint-editar {
   display: inline;
   margin-left: 0.6em;
@@ -172,11 +149,6 @@
   opacity: 1;
 }
 
-/* ─────────────────────────────────────────
-   NOMBRE PRINCIPAL
-───────────────────────────────────────── */
-
-/* ── Hint drag ── */
 .hero-drag-hint {
   position: absolute;
   top: -34px;
@@ -212,7 +184,6 @@
   cursor: none !important;
 }
 
-/* ── DANIEL — filled, draggable ── */
 .hero-nombre-daniel {
   font-family: var(--fuente-display);
   font-weight: 700;
@@ -239,7 +210,6 @@
   touch-action: none;
 }
 
-/* ── VELEZ — outline, stroke ── */
 .hero-nombre-velez {
   font-family: var(--fuente-display);
   font-weight: 200;
@@ -257,10 +227,6 @@
     color var(--transicion-tema),
     -webkit-text-stroke-color var(--transicion-tema);
 }
-
-/* ─────────────────────────────────────────
-   DRAG MICROINTERACTION — DANIEL
-───────────────────────────────────────── */
 
 .hero-drag-line-svg {
   position: fixed;
@@ -366,9 +332,7 @@
     color-mix(in srgb, var(--color-cursor-daniel) 34%, transparent);
 }
 
-/* ─── Tablet landscape (769px – 1024px) ─── */
 @media (max-width: 1024px) and (min-width: 769px) {
-  /* Nombres: centrados como en móvil */
   .hero-nombres-area {
     right: auto;
     left: 50%;
@@ -393,7 +357,6 @@
     -webkit-text-stroke-width: 2.5px;
   }
 
-  /* Frases: centradas en la parte baja */
   .hero-editable-area {
     bottom: clamp(44px, 6vh, 72px);
     left: 50%;
@@ -432,23 +395,10 @@
   display: inline-block;
 }
 
-/* ─────────────────────────────────────────
-   EDICIÓN MICROINTERACCIÓN — DANIEL RESPONDE
-   Se activa cuando el usuario cambia texto editable.
-   Estados: IDLE → SELECT → BUBBLE → FADEOUT → IDLE
-───────────────────────────────────────── */
-
 .hero-editable-area.is-edit-reacting,
 .hero-editable-area.is-edit-reacting * {
   cursor: none !important;
 }
-
-/* ─────────────────────────────────────────
-   INTRO OVERLAYS
-   Leyenda, bounding boxes, labels y tooltips
-   de la secuencia cinematográfica de entrada.
-   position: fixed + GSAP transform — cero layout impact.
-───────────────────────────────────────── */
 
 .hero-intro-legend {
   position: fixed;
@@ -543,7 +493,6 @@
     "dlig" 1,
     "liga" 1;
   font-variant-ligatures: normal;
-  /* Glassmorphism */
   background: color-mix(in srgb, var(--color-fondo) 55%, transparent);
   backdrop-filter: blur(14px) saturate(1.4);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
@@ -560,9 +509,7 @@
 
 .hero-intro-tooltip .tip-row {
   display: block;
-  line-height: 1; /* sin espacio entre filas */
-  padding: 4px 0; /* respiro visual mínimo sin hueco */
-}
+  line-height: 1; padding: 4px 0; }
 
 .hero-intro-tooltip .tip-row + .tip-row {
   border-top: 1px solid color-mix(in srgb, var(--color-hint) 25%, transparent);
@@ -579,7 +526,6 @@
   color: var(--color-texto);
 }
 
-/* Flash de pantalla (doble parpadeo) antes de la leyenda */
 .hero-intro-flash {
   position: fixed;
   inset: 0;
@@ -589,7 +535,6 @@
   mix-blend-mode: blend;
 }
 
-/* Cursor parpadeante del typewriter de frases */
 .hero-tw-cursor {
   color: var(--color-acento);
   font-weight: 300;
@@ -597,17 +542,12 @@
   user-select: none;
 }
 
-/* ─────────────────────────────────────────
-   RESPONSIVE HERO
-───────────────────────────────────────── */
-
 @media (max-width: 1200px) {
   .hero-hint-editar {
     display: none;
   }
 }
 
-/* ─── Tablet portrait (600px – 1024px, orientation: portrait) ─── */
 @media (max-width: 1024px) and (orientation: portrait) {
   .hero-nombres-area {
     right: auto;
@@ -664,7 +604,6 @@
     height: 100dvh;
   }
 
-  /* Nombres: centrados vertical y horizontalmente */
   .hero-nombres-area {
     right: auto;
     left: 50%;
@@ -678,7 +617,6 @@
     display: none;
   }
 
-  /* ── Nombres más grandes en móvil ── */
   .hero-nombre-daniel {
     font-size: clamp(108px, 34vw, 200px);
     letter-spacing: 0.02em;
@@ -695,7 +633,6 @@
     -webkit-text-stroke-width: 2.5px;
   }
 
-  /* Frases: centradas, con espacio suficiente sobre las coords de esquina */
   .hero-editable-area {
     bottom: clamp(52px, 8vh, 80px);
     left: 50%;
@@ -712,7 +649,6 @@
     text-align: center;
   }
 
-  /* ── Frases editables más grandes ── */
   .hero-frase-fija,
   .hero-frase-editable {
     font-size: clamp(22px, 6.4vw, 40px);
