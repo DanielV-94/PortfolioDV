@@ -298,6 +298,10 @@
     font-size: clamp(2rem, 12vw, 3.5rem);
   }
 
+  .footer-titulo span {
+    display: block;
+  }
+
   .footer-nav {
     flex-wrap: wrap;
     justify-content: center;

@@ -441,37 +441,63 @@ body:has(.contacto-main)::after {
     font-size: clamp(3.2rem, 16vw, 5.6rem);
   }
 
+  .contacto-hero-sub {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+
   .contacto-split {
     grid-template-columns: 1fr;
-    gap: 4rem;
-    padding: 4rem 1.5rem;
+    gap: 2rem;
+    padding: 2rem 0.8rem;
   }
 
   .contacto-split-izq {
     position: static;
+    height: auto;
+  }
+
+  .contacto-manifiesto-contenido {
+    padding: 1.2rem;
+    border-radius: 14px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .contacto-manifiesto-contenido p {
-    font-size: 1.1rem;
-    line-height: 1.75;
+    font-size: 1.25rem;
+    line-height: 1.7;
+  }
+
+  .contacto-split-der {
+    padding: 1.2rem;
+    border-radius: 14px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .contacto-cierre-texto {
-    font-size: clamp(1.4rem, 6vw, 2rem);
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
   }
 
   .contacto-link-card {
-    padding: 1.2rem 1.4rem;
-    gap: 1rem;
+    padding: 1rem 1.2rem;
+    gap: 0.8rem;
+    border-radius: 10px;
   }
 
   .contacto-link-card-icono-wrap {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
   }
 
   .contacto-link-card-valor {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    word-break: break-all;
+  }
+
+  .contacto-link-card-nombre {
+    font-size: 0.65rem;
   }
 }
 

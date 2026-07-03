@@ -16,7 +16,7 @@
   --fuente-parrafo-light: "ProtageL", sans-serif;
 
   /* ── Grid ── */
-  --grid-size: 44px;
+  --grid-size: 24px;
 
   /* ── Transición de tema ── */
   --transicion-tema: 0.9s cubic-bezier(0.16, 1, 0.3, 1);
@@ -35,7 +35,7 @@
   --color-texto-suave: #b048b0;
   --color-acento: #0b50c8;
   --color-acento-hover: #6a09ab;
-  --color-grid: rgba(16, 47, 60, 0.5);
+  --color-grid: rgba(16, 47, 60, 0.35);
   --color-gradiente-ini: rgba(232, 242, 245, 0);
   --color-gradiente-fin: rgba(196, 219, 227, 0.3);
   --color-cursor-daniel: #c8145a;
@@ -79,7 +79,7 @@
   --color-texto-suave: #ffbc02;
   --color-acento: #91ff00;
   --color-acento-hover: #ff2d9b;
-  --color-grid: rgba(145, 255, 0, 0.5);
+  --color-grid: rgba(145, 255, 0, 0.35);
   --color-gradiente-ini: rgba(10, 10, 20, 0);
   --color-gradiente-fin: rgba(10, 10, 20, 0.3);
   --color-cursor-daniel: #00f0ff;
@@ -122,7 +122,7 @@
   --color-texto-suave: #55edf8;
   --color-acento: #ff2d6a;
   --color-acento-hover: #ffd000;
-  --color-grid: rgba(255, 45, 104, 0.5);
+  --color-grid: rgba(255, 45, 104, 0.35);
   --color-gradiente-ini: rgba(15, 0, 36, 0);
   --color-gradiente-fin: rgba(15, 0, 36, 0.3);
   --color-cursor-daniel: #00e5ff;
@@ -165,7 +165,7 @@
   --color-texto-suave: #ebf6dc;
   --color-acento: #ff3300;
   --color-acento-hover: #00ff88;
-  --color-grid: rgba(255, 153, 0, 0.5);
+  --color-grid: rgba(255, 153, 0, 0.35);
   --color-gradiente-ini: rgba(5, 5, 5, 0);
   --color-gradiente-fin: rgba(5, 5, 5, 0.3);
   --color-cursor-daniel: #ffee00;
@@ -208,7 +208,7 @@
   --color-texto-suave: #6b5740;
   --color-acento: #cc2222;
   --color-acento-hover: #0044aa;
-  --color-grid: rgba(26, 20, 16, 0.5);
+  --color-grid: rgba(26, 20, 16, 0.35);
   --color-gradiente-ini: rgba(232, 220, 200, 0);
   --color-gradiente-fin: rgba(212, 196, 168, 0.3);
   --color-cursor-daniel: #cc2222;
@@ -251,7 +251,7 @@
   --color-texto-suave: #9106cd;
   --color-acento: #ff00cc;
   --color-acento-hover: #0629d6;
-  --color-grid: rgba(124, 58, 237, 0.5);
+  --color-grid: rgba(124, 58, 237, 0.35);
   --color-gradiente-ini: rgba(245, 247, 255, 0);
   --color-gradiente-fin: rgba(234, 237, 250, 0.3);
   --color-cursor-daniel: #ff006e;

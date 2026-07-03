@@ -258,17 +258,17 @@
   /* ── Franja superior: número + título ── */
   .proyecto-numero {
     padding: 2rem 2rem 0.5rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   .proyecto-titulo {
-    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-size: clamp(3.2rem, 8vw, 5.2rem);
     padding: 0 2rem 1.2rem;
     border-bottom: 1px solid var(--color-grid, rgba(255, 255, 255, 0.1));
   }
 
   .proyecto-tag {
-    font-size: 0.84rem;
+    font-size: 1rem;
     padding: 0.35rem 0.85rem;
     margin: 1rem 0 0 2rem;
   }
@@ -281,19 +281,19 @@
 
   .proyecto-rol,
   .proyecto-encargo {
-    font-size: clamp(1rem, 1.8vw, 1.14rem);
+    font-size: clamp(1.3rem, 2.4vw, 1.5rem);
     line-height: 1.55;
   }
 
   .proyecto-descripcion {
-    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    font-size: clamp(1.35rem, 2.6vw, 1.6rem);
     line-height: 1.7;
     max-width: 100%;
     padding: 0.8rem 2rem 0;
   }
 
   .proyecto-link {
-    font-size: clamp(1rem, 1.6vw, 1.14rem);
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
     padding: 0 2rem;
     margin-top: 0.8rem;
   }
