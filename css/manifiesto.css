@@ -45,7 +45,7 @@
   letter-spacing: 0.01em;
   text-transform: uppercase;
   text-align: left;
-  color: var(--color-texto);
+  color: var(--color-hint);
   font-feature-settings:
     "liga" 1,
     "clig" 1,
@@ -352,7 +352,7 @@
     inset: 0;
     height: 100dvh;
     z-index: 0;
-    will-change: filter;
+    filter: blur(6px) brightness(0.8);
   }
 
   .manifiesto-col--imagen::after {
@@ -362,16 +362,11 @@
     z-index: 1;
     background: linear-gradient(
       160deg,
-      rgba(255, 255, 255, 0.65) 0%,
-      rgba(255, 255, 255, 0.45) 50%,
-      rgba(255, 255, 255, 0.3) 100%
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.35) 50%,
+      rgba(0, 0, 0, 0.25) 100%
     );
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .manifiesto-col--imagen.overlay-activo::after {
     opacity: 1;
   }
 
@@ -437,4 +432,17 @@
   .manifiesto-glitch-layers.glitch-flash {
     display: none !important;
   }
+}
+
+
+.manifiesto-cursor {
+  display: inline;
+  color: var(--color-acento);
+  font-weight: 300;
+  animation: manifiesto-blink 0.7s step-end infinite;
+}
+
+@keyframes manifiesto-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

@@ -136,7 +136,7 @@
     "liga" 1;
   font-variant-ligatures: normal;
   color: var(--color-hint);
-  opacity: 0;
+  opacity: 1;
   white-space: nowrap;
   pointer-events: none;
   vertical-align: middle;
@@ -166,7 +166,7 @@
   border: 1px solid var(--color-hint);
   padding: 3px 10px;
   border-radius: 20px;
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
   white-space: nowrap;
   transition:
@@ -216,12 +216,12 @@
   font-size: clamp(113px, 21.8vw, 351px);
   letter-spacing: -0.03em;
   line-height: 0.88;
-  color: transparent;
+  color: var(--color-editable-activo);
   text-transform: none;
   display: block;
   position: relative;
   left: clamp(58px, 23.6vw, 174px);
-  -webkit-text-stroke: 3.5px var(--color-texto);
+  -webkit-text-stroke: 3.5px var(--color-editable-activo);
   font-feature-settings: "liga" 1;
   transition:
     color var(--transicion-tema),
