@@ -45,7 +45,7 @@
   letter-spacing: 0.01em;
   text-transform: uppercase;
   text-align: left;
-  color: var(--color-hint);
+  color: var(--color-texto);
   font-feature-settings:
     "liga" 1,
     "clig" 1,

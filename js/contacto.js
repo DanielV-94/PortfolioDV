@@ -257,6 +257,44 @@ const Contacto = (() => {
         });
       }
     }
+    const contactoForm = document.getElementById('contactoForm');
+    const formExito = document.getElementById('contactoFormExito');
+
+    if (contactoForm) {
+      contactoForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = contactoForm.querySelector('.contacto-form-btn');
+        const btnTexto = btn.querySelector('.contacto-form-btn-texto');
+        const originalText = btnTexto.textContent;
+
+        btnTexto.textContent = 'Enviando...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        try {
+          const response = await fetch(contactoForm.action, {
+            method: 'POST',
+            body: new FormData(contactoForm),
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            contactoForm.hidden = true;
+            if (formExito) formExito.hidden = false;
+          } else {
+            btnTexto.textContent = 'Error — intenta de nuevo';
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            setTimeout(() => { btnTexto.textContent = originalText; }, 3000);
+          }
+        } catch (err) {
+          btnTexto.textContent = 'Error de red — intenta de nuevo';
+          btn.disabled = false;
+          btn.style.opacity = '1';
+          setTimeout(() => { btnTexto.textContent = originalText; }, 3000);
+        }
+      });
+    }
   }
 
   return { init };

@@ -256,6 +256,60 @@
       </div>
     </section>
 
+    <section class="contacto-form-section" id="contactoFormSection">
+      <div class="contacto-form-section-glow" aria-hidden="true"></div>
+      <div class="contacto-formulario" id="contactoFormulario">
+        <div class="contacto-form-header">
+          <h3 class="contacto-form-titulo">¿Listo para empezar?</h3>
+          <p class="contacto-form-sub">Cuéntame tu idea — respondo en menos de 24 horas.</p>
+        </div>
+
+        <form class="contacto-form" id="contactoForm" action="https://formspree.io/f/mjgqzgqz" method="POST">
+          <input type="hidden" name="_subject" value="Nuevo proyecto desde portfolio" />
+          <input type="text" name="_gotcha" style="display:none" />
+
+          <div class="contacto-form-row">
+            <div class="contacto-form-grupo">
+              <label class="contacto-form-label" for="formNombre">Nombre</label>
+              <input class="contacto-form-input" type="text" id="formNombre" name="nombre" placeholder="Tu nombre completo" required autocomplete="name" />
+            </div>
+
+            <div class="contacto-form-grupo">
+              <label class="contacto-form-label" for="formEmail">Email</label>
+              <input class="contacto-form-input" type="email" id="formEmail" name="email" placeholder="tu@email.com" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="contacto-form-grupo">
+            <label class="contacto-form-label" for="formTipo">¿Qué necesitas?</label>
+            <select class="contacto-form-input contacto-form-select" id="formTipo" name="tipo_proyecto" required>
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="sitio-nuevo">Sitio web desde cero</option>
+              <option value="rediseno">Rediseño de sitio existente</option>
+              <option value="landing">Landing page</option>
+              <option value="ecommerce">Tienda en línea</option>
+              <option value="otro">Otro proyecto</option>
+            </select>
+          </div>
+
+          <div class="contacto-form-grupo">
+            <label class="contacto-form-label" for="formMensaje">Cuéntame más</label>
+            <textarea class="contacto-form-input contacto-form-textarea" id="formMensaje" name="mensaje" placeholder="Describe tu idea, tu marca, tu presupuesto aproximado..." rows="5" required></textarea>
+          </div>
+
+          <button class="contacto-form-btn" type="submit">
+            <span class="contacto-form-btn-texto">Enviar mensaje</span>
+            <svg class="contacto-form-btn-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+
+        <div class="contacto-form-exito" id="contactoFormExito" hidden>
+          <span class="contacto-form-exito-icono">✓</span>
+          <p class="contacto-form-exito-texto">¡Mensaje enviado! Te contacto pronto.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer" aria-label="Pie de página — contacto">

@@ -95,11 +95,11 @@
   --color-fondo: #0f0024;
   --color-fondo-secundario: #000f24;
   --color-fondo-alt: #dfc655;
-  --color-texto: #c3f886;
+  --color-texto: #243016;
   --color-texto-suave: #55edf8;
   --color-acento: #ff2d6a;
   --color-acento-hover: #ffd000;
-  --color-grid: rgba(255, 45, 104, 0.35);
+  --color-grid: rgba(255, 45, 104, 0.548);
   --color-gradiente-ini: rgba(15, 0, 36, 0);
   --color-gradiente-fin: rgba(15, 0, 36, 0.3);
   --color-cursor-daniel: #00e5ff;
@@ -107,7 +107,7 @@
   --color-editable: #fff0f5;
   --color-editable-activo: #7300ff;
   --color-hint: rgba(243, 184, 248, 0.85);
-  --color-nav-fondo: rgba(15, 0, 36, 0.90);
+  --color-nav-fondo: rgba(15, 0, 36, 0.973);
   --color-nombre-daniel: #ff2d6a;
   --sombra-nombre-daniel: #9900ff;
   --manifiesto-drop-1: rgba(255, 45, 106, 0.70);
